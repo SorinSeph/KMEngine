@@ -1112,7 +1112,7 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             //UINT offset = 0;
             m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer3, &stride, &offset);
 
-            RayCB.mWorld = XMMatrixTranspose(XMMatrixIdentity());
+            RayCB.mWorld = XMMatrixTranspose(RayCB.mWorld);
             RayCB.mView = XMMatrixTranspose(m_ViewMatrix);
             RayCB.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
 
