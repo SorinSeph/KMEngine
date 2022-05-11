@@ -14,8 +14,10 @@
 
 class DX11Device
 {
-public:
+private:
 	DX11Device() {}
+
+	static DX11Device* g_DX11Device;
 
 	DX11Device(HWND Viewport)
 		: m_Viewport{ Viewport }
@@ -60,6 +62,7 @@ public:
 		return S_OK;
 	}
 
+public:
 	HRESULT InitDX11Device();
 	
 	void SetViewport(HWND InViewport);
@@ -75,11 +78,14 @@ public:
 	void InitShaders();
 	void InitShaders2();
 	void AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+	void InitLine();
 	//void CleanupDX11Device();
 	
 	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 	void CleanupDX11Device();
 	//void Render2();
+
+	static DX11Device* GetDX11Device();
 
 private:
 	HWND							m_Viewport{ };
@@ -153,6 +159,7 @@ private:
 	GameEntity3D					m_CubeEntity = { };
 	GameEntity3D					m_CubeEntity2 = { };
 	GameEntity3D					m_ArrowEntity{ };
+	GameEntity3D					m_Linetrace{ };
 
 	UINT							m_ViewportWidth{ };
 	UINT							m_ViewportHeight{ };

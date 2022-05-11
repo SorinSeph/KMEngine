@@ -41,13 +41,12 @@ public:
 	EngineInitializer(HINSTANCE hInstance, int nCmdShow)
         : m_HInstance{ hInstance }
         , m_NCmdShow{ nCmdShow }
-        , m_DX11Device{ new DX11Device }
+        //, m_DX11Device{ new DX11Device }
     {}
 
 
     static void UnprojectClick3(long InX, long InY)
     {
-        static DX11Device* sDX11Device = new DX11Device;
         //XMVECTOR OriginPoint = XMVectorSet(InX, InY, 0, 0);
         XMFLOAT3 OriginPointFloat3 = XMFLOAT3(InX, InY, 0);
         XMVECTOR OriginPoint = XMLoadFloat3(&OriginPointFloat3);
@@ -91,7 +90,8 @@ public:
         RaycastDestinationY = RayDirectionFloat4.y * 100;
         RaycastDestinationZ = RayDirectionFloat4.z * 100;
 
-        sDX11Device->AddLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        DX11Device* dx11Device = DX11Device::GetDX11Device();
+        dx11Device->AddLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
     }
 
     static LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

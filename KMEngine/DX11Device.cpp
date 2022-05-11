@@ -4,6 +4,13 @@ XMMATRIX DX11Device::m_WorldMatrix;
 XMMATRIX DX11Device::m_ViewMatrix;
 XMMATRIX DX11Device::m_ProjectionMatrix;
 
+DX11Device* DX11Device::g_DX11Device = new DX11Device;
+
+DX11Device* DX11Device::GetDX11Device()
+{
+    return g_DX11Device;
+}
+
 HRESULT DX11Device::InitDX11Device()
 {
     PrimitiveGeometryFactory GeometryFactory;
@@ -17,7 +24,8 @@ HRESULT DX11Device::InitDX11Device()
     InitDefaultDepthStencil();
     InitViewport();
     InitShaders();
-    InitShaders2();
+    //InitShaders2();
+    InitLine();
 
     return S_OK;
 }
@@ -683,7 +691,7 @@ void DX11Device::InitShaders2()
     m_ArrowEntity.SetLocationF(0.0f, 0.0f, 4.0f);
     //m_ArrowEntity.SetScale(1.01f, 1.01f, 1.01f);
     m_ArrowEntity.m_GameEntityTag = "ColorCube";
-    SScene->AddEntityToScene(1, m_ArrowEntity);
+    SScene->AddEntityToScene(m_ArrowEntity);
 
     D3D11_BUFFER_DESC bd{};
     bd.Usage = D3D11_USAGE_DEFAULT;
@@ -915,24 +923,37 @@ void DX11Device::InitShaders2()
     m_hr = m_D3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
 
     m_ImmediateContext->RSSetState(m_RasterizerState);
-
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
-    m_WorldMatrix = XMMatrixIdentity();
 }
 
 void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
 {
+    Scene* SScene = Scene::GetScene();
     ConstantBuffer RayCB{};
 
     //RaycastDestinationX = -std::sinf(XMConvertToRadians(g_RotY)) * 5;
    // RaycastDestinationY = -std::cosf(XMConvertToRadians(g_RotY)) * 5;
     //RaycastDestinationZ = std::sinf(XMConvertToRadians(g_RotX)) * 5;
 
-    SimpleVertex RayVertices[] =
+    PrimitiveGeometryFactory GeometryFactory;
+
+    GameEntity3D Linetrace{ GeometryFactory.CreateLinetrace(OriginX, OriginY, OriginZ, DestinationX, DestinationY, DestinationZ) };
+
+    //SimpleVertex RayVertices[] =
+    //{
+    //    { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT2(1.0f, 0.0f)},
+    //    { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT2(1.0f, 0.0f)}
+    //};
+
+    std::vector<SimpleColorVertex> LinetraceList = Linetrace.GetSimpleColorVerticesList();
+    int LinetraceListSize = LinetraceList.size();
+    SimpleColorVertex* LinetraceVertex = new SimpleColorVertex[LinetraceListSize];
+
+    for (int i = 0; i < LinetraceListSize; i++)
     {
-        { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT2(1.0f, 0.0f)},
-        { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT2(1.0f, 0.0f)}
-    };
+        LinetraceVertex[i] = LinetraceList.at(i);
+    }
+
+    //InitData.pSysMem = VertexObj;
 
     D3D11_BUFFER_DESC RayBuffer = {};
     RayBuffer.Usage = D3D11_USAGE_DEFAULT;
@@ -941,7 +962,7 @@ void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float Dest
     RayBuffer.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA RayData = {};
-    RayData.pSysMem = RayVertices;
+    RayData.pSysMem = LinetraceVertex;
 
     m_hr = m_D3D11Device->CreateBuffer(&RayBuffer, &RayData, &m_VertexBuffer3);
     if (FAILED(m_hr))
@@ -951,6 +972,48 @@ void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float Dest
     UINT stride = sizeof(SimpleVertex);
     UINT offset = 0;
     m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer3, &stride, &offset);
+}
+
+void DX11Device::InitLine()
+{
+    Scene* SScene = Scene::GetScene();
+    ConstantBuffer RayCB{};
+    PrimitiveGeometryFactory GeometryFactory;
+
+    GameEntity3D Linetrace;
+    Linetrace.m_GameEntityTag = "Linetrace";
+    Linetrace.SetLocationF(-2.0f, -0.01f, 0.01f);
+    SScene->AddEntityToScene(Linetrace);
+
+    SimpleVertex RayVertices[] =
+    {
+        { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(1.0f, 0.0f)},
+        { XMFLOAT3(0.0f, 0.0f, 15.0f), XMFLOAT2(1.0f, 0.0f)}
+    };
+
+    //bd.Usage = D3D11_USAGE_DEFAULT;
+    //bd.ByteWidth = sizeof(ConstantBuffer);
+    //bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    //bd.CPUAccessFlags = 0;
+    //m_hr = m_D3D11Device->CreateBuffer(&bd, nullptr, &m_ConstantBuffer);
+    //if (FAILED(m_hr))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize constant buffer", L"Error", MB_OK);
+    //    return;
+    //}
+
+
+    D3D11_BUFFER_DESC RayBuffer{ };
+    RayBuffer.Usage = D3D11_USAGE_DEFAULT;
+    RayBuffer.ByteWidth = sizeof(ConstantBuffer);
+    RayBuffer.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    RayBuffer.CPUAccessFlags = 0;
+    m_hr = m_D3D11Device->CreateBuffer(&RayBuffer, nullptr, &m_ConstantBuffer3);
+
+    D3D11_SUBRESOURCE_DATA RayData = {};
+    RayData.pSysMem = RayVertices;
+
+    m_hr = m_D3D11Device->CreateBuffer(&RayBuffer, &RayData, &m_VertexBuffer3);
 }
 
 void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
@@ -983,19 +1046,20 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
     m_ImmediateContext->ClearDepthStencilView(pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     
+    UINT stride = sizeof(SimpleVertex);
+    UINT offset = 0;
+
     for (auto SceneEntityIt : SceneList)
     {
-        //if (SceneEntityIt.m_GameEntityTag != "ColorCube")
-        //{
-            
+
+        if (SceneEntityIt.m_GameEntityTag == "Default")
+        {
             ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
             cb.mWorld = XMMatrixTranspose(cb.mWorld);
             cb.mView = XMMatrixTranspose(m_ViewMatrix);
             cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
             m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
 
-            UINT stride = sizeof(SimpleVertex);
-            UINT offset = 0;
             m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
             m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
             m_ImmediateContext->IASetInputLayout(m_VertexLayout);
@@ -1006,45 +1070,59 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
             m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
             m_ImmediateContext->DrawIndexed(36, 0, 0);
+        }
 
-            if (SceneEntityIt.m_GameEntityTag == "ColorCube")
-            {
-                ConstantBuffer cb2 = SceneEntityIt.GetConstantBuffer();
-                cb2.mWorld = XMMatrixTranspose(cb2.mWorld);
-                cb2.mView = XMMatrixTranspose(m_ViewMatrix);
-                cb2.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
-                m_ImmediateContext->UpdateSubresource(m_ConstantBuffer2, 0, nullptr, &cb2, 0, 0);
+            // Code for Box yellow outline
 
-                UINT stride2 = sizeof(SimpleColorVertex);
-                UINT offset2 = 0;
-                m_ImmediateContext->IASetInputLayout(m_VertexLayout2);
-                m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer2, &stride2, &offset2);
-                m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[1], DXGI_FORMAT_R16_UINT, 0);
-                m_ImmediateContext->VSSetShader(m_VertexShader2, nullptr, 0);
-                m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer2);
-                m_ImmediateContext->PSSetShader(m_PixelShader2, nullptr, 0);
-                m_ImmediateContext->OMSetDepthStencilState(pDepthStencilStateOutline, 0);
-                // m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV2);
-                // m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
-                m_ImmediateContext->DrawIndexed(36, 0, 0);        // 36 vertices needed for 12 triangles in a triangle list
-                //m_ImmediateContext->OMSetDepthStencilState(m_DepthStencilState, 0);            
-            }
-            else if (SceneEntityIt.m_GameEntityTag != "Default")
-            {
-                ConstantBuffer RayCB{};
+        //else
+        //if (SceneEntityIt.m_GameEntityTag == "ColorCube")
+        //{
+        //    ConstantBuffer cb2 = SceneEntityIt.GetConstantBuffer();
+        //    cb2.mWorld = XMMatrixTranspose(cb2.mWorld);
+        //    cb2.mView = XMMatrixTranspose(m_ViewMatrix);
+        //    cb2.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
+        //    m_ImmediateContext->UpdateSubresource(m_ConstantBuffer2, 0, nullptr, &cb2, 0, 0);
 
-                stride = sizeof(SimpleVertex);
-                offset = 0;
+        //    UINT stride2 = sizeof(SimpleColorVertex);
+        //    UINT offset2 = 0;
+        //    m_ImmediateContext->IASetInputLayout(m_VertexLayout2);
+        //    m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer2, &stride2, &offset2);
+        //    m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[1], DXGI_FORMAT_R16_UINT, 0);
+        //    m_ImmediateContext->VSSetShader(m_VertexShader2, nullptr, 0);
+        //    m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer2);
+        //    m_ImmediateContext->PSSetShader(m_PixelShader2, nullptr, 0);
+        //    m_ImmediateContext->OMSetDepthStencilState(pDepthStencilStateOutline, 0);
+        //    // m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV2);
+        //    // m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+        //    m_ImmediateContext->DrawIndexed(36, 0, 0);        // 36 vertices needed for 12 triangles in a triangle list
+        //    //m_ImmediateContext->OMSetDepthStencilState(m_DepthStencilState, 0);            
+        //}
+        // 
+        else if (SceneEntityIt.m_GameEntityTag == "Linetrace")
+        //if (SceneEntityIt.m_GameEntityTag == "Linetrace")
+        {
+            ConstantBuffer RayCB = SceneEntityIt.GetConstantBuffer();
 
-                RayCB.mWorld = XMMatrixTranspose(XMMatrixIdentity());
-                RayCB.mView = XMMatrixTranspose(m_ViewMatrix);
-                RayCB.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
-                m_ImmediateContext->UpdateSubresource(m_ConstantBuffer2, 0, nullptr, &RayCB, 0, 0);
+            //RaycastDestinationX = -std::sinf(XMConvertToRadians(g_RotY)) * 5;
+            // RaycastDestinationY = -std::cosf(XMConvertToRadians(g_RotY)) * 5;
+            //RaycastDestinationZ = std::sinf(XMConvertToRadians(g_RotX)) * 5;
 
-                m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer3, &stride, &offset);
-            }
+            //// Set vertex buffer
+            //UINT stride = sizeof(SimpleVertex);
+            //UINT offset = 0;
+            m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer3, &stride, &offset);
+
+            RayCB.mWorld = XMMatrixTranspose(XMMatrixIdentity());
+            RayCB.mView = XMMatrixTranspose(m_ViewMatrix);
+            RayCB.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
+
+            m_ImmediateContext->UpdateSubresource(m_ConstantBuffer3, 0, nullptr, &RayCB, 0, 0);
+            m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer3);
+            m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+            m_ImmediateContext->Draw(2, 0);
+        }
+
     }  
-    
     m_SwapChain->Present(0, 0);
 }
 
@@ -1053,6 +1131,7 @@ void DX11Device::CleanupDX11Device()
     if (m_ImmediateContext) m_ImmediateContext->ClearState();
 
     if (m_ConstantBuffer) m_ConstantBuffer->Release();
+    if (m_ConstantBuffer3) m_ConstantBuffer3->Release();
     if (m_VertexBuffer) m_VertexBuffer->Release();
     for (auto indexBuffer : m_IndexBufferArray)
     {
