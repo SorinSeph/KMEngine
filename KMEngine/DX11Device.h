@@ -78,7 +78,7 @@ public:
 	void InitShaders();
 	void InitShaders2();
 	void AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
-	void InitLine();
+	void InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 	//void CleanupDX11Device();
 	
 	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);

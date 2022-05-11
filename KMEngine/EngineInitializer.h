@@ -54,9 +54,9 @@ public:
         XMFLOAT3 DestinationPointFloat3 = XMFLOAT3(InX, InY, 1);
         XMVECTOR DestinationPoint = XMLoadFloat3(&DestinationPointFloat3);
 
-        XMMATRIX ProjectionMatrix = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
-        XMMATRIX ViewMatrix = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-        XMMATRIX WorldMatrix = XMMatrixTranspose(DX11Device::m_WorldMatrix);
+        XMMATRIX ProjectionMatrix = DX11Device::m_ProjectionMatrix;
+        XMMATRIX ViewMatrix = DX11Device::m_ViewMatrix;
+        XMMATRIX WorldMatrix = DX11Device::m_WorldMatrix;
 
         XMVECTOR OriginPointUnprojected = XMVector3Unproject(OriginPoint, 0, 0, ViewportWidth, ViewportHeight, 0, 1, ProjectionMatrix, ViewMatrix, WorldMatrix);
         XMVECTOR DestinationPointUnprojected = XMVector3Unproject(DestinationPoint, 0, 0, ViewportWidth, ViewportHeight, 0, 1, ProjectionMatrix, ViewMatrix, WorldMatrix);
@@ -91,7 +91,7 @@ public:
         RaycastDestinationZ = RayDirectionFloat4.z * 100;
 
         DX11Device* dx11Device = DX11Device::GetDX11Device();
-        dx11Device->AddLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
     }
 
     static LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

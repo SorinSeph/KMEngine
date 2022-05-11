@@ -25,7 +25,7 @@ HRESULT DX11Device::InitDX11Device()
     InitViewport();
     InitShaders();
     //InitShaders2();
-    InitLine();
+    InitLine(0.f, 0.f, 0.f, 0.f, 0.f, 0.f);
 
     return S_OK;
 }
@@ -974,7 +974,7 @@ void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float Dest
     m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer3, &stride, &offset);
 }
 
-void DX11Device::InitLine()
+void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
 {
     Scene* SScene = Scene::GetScene();
     ConstantBuffer RayCB{};
@@ -982,13 +982,13 @@ void DX11Device::InitLine()
 
     GameEntity3D Linetrace;
     Linetrace.m_GameEntityTag = "Linetrace";
-    Linetrace.SetLocationF(-2.0f, -0.01f, 0.01f);
+    Linetrace.SetLocationF(0.0f, 0.0f, 0.0f);
     SScene->AddEntityToScene(Linetrace);
 
     SimpleVertex RayVertices[] =
     {
-        { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT2(1.0f, 0.0f)},
-        { XMFLOAT3(0.0f, 0.0f, 15.0f), XMFLOAT2(1.0f, 0.0f)}
+        { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT2(1.0f, 0.0f)},
+        { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT2(1.0f, 0.0f)}
     };
 
     //bd.Usage = D3D11_USAGE_DEFAULT;
