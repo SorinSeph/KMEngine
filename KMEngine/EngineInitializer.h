@@ -47,6 +47,7 @@ public:
 
     static void UnprojectClick3(long InX, long InY)
     {
+        // Test
         //XMVECTOR OriginPoint = XMVectorSet(InX, InY, 0, 0);
         XMFLOAT3 OriginPointFloat3 = XMFLOAT3(InX, InY, 0);
         XMVECTOR OriginPoint = XMLoadFloat3(&OriginPointFloat3);
