@@ -593,6 +593,7 @@ void DX11Device::InitShaders3()
     m_hr = CompileShaderFromFile(L"C:/Users/Dell Gray/source/repos/KMEngine/KMEngine/texture.ps", "PS", "ps_5_0", &pPSBlob);
     if (FAILED(m_hr))
     {
+
         MessageBox(nullptr, L"The PS file cannot be compiled.", L"Error", MB_OK);
         return;
     }
