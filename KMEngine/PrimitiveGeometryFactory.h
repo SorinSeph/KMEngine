@@ -8,6 +8,7 @@ enum class PrimitiveGeometryType
     Line,
 	Plane,
 	Cube,
+    Pyramid,
     CubeTest,
 	Cylinder,
     Arrow
@@ -35,7 +36,6 @@ public:
                 Entity.SetVerticesList(VerticesList);
                 return Entity;
             }
-
 		    case PrimitiveGeometryType::Cube:
 		    {
                 std::vector<SimpleVertex>VerticesList = 
@@ -76,6 +76,40 @@ public:
                 Entity.SetVerticesList(VerticesList);
                 return Entity;
 		    }
+            case PrimitiveGeometryType::Pyramid:
+            {
+                std::vector<SimpleVertex>VerticesList =
+                {
+                    // Base
+                    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+
+                    // Front Face
+                    { XMFLOAT3(0.0f, 1.0f, 0.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(-1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+
+                    // Right Face
+                    { XMFLOAT3(0.0f, 1.0f, 0.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, 0.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+
+                    // Back face
+                    { XMFLOAT3(0.0f, 1.0f, 0.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(1.0f, 0.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(-1.0f, 0.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+
+                    // Left face
+                    { XMFLOAT3(0.0f, 1.0f, 0.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(-1.0f, 0.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+                    { XMFLOAT3(-1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+                };
+
+                Entity.SetVerticesList(VerticesList);
+                return Entity;
+            }
             case PrimitiveGeometryType::CubeTest:
             {
                 std::vector<SimpleColorVertex> VerticesList =

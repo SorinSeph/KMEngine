@@ -77,6 +77,10 @@ public:
 	void InitViewport();
 	void InitShaders();
 	void InitShaders2();
+
+	// Test func to init properties of pyramid object
+	void InitShaders3();
+
 	void AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 	void InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 	//void CleanupDX11Device();
@@ -154,12 +158,13 @@ public:
 	static XMMATRIX                 m_ProjectionMatrix;
 
 private:
-	ID3D11Buffer*					m_IndexBufferArray[2]{ };
+	ID3D11Buffer*					m_IndexBufferArray[3]{ };
 
 	GameEntity3D					m_CubeEntity = { };
 	GameEntity3D					m_CubeEntity2 = { };
 	GameEntity3D					m_ArrowEntity{ };
 	GameEntity3D					m_Linetrace{ };
+	GameEntity3D					m_Pyramid{ };
 
 	UINT							m_ViewportWidth{ };
 	UINT							m_ViewportHeight{ };
