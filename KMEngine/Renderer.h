@@ -7,11 +7,7 @@ HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LP
 class Renderer
 {
 public:
-    Renderer(HWND Viewport)
-    {
-        m_DX11Device = DX11Device::GetDX11Device();
-        m_DX11Device->SetViewport(m_Viewport);
-    }
+    Renderer(HWND Viewport);
 
 	//Renderer(UINT ViewportWidth, UINT ViewportHeight)
  //       : m_ViewportWidth{ ViewportWidth }
@@ -20,16 +16,9 @@ public:
  //       m_DX11Device.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
  //   }
 
-    void SetViewport(HWND InViewport)
-    {
-        m_Viewport = InViewport;
-        m_DX11Device->SetViewport(m_Viewport);
-    }
+    void SetViewport(HWND InViewport);
 
-    void InitRenderer()
-    {
-        m_DX11Device->InitDX11Device();
-    }
+    void InitRenderer();
 
     void CreatePixelShader(HRESULT hr, ID3D11Device* D3D11Device, ID3D11PixelShader* PixelShader)
     {
@@ -53,19 +42,14 @@ public:
         }
     }
 
-    void Render(float RotX, float RotY, float LocX, float LocY, float LocZ)
-    {
-        m_DX11Device->Render(RotX, RotY, LocX, LocY, LocZ);
-    }
+    void Render(float RotX, float RotY, float LocX, float LocY, float LocZ);
 
-    void CleanupRenderer()
-    {
-        m_DX11Device->CleanupDX11Device();
-    }
+    void CleanupRenderer();
 
 private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
     DX11Device* m_DX11Device;
+    Scene* m_Scene;
 };

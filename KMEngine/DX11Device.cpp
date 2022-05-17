@@ -261,72 +261,6 @@ void DX11Device::InitViewport()
 
 void DX11Device::InitDefaultDepthStencil()
 {
-    //
-    // Non-working code
-    //
-
-    /*
-    defDescDepth.Width = m_ViewportWidth;
-    defDescDepth.Height = m_ViewportHeight;
-    defDescDepth.MipLevels = 1;
-    defDescDepth.ArraySize = 1;
-    defDescDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-    defDescDepth.SampleDesc.Count = 1;
-    defDescDepth.SampleDesc.Quality = 0;
-    defDescDepth.Usage = D3D11_USAGE_DEFAULT;
-    defDescDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-    defDescDepth.CPUAccessFlags = 0;
-    defDescDepth.MiscFlags = 0;
-
-    m_hr = m_D3D11Device->CreateTexture2D(&defDescDepth, NULL, &pDefDepthStencil);
-    if (FAILED(m_hr))
-    {
-        MessageBox(nullptr, L"Failed to initialize depth stencil texture", L"Error", MB_OK);
-        return;
-    }
-
-    defDepthStencilDesc.DepthEnable = true;
-    defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
-
-
-    defDepthStencilDesc.StencilEnable = true;
-    defDepthStencilDesc.StencilReadMask = 0xFF;
-    defDepthStencilDesc.StencilWriteMask = 0xFF;
-
-    defDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    defDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-    defDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    defDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-    defDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    defDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-    defDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    defDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-    m_D3D11Device->CreateDepthStencilState(&defDepthStencilDesc, &pDefDepthStencilState);
-    if (FAILED(m_hr))
-    {
-        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
-        return;
-    }
-
-    m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 1);
-
-    defDescDepthStencilViewDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-    defDescDepthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-    defDescDepthStencilViewDesc.Texture2D.MipSlice = 0;
-
-    m_hr = m_D3D11Device->CreateDepthStencilView(pDefDepthStencil, &defDescDepthStencilViewDesc, &pDefDepthStencilView);
-    if (FAILED(m_hr))
-    {
-        MessageBox(nullptr, L"Failed to initialize depth stencil view", L"Error", MB_OK);
-        return;
-    }
-
-    m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, pDefDepthStencilView);
-    */
-
     defDescDepth.Width = m_ViewportWidth;
     defDescDepth.Height = m_ViewportHeight;
     defDescDepth.MipLevels = 1;
@@ -595,8 +529,216 @@ void DX11Device::InitShaders()
 
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
     m_WorldMatrix = XMMatrixIdentity();
+
+    //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
+    m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+    m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+    m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
+    //m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+    m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
+    m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
+    m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+    m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
 }
 
+void DX11Device::InitShaders3()
+{
+    Scene* SScene = Scene::GetScene();
+    PrimitiveGeometryFactory GeometryFactory;
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
+    m_hr = CompileShaderFromFile(L"C:/Users/Dell Gray/source/repos/KMEngine/KMEngine/texture.vs", "VS", "vs_5_0", &pVSBlob);
+
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr,
+            L"The VS file cannot be compiled.", L"Error", MB_OK);
+        return;
+    }
+
+    // Create the vertex shader
+    m_hr = m_D3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader);
+
+    if (FAILED(m_hr))
+    {
+        pVSBlob->Release();
+        return;
+    }
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    m_hr = m_D3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &m_VertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to initialize input layout", L"Error", MB_OK);
+        return;
+    }
+
+    // Set the input layout
+    //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    //hr = CompileShaderFromFile(L"Tutorial04.fxh", "PS", "ps_4_0", &pPSBlob);
+    m_hr = CompileShaderFromFile(L"C:/Users/Dell Gray/source/repos/KMEngine/KMEngine/texture.ps", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"The PS file cannot be compiled.", L"Error", MB_OK);
+        return;
+    }
+
+    // Create the pixel shader
+    m_hr = m_D3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to create pixel shader", L"Error", MB_OK);
+        return;
+    }
+
+    m_Pyramid = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
+    m_Pyramid.SetLocationF(0.0f, 0.0f, -2.0f);
+    m_Pyramid.m_GameEntityTag = "Default";
+    //m_GameEntityList.push_back(m_CubeEntity);
+    SScene->AddEntityToScene(m_Pyramid);
+
+    D3D11_BUFFER_DESC bd{};
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(SimpleVertex) * 24;
+    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+
+    D3D11_SUBRESOURCE_DATA InitData{};
+    int GameEntityListSize = SScene->GetSceneList().size();
+    std::vector<SimpleVertex> TotalVerticesVector;
+
+    for (int i = 0; i < GameEntityListSize; i++)
+    {
+        int CurrentVertexListSize = SScene->GetSceneList().at(i).GetVerticesList().size();
+
+        for (int j = 0; j < CurrentVertexListSize; j++)
+        {
+            TotalVerticesVector.push_back(SScene->GetSceneList().at(i).GetVerticesList().at(j));
+        }
+    }
+
+    int TotalVerticesVectorSize = TotalVerticesVector.size();
+
+    SimpleVertex* VerticesArray = new SimpleVertex[TotalVerticesVectorSize];
+
+    for (int i = 0; i < TotalVerticesVectorSize; i++)
+    {
+        VerticesArray[i] = TotalVerticesVector.at(i);
+    }
+
+    InitData.pSysMem = VerticesArray;
+
+    m_hr = m_D3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer);
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to initialize vertex buffer", L"Error", MB_OK);
+        return;
+    }
+
+    // Set vertex buffer
+    UINT stride = sizeof(SimpleVertex);
+    UINT offset = 0;
+    //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
+
+    // Create index buffer
+    WORD indices[] =
+    {
+        3,1,0,
+        2,1,3,
+
+        6,4,5,
+        7,4,6,
+
+        11,9,8,
+        10,9,11,
+
+        14,12,13,
+        15,12,14,
+
+        19,17,16,
+        18,17,19,
+
+        22,20,21,
+        23,20,22
+    };
+
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+    InitData.pSysMem = indices;
+    m_hr = m_D3D11Device->CreateBuffer(&bd, &InitData, &m_IndexBufferArray[0]);
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to initialize index buffer", L"Error", MB_OK);
+        return;
+    }
+
+    // Set index buffer
+    //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+
+    // Create the constant buffer
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(ConstantBuffer);
+    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    bd.CPUAccessFlags = 0;
+    m_hr = m_D3D11Device->CreateBuffer(&bd, nullptr, &m_ConstantBuffer);
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to initialize constant buffer", L"Error", MB_OK);
+        return;
+    }
+
+    const wchar_t* TextureName = L"UV_Color_Grid.dds";
+    m_hr = CreateDDSTextureFromFile(m_D3D11Device, TextureName, nullptr, &m_TextureRV);
+    if (FAILED(m_hr))
+    {
+        MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+        return;
+    }
+
+    D3D11_SAMPLER_DESC sampDesc{};
+    ZeroMemory(&sampDesc, sizeof(sampDesc));
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    sampDesc.MinLOD = 0;
+    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_hr = m_D3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+
+    D3D11_RASTERIZER_DESC rasterDesc = {};
+    rasterDesc.CullMode = D3D11_CULL_NONE;
+
+    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+    m_WorldMatrix = XMMatrixIdentity();
+
+    //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
+    m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+    m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+    m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
+    //m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+    m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
+    m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
+    m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+    m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
+}
 
 void DX11Device::InitShaders2()
 {
@@ -1061,14 +1203,14 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
 
             m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
-            m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
-            m_ImmediateContext->IASetInputLayout(m_VertexLayout);
-            m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
+            //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+            //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+            //m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
             m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
-            m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
-            m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
-            m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
-            m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
+            //m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
+            //m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
+            //m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+            //m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
             m_ImmediateContext->DrawIndexed(36, 0, 0);
         }
 
