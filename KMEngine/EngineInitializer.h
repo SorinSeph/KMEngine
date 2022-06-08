@@ -105,150 +105,150 @@ public:
 
         switch (message)
         {
-        case WM_CREATE:
-        {
-            bClipCursor = false;
-            SetWindowLong(hwnd, 0, 0);       // on/off flag
-            return 0;
-        }
+            case WM_CREATE:
+            {
+                bClipCursor = false;
+                SetWindowLong(hwnd, 0, 0);       // on/off flag
+                return 0;
+            }
 
-        //case WM_PAINT:
-        //{
-        //    hdc = BeginPaint(hwnd, &ps);
-        //    GetClientRect(hwnd, &rect);
-        //    Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-        //    HBRUSH Brush = CreateSolidBrush(RGB(0, 0, 255));
-        //    FillRect(hdc, &rect, Brush);
-        //    EndPaint(hwnd, &ps);
-        //    return 0;
-        //}
-
-        case WM_ACTIVATE:
-        {
-            ::bClipCursor = false;
-            return 0;
-        }
-
-        case WM_LBUTTONDOWN:
-        {
-            POINT mousePos;
-
-            GetCursorPos(&mousePos);
-            ScreenToClient(hwnd, &mousePos);
-
-            int mouseX = mousePos.x;
-            int mouseY = mousePos.y;
-
-            //KMEngine_Log << "MouseX on click is: " << mouseX << "\n";
-            //KMEngine_Log << "MouseY on click is: " << mouseY << "\n";
-
-            float mouseXUnprojected = ((2 * mouseX) / ViewportWidth - 1);
-            float mouseYUnprojected = 1 - ((2 * mouseY) / ViewportHeight);
-
-            //KMEngine_Log << "Unprojected MouseX on click is: " << mouseXUnprojected << "\n";
-            //KMEngine_Log << "Unprojected MouseY on click is: " << mouseYUnprojected << "\n";
-
-            UnprojectClick3(mouseX, mouseY);
-
-            //RaycastX = mouseXUnprojected;
-            //RaycastY = mouseYUnprojected;
-
-            return 0;
-        }
-
-        case WM_RBUTTONUP:
-        {
-            ::bClipCursor = false;
-            return 0;
-        }
-
-        case WM_RBUTTONDOWN:
-        {
-            ::bClipCursor = true;
-            POINT CursorPoint;
-            GetClientRect(hwnd, &rect);
-
-            //if (GetCursorPos(&CursorPoint))
+            //case WM_PAINT:
             //{
-            //    SetCursorPos(rect.right + 50, rect.bottom - 50); 
+            //    hdc = BeginPaint(hwnd, &ps);
+            //    GetClientRect(hwnd, &rect);
+            //    Rectangle(hdc, 0, 0, rect.right, rect.bottom);
+            //    HBRUSH Brush = CreateSolidBrush(RGB(0, 0, 255));
+            //    FillRect(hdc, &rect, Brush);
+            //    EndPaint(hwnd, &ps);
+            //    return 0;
             //}
 
-            return 0;
-        }
-
-        case WM_MOUSEMOVE:
-        {
-            POINT ptClientUL, ptClientLR;
-            GetClientRect(ViewportHwnd, &rect);
-            ptClientUL.x = rect.left;
-            ptClientUL.y = rect.top;
-
-            // Add one to the right and bottom sides, because the 
-            // coordinates retrieved by GetClientRect do not 
-            // include the far left and lowermost pixels. 
-
-            ptClientLR.x = rect.right + 1;
-            ptClientLR.y = rect.bottom + 1;
-            ClientToScreen(ViewportHwnd, &ptClientUL);
-            ClientToScreen(ViewportHwnd, &ptClientLR);
-
-            // Copy the client coordinates of the client area 
-            // to the rcClient structure. Confine the mouse cursor 
-            // to the client area by passing the rcClient structure 
-            // to the ClipCursor function. 
-
-            SetRect(&rect, ptClientUL.x, ptClientUL.y, ptClientLR.x, ptClientLR.y);
-
-            RECT rect2;
-            GetClientRect(ViewportHwnd, &rect2);
-
-
-            // Copy the client coordinates of the client area 
-            // to the rcClient structure. Confine the mouse cursor 
-            // to the client area by passing the rcClient structure 
-            // to the ClipCursor function. 
-            if (::bClipCursor)
+            case WM_ACTIVATE:
             {
-                SetCursorPos(3 * (rect2.right) / 2, rect2.bottom / 2);
+                ::bClipCursor = false;
+                return 0;
             }
 
-            //KMEngine_Log << "Viewport rect.left + rect.right / 2 is: " << (rect.left + rect.right) / 2 << "\n";
-            //KMEngine_Log << "Viewport rect.bottom / 2 is: " << rect.bottom / 2 << "\n";
-
-            return 0;
-        }
-
-        case WM_INPUT:
-        {
-            UINT dwSize = sizeof(RAWINPUT);
-            static BYTE lpb[sizeof(RAWINPUT)];
-
-            GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
-
-            RAWINPUT* raw = (RAWINPUT*)lpb;
-
-            if (raw->header.dwType == RIM_TYPEMOUSE && ::bClipCursor)
+            case WM_LBUTTONDOWN:
             {
-                float xPosRelative = raw->data.mouse.lLastX;
-                float yPosRelative = raw->data.mouse.lLastY;
+                POINT mousePos;
 
-                g_RotX += yPosRelative * 0.15f;
-                g_RotY += xPosRelative * 0.15f;
+                GetCursorPos(&mousePos);
+                ScreenToClient(hwnd, &mousePos);
+
+                int mouseX = mousePos.x;
+                int mouseY = mousePos.y;
+
+                //KMEngine_Log << "MouseX on click is: " << mouseX << "\n";
+                //KMEngine_Log << "MouseY on click is: " << mouseY << "\n";
+
+                float mouseXUnprojected = ((2 * mouseX) / ViewportWidth - 1);
+                float mouseYUnprojected = 1 - ((2 * mouseY) / ViewportHeight);
+
+                //KMEngine_Log << "Unprojected MouseX on click is: " << mouseXUnprojected << "\n";
+                //KMEngine_Log << "Unprojected MouseY on click is: " << mouseYUnprojected << "\n";
+
+                UnprojectClick3(mouseX, mouseY);
+
+                //RaycastX = mouseXUnprojected;
+                //RaycastY = mouseYUnprojected;
+
+                return 0;
             }
-            break;
-        }
 
-        case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-            return 0;
-        }
+            case WM_RBUTTONUP:
+            {
+                ::bClipCursor = false;
+                return 0;
+            }
 
-        case WM_SETCURSOR:
-        {
-            SetCursor(LoadCursor(NULL, IDC_CROSS));
-            return 0;
-        }
+            case WM_RBUTTONDOWN:
+            {
+                ::bClipCursor = true;
+                POINT CursorPoint;
+                GetClientRect(hwnd, &rect);
+
+                //if (GetCursorPos(&CursorPoint))
+                //{
+                //    SetCursorPos(rect.right + 50, rect.bottom - 50); 
+                //}
+
+                return 0;
+            }
+
+            case WM_MOUSEMOVE:
+            {
+                POINT ptClientUL, ptClientLR;
+                GetClientRect(ViewportHwnd, &rect);
+                ptClientUL.x = rect.left;
+                ptClientUL.y = rect.top;
+
+                // Add one to the right and bottom sides, because the 
+                // coordinates retrieved by GetClientRect do not 
+                // include the far left and lowermost pixels. 
+
+                ptClientLR.x = rect.right + 1;
+                ptClientLR.y = rect.bottom + 1;
+                ClientToScreen(ViewportHwnd, &ptClientUL);
+                ClientToScreen(ViewportHwnd, &ptClientLR);
+
+                // Copy the client coordinates of the client area 
+                // to the rcClient structure. Confine the mouse cursor 
+                // to the client area by passing the rcClient structure 
+                // to the ClipCursor function. 
+
+                SetRect(&rect, ptClientUL.x, ptClientUL.y, ptClientLR.x, ptClientLR.y);
+
+                RECT rect2;
+                GetClientRect(ViewportHwnd, &rect2);
+
+
+                // Copy the client coordinates of the client area 
+                // to the rcClient structure. Confine the mouse cursor 
+                // to the client area by passing the rcClient structure 
+                // to the ClipCursor function. 
+                if (::bClipCursor)
+                {
+                    SetCursorPos(3 * (rect2.right) / 2, rect2.bottom / 2);
+                }
+
+                //KMEngine_Log << "Viewport rect.left + rect.right / 2 is: " << (rect.left + rect.right) / 2 << "\n";
+                //KMEngine_Log << "Viewport rect.bottom / 2 is: " << rect.bottom / 2 << "\n";
+
+                return 0;
+            }
+
+            case WM_INPUT:
+            {
+                UINT dwSize = sizeof(RAWINPUT);
+                static BYTE lpb[sizeof(RAWINPUT)];
+
+                GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
+
+                RAWINPUT* raw = (RAWINPUT*)lpb;
+
+                if (raw->header.dwType == RIM_TYPEMOUSE && ::bClipCursor)
+                {
+                    float xPosRelative = raw->data.mouse.lLastX;
+                    float yPosRelative = raw->data.mouse.lLastY;
+
+                    g_RotX += yPosRelative * 0.15f;
+                    g_RotY += xPosRelative * 0.15f;
+                }
+                break;
+            }
+
+            case WM_DESTROY:
+            {
+                PostQuitMessage(0);
+                return 0;
+            }
+
+            case WM_SETCURSOR:
+            {
+                SetCursor(LoadCursor(NULL, IDC_CROSS));
+                return 0;
+            }
         }
         return DefWindowProc(hwnd, message, wParam, lParam);
     }

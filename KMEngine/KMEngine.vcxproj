@@ -141,7 +141,9 @@
   <ItemGroup>
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="DX11Device.cpp" />
+    <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="DXStructuresInitializer.cpp" />
+    <ClCompile Include="GameEntity3D.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="CubeTerrainGenerator.h" />
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="DX11Device.h" />
+    <ClInclude Include="DXResourcesConfig.h" />
     <ClInclude Include="DXStructuresInitializer.h" />
     <ClInclude Include="EngineInitializer.h" />
     <ClInclude Include="GameEntity.h" />

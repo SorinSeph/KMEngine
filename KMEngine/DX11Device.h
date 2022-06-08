@@ -121,6 +121,21 @@ private:
 	ID3D11Buffer*					m_ConstantBuffer{ nullptr };
 	ID3D11ShaderResourceView*		m_TextureRV{ nullptr };
 
+	/**
+	* Temp objects for pyramid object
+	*/
+
+	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
+	ID3D11ShaderResourceView*		m_TextureRV4{ nullptr };
+
+	/**
+	* Empty Resource
+	*/
+
+	ID3D11ShaderResourceView*		m_TextureRV5{ nullptr };
+	ID3D11DepthStencilState*		m_NullDepthStencilState{ nullptr };
+
+
 	/*
 	* Default Depth Stencil
 	* Contains "def" in variable name
