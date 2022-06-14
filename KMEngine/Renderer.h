@@ -51,5 +51,4 @@ private:
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
     DX11Device* m_DX11Device;
-    Scene* m_Scene;
 };

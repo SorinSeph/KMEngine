@@ -1,9 +1,10 @@
 #include "Scene.h"
 
-Scene* Scene::GScene = new Scene;
+//Scene* Scene::GScene = new Scene;
 
-Scene* Scene::GetScene()
+Scene& Scene::GetScene()
 {
+	static Scene GScene;
 	return GScene;
 }
 

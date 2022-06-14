@@ -3,14 +3,19 @@
 Renderer::Renderer(HWND Viewport)
 {
     m_DX11Device = DX11Device::GetDX11Device();
-    m_Scene = Scene::GetScene();
-    m_DX11Device->SetViewport(m_Viewport);
+    if (m_DX11Device)
+    {
+        m_DX11Device->SetViewport(m_Viewport);
+    }
 }
 
 void Renderer::SetViewport(HWND InViewport)
 {
     m_Viewport = InViewport;
-    m_DX11Device->SetViewport(m_Viewport);
+    if (m_DX11Device)
+    {
+        m_DX11Device->SetViewport(m_Viewport);
+    }
 }
 
 void Renderer::InitRenderer()

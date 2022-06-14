@@ -7,11 +7,12 @@ class Scene
 {
 private:
 	Scene() {}
-	static Scene* GScene;
+	//static Scene* GScene;
 	std::vector<GameEntity3D> m_GameEntityList;
 
 public:
-	static Scene* GetScene();
+	//static Scene* GetScene();
+	static Scene& GetScene();
 	void AddEntityToScene(GameEntity3D Entity);
 	void AddEntityToScene(int Location, GameEntity3D Entity);
 	std::vector<GameEntity3D> GetSceneList();
