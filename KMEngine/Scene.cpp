@@ -19,6 +19,11 @@ void Scene::AddEntityToScene(int Location, GameEntity3D Entity)
 	m_GameEntityList.emplace(Loc, Entity);
 }
 
+void Scene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
+{
+	m_GameEntityList.at(Location).SetVertexbuffer(vb);
+}
+
 std::vector<GameEntity3D> Scene::GetSceneList()
 {
 	return m_GameEntityList;

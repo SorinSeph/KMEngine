@@ -91,8 +91,8 @@ public:
         RaycastDestinationY = RayDirectionFloat4.y * 100;
         RaycastDestinationZ = RayDirectionFloat4.z * 100;
 
-        DX11Device* dx11Device = DX11Device::GetDX11Device();
-        dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        //DX11Device* dx11Device = DX11Device::GetDX11Device();
+        //dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
     }
 
     static LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -408,7 +408,7 @@ public:
         HINSTANCE m_HInstance{ };
         int m_NCmdShow{ };
         Renderer m_Renderer{ ViewportHwnd };
-        DX11Device* m_DX11Device;
+        DX11Device m_DX11Device{ };
 };
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

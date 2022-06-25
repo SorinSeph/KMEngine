@@ -16,4 +16,5 @@ public:
 	void AddEntityToScene(GameEntity3D Entity);
 	void AddEntityToScene(int Location, GameEntity3D Entity);
 	std::vector<GameEntity3D> GetSceneList();
+	void SetVertexbuffer(int Location, ID3D11Buffer* vb);
 };

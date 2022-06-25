@@ -65,7 +65,7 @@ public:
 
 	XMMATRIX TransformationMatrix();
 
-
+	void SetVertexbuffer(ID3D11Buffer* vb);
 
 	void SetVerticesList(std::vector<SimpleVertex> VerticesList);
 

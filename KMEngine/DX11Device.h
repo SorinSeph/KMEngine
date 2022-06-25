@@ -14,10 +14,8 @@
 
 class DX11Device
 {
-private:
+public:
 	DX11Device() {}
-
-	static DX11Device* g_DX11Device;
 
 	DX11Device(HWND Viewport)
 		: m_Viewport{ Viewport }
@@ -88,8 +86,6 @@ public:
 	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 	void CleanupDX11Device();
 	//void Render2();
-
-	static DX11Device* GetDX11Device();
 
 private:
 	HWND							m_Viewport{ };

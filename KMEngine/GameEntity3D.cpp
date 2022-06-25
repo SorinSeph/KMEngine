@@ -24,6 +24,11 @@ void  GameEntity3D::SetColorVerticesList(std::vector<ColorVertex> VerticesList)
 	m_ColorVerticesList = VerticesList;
 }
 
+void GameEntity3D::SetVertexbuffer(ID3D11Buffer* vb)
+{
+	m_DXResConfig.SetVertexBuffer(vb);
+}
+
 std::vector<SimpleVertex> GameEntity3D::GetVerticesList()
 {
 	return m_VerticesList;

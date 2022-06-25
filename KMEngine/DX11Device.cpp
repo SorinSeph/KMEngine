@@ -4,19 +4,10 @@ XMMATRIX DX11Device::m_WorldMatrix;
 XMMATRIX DX11Device::m_ViewMatrix;
 XMMATRIX DX11Device::m_ProjectionMatrix;
 
-DX11Device* DX11Device::g_DX11Device = nullptr;
-
-DX11Device* DX11Device::GetDX11Device()
-{
-    if (g_DX11Device = nullptr)
-        g_DX11Device = new DX11Device;
-    return g_DX11Device;
-}
-
 HRESULT DX11Device::InitDX11Device()
 {
     PrimitiveGeometryFactory GeometryFactory;
-
+  
     InitDriveTypeAndFeatureLevel();
     IDXGIFactory1* dxgiFactory = InitDXGIFactory();
     InitSwapChain(dxgiFactory);
@@ -474,6 +465,8 @@ void DX11Device::InitShaders()
         SceneItTemp.m_DXResConfig.m_UID = "0012";
         SceneItTemp.m_DXResConfig.SetVertexBuffer(m_VertexBuffer);
     }
+
+    SScene.SetVertexbuffer(0, m_VertexBuffer);
 
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
@@ -1226,6 +1219,8 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             SceneItTemp.m_DXResConfig.m_ConfigVertexBuffer = m_VertexBuffer;
     }
 
+    SScene.GetSceneList().at(0).SetVertexbuffer(m_VertexBuffer);
+
     for (auto SceneEntityIt : SceneList)
     {
         int Size = SceneList.size();
@@ -1238,7 +1233,7 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
 
             ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_ConfigVertexBuffer;
-            assert(VertexBuffer != nullptr);
+            //assert(VertexBuffer != nullptr);
             m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
 
 
