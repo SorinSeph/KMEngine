@@ -44,24 +44,15 @@ struct ColorVertex
 class GameEntity3D : public GameEntity
 {
 public:
-	GameEntity3D() :
-		m_ConstantBuffer{ },
-		m_VerticesList{ 0 },
-		m_LocationMatrix{ XMMatrixIdentity() },
-		m_RotationMatrix{ XMMatrixIdentity() },
-		m_ScaleMatrix{ XMMatrixIdentity() },
-		m_Collision{ },
-		m_DXResConfig{ }
+	GameEntity3D() 
+		:	m_ConstantBuffer{ }
+		,	m_VerticesList{ 0 }
+		,	m_LocationMatrix{ XMMatrixIdentity() }
+		,	m_RotationMatrix{ XMMatrixIdentity() }
+		,	m_ScaleMatrix{ XMMatrixIdentity() }
+		,	m_Collision{ }
+		,	m_DXResConfig{ }
 	{ }
-
-	ID3D11InputLayout* InputLayout;
-	ID3D11Buffer* IndexBuffer;
-	ID3D11Buffer* VertexBuffer;
-	ID3D11VertexShader* VertexShader;
-	ID3D11PixelShader* PixelShader;
-	ID3D11ShaderResourceView* m_TextureRV;
-	ID3D11SamplerState* m_SamplerLinear;
-	ID3D11RasterizerState* m_RasterizerState;
 
 	XMMATRIX TransformationMatrix();
 
@@ -103,9 +94,21 @@ public:
 
 	void SetCollisionBoxCenter(XMFLOAT3 NewCenter);
 
+	void SetUID(std::string uid);
+
+	std::string GetUID();
+
 	CollisionComponent GetCollisionComponent();
 
 	DXResourcesConfig m_DXResConfig{ };
+
+	std::string m_UID;
+
+	// Test
+
+	void SetUIDTest(int uid);
+
+	int GetUIDTest();
 
 protected:
 	CollisionComponent m_Collision;
@@ -117,5 +120,6 @@ protected:
 	std::vector<ColorVertex> m_ColorVerticesList;
 	std::vector<SimpleColorVertex> m_SimpleColorVerticesList;
 	ConstantBuffer m_ConstantBuffer;
+	int m_UIDTest{ };
 };
 

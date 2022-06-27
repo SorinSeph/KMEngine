@@ -100,7 +100,29 @@ void GameEntity3D::SetCollisionBoxCenter(XMFLOAT3 NewCenter)
 	m_Collision.CollisionType = DISJOINT;
 }
 
+void GameEntity3D::SetUID(std::string uid)
+{
+	m_UID = uid;
+}
+
+std::string GameEntity3D::GetUID()
+{
+	return m_UID;
+}
+
 CollisionComponent GameEntity3D::GetCollisionComponent()
 {
 	return m_Collision;
+}
+
+// Test
+
+void GameEntity3D::SetUIDTest(int uid)
+{
+	m_UIDTest = uid;
+}
+
+int GameEntity3D::GetUIDTest()
+{
+	return m_UIDTest;
 }

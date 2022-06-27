@@ -146,6 +146,7 @@
     <ClCompile Include="GameEntity3D.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
+    <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
