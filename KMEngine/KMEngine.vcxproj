@@ -145,6 +145,7 @@
     <ClCompile Include="DXStructuresInitializer.cpp" />
     <ClCompile Include="GameEntity3D.cpp" />
     <ClCompile Include="KMEngine.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="EngineInitializer.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer.h" />

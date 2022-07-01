@@ -11,6 +11,7 @@
 #include "DDSTextureLoader.h"
 #include "Cube.h"
 #include "Scene.h"
+#include "Logger.h"
 
 class DX11Device
 {

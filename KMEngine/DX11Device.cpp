@@ -1182,6 +1182,8 @@ void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float Des
 
 void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
+    Logger& SLogger = Logger::GetLogger();
+    SLogger.Log("YO MR WHITE");
     Scene& SScene = Scene::GetScene();
     std::vector<GameEntity3D> SceneList = SScene.GetSceneList();
 
@@ -1226,29 +1228,27 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
         int Size = SceneList.size();
         //if (SceneEntityIt.m_GameEntityTag == "Default")
         //{
-            ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-            cb.mWorld = XMMatrixTranspose(cb.mWorld);
-            cb.mView = XMMatrixTranspose(m_ViewMatrix);
-            cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
-            m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
+        ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
+        cb.mWorld = XMMatrixTranspose(cb.mWorld);
+        cb.mView = XMMatrixTranspose(m_ViewMatrix);
+        cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
+        m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
 
-            ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_ConfigVertexBuffer;
-            //assert(VertexBuffer != nullptr);
-            m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
+        ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_ConfigVertexBuffer;
+        //assert(VertexBuffer != nullptr);
+        m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
 
+        //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
-
-            //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
-
-            //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
-            //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
-            //m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
-            m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
-            //m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
-            //m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
-            //m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
-            m_ImmediateContext->OMSetDepthStencilState(m_NullDepthStencilState, 0);
-            m_ImmediateContext->DrawIndexed(126, 0, 0);
+        //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+        //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+        //m_ImmediateContext->VSSetShader(m_VertexShader, nullptr, 0);
+        m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+        //m_ImmediateContext->PSSetShader(m_PixelShader, nullptr, 0);
+        //m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV);
+        //m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+        m_ImmediateContext->OMSetDepthStencilState(m_NullDepthStencilState, 0);
+        m_ImmediateContext->DrawIndexed(126, 0, 0);
         //}
 
             // Code for Box yellow outline
