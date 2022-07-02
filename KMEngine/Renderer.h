@@ -50,6 +50,6 @@ private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
-    DX11Device* m_DX11Device;
-    Scene* m_Scene;
+    DX11Device m_DX11Device{ };
+    DX11Device* m_pDX11Device{ nullptr };
 };

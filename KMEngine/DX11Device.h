@@ -11,13 +11,12 @@
 #include "DDSTextureLoader.h"
 #include "Cube.h"
 #include "Scene.h"
+#include "Logger.h"
 
 class DX11Device
 {
-private:
+public:
 	DX11Device() {}
-
-	static DX11Device* g_DX11Device;
 
 	DX11Device(HWND Viewport)
 		: m_Viewport{ Viewport }
@@ -89,8 +88,6 @@ public:
 	void CleanupDX11Device();
 	//void Render2();
 
-	static DX11Device* GetDX11Device();
-
 private:
 	HWND							m_Viewport{ };
 	HRESULT							m_hr{ };
@@ -120,6 +117,21 @@ private:
 	ID3D11Buffer*					m_IndexBuffer{ nullptr };
 	ID3D11Buffer*					m_ConstantBuffer{ nullptr };
 	ID3D11ShaderResourceView*		m_TextureRV{ nullptr };
+
+	/**
+	* Temp objects for pyramid object
+	*/
+
+	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
+	ID3D11ShaderResourceView*		m_TextureRV4{ nullptr };
+
+	/**
+	* Empty Resource
+	*/
+
+	ID3D11ShaderResourceView*		m_TextureRV5{ nullptr };
+	ID3D11DepthStencilState*		m_NullDepthStencilState{ nullptr };
+
 
 	/*
 	* Default Depth Stencil

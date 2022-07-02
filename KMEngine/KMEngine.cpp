@@ -23,6 +23,8 @@
 #include <dinput.h>
 #pragma comment (lib, "dinput8.lib")
 
+#include "Logger.h"
+
 #include "DX11Device.h"
 
 #include "EngineInitializer.h"

@@ -1,6 +1,11 @@
 #pragma once
 
+#include <d3d11_1.h>
+#include <d3d11.h>
+#include <d3dcompiler.h>
+#include <directxcolors.h>
 #include "GameEntity.h"
+#include "DXResourcesConfig.h"
 #include <DirectXCollision.h>
 #include <DirectXCollision.inl>
 #include <vector>
@@ -39,109 +44,71 @@ struct ColorVertex
 class GameEntity3D : public GameEntity
 {
 public:
-	GameEntity3D() :
-		m_ConstantBuffer{ },
-		m_VerticesList{ 0 },
-		m_LocationMatrix{ XMMatrixIdentity() },
-		m_RotationMatrix{ XMMatrixIdentity() },
-		m_ScaleMatrix{ XMMatrixIdentity() },
-		m_Collision{ }
+	GameEntity3D() 
+		:	m_ConstantBuffer{ }
+		,	m_VerticesList{ 0 }
+		,	m_LocationMatrix{ XMMatrixIdentity() }
+		,	m_RotationMatrix{ XMMatrixIdentity() }
+		,	m_ScaleMatrix{ XMMatrixIdentity() }
+		,	m_Collision{ }
+		,	m_DXResConfig{ }
 	{ }
 
-	void SetVerticesList(std::vector<SimpleVertex> VerticesList) 
-	{
-		m_VerticesList = VerticesList; 
-	}
+	XMMATRIX TransformationMatrix();
 
-	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList)
-	{
-		m_SimpleColorVerticesList = VerticesList;
-	}
+	void SetVertexbuffer(ID3D11Buffer* vb);
+
+	void SetVerticesList(std::vector<SimpleVertex> VerticesList);
+
+	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList);
 
 	/**
 	* Sets a vertex list
 	*/
 
-	void SetColorVerticesList(std::vector<ColorVertex> VerticesList)
-	{
-		m_ColorVerticesList = VerticesList;
-	}
+	void SetColorVerticesList(std::vector<ColorVertex> VerticesList);
 
-	std::vector<SimpleVertex> GetVerticesList() 
-	{
-		return m_VerticesList; 
-	}
+	std::vector<SimpleVertex> GetVerticesList();
 
-	std::vector<SimpleColorVertex> GetSimpleColorVerticesList()
-	{
-		return m_SimpleColorVerticesList;
-	}
+	std::vector<SimpleColorVertex> GetSimpleColorVerticesList();
 
-	std::vector<ColorVertex> GetColorVerticesList()
-	{
-		return m_ColorVerticesList;
-	}
+	std::vector<ColorVertex> GetColorVerticesList();
 
-	void SetLocation(XMMATRIX Location)
-	{
-		m_ConstantBuffer.mWorld = Location;
-	}
+	void SetLocation(XMMATRIX Location);
 
-	void SetLocationF(float InX, float InY, float InZ)
-	{
-		m_LocationVector = { InX, InY, InZ };
-		m_LocationMatrix = XMMatrixTranslation(InX, InY, InZ);
-		m_ConstantBuffer.mWorld = TransformationMatrix();
-	}
+	void SetLocationF(float InX, float InY, float InZ);
 
-	XMMATRIX GetLocation()
-	{
-		return m_LocationMatrix;
-	}
+	XMMATRIX GetLocation();
 
-	XMVECTOR GetLocationVector()
-	{
-		return m_LocationVector;
-	}
+	XMVECTOR GetLocationVector();
 
-	XMMATRIX GetRotation()
-	{
-		return m_RotationMatrix;
-	}
+	XMMATRIX GetRotation();
 
-	XMMATRIX GetScale()
-	{
-		return m_ScaleMatrix;
-	}
+	XMMATRIX GetScale();
 
-	void SetRotation(float InPitch, float InYaw, float InRoll)
-	{
-		m_RotationMatrix = XMMatrixRotationRollPitchYaw(InPitch, InYaw, InRoll);
-		m_ConstantBuffer.mWorld = TransformationMatrix();
-	}
+	void SetRotation(float InPitch, float InYaw, float InRoll);
 
-	void SetScale(float InX, float InY, float InZ)
-	{
-		m_ScaleMatrix = XMMatrixScaling(InX, InY, InZ);
-		m_ConstantBuffer.mWorld = TransformationMatrix();
-	}
+	void SetScale(float InX, float InY, float InZ);
 
-	ConstantBuffer GetConstantBuffer()
-	{
-		return m_ConstantBuffer;
-	}
+	ConstantBuffer GetConstantBuffer();
 
-	void SetCollisionBoxCenter(XMFLOAT3 NewCenter)
-	{
-		m_Collision.AABox.Center = NewCenter;
-		m_Collision.AABox.Extents = XMFLOAT3(0.5f, 0.5f, 0.5f);
-		m_Collision.CollisionType = DISJOINT;
-	}
+	void SetCollisionBoxCenter(XMFLOAT3 NewCenter);
 
-	CollisionComponent GetCollisionComponent()
-	{
-		return m_Collision;
-	}
+	void SetUID(std::string uid);
+
+	std::string GetUID();
+
+	CollisionComponent GetCollisionComponent();
+
+	DXResourcesConfig m_DXResConfig{ };
+
+	std::string m_UID;
+
+	// Test
+
+	void SetUIDTest(int uid);
+
+	int GetUIDTest();
 
 protected:
 	CollisionComponent m_Collision;
@@ -153,10 +120,6 @@ protected:
 	std::vector<ColorVertex> m_ColorVerticesList;
 	std::vector<SimpleColorVertex> m_SimpleColorVerticesList;
 	ConstantBuffer m_ConstantBuffer;
-
-	XMMATRIX TransformationMatrix()
-	{
-		return m_ScaleMatrix * m_RotationMatrix * m_LocationMatrix;
-	}
+	int m_UIDTest{ };
 };
 

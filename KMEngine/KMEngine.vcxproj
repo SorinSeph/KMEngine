@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,9 +142,13 @@
   <ItemGroup>
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="DX11Device.cpp" />
+    <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="DXStructuresInitializer.cpp" />
+    <ClCompile Include="GameEntity3D.cpp" />
     <ClCompile Include="KMEngine.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
+    <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
@@ -153,10 +158,12 @@
     <ClInclude Include="CubeTerrainGenerator.h" />
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="DX11Device.h" />
+    <ClInclude Include="DXResourcesConfig.h" />
     <ClInclude Include="DXStructuresInitializer.h" />
     <ClInclude Include="EngineInitializer.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer.h" />
