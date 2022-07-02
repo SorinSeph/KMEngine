@@ -353,6 +353,11 @@ void DX11Device::InitShaders()
     //m_GameEntityList.push_back(m_CubeEntity2);
     //SScene.AddEntityToScene(m_CubeEntity2);
 
+    GameEntity3D m_CubeEntity3 = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
+    m_CubeEntity3.SetLocationF(0.5f, 0.0f, 4.0f);
+    m_CubeEntity3.m_GameEntityTag = "ConstantScale";
+    SScene.AddEntityToScene(m_CubeEntity3);
+
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
     // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
@@ -467,6 +472,7 @@ void DX11Device::InitShaders()
     }
 
     SScene.SetVertexbuffer(0, m_VertexBuffer);
+    SScene.SetVertexbuffer(1, m_VertexBuffer);
 
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
@@ -545,7 +551,7 @@ void DX11Device::InitShaders()
     D3D11_RASTERIZER_DESC rasterDesc = {};
     rasterDesc.CullMode = D3D11_CULL_NONE;
 
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.1f, 10.0f);
     m_WorldMatrix = XMMatrixIdentity();
 
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
@@ -1183,9 +1189,28 @@ void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float Des
 void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
     Logger& SLogger = Logger::GetLogger();
-    SLogger.Log("YO MR WHITE");
     Scene& SScene = Scene::GetScene();
     std::vector<GameEntity3D> SceneList = SScene.GetSceneList();
+
+    XMFLOAT3 CameraPos(EyeX, EyeY, EyeZ);
+    XMVECTOR CameraVec = XMLoadFloat3(&CameraPos);
+
+    XMFLOAT3 ObjectPos(0.5f, 0.0f, 4.0f);
+    XMVECTOR ObjectVec = XMLoadFloat3(&ObjectPos);
+
+    XMVECTOR CameraObjectSub = XMVectorSubtract(CameraVec, ObjectVec);
+    XMVECTOR length = XMVector3Length(CameraObjectSub);
+
+    float distance = 0.0f;
+    XMStoreFloat(&distance, length);
+
+    // 2.0 * atan(tan(FovAngleY * 0.5) / AspectRatio).
+    float ratio = (float)m_ViewportWidth / m_ViewportHeight;
+    float worldSize = (std::tan (XM_PIDIV4 * 0.5) / ratio) * distance;
+    float size = 0.25f * worldSize;
+
+    /*SLogger.TemplatedLog("Eye X, Y and Z are: ", EyeX, EyeY, EyeZ);*/
+    SLogger.Log("Oi ", 12345," ", true);
 
     m_ViewMatrix = XMMatrixIdentity();
     XMMATRIX RotationMatrixX
@@ -1225,6 +1250,11 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
 
     for (auto SceneEntityIt : SceneList)
     {
+        if (SceneEntityIt.m_GameEntityTag == "ConstantScale")
+        {
+            SceneEntityIt.SetScale(size, size, size);
+        }
+
         int Size = SceneList.size();
         //if (SceneEntityIt.m_GameEntityTag == "Default")
         //{

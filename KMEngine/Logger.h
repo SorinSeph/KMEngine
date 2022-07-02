@@ -17,5 +17,17 @@ public:
 
 	void Log(string Output);
 
+	void Log(string Output, float Value);
+
+	template <typename... Args>
+	void Log(Args...args)
+	{
+		//KMELog << Text;
+		//LogArgs(args...);
+		//KMELog << endl;
+		(KMELog << ... << args);
+		KMELog << endl;
+	}
+
 	ofstream KMELog;
 };
