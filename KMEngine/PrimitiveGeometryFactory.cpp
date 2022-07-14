@@ -81,6 +81,21 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
 
             Entity.SetVerticesList(VerticesList);
             return Entity;
+            break;
+        }
+        case PrimitiveGeometryType::PlaneColored:
+        {
+            std::vector<SimpleColorVertex>VerticesList =
+            {
+                { XMFLOAT3(-5.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(5.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(5.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-5.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+            };
+
+            Entity.SetSimpleColorVerticesList(VerticesList);
+            return Entity;
+            break;
         }
         case PrimitiveGeometryType::Cube:
         {
@@ -123,6 +138,7 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             SetUID(Entity);
             SetUIDTest(Entity);
             return Entity;
+            break;
         }
         case PrimitiveGeometryType::Pyramid:
         {
@@ -157,46 +173,80 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
 
             Entity.SetVerticesList(VerticesList);
             return Entity;
+            break;
         }
         case PrimitiveGeometryType::CubeTest:
         {
             std::vector<SimpleColorVertex> VerticesList =
             {
-                { XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
 
-                { XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
 
-                { XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
 
-                { XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
 
-                { XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, -0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
 
                 // Front face
 
-                { XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-                { XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, -0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                { XMFLOAT3(-0.24f, 0.24f, 0.24f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //{ XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //{ XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //{ XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //{ XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //{ XMFLOAT3(-0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, -0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, 0.25f, -0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+
+                //// Front face
+
+                //{ XMFLOAT3(-0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, -0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+                //{ XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
             };
 
             Entity.SetSimpleColorVerticesList(VerticesList);
             return Entity;
+            break;
         }
         case PrimitiveGeometryType::Arrow:
         {
@@ -245,6 +295,7 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
 
             Entity.SetSimpleColorVerticesList(VerticesList);
             return Entity;
+            break;
         }
     }
 }

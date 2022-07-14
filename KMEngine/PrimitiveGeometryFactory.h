@@ -7,6 +7,7 @@ enum class PrimitiveGeometryType
 {
     Line,
 	Plane,
+    PlaneColored,
 	Cube,
     Pyramid,
     CubeTest,

@@ -18,8 +18,12 @@ public:
 	static int UIDCounter;
 
 	ID3D11InputLayout* m_InputLayout{ nullptr };
+
 	ID3D11Buffer* m_IndexBuffer{ nullptr };
-	ID3D11Buffer* m_ConfigVertexBuffer{ nullptr };
+	DXGI_FORMAT m_IndexBufferFormat{ };
+	UINT m_IndexBufferOffset{ };
+
+	ID3D11Buffer* m_VertexBuffer{ nullptr };
 	ID3D11VertexShader* m_VertexShader{ nullptr };
 	ID3D11PixelShader* m_PixelShader{ nullptr };
 	ID3D11ShaderResourceView* m_TextureRV{ nullptr };
@@ -32,7 +36,14 @@ public:
 
 	void SetIndexBuffer(ID3D11Buffer* IndexBuffer, DXGI_FORMAT Format, int Offset);
 
-	ID3D11Buffer* GetVertexBuffer() { return m_ConfigVertexBuffer; }
-	ID3D11Buffer* GetIndexBuffer() { return m_IndexBuffer; }
+	void SetInputLayout(ID3D11InputLayout* InputLayout);
+
+	void SetVertexShader(ID3D11VertexShader* VS);
+
+	void SetPixelShader(ID3D11PixelShader* PS);
+
+	ID3D11Buffer* GetVertexBuffer()		{ return m_VertexBuffer; }
+	ID3D11Buffer* GetIndexBuffer()		{ return m_IndexBuffer; }
+	ID3D11InputLayout* GetInputLayout() { return m_InputLayout; }
 };
 

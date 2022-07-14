@@ -100,15 +100,30 @@ void CreateInputLayout(
 
 void DXResourcesConfig::SetVertexBuffer(ID3D11Buffer* VertexBuffer)
 {
-	m_ConfigVertexBuffer = VertexBuffer;
+	m_VertexBuffer = VertexBuffer;
 }
 
 void DXResourcesConfig::SetIndexBuffer(ID3D11Buffer* IndexBuffer, DXGI_FORMAT Format, int Offset)
 {
 	m_IndexBuffer = IndexBuffer;
+	m_IndexBufferFormat = Format;
+	m_IndexBufferOffset = Offset;
 }
 
+void DXResourcesConfig::SetInputLayout(ID3D11InputLayout* InputLayout)
+{
+	m_InputLayout = InputLayout;
+}
 
+void DXResourcesConfig::SetVertexShader(ID3D11VertexShader* VS)
+{
+	m_VertexShader = VS;
+}
+
+void DXResourcesConfig::SetPixelShader(ID3D11PixelShader* PS)
+{
+	m_PixelShader = PS;
+}
 
 //void DXResourcesConfig::CreateInputLayout(int Size, ID3D11InputLayout Input[])
 //{

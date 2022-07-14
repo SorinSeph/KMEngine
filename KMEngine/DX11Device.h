@@ -73,6 +73,7 @@ public:
 	D3D11_TEXTURE2D_DESC InitTexture2D();
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
 	void InitDefaultDepthStencil();
+	void InitDisabledDepthStencil();
 	void InitViewport();
 	void InitShaders();
 	void InitShaders2();

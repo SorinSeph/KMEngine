@@ -24,6 +24,26 @@ void Scene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
 	m_GameEntityList.at(Location).SetVertexbuffer(vb);
 }
 
+void Scene::SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+{
+	m_GameEntityList.at(Location).SetIndexbuffer(ib, Format, Offset);
+}
+
+void Scene::SetInputLayout(int Location, ID3D11InputLayout* InputLayout)
+{
+	m_GameEntityList.at(Location).SetInputLayout(InputLayout);
+}
+
+void Scene::SetVertexShader(int Location, ID3D11VertexShader* VS)
+{
+	m_GameEntityList.at(Location).SetVertexShader(VS);
+}
+
+void Scene::SetPixelShader(int Location, ID3D11PixelShader* PS)
+{
+	m_GameEntityList.at(Location).SetPixelShader(PS);
+}
+
 std::vector<GameEntity3D> Scene::GetSceneList()
 {
 	return m_GameEntityList;

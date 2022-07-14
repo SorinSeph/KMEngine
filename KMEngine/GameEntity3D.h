@@ -58,7 +58,15 @@ public:
 
 	void SetVertexbuffer(ID3D11Buffer* vb);
 
+	void SetIndexbuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
+
 	void SetVerticesList(std::vector<SimpleVertex> VerticesList);
+
+	void SetInputLayout(ID3D11InputLayout* InputLayout);
+
+	void SetVertexShader(ID3D11VertexShader* VS);
+
+	void SetPixelShader(ID3D11PixelShader* VS);
 
 	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList);
 

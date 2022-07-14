@@ -222,14 +222,14 @@ void DetectKeyboardInput()
 
     if (keyboardState[DIK_A] & 0x80)
     {
-        EyeX -= std::sinf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
-        EyeZ -= std::cosf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
+        EyeX += std::sinf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
+        EyeZ += std::cosf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
     }
 
     if (keyboardState[DIK_D] & 0x80)
     {
-        EyeX += std::sinf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
-        EyeZ += std::cosf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
+        EyeX -= std::sinf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
+        EyeZ -= std::cosf(XMConvertToRadians(g_RotY - 90)) * SpeedScale;
     }
     else
     {
@@ -240,27 +240,27 @@ void DetectKeyboardInput()
     {
         if (!bCollision)
         {
-            EyeX -= std::sinf(XMConvertToRadians(g_RotY)) * SpeedScale;
-            EyeZ -= std::cosf(XMConvertToRadians(g_RotY)) * SpeedScale;
-            EyeY += std::sinf(XMConvertToRadians(g_RotX)) * SpeedScale;
+            EyeX += std::sinf(XMConvertToRadians(g_RotY)) * SpeedScale;
+            EyeZ += std::cosf(XMConvertToRadians(g_RotY)) * SpeedScale;
+            EyeY -= std::sinf(XMConvertToRadians(g_RotX)) * SpeedScale;
         }
     }
 
     if (keyboardState[DIK_S] & 0x80)
     {
-        EyeX += std::sinf(XMConvertToRadians(g_RotY)) * SpeedScale;
-        EyeZ += std::cosf(XMConvertToRadians(g_RotY)) * SpeedScale;
-        EyeY -= std::sinf(XMConvertToRadians(g_RotX)) * SpeedScale;
+        EyeX -= std::sinf(XMConvertToRadians(g_RotY)) * SpeedScale;
+        EyeZ -= std::cosf(XMConvertToRadians(g_RotY)) * SpeedScale;
+        EyeY += std::sinf(XMConvertToRadians(g_RotX)) * SpeedScale;
     }
 
     if (keyboardState[DIK_Z] & 0x80)
     {
-        EyeY -= 0.001f;
+        EyeY += 0.001f;
     }
 
     if (keyboardState[DIK_X] & 0x80)
     {
-        EyeY += 0.001f;
+        EyeY -= 0.001f;
     }
 
     if (keyboardState[DIK_S] & 0x80)

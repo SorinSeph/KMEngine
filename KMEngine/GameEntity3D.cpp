@@ -29,6 +29,26 @@ void GameEntity3D::SetVertexbuffer(ID3D11Buffer* vb)
 	m_DXResConfig.SetVertexBuffer(vb);
 }
 
+void GameEntity3D::SetIndexbuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+{
+	m_DXResConfig.SetIndexBuffer(ib, Format, Offset);
+}
+
+void GameEntity3D::SetInputLayout(ID3D11InputLayout* InputLayout)
+{
+	m_DXResConfig.SetInputLayout(InputLayout);
+}
+
+void GameEntity3D::SetVertexShader(ID3D11VertexShader* VS)
+{
+	m_DXResConfig.SetVertexShader(VS);
+}
+
+void GameEntity3D::SetPixelShader(ID3D11PixelShader* PS)
+{
+	m_DXResConfig.SetPixelShader(PS);
+}
+
 std::vector<SimpleVertex> GameEntity3D::GetVerticesList()
 {
 	return m_VerticesList;
