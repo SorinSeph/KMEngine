@@ -125,6 +125,11 @@ void DXResourcesConfig::SetPixelShader(ID3D11PixelShader* PS)
 	m_PixelShader = PS;
 }
 
+void DXResourcesConfig::SetConstantBuffer(ID3D11Buffer* ConstantBuffer)
+{
+	m_ConstantBuffer = ConstantBuffer;
+}
+
 //void DXResourcesConfig::CreateInputLayout(int Size, ID3D11InputLayout Input[])
 //{
 //	m_InputLayout = Input;

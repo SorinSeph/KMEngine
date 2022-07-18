@@ -16,6 +16,7 @@ public:
 	void AddEntityToScene(GameEntity3D Entity);
 	void AddEntityToScene(int Location, GameEntity3D Entity);
 	std::vector<GameEntity3D> GetSceneList();
+	void SetConstantBuffer(int Location, ID3D11Buffer* cb);
 	void SetVertexbuffer(int Location, ID3D11Buffer* vb);
 	void SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
 	void SetInputLayout(int Location, ID3D11InputLayout* InputLayout);

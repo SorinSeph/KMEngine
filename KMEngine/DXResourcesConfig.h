@@ -17,12 +17,11 @@ public:
 
 	static int UIDCounter;
 
+	ID3D11Buffer* m_ConstantBuffer{ nullptr };
 	ID3D11InputLayout* m_InputLayout{ nullptr };
-
 	ID3D11Buffer* m_IndexBuffer{ nullptr };
 	DXGI_FORMAT m_IndexBufferFormat{ };
 	UINT m_IndexBufferOffset{ };
-
 	ID3D11Buffer* m_VertexBuffer{ nullptr };
 	ID3D11VertexShader* m_VertexShader{ nullptr };
 	ID3D11PixelShader* m_PixelShader{ nullptr };
@@ -30,7 +29,7 @@ public:
 	ID3D11SamplerState* m_SamplerLinear{ nullptr };
 	ID3D11RasterizerState* m_RasterizerState{ nullptr };
 
-	/*void CreateInputLayout(int Size, ID3D11InputLayout Input[]);*/
+	void SetConstantBuffer(ID3D11Buffer* ConstantBuffer);
 
 	void SetVertexBuffer(ID3D11Buffer* VertexBuffer);
 

@@ -68,6 +68,8 @@ public:
 
 	void SetPixelShader(ID3D11PixelShader* VS);
 
+	void SetConstantBuffer(ID3D11Buffer* cb);
+
 	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList);
 
 	/**

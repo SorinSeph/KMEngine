@@ -49,6 +49,11 @@ void GameEntity3D::SetPixelShader(ID3D11PixelShader* PS)
 	m_DXResConfig.SetPixelShader(PS);
 }
 
+void GameEntity3D::SetConstantBuffer(ID3D11Buffer* cb)
+{
+	m_DXResConfig.SetConstantBuffer(cb);
+}
+
 std::vector<SimpleVertex> GameEntity3D::GetVerticesList()
 {
 	return m_VerticesList;

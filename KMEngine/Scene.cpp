@@ -44,6 +44,11 @@ void Scene::SetPixelShader(int Location, ID3D11PixelShader* PS)
 	m_GameEntityList.at(Location).SetPixelShader(PS);
 }
 
+void Scene::SetConstantBuffer(int Location, ID3D11Buffer* cb)
+{
+	m_GameEntityList.at(Location).SetConstantBuffer(cb);
+}
+
 std::vector<GameEntity3D> Scene::GetSceneList()
 {
 	return m_GameEntityList;
