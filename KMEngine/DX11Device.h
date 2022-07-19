@@ -148,7 +148,7 @@ private:
 	ID3D11DepthStencilView*			pDefDepthStencilView{ nullptr };
 
 	/**
-	* Duplicates, to remove
+	* For InitShaders2()
 	*/
 	ID3D11VertexShader*				m_VertexShader2{ nullptr };
 	ID3D11PixelShader*				m_PixelShader2{ nullptr };
@@ -158,9 +158,18 @@ private:
 	ID3D11Buffer*					m_ConstantBuffer2{ nullptr };
 	ID3D11ShaderResourceView*		m_TextureRV2{ nullptr };
 
-	// Used for line
+	/**
+	* For InitShaders3()
+	*/
+	ID3D11VertexShader*				m_VertexShader3{ nullptr };
+	ID3D11PixelShader*				m_PixelShader3{ nullptr };
+	ID3D11InputLayout*				m_VertexLayout3{ nullptr };
 	ID3D11Buffer*					m_VertexBuffer3{ nullptr };
+	ID3D11Buffer*					m_IndexBuffer3{ nullptr };
 	ID3D11Buffer*					m_ConstantBuffer3{ nullptr };
+	ID3D11ShaderResourceView*		m_TextureRV3{ nullptr };
+
+	// Used for line
 
 	ID3D11SamplerState*				m_SamplerLinear{ nullptr };
 	ID3D11RasterizerState*			m_RasterizerState{ nullptr };
