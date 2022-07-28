@@ -9,13 +9,6 @@ class Renderer
 public:
     Renderer(HWND Viewport);
 
-	//Renderer(UINT ViewportWidth, UINT ViewportHeight)
- //       : m_ViewportWidth{ ViewportWidth }
- //       , m_ViewportHeight{ ViewportHeight }
- //   {
- //       m_DX11Device.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
- //   }
-
     void SetViewport(HWND InViewport);
 
     void InitRenderer();
@@ -41,6 +34,10 @@ public:
             return;
         }
     }
+
+    void Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
+
+    void AddOutline();
 
     void Render(float RotX, float RotY, float LocX, float LocY, float LocZ);
 

@@ -20,6 +20,16 @@ void Renderer::Render(float RotX, float RotY, float LocX, float LocY, float LocZ
     m_DX11Device.Render(RotX, RotY, LocX, LocY, LocZ);
 }
 
+void Renderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ)
+{
+    m_DX11Device.InitLine(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+}
+
+void Renderer::AddOutline()
+{
+    m_DX11Device.InitShaders3();
+}
+
 void Renderer::CleanupRenderer()
 {
     m_DX11Device.CleanupDX11Device();

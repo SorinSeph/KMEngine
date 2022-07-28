@@ -75,10 +75,20 @@ public:
 	void InitDefaultDepthStencil();
 	void InitDisabledDepthStencil();
 	void InitViewport();
+
+	/**
+	* Initializes a plain, textured cube
+	*/
 	void InitShaders();
+
+	/**
+	* Initializes a red cube, with outline stencil state
+	*/
 	void InitShaders2();
 
-	// Test func to init properties of pyramid object
+	/**
+	* Initializes a red arrow object, with fixed value scaling
+	*/
 	void InitShaders3();
 
 	void AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
@@ -118,13 +128,8 @@ private:
 	ID3D11Buffer*					m_IndexBuffer{ nullptr };
 	ID3D11Buffer*					m_ConstantBuffer{ nullptr };
 	ID3D11ShaderResourceView*		m_TextureRV{ nullptr };
-
-	/**
-	* Temp objects for pyramid object
-	*/
-
-	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
-	ID3D11ShaderResourceView*		m_TextureRV4{ nullptr };
+	ID3D11SamplerState*				m_SamplerLinear{ nullptr };
+	ID3D11RasterizerState*			m_RasterizerState{ nullptr };
 
 	/**
 	* Empty Resource
@@ -170,9 +175,8 @@ private:
 	ID3D11ShaderResourceView*		m_TextureRV3{ nullptr };
 
 	// Used for line
-
-	ID3D11SamplerState*				m_SamplerLinear{ nullptr };
-	ID3D11RasterizerState*			m_RasterizerState{ nullptr };
+	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
+	ID3D11Buffer*					m_ConstantBuffer4{ nullptr };
 
 public:
 	static XMMATRIX                 m_WorldMatrix;

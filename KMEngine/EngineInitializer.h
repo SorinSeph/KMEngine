@@ -34,6 +34,8 @@ float RaycastDestinationY = 0.0f;
 float RaycastDestinationZ = 0.0f;
 
 
+Renderer* g_Renderer{ nullptr };
+
 class EngineInitializer
 {
 public:
@@ -41,11 +43,14 @@ public:
 	EngineInitializer(HINSTANCE hInstance, int nCmdShow)
         : m_HInstance{ hInstance }
         , m_NCmdShow{ nCmdShow }
+        , m_Renderer{ ViewportHwnd }
         //, m_DX11Device{ new DX11Device }
-    {}
+    {
+        g_Renderer = &m_Renderer;
+    }
 
 
-    static void UnprojectClick3(long InX, long InY)
+    static void RayCast(long InX, long InY)
     {
         // Test
         //XMVECTOR OriginPoint = XMVectorSet(InX, InY, 0, 0);
@@ -90,9 +95,11 @@ public:
         RaycastDestinationX = RayDirectionFloat4.x * 100;
         RaycastDestinationY = RayDirectionFloat4.y * 100;
         RaycastDestinationZ = RayDirectionFloat4.z * 100;
-
         //DX11Device* dx11Device = DX11Device::GetDX11Device();
         //dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        
+        g_Renderer->Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        //g_Renderer->AddOutline();
     }
 
     static LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -147,8 +154,7 @@ public:
 
                 //KMEngine_Log << "Unprojected MouseX on click is: " << mouseXUnprojected << "\n";
                 //KMEngine_Log << "Unprojected MouseY on click is: " << mouseYUnprojected << "\n";
-
-                UnprojectClick3(mouseX, mouseY);
+                RayCast(mouseX, mouseY);
 
                 //RaycastX = mouseXUnprojected;
                 //RaycastY = mouseYUnprojected;
@@ -407,7 +413,8 @@ public:
     private:
         HINSTANCE m_HInstance{ };
         int m_NCmdShow{ };
-        Renderer m_Renderer{ ViewportHwnd };
+        Renderer m_Renderer;
+        Renderer* m_pRenderer;
         DX11Device m_DX11Device{ };
 };
 
