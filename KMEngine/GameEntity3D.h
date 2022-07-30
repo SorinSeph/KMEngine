@@ -120,6 +120,8 @@ public:
 
 	int GetUIDTest();
 
+	//CollisionComponent m_Collision;
+
 protected:
 	CollisionComponent m_Collision;
 	XMVECTOR m_LocationVector;
