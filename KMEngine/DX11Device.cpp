@@ -18,7 +18,7 @@ HRESULT DX11Device::InitDX11Device()
     //InitDepthStencilView(descDepth);
     InitDisabledDepthStencil();
     InitDefaultDepthStencil();
-    InitOutlineDepthStencil();
+    //InitOutlineDepthStencil();
     InitViewport();
     InitShaders();
     InitShaders2();
@@ -407,15 +407,16 @@ void DX11Device::InitDisabledDepthStencil()
 //    m_ImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
 //        &m_RenderTargetView,      // Render target view, created earlier
 //        pDSV);     // Depth stencil view for the render target
-}
 
-{
+
+
     // Create the depth stencil outline
     defDepthStencilDesc.DepthEnable = true;
     defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
     defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
 
     defDepthStencilDesc.StencilEnable = true;
+}
 
 void DX11Device::InitShaders()
 {
@@ -648,32 +649,32 @@ void DX11Device::InitShaders2()
     //m_GameEntityList.push_back(m_CubeEntity);
     //SScene.AddEntityToScene(m_CubeOutline);
 
-    //// Create the depth stencil outline
-    //defDepthStencilDesc.DepthEnable = true;
-    //defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    //defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+    // Create the depth stencil outline
+    defDepthStencilDesc.DepthEnable = true;
+    defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
 
-    //defDepthStencilDesc.StencilEnable = true;
-    //defDepthStencilDesc.StencilReadMask = 0xFF;
-    //defDepthStencilDesc.StencilWriteMask = 0xFF;
+    defDepthStencilDesc.StencilEnable = true;
+    defDepthStencilDesc.StencilReadMask = 0xFF;
+    defDepthStencilDesc.StencilWriteMask = 0xFF;
 
-    //// It does not matter what we write since we are not using the values after this step.
-    //// In other words, we are only using the values to mask pixels.
-    //defDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    //// The stencil test passes if the passed parameter is equal to value in the buffer.
-    //defDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+    // It does not matter what we write since we are not using the values after this step.
+    // In other words, we are only using the values to mask pixels.
+    defDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    // The stencil test passes if the passed parameter is equal to value in the buffer.
+    defDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
 
-    //// Again, we do not care about back-facing pixels.
-    //defDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
+    // Again, we do not care about back-facing pixels.
+    defDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
 
-    ////hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
+    //hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
 
-    //m_D3D11Device->CreateDepthStencilState(&defDepthStencilDesc, &pDepthStencilStateOutline);
+    m_D3D11Device->CreateDepthStencilState(&defDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
