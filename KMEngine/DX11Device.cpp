@@ -18,11 +18,10 @@ HRESULT DX11Device::InitDX11Device()
     //InitDepthStencilView(descDepth);
     InitDisabledDepthStencil();
     InitDefaultDepthStencil();
-    InitOutlineDepthStencil();
     InitViewport();
     InitShaders();
     InitShaders2();
-    InitShaders3();
+    //InitShaders3();
 
     //InitLine(0, 0, 0, 0, 0, 4);
 
@@ -409,14 +408,6 @@ void DX11Device::InitDisabledDepthStencil()
 //        pDSV);     // Depth stencil view for the render target
 }
 
-{
-    // Create the depth stencil outline
-    defDepthStencilDesc.DepthEnable = true;
-    defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
-
-    defDepthStencilDesc.StencilEnable = true;
-
 void DX11Device::InitShaders()
 {
     Scene& SScene = Scene::GetScene();
@@ -426,18 +417,8 @@ void DX11Device::InitShaders()
     m_CubeEntity.SetLocationF(0.0f, 0.0f, 4.0f);
     m_CubeEntity.m_GameEntityTag = "Original_Tag";
     m_CubeEntity.m_DXResConfig.m_UID = "UID1234";
-
-    CollisionComponent Collision = m_CubeEntity.GetCollisionComponent();
-    Collision.AABox.Center = { 0, 0, 10 };
-    Collision.AABox.Extents = { 1.0f, 1.0f, 1.0f };
-    Collision.CollisionType = DISJOINT;
-
     SScene.AddEntityToScene(m_CubeEntity);
     //m_GameEntityList.push_back(m_CubeEntity);
-
-    //g_SecondaryAABoxes[i].aabox.Center = XMFLOAT3(0, 0, 0);
-    //g_SecondaryAABoxes[i].aabox.Extents = XMFLOAT3(0.5f, 0.5f, 0.5f);
-    //g_SecondaryAABoxes[i].collision = DISJOINT;
 
     //m_CubeEntity2 = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
     //m_CubeEntity2.SetLocationF(10.0f, 0.0f, 0.0f);
@@ -641,39 +622,39 @@ void DX11Device::InitShaders2()
     Scene& SScene = Scene::GetScene();
     PrimitiveGeometryFactory GeometryFactory;
 
-    m_CubeOutline = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::CubeTest);
-    m_CubeOutline.SetLocationF(0.0f, 0.0f, 4.0f);
-    m_CubeOutline.SetScale(1.02f, 1.02f, 1.02f);
-    m_CubeOutline.m_GameEntityTag = "Outline";
+    m_Pyramid = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::CubeTest);
+    m_Pyramid.SetLocationF(0.0f, 0.0f, 4.0f);
+    m_Pyramid.SetScale(1.05f, 1.05f, 1.05f);
+    m_Pyramid.m_GameEntityTag = "Outline";
     //m_GameEntityList.push_back(m_CubeEntity);
-    //SScene.AddEntityToScene(m_CubeOutline);
+    SScene.AddEntityToScene(m_Pyramid);
 
-    //// Create the depth stencil outline
-    //defDepthStencilDesc.DepthEnable = true;
-    //defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    //defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+    // Create the depth stencil outline
+    defDepthStencilDesc.DepthEnable = true;
+    defDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    defDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
 
-    //defDepthStencilDesc.StencilEnable = true;
-    //defDepthStencilDesc.StencilReadMask = 0xFF;
-    //defDepthStencilDesc.StencilWriteMask = 0xFF;
+    defDepthStencilDesc.StencilEnable = true;
+    defDepthStencilDesc.StencilReadMask = 0xFF;
+    defDepthStencilDesc.StencilWriteMask = 0xFF;
 
-    //// It does not matter what we write since we are not using the values after this step.
-    //// In other words, we are only using the values to mask pixels.
-    //defDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    //// The stencil test passes if the passed parameter is equal to value in the buffer.
-    //defDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+    // It does not matter what we write since we are not using the values after this step.
+    // In other words, we are only using the values to mask pixels.
+    defDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    // The stencil test passes if the passed parameter is equal to value in the buffer.
+    defDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
 
-    //// Again, we do not care about back-facing pixels.
-    //defDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    //defDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
+    // Again, we do not care about back-facing pixels.
+    defDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
 
-    ////hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
+    //hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
 
-    //m_D3D11Device->CreateDepthStencilState(&defDepthStencilDesc, &pDepthStencilStateOutline);
+    m_D3D11Device->CreateDepthStencilState(&defDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
@@ -696,8 +677,7 @@ void DX11Device::InitShaders2()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetVertexShader(m_VertexShader2);
-    //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
+    SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -716,8 +696,7 @@ void DX11Device::InitShaders2()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetInputLayout(m_VertexLayout2);
-    //SScene.SetInputLayout(SceneLoc, m_VertexLayout2);
+    SScene.SetInputLayout(SceneLoc, m_VertexLayout2);
 
     // Set the input layout
     //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
@@ -742,8 +721,7 @@ void DX11Device::InitShaders2()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetPixelShader(m_PixelShader2);
-    //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
+    SScene.SetPixelShader(SceneLoc, m_PixelShader2);
 
     D3D11_BUFFER_DESC bd{};
     bd.Usage = D3D11_USAGE_DEFAULT;
@@ -752,14 +730,12 @@ void DX11Device::InitShaders2()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<SimpleColorVertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutline.GetSimpleColorVerticesList().size();
-
+    std::vector<SimpleColorVertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
+    int TotalVerticesVectorSize = TotalVerticesVector.size();
     SimpleColorVertex* VerticesArray = new SimpleColorVertex[TotalVerticesVectorSize];
     for (int i = 0; i < TotalVerticesVectorSize; i++)
     {
-        VerticesArray[i] = m_CubeOutline.GetSimpleColorVerticesList().at(i);
+        VerticesArray[i] = TotalVerticesVector.at(i);
     }
     InitData.pSysMem = VerticesArray;
 
@@ -775,8 +751,7 @@ void DX11Device::InitShaders2()
     UINT offset = 0;
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
-    m_CubeOutline.m_DXResConfig.SetVertexBuffer(m_VertexBuffer2);
-    //SScene.SetVertexbuffer(SceneLoc, m_VertexBuffer2);
+    SScene.SetVertexbuffer(SceneLoc, m_VertexBuffer2);
 
     // Pyramid indices,
     WORD indices[] =
@@ -813,8 +788,7 @@ void DX11Device::InitShaders2()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetIndexBuffer(m_IndexBuffer2, DXGI_FORMAT_R16_UINT, 0);
-    //SScene.SetIndexbuffer(SceneLoc, m_IndexBuffer2, DXGI_FORMAT_R16_UINT, 0);
+    SScene.SetIndexbuffer(SceneLoc, m_IndexBuffer2, DXGI_FORMAT_R16_UINT, 0);
 
     // Set index buffer
     //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
@@ -831,8 +805,7 @@ void DX11Device::InitShaders2()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetConstantBuffer(m_ConstantBuffer2);
-    //SScene.SetConstantBuffer(SceneLoc, m_ConstantBuffer2);
+    SScene.SetConstantBuffer(SceneLoc, m_ConstantBuffer2);
 
     const wchar_t* TextureName = L"UV_Color_Grid.dds";
     m_hr = CreateDDSTextureFromFile(m_D3D11Device, TextureName, nullptr, &m_TextureRV2);
@@ -861,9 +834,7 @@ void DX11Device::InitShaders2()
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
     m_WorldMatrix = XMMatrixIdentity();
 
-    //SceneLoc++;
-
-    m_UnrenderedList.push_back(m_CubeOutline);
+    SceneLoc++;
 
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
     //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[2], DXGI_FORMAT_R16_UINT, 0);
@@ -882,12 +853,12 @@ void DX11Device::InitShaders3()
     Scene& SScene = Scene::GetScene();
     PrimitiveGeometryFactory GeometryFactory;
 
-    GameEntity3D m_Arrow = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Arrow);
-    m_Arrow.SetLocationF(0.0f, 0.0f, 4.0f);
-    m_Arrow.SetScale(0.1f, 0.1f, 0.1f);
-    m_Arrow.m_GameEntityTag = "ConstantScale";
-    m_Arrow.m_DXResConfig.m_UID = "UID1234";
-    SScene.AddEntityToScene(m_Arrow);
+    GameEntity3D m_CubeEntityTest = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Arrow);
+    m_CubeEntityTest.SetLocationF(0.0f, 0.0f, 4.0f);
+    m_CubeEntityTest.SetScale(0.1f, 0.1f, 0.1f);
+    m_CubeEntityTest.m_GameEntityTag = "ConstantScale";
+    m_CubeEntityTest.m_DXResConfig.m_UID = "UID1234";
+    SScene.AddEntityToScene(m_CubeEntityTest);
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
@@ -906,7 +877,6 @@ void DX11Device::InitShaders3()
         return;
     }
 
-    m_Arrow.m_DXResConfig.SetVertexShader(m_VertexShader3);
     SScene.SetVertexShader(SceneLoc, m_VertexShader3);
 
     // Define the input layout
@@ -923,7 +893,6 @@ void DX11Device::InitShaders3()
     if (FAILED(m_hr))
         return;
 
-    m_Arrow.m_DXResConfig.SetInputLayout(m_VertexLayout3);
     SScene.SetInputLayout(SceneLoc, m_VertexLayout3);
 
     // Compile the pixel shader
@@ -942,9 +911,6 @@ void DX11Device::InitShaders3()
         return;
 
     // Add the vertex and pixel shader to the DX Resources object
-    m_Arrow.m_DXResConfig.SetVertexShader(m_VertexShader3);
-    m_Arrow.m_DXResConfig.SetPixelShader(m_PixelShader3);
-
     SScene.SetVertexShader(SceneLoc, m_VertexShader3);
     SScene.SetPixelShader(SceneLoc, m_PixelShader3);
 
@@ -973,7 +939,6 @@ void DX11Device::InitShaders3()
     UINT stride = sizeof(SimpleColorVertex);
     UINT offset = 0;
 
-    m_Arrow.m_DXResConfig.SetVertexBuffer(m_VertexBuffer3);
     SScene.SetVertexbuffer(SceneLoc, m_VertexBuffer3);
     //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer2, &stride, &offset);
 
@@ -1094,7 +1059,6 @@ void DX11Device::InitShaders3()
         return;
 
     // Set index buffer
-    m_Arrow.m_DXResConfig.SetIndexBuffer(m_IndexBuffer3, DXGI_FORMAT_R16_UINT, 0);
     SScene.SetIndexbuffer(SceneLoc, m_IndexBuffer3, DXGI_FORMAT_R16_UINT, 0);
 
     // Create the constant buffer
@@ -1105,13 +1069,9 @@ void DX11Device::InitShaders3()
     m_hr = m_D3D11Device->CreateBuffer(&bd, nullptr, &m_ConstantBuffer3);
     if (FAILED(m_hr))
         return;
-
-    m_Arrow.m_DXResConfig.SetConstantBuffer(m_ConstantBuffer3);
     SScene.SetConstantBuffer(SceneLoc, m_ConstantBuffer3);
 
     SceneLoc++;
-
-    m_UnrenderedList.push_back(m_Arrow);
 }
 
 void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
@@ -1227,20 +1187,6 @@ void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float Des
     Logger& SLogger = Logger::GetLogger();
     SLogger.Log("InitLine, called from DX11Device.cpp");
 
-    SceneLoc++;
-
-    m_UnrenderedList.push_back(Linetrace);
-}
-
-void DX11Device::CheckCollision()
-{
-
-}
-
-void DX11Device::AddOutline()
-{
-    Scene& SScene = Scene::GetScene();
-    SScene.AddEntityToScene(m_CubeOutline);
     SceneLoc++;
 }
 

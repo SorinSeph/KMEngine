@@ -98,8 +98,8 @@ public:
         //DX11Device* dx11Device = DX11Device::GetDX11Device();
         //dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
         
-        //g_Renderer->Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
-        g_Renderer->AddOutline();
+        g_Renderer->Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+        //g_Renderer->AddOutline();
     }
 
     static LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

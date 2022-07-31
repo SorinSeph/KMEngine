@@ -74,7 +74,6 @@ public:
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
 	void InitDefaultDepthStencil();
 	void InitDisabledDepthStencil();
-	void InitOutlineDepthStencil();
 	void InitViewport();
 
 	/**
@@ -96,13 +95,6 @@ public:
 	void InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 	//void CleanupDX11Device();
 	
-	/**
-	* Check the intersection of the raycast with the first cube
-	*/
-	void CheckCollision();
-
-	void AddOutline();
-
 	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 	void CleanupDX11Device();
 	//void Render2();
@@ -186,8 +178,6 @@ private:
 	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
 	ID3D11Buffer*					m_ConstantBuffer4{ nullptr };
 
-	std::vector<GameEntity3D>		m_UnrenderedList{ };
-
 public:
 	static XMMATRIX                 m_WorldMatrix;
 	static XMMATRIX                 m_ViewMatrix;
@@ -198,9 +188,9 @@ private:
 
 	GameEntity3D					m_CubeEntity = { };
 	GameEntity3D					m_CubeEntity2 = { };
-	GameEntity3D					m_CubeOutlineEntity{ };
+	GameEntity3D					m_ArrowEntity{ };
 	GameEntity3D					m_Linetrace{ };
-	GameEntity3D					m_CubeOutline{ };
+	GameEntity3D					m_Pyramid{ };
 
 	UINT							m_ViewportWidth{ };
 	UINT							m_ViewportHeight{ };
