@@ -27,7 +27,7 @@ void Renderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX,
 
 void Renderer::AddOutline()
 {
-    m_DX11Device.AddOutline();
+    m_DX11Device.CheckCollision();
 }
 
 void Renderer::CleanupRenderer()

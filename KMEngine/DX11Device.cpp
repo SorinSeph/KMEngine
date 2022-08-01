@@ -1,10 +1,18 @@
 #include "DX11Device.h"
+using namespace Internal;
 
 XMMATRIX DX11Device::m_WorldMatrix;
 XMMATRIX DX11Device::m_ViewMatrix;
 XMMATRIX DX11Device::m_ProjectionMatrix;
 
 int SceneLoc = 0;
+
+XMVECTOR g_RayOrigin;
+XMVECTOR g_RayDestination;
+
+XMGLOBALCONST XMVECTORF32 _RayEpsilon = { { { 1e-20f, 1e-20f, 1e-20f, 1e-20f } } };
+XMGLOBALCONST XMVECTORF32 _FltMin = { { { -FLT_MAX, -FLT_MAX, -FLT_MAX, -FLT_MAX } } };
+XMGLOBALCONST XMVECTORF32 _FltMax = { { { FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX } } };
 
 HRESULT DX11Device::InitDX11Device()
 {
@@ -23,6 +31,8 @@ HRESULT DX11Device::InitDX11Device()
     InitShaders();
     InitShaders2();
     InitShaders3();
+
+    TestVector();
 
     //InitLine(0, 0, 0, 0, 0, 4);
 
@@ -428,13 +438,19 @@ void DX11Device::InitShaders()
     m_CubeEntity.m_GameEntityTag = "Original_Tag";
     m_CubeEntity.m_DXResConfig.m_UID = "UID1234";
 
+    XMFLOAT3 CubeEntityCenter{ 0, 0, 4 };
+    XMFLOAT3 CubeEntityExtents{ 1.0f, 1.0f, 1.0f };
+
     CollisionComponent Collision = m_CubeEntity.GetCollisionComponent();
-    Collision.AABox.Center = { 0, 0, 10 };
+    Collision.AABox.Center = { 0, 0, 4 };
     Collision.AABox.Extents = { 1.0f, 1.0f, 1.0f };
     Collision.CollisionType = DISJOINT;
 
+    m_CubeEntity.SetCollisionParams(CubeEntityCenter, CubeEntityExtents, DISJOINT);
+
     SScene.AddEntityToScene(m_CubeEntity);
     //m_GameEntityList.push_back(m_CubeEntity);
+    SScene.SetCollisionParams(SceneLoc, CubeEntityCenter, CubeEntityExtents, DISJOINT);
 
     //g_SecondaryAABoxes[i].aabox.Center = XMFLOAT3(0, 0, 0);
     //g_SecondaryAABoxes[i].aabox.Extents = XMFLOAT3(0.5f, 0.5f, 0.5f);
@@ -1176,11 +1192,146 @@ void DX11Device::AddLine(float OriginX, float OriginY, float OriginZ, float Dest
     SceneLoc++;
 }
 
+bool DX11Device::DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist)
+{
+    // Load the box.
+    XMVECTOR vCenter = XMLoadFloat3(&Center);
+    XMVECTOR vExtents = XMLoadFloat3(&Extents);
+
+    // Adjust ray origin to be relative to center of the box.
+    XMVECTOR TOrigin = XMVectorSubtract(vCenter, Origin);
+
+    // Compute the dot product againt each axis of the box.
+    // Since the axii are (1,0,0), (0,1,0), (0,0,1) no computation is necessary.
+    XMVECTOR AxisDotOrigin = TOrigin;
+    XMVECTOR AxisDotDirection = Direction;
+
+    // if (fabs(AxisDotDirection) <= Epsilon) the ray is nearly parallel to the slab.
+    XMVECTOR IsParallel = XMVectorLessOrEqual(XMVectorAbs(AxisDotDirection), _RayEpsilon);
+
+    // Test against all three axii simultaneously.
+    XMVECTOR InverseAxisDotDirection = XMVectorReciprocal(AxisDotDirection);
+    XMVECTOR t1 = XMVectorMultiply(XMVectorSubtract(AxisDotOrigin, vExtents), InverseAxisDotDirection);
+    XMVECTOR t2 = XMVectorMultiply(XMVectorAdd(AxisDotOrigin, vExtents), InverseAxisDotDirection);
+
+    // Compute the max of min(t1,t2) and the min of max(t1,t2) ensuring we don't
+    // use the results from any directions parallel to the slab.
+    XMVECTOR t_min = XMVectorSelect(XMVectorMin(t1, t2), _FltMin, IsParallel);
+    XMVECTOR t_max = XMVectorSelect(XMVectorMax(t1, t2), _FltMax, IsParallel);
+
+    // t_min.x = maximum( t_min.x, t_min.y, t_min.z );
+    // t_max.x = minimum( t_max.x, t_max.y, t_max.z );
+    t_min = XMVectorMax(t_min, XMVectorSplatY(t_min));  // x = max(x,y)
+    t_min = XMVectorMax(t_min, XMVectorSplatZ(t_min));  // x = max(max(x,y),z)
+    t_max = XMVectorMin(t_max, XMVectorSplatY(t_max));  // x = min(x,y)
+    t_max = XMVectorMin(t_max, XMVectorSplatZ(t_max));  // x = min(min(x,y),z)
+
+    // if ( t_min > t_max ) return false;
+    XMVECTOR NoIntersection = XMVectorGreater(XMVectorSplatX(t_min), XMVectorSplatX(t_max));
+
+    // if ( t_max < 0.0f ) return false;
+    NoIntersection = XMVectorOrInt(NoIntersection, XMVectorLess(XMVectorSplatX(t_max), XMVectorZero()));
+
+    // if (IsParallel && (-Extents > AxisDotOrigin || Extents < AxisDotOrigin)) return false;
+    XMVECTOR ParallelOverlap = XMVectorInBounds(AxisDotOrigin, vExtents);
+    NoIntersection = XMVectorOrInt(NoIntersection, XMVectorAndCInt(IsParallel, ParallelOverlap));
+
+    if (!DirectX::Internal::XMVector3AnyTrue(NoIntersection))
+    {
+        // Store the x-component to *pDist
+        XMStoreFloat(&Dist, t_min);
+        return true;
+    }
+
+    Dist = 0.f;
+    return false;
+}
+
+void DX11Device::TestVector()
+{
+    Logger& SLogger = Logger::GetLogger();
+    SLogger.Log("DX11Device::TestVector()");
+
+    // Load vector (2, 4, 1)
+    XMFLOAT3 F2V{ 2.0f, 4.0f, 1.0f };
+    XMVECTOR TestVector = XMLoadFloat3(&F2V);
+
+    // Get its length
+    TestVector = XMVector3Length(TestVector);
+
+    // Store its members
+    XMFLOAT3 TestFloat1{ };
+    XMStoreFloat3(&TestFloat1, TestVector);
+    
+    SLogger.Log("Vector1 length is: X = ", TestFloat1.x, ", Y = ", TestFloat1.y, ", Z = ", TestFloat1.z);
+
+    // Load vector (0, 0, 1)
+    XMFLOAT3 F2V2{ 0.0f, 0.0f, 1.0f };
+    XMVECTOR UnitVector = XMLoadFloat3(&F2V2);
+
+    //// Get its length
+    //UnitVector = XMVector3Length(UnitVector);
+
+    //// Store its members
+    //XMFLOAT3 TestFloat2{ };
+    //XMStoreFloat3(&TestFloat2, UnitVector);
+    
+    XMVECTOR Difference = XMVectorSubtract(XMVector3Length(UnitVector), XMVectorSplatOne());
+
+    XMFLOAT3 TestFloat2{ };
+    XMStoreFloat3(&TestFloat2, Difference);
+
+    SLogger.Log("Difference is: X = ", TestFloat2.x, ", Y = ", TestFloat2.y, ", Z = ", TestFloat2.z);
+
+    XMVECTORF32 UnitVectorEpsilon = { { { 1.0e-4f, 1.0e-4f, 1.0e-4f, 1.0e-4f } } };
+
+    // Store epsilon vector members
+    XMFLOAT3 EpsilonFloat{ };
+    XMStoreFloat3(&EpsilonFloat, UnitVectorEpsilon);
+
+    SLogger.Log("Epsilon vector is: X = ", EpsilonFloat.x, ", Y = ", EpsilonFloat.y, ", Z = ", EpsilonFloat.z);
+
+    if (XMVector4Less(XMVectorAbs(Difference), UnitVectorEpsilon))
+    {
+        SLogger.Log("Difference is less than Epsilon");
+    }
+    else
+    {
+        SLogger.Log("Difference is NOT LESS than Epsilon");
+    }
+
+    if (XMVector3IsUnit(UnitVector))
+    {
+        SLogger.Log("Unit vector TRUE");
+    }
+    else
+    {
+        SLogger.Log("Unit vector FALSE");
+    }
+
+}
+
 void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
 {
     Scene& SScene = Scene::GetScene();
     /*ConstantBuffer RayCB{};*/
     PrimitiveGeometryFactory GeometryFactory;
+
+    XMFLOAT3 OriginVector(OriginX, OriginY, OriginZ);
+    XMFLOAT3 DestinationVector(DestinationX, DestinationY, DestinationZ);
+
+    XMVECTOR RayOrigin = XMLoadFloat3(&OriginVector);
+
+    // Unnormalized vector, must be normalized
+    XMVECTOR RayDestinationTemp = XMLoadFloat3(&DestinationVector);
+    XMVECTOR RayDestination = XMVector3Normalize(RayDestinationTemp);
+
+    XMFLOAT3 F2V2{ 0.0f, 0.0f, 1.0f };
+    XMVECTOR UnitVector = XMLoadFloat3(&F2V2);
+
+    g_RayOrigin = RayOrigin;
+    g_RayDestination = RayDestinationTemp;
+    //g_RayDestination = UnitVector;
 
     GameEntity3D Linetrace;
     Linetrace.m_GameEntityTag = "Linetrace";
@@ -1235,7 +1386,35 @@ void DX11Device::InitLine(float OriginX, float OriginY, float OriginZ, float Des
 
 void DX11Device::CheckCollision()
 {
+    Logger& SLogger = Logger::GetLogger();
+    float fDistance = -1.0f;
+    float fDist;
 
+    CollisionComponent Collision{ m_CubeEntity.GetCollisionComponent() };
+
+    SLogger.Log("DX11Device::CheckCollision: CollisionAABox center vector is: X = ", Collision.AABox.Center.x,
+        ", Y = ", Collision.AABox.Center.y,
+        ", Z = ", Collision.AABox.Center.z);
+
+    if (DoesIntersect(g_RayOrigin, g_RayDestination, Collision.AABox.Center, Collision.AABox.Extents, fDist))
+    {
+        fDistance = fDist;
+        Collision.CollisionType = INTERSECTS;
+        AddOutline();
+    }
+
+    //if (Collision.AABox.Intersects(g_RayOrigin, g_RayDestination, fDist))
+    //{
+    //    fDistance = fDist;
+    //    Collision.CollisionType = INTERSECTS;
+    //    AddOutline();
+    //}
+
+    //if (g_SecondarySpheres[3].sphere.Intersects(g_PrimaryRay.origin, g_PrimaryRay.direction, fDist))
+    //{
+    //    fDistance = fDist;
+    //    g_SecondarySpheres[3].collision = INTERSECTS;
+    //}
 }
 
 void DX11Device::AddOutline()
@@ -1269,9 +1448,6 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
     float ratio = (float)m_ViewportWidth / m_ViewportHeight;
     float worldSize = (std::tan (XM_PIDIV4 * 0.5) / ratio) * distance;
     float size = 0.004f * worldSize;
-
-    /*SLogger.TemplatedLog("Eye X, Y and Z are: ", EyeX, EyeY, EyeZ);*/
-    SLogger.Log("Oi ", 12345," ", true);
 
     m_ViewMatrix = XMMatrixIdentity();
     XMMATRIX RotationMatrixX

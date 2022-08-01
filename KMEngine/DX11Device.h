@@ -97,11 +97,19 @@ public:
 	//void CleanupDX11Device();
 	
 	/**
+	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
+	*/
+	bool DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist);
+
+	/**
 	* Check the intersection of the raycast with the first cube
 	*/
 	void CheckCollision();
 
 	void AddOutline();
+
+	// Testing vector normalizing, because the DirectXCollision assert for IsUnitVector fails
+	void TestVector();
 
 	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 	void CleanupDX11Device();

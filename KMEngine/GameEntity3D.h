@@ -120,6 +120,8 @@ public:
 
 	int GetUIDTest();
 
+	void SetCollisionParams(XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
+
 	//CollisionComponent m_Collision;
 
 protected:

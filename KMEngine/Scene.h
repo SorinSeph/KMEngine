@@ -22,4 +22,5 @@ public:
 	void SetInputLayout(int Location, ID3D11InputLayout* InputLayout);
 	void SetVertexShader(int Location, ID3D11VertexShader* VS);
 	void SetPixelShader(int Location, ID3D11PixelShader* PS);
+	void SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 };

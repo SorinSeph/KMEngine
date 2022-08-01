@@ -49,6 +49,11 @@ void Scene::SetConstantBuffer(int Location, ID3D11Buffer* cb)
 	m_GameEntityList.at(Location).SetConstantBuffer(cb);
 }
 
+void Scene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
+{
+	m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
+}
+
 std::vector<GameEntity3D> Scene::GetSceneList()
 {
 	return m_GameEntityList;

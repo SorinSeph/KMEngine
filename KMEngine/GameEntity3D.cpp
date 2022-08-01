@@ -151,3 +151,10 @@ int GameEntity3D::GetUIDTest()
 {
 	return m_UIDTest;
 }
+
+void GameEntity3D::SetCollisionParams(XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
+{
+	m_Collision.AABox.Center = Center;
+	m_Collision.AABox.Extents = Extents;
+	m_Collision.CollisionType = CollisionType;
+}
