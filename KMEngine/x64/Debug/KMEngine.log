@@ -1,0 +1,46 @@
+﻿  DX11Device.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(27,30): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(57,10): warning C4101: 'rc': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(81,30): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(570,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(795,84): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1020,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1128,5): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1092,30): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1313,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1314,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1314,35): warning C4056: overflow in floating-point constant arithmetic
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1315,30): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1315,37): warning C4056: overflow in floating-point constant arithmetic
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1380,30): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1563,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  DXStructuresInitializer.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\DXStructuresInitializer.cpp(102,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DXStructuresInitializer.cpp(107,82): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DXStructuresInitializer.cpp(115,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(65,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(65,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(68,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(68,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(191,1): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(225,1): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(256,43): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(257,38): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(428,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(429,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(401,30): warning C4101: 'y': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\EngineInitializer.h(407,22): warning C4101: 'hSubMenu': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(210,46): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(210,40): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
+  PrimitiveGeometryFactory.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(298,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Renderer.cpp
+  Scene.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\Scene.cpp(22,62): warning C4390: ';': empty controlled statement found; is this the intent?
+C:\Users\sefce\source\KMEngine\KMEngine\Scene.cpp(145,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\sefce\source\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(503): warning C4715: 'PrimitiveGeometryFactory::CreateEntity3DComponent': not all control paths return a value
+C:\Users\sefce\source\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(429): warning C4715: 'PrimitiveGeometryFactory::CreateEntity3D': not all control paths return a value
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
