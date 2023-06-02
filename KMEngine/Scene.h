@@ -82,4 +82,6 @@ public:
 	void SetCollisionParams2(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 
 	std::vector<GameEntity3D> GetSceneList2();
+
+	void SetComponentConstantBuffer(int Location, ID3D11Buffer* cb);
 };
