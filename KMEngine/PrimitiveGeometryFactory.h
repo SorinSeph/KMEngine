@@ -26,6 +26,8 @@ public:
 
     GameEntity3D CreateEntity3D(PrimitiveGeometryType Type);
 
+    GameEntity3DComponent CreateEntity3DComponent(PrimitiveGeometryType Type);
+
     GameEntity3D CreateLinetrace(float X_Origin, float Y_Origin, float Z_Origin, float X_Destination, float Y_Destination, float Z_Destination);
 
     std::vector<WORD> GetIndicesList();

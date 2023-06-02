@@ -187,3 +187,10 @@ std::vector<GameEntity3D> Scene::GetSceneList2()
 {
 	return m_SceneList.m_GameEntityList;
 }
+
+////// Setting GameEntity3DComponent objects in Scene
+
+void Scene::SetComponentConstantBuffer(int Location, ID3D11Buffer* cb)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetConstantBuffer(cb);
+}
