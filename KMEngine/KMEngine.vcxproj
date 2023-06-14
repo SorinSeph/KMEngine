@@ -164,6 +164,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="ViewportWindow.h" />
   </ItemGroup>
   <ItemGroup>
