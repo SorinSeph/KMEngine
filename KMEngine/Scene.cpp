@@ -194,3 +194,28 @@ void Scene::SetComponentConstantBuffer(int Location, ID3D11Buffer* cb)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetConstantBuffer(cb);
 }
+
+void Scene::SetComponentVertexShader(int Location, ID3D11VertexShader* VS)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetVertexShader(VS);
+}
+
+void Scene::SetComponentPixelShader(int Location, ID3D11PixelShader* PS)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetPixelShader(PS);
+}
+
+void Scene::SetComponentInputLayout(int Location, ID3D11InputLayout* InputLayout)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetInputLayout(InputLayout);
+}
+
+void Scene::SetComponentVertexbuffer(int Location, ID3D11Buffer* vb)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetVertexbuffer(vb);
+}
+
+void Scene::SetComponentIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+{
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetIndexbuffer(ib, Format, Offset);
+}

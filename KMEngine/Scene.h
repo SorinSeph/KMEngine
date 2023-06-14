@@ -83,5 +83,17 @@ public:
 
 	std::vector<GameEntity3D> GetSceneList2();
 
+	// Methods for entity components
+
 	void SetComponentConstantBuffer(int Location, ID3D11Buffer* cb);
+
+	void SetComponentVertexShader(int Location, ID3D11VertexShader* VS);
+
+	void SetComponentPixelShader(int Location, ID3D11PixelShader* PS);
+
+	void SetComponentInputLayout(int Location, ID3D11InputLayout* InputLayout);
+
+	void SetComponentVertexbuffer(int Location, ID3D11Buffer* vb);
+
+	void SetComponentIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
 };

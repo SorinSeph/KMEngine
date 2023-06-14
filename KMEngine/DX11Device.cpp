@@ -445,57 +445,45 @@ void DX11Device::InitCube()
     Scene& SScene = Scene::GetScene();
     PrimitiveGeometryFactory GeometryFactory;
 
-    m_CubeEntity = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
-    GameEntity3DComponent CubeComponent1 = GeometryFactory.CreateEntity3DComponent(PrimitiveGeometryType::Cube);
-
     // Original cube entity
+    m_CubeEntity = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
+
     m_CubeEntity.SetLocationF(3.0f, 0.0f, 0.0f);
     m_CubeEntity.m_GameEntityTag = "Original_Tag";
     m_CubeEntity.m_DXResConfig.m_UID = "UID1234";
     m_CubeEntity.PhysicalMesh.SetIndicesList(GeometryFactory.GetIndicesList());
     m_CubeEntity.PhysicalMesh.SetStride(sizeof(SimpleVertex));
 
-    // New cube component
-    CubeComponent1.SetLocationF(3.0f, 0.0f, 0.0f);
-    CubeComponent1.m_GameEntityTag = "Original_Tag";
-    CubeComponent1.m_DXResConfig.m_UID = "UID1234";
-    CubeComponent1.PhysicalMesh.SetIndicesList(GeometryFactory.GetIndicesList());
-    CubeComponent1.PhysicalMesh.SetStride(sizeof(SimpleVertex));
-    m_CubeEntity.m_GameEntity3DComponent.push_back(CubeComponent1);
-
     XMFLOAT3 CubeEntityCenter{ 3, 0, 0 };
     XMFLOAT3 CubeEntityExtents{ 0.5f, 0.5f, 0.5f };
 
-    // Original cube entity
     CollisionComponent Collision = m_CubeEntity.GetCollisionComponent();
     Collision.AABox.Center = { 3, 0, 0 };
     Collision.AABox.Extents = { 0.5f, 0.5f, 0.5f };
     Collision.CollisionType = DISJOINT;
     m_CubeEntity.SetCollisionParams(CubeEntityCenter, CubeEntityExtents, DISJOINT);
 
-    // New cube component
+
+    // Cube Entity Component 1
+    GameEntity3DComponent CubeComponent1 = GeometryFactory.CreateEntity3DComponent(PrimitiveGeometryType::Cube);
+
+
+    CubeComponent1.SetLocationF(3.0f, 0.0f, 0.0f);
+    CubeComponent1.m_GameEntityTag = "Original_Tag";
+    CubeComponent1.m_DXResConfig.m_UID = "UID1234";
+    CubeComponent1.PhysicalMesh.SetIndicesList(GeometryFactory.GetIndicesList());
+    CubeComponent1.PhysicalMesh.SetStride(sizeof(SimpleVertex));
+
     CollisionComponent Collision2 = CubeComponent1.GetCollisionComponent();
     Collision.AABox.Center = { 3, 0, 0 };
     Collision.AABox.Extents = { 0.5f, 0.5f, 0.5f };
     Collision.CollisionType = DISJOINT;
     CubeComponent1.SetCollisionParams(CubeEntityCenter, CubeEntityExtents, DISJOINT);
 
+    m_CubeEntity.m_GameEntity3DComponent.push_back(CubeComponent1);
+
     SScene.AddEntityToScene2(m_CubeEntity);
-    //m_GameEntityList.push_back(m_CubeEntity);
     SScene.SetCollisionParams2(SceneLoc, CubeEntityCenter, CubeEntityExtents, DISJOINT);
-
-    //g_SecondaryAABoxes[i].aabox.Center = XMFLOAT3(0, 0, 0);
-    //g_SecondaryAABoxes[i].aabox.Extents = XMFLOAT3(0.5f, 0.5f, 0.5f);
-    //g_SecondaryAABoxes[i].collision = DISJOINT;
-
-    //m_CubeEntity2 = GeometryFactory.CreateEntity3D(PrimitiveGeometryType::Cube);
-    //m_CubeEntity2.SetLocationF(10.0f, 0.0f, 0.0f);
-    //m_CubeEntity2.GetCollisionComponent().AABox.Center = { 0, 0, 10 };
-    //m_CubeEntity2.m_GameEntityTag = "Default";
-    //SScene.AddEntityToScene(m_CubeEntity2);
-    //m_CubeEntity2.SetScale(0.25f, 0.25f, 0.25f);
-    //m_GameEntityList.push_back(m_CubeEntity2);
-    //SScene.AddEntityToScene(m_CubeEntity2);
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
@@ -534,7 +522,8 @@ void DX11Device::InitCube()
         return;
     }
 
-    SScene.SetInputLayout2(SceneLoc, m_VertexLayout);
+    //SScene.SetInputLayout2(SceneLoc, m_VertexLayout);
+    SScene.SetComponentInputLayout(SceneLoc, m_VertexLayout);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
@@ -557,6 +546,9 @@ void DX11Device::InitCube()
 
     SScene.SetVertexShader2(SceneLoc, m_VertexShader);
     SScene.SetPixelShader2(SceneLoc, m_PixelShader);
+
+    SScene.SetComponentVertexShader(SceneLoc, m_VertexShader);
+    SScene.SetComponentPixelShader(SceneLoc, m_PixelShader);
 
     D3D11_BUFFER_DESC bd{};
     bd.Usage = D3D11_USAGE_DEFAULT;
@@ -589,7 +581,8 @@ void DX11Device::InitCube()
     UINT stride = sizeof(SimpleVertex);
     UINT offset = 0;
 
-    SScene.SetVertexbuffer2(SceneLoc, m_VertexBuffer);
+    //SScene.SetVertexbuffer2(SceneLoc, m_VertexBuffer);
+    SScene.SetComponentVertexbuffer(SceneLoc, m_VertexBuffer);
 
     //WORD* arr = IndicesVector.data();
     WORD* Indices = m_CubeEntity.PhysicalMesh.GetIndicesList().data();
@@ -609,7 +602,8 @@ void DX11Device::InitCube()
         MessageBox(nullptr, L"Failed to initialize index buffer", L"Error", MB_OK);
         return;
     }
-    SScene.SetIndexbuffer2(SceneLoc, m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+    //SScene.SetIndexbuffer2(SceneLoc, m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+    SScene.SetComponentIndexbuffer(SceneLoc, m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
 
     // Create the constant buffer
     bd.Usage = D3D11_USAGE_DEFAULT;
@@ -1682,40 +1676,81 @@ void DX11Device::Render(float RotX, float RotY, float EyeX, float EyeY, float Ey
             //m_ImmediateContext->Draw(2, 0);
         }
 
+        //else if (SceneEntityIt.m_GameEntityTag == "Original_Tag")
+        //{
+        //    ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
+        //    cb.mWorld = XMMatrixTranspose(cb.mWorld);
+        //    cb.mView = XMMatrixTranspose(m_ViewMatrix);
+        //    cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
+
+        //    ID3D11Buffer* ConstantBuffer = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_ConstantBuffer;
+        //    m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
+
+        //    ID3D11Buffer* VertexBuffer = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_VertexBuffer;
+        //    assert(VertexBuffer != nullptr);
+
+        //    m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
+
+        //    //ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
+        //    ID3D11Buffer* IndexBuffer = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_IndexBuffer;
+        //    DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_IndexBufferFormat;
+        //    UINT IndexBufferOffset = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_IndexBufferOffset;
+        //    m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
+
+        //    ID3D11InputLayout* InputLayout = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.GetInputLayout();
+        //    m_ImmediateContext->IASetInputLayout(InputLayout);
+
+        //    ID3D11VertexShader* VertexShader = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_VertexShader;
+        //    ID3D11PixelShader* PixelShader = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_PixelShader;
+
+        //    m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+        //    m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
+
+        //    m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+        //    m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
+
+        //    m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+        //    m_ImmediateContext->DrawIndexed(512, 0, 0);
+        //}
+
         else if (SceneEntityIt.m_GameEntityTag == "Original_Tag")
         {
-            ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-            cb.mWorld = XMMatrixTranspose(cb.mWorld);
-            cb.mView = XMMatrixTranspose(m_ViewMatrix);
-            cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
+            for (auto SceneEntityComponentIt : SceneEntityIt.m_GameEntity3DComponent)
+            {
+                ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
+                cb.mWorld = XMMatrixTranspose(cb.mWorld);
+                cb.mView = XMMatrixTranspose(m_ViewMatrix);
+                cb.mProjection = XMMatrixTranspose(m_ProjectionMatrix);
 
-            ID3D11Buffer* ConstantBuffer = SceneEntityIt.m_GameEntity3DComponent.at(0).m_DXResConfig.m_ConstantBuffer;
-            m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
+                ID3D11Buffer* ConstantBuffer = SceneEntityComponentIt.m_DXResConfig.m_ConstantBuffer;
+                m_ImmediateContext->UpdateSubresource(m_ConstantBuffer, 0, nullptr, &cb, 0, 0);
 
-            ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_VertexBuffer;
-            assert(VertexBuffer != nullptr);
+                ID3D11Buffer* VertexBuffer = SceneEntityComponentIt.m_DXResConfig.m_VertexBuffer;
+                assert(VertexBuffer != nullptr);
 
-            m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
+                m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
 
-            ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
-            DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.m_IndexBufferFormat;
-            UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.m_IndexBufferOffset;
-            m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
+                //ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
+                ID3D11Buffer* IndexBuffer = SceneEntityComponentIt.m_DXResConfig.m_IndexBuffer;
+                DXGI_FORMAT IndexBufferFormat = SceneEntityComponentIt.m_DXResConfig.m_IndexBufferFormat;
+                UINT IndexBufferOffset = SceneEntityComponentIt.m_DXResConfig.m_IndexBufferOffset;
+                m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
 
-            ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
-            m_ImmediateContext->IASetInputLayout(InputLayout);
+                ID3D11InputLayout* InputLayout = SceneEntityComponentIt.m_DXResConfig.GetInputLayout();
+                m_ImmediateContext->IASetInputLayout(InputLayout);
 
-            ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.m_VertexShader;
-            ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.m_PixelShader;
+                ID3D11VertexShader* VertexShader = SceneEntityComponentIt.m_DXResConfig.m_VertexShader;
+                ID3D11PixelShader* PixelShader = SceneEntityComponentIt.m_DXResConfig.m_PixelShader;
 
-            m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-            m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
+                m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+                m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
 
-            m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
-            m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
+                m_ImmediateContext->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+                m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
 
-            m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-            m_ImmediateContext->DrawIndexed(512, 0, 0);
+                m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                m_ImmediateContext->DrawIndexed(512, 0, 0);
+            }
         }
 
         else

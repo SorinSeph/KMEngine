@@ -11,6 +11,7 @@
 #include <DirectXCollision.h>
 #include <DirectXCollision.inl>
 #include <vector>
+#include "SceneGraph.h"
 
 struct ConstantBuffer
 {
@@ -56,6 +57,7 @@ public:
 		, m_ScaleMatrix{ XMMatrixIdentity() }
 		, m_Collision{ }
 		, m_DXResConfig{ }
+		, m_SceneGraph{ }
 	{ }
 
 	XMMATRIX TransformationMatrix();
@@ -147,6 +149,8 @@ public:
 	//CollisionComponent m_Collision;
 
 protected:
+	SceneGraph<GameEntity3DComponent*> m_SceneGraph;
+
 	CollisionComponent m_Collision;
 
 	XMVECTOR m_LocationVector;
