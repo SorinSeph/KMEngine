@@ -54,6 +54,12 @@
     <ClCompile Include="CoreTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntityBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KMEngine.h">
@@ -116,10 +122,16 @@
     <ClInclude Include="EntityPhysicalMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEntity3DComponent.h">
+    <ClInclude Include="SceneGraph.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGraph.h">
+    <ClInclude Include="World.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntityBuilder.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainGenerator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,6 +140,8 @@
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
     <None Include="texture.vs" />
+    <None Include="GizmoRedArrow.vs" />
+    <None Include="GizmoRedArrow.ps" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">

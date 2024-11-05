@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -135,6 +135,7 @@
     <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="DXStructuresInitializer.cpp" />
     <ClCompile Include="GameEntity3D.cpp" />
+    <ClCompile Include="GameEntityBuilder.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreTimer.h" />
@@ -156,7 +158,7 @@
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
-    <ClInclude Include="GameEntity3DComponent.h" />
+    <ClInclude Include="GameEntityBuilder.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="PerlinNoise.h" />
@@ -165,9 +167,13 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGraph.h" />
+    <ClInclude Include="TerrainGenerator.h" />
     <ClInclude Include="ViewportWindow.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GizmoRedArrow.ps" />
+    <None Include="GizmoRedArrow.vs" />
     <None Include="solid_color.ps" />
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />

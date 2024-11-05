@@ -1,17 +1,3 @@
-﻿  DX11Device.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(27,30): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(57,10): warning C4101: 'rc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(81,30): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(562,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(789,84): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1014,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1122,5): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1086,30): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1307,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1308,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1308,35): warning C4056: overflow in floating-point constant arithmetic
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1309,30): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1309,37): warning C4056: overflow in floating-point constant arithmetic
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1374,30): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1557,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Renderer.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp(53,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe

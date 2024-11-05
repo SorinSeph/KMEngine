@@ -129,15 +129,12 @@ const wchar_t VIEWPORT_NAME2[] = L"Viewport";
 const wchar_t TOOLBAR_NAME2[] = L"Toolbar";
 const wchar_t SIDETOOLBAR_NAME2[] = L"SideToolbar";
 
-//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-//LRESULT CALLBACK ToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-//LRESULT CALLBACK SideToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-//LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow);
 //HRESULT InitEngine(HINSTANCE hInstance, int nCmdShow);
 bool InitDirectInput(HINSTANCE hInstance);
 void DetectKeyboardInput();
+
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -162,24 +159,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         MessageBox(0, L"Failed to initialize Direct Input", L"Error", MB_OK);
         return 0;
     }
-
-    //if (FAILED(InitEngine(hInstance, nCmdShow)))
-    //    return 0;
-
-   // DX11Device m_DX11Device;
-
-    //if (FAILED(InitDirectXDevice()))
-    //if (FAILED(m_DX11Device.InitDX11Device()))
-    //{
-    //    MessageBox(nullptr, L"Failed to initialize D3D11 Device", L"Error", MB_OK);
-    //    return 0;
-    //}
-
-    //if (!InitDirectInput(hInstance))
-    //{
-    //    MessageBox(0, L"Failed to initialize Direct Input", L"Error", MB_OK);
-    //    return 0;
-    //}
 
     CoreTimer.Reset();
 
@@ -207,11 +186,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
             float RayX = FEngineInitializer.GetRaycastX();
             float RayY = FEngineInitializer.GetRaycastY();
+
+            SLogger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
             FEngineInitializer.RayCast(RayX, RayY);
 
             int SceneListIndex = 0;
 
-            for (auto SceneListIt : Scene::GetScene().GetSceneList2())
+            for (auto SceneListIt : Scene::GetScene().GetSceneList())
             {
                 std::string EntityTag = SceneListIt.m_GameEntityTag;
                 SLogger.Log("Entity Tag at ", SceneListIndex, " is: ", EntityTag);

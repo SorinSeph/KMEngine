@@ -17,6 +17,12 @@ struct SimpleColorVertex
 class TEntityPhysicalMesh
 {
 public:
+
+	~TEntityPhysicalMesh()
+	{
+
+	}
+
 	void SetSimpleVerticesList(std::vector<SimpleVertex> VerticesList)
 	{
 		m_VerticesList = VerticesList;

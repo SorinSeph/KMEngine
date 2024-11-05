@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "GameEntity3D.h"
 
 class SceneList
@@ -28,6 +29,12 @@ private:
 public:
 	//static Scene* GetScene();
 	static Scene& GetScene();
+
+	std::unordered_map<uint16_t, DXResourcesConfig> DXResourceConfigMap;
+
+	void InsertDXResourceConfig(int Key, DXResourcesConfig Config);
+
+	DXResourcesConfig GetDXResourceConfig(int Key);
 
 	void AddEntityToScene(GameEntity3D Entity);
 
@@ -81,19 +88,19 @@ public:
 
 	void SetCollisionParams2(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 
-	std::vector<GameEntity3D> GetSceneList2();
+	//std::vector<GameEntity3D> GetSceneList2();
 
 	// Methods for entity components
 
-	void SetComponentConstantBuffer(int Location, ID3D11Buffer* cb);
+	void SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb);
 
-	void SetComponentVertexShader(int Location, ID3D11VertexShader* VS);
+	void SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS);
 
-	void SetComponentPixelShader(int Location, ID3D11PixelShader* PS);
+	void SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS);
 
-	void SetComponentInputLayout(int Location, ID3D11InputLayout* InputLayout);
+	void SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout);
 
-	void SetComponentVertexbuffer(int Location, ID3D11Buffer* vb);
+	void SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb);
 
-	void SetComponentIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
+	void SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
 };

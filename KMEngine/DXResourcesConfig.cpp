@@ -130,6 +130,16 @@ void DXResourcesConfig::SetConstantBuffer(ID3D11Buffer* ConstantBuffer)
 	m_ConstantBuffer = ConstantBuffer;
 }
 
+void DXResourcesConfig::SetArrowConstantBuffer(ID3D11Buffer* ConstantBuffer)
+{
+	m_ConstantBuffer = ConstantBuffer;
+}
+
+void DXResourcesConfig::SetDepthStencilState(ID3D11DepthStencilState* DepthStencilState)
+{
+	m_DepthStencilState = DepthStencilState;
+}
+
 //void DXResourcesConfig::CreateInputLayout(int Size, ID3D11InputLayout Input[])
 //{
 //	m_InputLayout = Input;

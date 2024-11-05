@@ -5,7 +5,6 @@
 #include <d3dcompiler.h>
 #include <directxcolors.h>
 #include "GameEntity.h"
-#include "GameEntity3DComponent.h"
 #include "DXResourcesConfig.h"
 #include "EntityPhysicalMesh.h"
 #include <DirectXCollision.h>
@@ -18,6 +17,14 @@ struct ConstantBuffer
 	XMMATRIX mWorld;
 	XMMATRIX mView;
 	XMMATRIX mProjection;
+};
+
+struct ArrowConstantBuffer
+{
+	XMMATRIX mWorld;
+	XMMATRIX mView;
+	XMMATRIX mProjection;
+	int mIsHovered;
 };
 
 struct CollisionComponent
@@ -62,9 +69,9 @@ public:
 
 	XMMATRIX TransformationMatrix();
 
-	void SetVertexbuffer(ID3D11Buffer* vb);
+	void SetVertexBuffer(ID3D11Buffer* vb);
 
-	void SetIndexbuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
+	void SetIndexBuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
 
 	void SetVerticesList(std::vector<SimpleVertex> VerticesList);
 
@@ -120,6 +127,8 @@ public:
 
 	ConstantBuffer GetConstantBuffer();
 
+	ArrowConstantBuffer GetArrowConstantBuffer();
+
 	void SetCollisionBoxCenter(XMFLOAT3 NewCenter);
 
 	void SetUID(std::string uid);
@@ -174,11 +183,16 @@ protected:
 	std::vector<ColorVertex> m_ColorVerticesList;
 	std::vector<SimpleColorVertex> m_SimpleColorVerticesList;
 	ConstantBuffer m_ConstantBuffer;
+	ArrowConstantBuffer m_ArrowConstantBuffer;
 	int m_UIDTest{ };
+
+	std::uint16_t MaterialHashIndex;
 };
 
 
 class GameEntity3DComponent : public GameEntity3D
 {
+public:
 
+	uint16_t DXResourceHashKey;
 };

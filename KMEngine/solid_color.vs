@@ -1,5 +1,3 @@
-bool IsHovered;
-
 cbuffer ConstantBuffer : register( b0 )
 {
 	matrix World;
