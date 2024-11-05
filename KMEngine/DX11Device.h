@@ -1,17 +1,23 @@
 #pragma once
 
+#ifndef DX11DEVICE_H
+#define DX11DEVICE_H
+
 #include <windows.h>
 #include <d3d11_1.h>
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <directxcolors.h>
 #include <cmath>
+#include <string>
+#include <vector>
 
 #include "PrimitiveGeometryFactory.h"
 #include "DDSTextureLoader.h"
 #include "Cube.h"
 #include "Scene.h"
 #include "Logger.h"
+#include "Math.h"
 
 static WORD* GetIndices(std::vector<WORD> InVector)
 {
@@ -19,24 +25,14 @@ static WORD* GetIndices(std::vector<WORD> InVector)
 	return Vector;
 }
 
-class DX11Device
+class CDX11Device
 {
 public:
-	DX11Device() {}
-
-	DX11Device(HWND Viewport)
-		: m_Viewport{ Viewport }
+	CDX11Device()
 	{
-		RECT rc;
-		GetClientRect(m_Viewport, &rc);
-		m_ViewportWidth = rc.right - rc.left;
-		m_ViewportHeight = rc.bottom - rc.top;
+		CLogger& Logger = CLogger::GetLogger();
+		Logger.Log("CDX11Device constructor");// from ", initFile);
 	}
-
-	DX11Device(UINT ViewportWidth, UINT ViewportHeight)
-		: m_ViewportWidth{ ViewportWidth }
-		, m_ViewportHeight{ ViewportHeight }
-	{}
 
 	HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
 	{
@@ -68,20 +64,23 @@ public:
 	}
 
 public:
+	/**
+	* Calls all of the init functions below
+	*/
 	HRESULT InitDX11Device();
 
 	void SetViewport(HWND InViewport);
 	//void SetViewportSize(UINT width, UINT height);
-	void InitDriveTypeAndFeatureLevel();
-	IDXGIFactory1* InitDXGIFactory();
-	void InitSwapChain(IDXGIFactory1* dxgiFactory);
-	void InitRenderTargetView();
+	void InitDriveTypeAndFeatureLevelFinal();
+	IDXGIFactory1* InitDXGIFactoryFinal();
+	void InitSwapChainFinal(IDXGIFactory1* dxgiFactory);
+	void InitRenderTargetViewFinal();
 	D3D11_TEXTURE2D_DESC InitTexture2D();
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
-	void InitDefaultDepthStencil();
+	void InitDefaultDepthStencil3();
 	void InitDisabledDepthStencil();
 	//void InitOutlineDepthStencil();
-	void InitViewport();
+	void InitViewportFinal();
 
 	/**
 	* Initializes a plain, textured cube
@@ -91,6 +90,8 @@ public:
 	void InitCubeComponents();
 
 	void InitSingleCubeComponent();
+
+	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
 	* Initializes a yellow cube, with outline stencil state
@@ -120,12 +121,19 @@ public:
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
+	HRESULT GenerateTerrain();
+
+	HRESULT AddLight();
+
 	void AddOutline();
 
 	void AddGizmo();
 
-	// Raytracing that is missing the cube at (3, 0, 0)
 	void AddTestLine();
+
+	void AddTestLine2();
+
+	HRESULT AddTestLine3();
 
 	// Testing vector normalizing, because the DirectXCollision assert for IsUnitVector fails
 	void TestVector();
@@ -143,108 +151,187 @@ public:
 
 	UINT GetViewportHeight();
 
-public:
-	HWND							m_Viewport{ };
-	HRESULT							m_hr{ };
-	D3D_DRIVER_TYPE                 m_DriverType{ D3D_DRIVER_TYPE_NULL };
-	D3D_FEATURE_LEVEL               m_FreatureLevel = D3D_FEATURE_LEVEL_11_0;
-	ID3D11Device*					m_D3D11Device{ nullptr };
-	ID3D11Device1*					m_D3D11Device1{ nullptr };
-	ID3D11DeviceContext*			m_ImmediateContext{ nullptr };
-	ID3D11DeviceContext1*			m_ImmediateContext1{ nullptr };
-	ID3D11RenderTargetView*			m_RenderTargetView{ nullptr };
-	ID3D11Texture2D*				m_DepthStencil{ nullptr };
-	D3D11_DEPTH_STENCIL_DESC        m_DepthStencilDesc{ };
-	D3D11_DEPTH_STENCIL_DESC        m_DepthStencilDescOutlineMask{ };
-	D3D11_DEPTH_STENCIL_DESC        m_DepthStencilDescOutline{ };
-	D3D11_DEPTH_STENCIL_DESC        m_DepthStencilDisabledDesc{ };
-	ID3D11DepthStencilState*		m_DepthStencilState{ };
-	ID3D11DepthStencilState*		m_DepthStencilStateDisabled{ };
-	ID3D11DepthStencilState*		m_DepthStencilStateOutlineMask{ };
-	ID3D11DepthStencilState*		m_DepthStencilStateOutline{ };
-	ID3D11DepthStencilView*			m_DepthStencilView{ nullptr };
-	ID3D11VertexShader*				m_VertexShader{ nullptr };
-	ID3D11PixelShader*				m_PixelShader{ nullptr };
-	ID3D11InputLayout*				m_VertexLayout{ nullptr };
-	ID3D11Buffer*					m_VertexBuffer{ nullptr };
-	ID3D11Buffer*					m_IndexBuffer{ nullptr };
-	ID3D11Buffer*					m_ConstantBuffer{ nullptr };
-	ID3D11ShaderResourceView*		m_TextureRV{ nullptr };
-	ID3D11SamplerState*				m_SamplerLinear{ nullptr };
-	ID3D11RasterizerState*			m_RasterizerState{ nullptr };
-
 	/**
-	* Empty Resource
+	* Temporary helper section of functions / variables
 	*/
 
-	ID3D11ShaderResourceView*		m_TextureRV5{ nullptr };
-	ID3D11DepthStencilState*		m_NullDepthStencilState{ nullptr };
+	void InterpMoveCube();
+
+	CGameEntity3D MainBaseCube{ };
+
+	CGameEntity3D* InterpMoveCubeRef{ nullptr };
+
+	float InterpMoveLoc{ 0.0f };
+
+	ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
+
+public:
+	HWND m_Viewport{ };
+	HRESULT m_HR{ };
+	D3D_DRIVER_TYPE m_DriverType{ D3D_DRIVER_TYPE_NULL };
+	D3D_FEATURE_LEVEL m_FreatureLevel = D3D_FEATURE_LEVEL_11_0;
+	ID3D11Device* m_pD3D11Device{ nullptr };
+	ID3D11Device1* m_pD3D11Device1{ nullptr };
+	ID3D11DeviceContext* m_pImmediateContext{ nullptr };
+	ID3D11DeviceContext1* m_pImmediateContext1{ nullptr };
+	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
+	ID3D11Texture2D* m_pDepthStencil{ nullptr };
+	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDesc{ };
+	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDescOutlineMask{ };
+	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDescOutline{ };
+	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDisabledDesc{ };
+	ID3D11DepthStencilState* m_pDepthStencilState{ };
+	ID3D11DepthStencilState* m_pDepthStencilStateDisabled{ };
+	ID3D11DepthStencilState* m_pDepthStencilStateOutlineMask{ };
+	ID3D11DepthStencilState* m_pDepthStencilStateOutline{ };
+	ID3D11DepthStencilView* m_DepthStencilView{ nullptr };
+	ID3D11VertexShader* m_VertexShader{ nullptr };
+	ID3D11PixelShader* m_PixelShader{ nullptr };
+	ID3D11InputLayout* m_VertexLayout{ nullptr };
+	ID3D11Buffer* m_VertexBuffer{ nullptr };
+	ID3D11Buffer* m_IndexBuffer{ nullptr };
+	ID3D11Buffer* m_ConstantBuffer{ nullptr };
+	ID3D11ShaderResourceView* m_TextureRV{ nullptr };
+	ID3D11SamplerState* m_SamplerLinear{ nullptr };
+	ID3D11RasterizerState* m_RasterizerState{ nullptr };
+
+	ID3D11ShaderResourceView* m_TextureColorGridRV{ nullptr };
+
+
+
+	//ID3D11ShaderResourceView* m_TextureRV5{ nullptr };
+	ID3D11DepthStencilState* m_NullDepthStencilState{ nullptr };
 
 
 	/*
 	* Default Depth Stencil
-	* Contains "def" in variable name
 	*/
 
-	ID3D11Texture2D*				pDefDepthStencil{ nullptr };
-	D3D11_TEXTURE2D_DESC			defDescDepth{ };
-	D3D11_DEPTH_STENCIL_DESC		defDepthStencilDesc{ };
-	ID3D11DepthStencilState*		pDefDepthStencilState{ nullptr };
-	ID3D11DepthStencilState*		pDepthStencilStateOutline{ };
-	D3D11_DEPTH_STENCIL_VIEW_DESC	defDescDepthStencilViewDesc{ };
-	ID3D11DepthStencilView*			pDefDepthStencilView{ nullptr };
+	ID3D11Texture2D* pDefDepthStencil3{ nullptr };
+	D3D11_TEXTURE2D_DESC defDescDepth3{ };
+	ID3D11DepthStencilState* pDefDepthStencilState3{ nullptr };
+	ID3D11DepthStencilView* pDefDepthStencilView3{ nullptr };
+	D3D11_DEPTH_STENCIL_VIEW_DESC defDescDepthStencilViewDesc3{ };
+	D3D11_DEPTH_STENCIL_DESC defDepthStencilDesc3{ };
+
+
+	ID3D11DepthStencilState* pDepthStencilStateOutline{ };
+	D3D11_DEPTH_STENCIL_DESC OutlineDepthStencilDesc{ };
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC defDescDepthStencilViewDesc{ };
+	ID3D11DepthStencilView* pDefDepthStencilView{ nullptr };
 
 	/**
 	* For InitShaders2()
 	*/
-	ID3D11VertexShader*				m_VertexShader2{ nullptr };
-	ID3D11PixelShader*				m_PixelShader2{ nullptr };
-	ID3D11InputLayout*				m_VertexLayout2{ nullptr };
-	ID3D11Buffer*					m_VertexBuffer2{ nullptr };
-	ID3D11Buffer*					m_IndexBuffer2{ nullptr };
-	ID3D11Buffer*					m_ConstantBuffer2{ nullptr };
-	ID3D11ShaderResourceView*		m_TextureRV2{ nullptr };
+	ID3D11VertexShader* m_VertexShader2{ nullptr };
+	ID3D11PixelShader* m_PixelShader2{ nullptr };
+	ID3D11InputLayout* m_VertexLayout2{ nullptr };
+	ID3D11Buffer* m_VertexBuffer2{ nullptr };
+	ID3D11Buffer* m_IndexBuffer2{ nullptr };
+	ID3D11Buffer* m_ConstantBuffer2{ nullptr };
+	//ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
 
 	/**
 	* For InitShaders3()
 	*/
-	ID3D11VertexShader*				m_VertexShader3{ nullptr };
-	ID3D11PixelShader*				m_PixelShader3{ nullptr };
-	ID3D11InputLayout*				m_VertexLayout3{ nullptr };
-	ID3D11Buffer*					m_VertexBuffer3{ nullptr };
-	ID3D11Buffer*					m_IndexBuffer3{ nullptr };
-	ID3D11Buffer*					m_ConstantBuffer3{ nullptr };
-	ID3D11ShaderResourceView*		m_TextureRV3{ nullptr };
+	ID3D11VertexShader* m_VertexShader3{ nullptr };
+	ID3D11PixelShader* m_PixelShader3{ nullptr };
+	ID3D11InputLayout* m_VertexLayout3{ nullptr };
+	ID3D11Buffer* m_VertexBuffer3{ nullptr };
+	ID3D11Buffer* m_IndexBuffer3{ nullptr };
+	ID3D11Buffer* m_ConstantBuffer3{ nullptr };
+	//ID3D11ShaderResourceView* m_TextureRV3{ nullptr };
 
 	// Used for line
-	ID3D11Buffer*					m_VertexBuffer4{ nullptr };
-	ID3D11Buffer*					m_ConstantBuffer4{ nullptr };
+	ID3D11Buffer* m_VertexBuffer4{ nullptr };
+	ID3D11Buffer* m_ConstantBuffer4{ nullptr };
 
-	std::vector<GameEntity3D>		m_UnrenderedList{ };
+	ID3D11InputLayout* m_LinetraceVertexLayout{ nullptr };
+	ID3D11Buffer* m_LinetraceVertexBuffer{ nullptr };
+	ID3D11Buffer* m_LinetraceConstantBuffer{ nullptr };
+	ID3D11VertexShader* m_LinetraceVertexShader{ nullptr };
+	ID3D11PixelShader* m_LinetracePixelShader{ nullptr };
+
+	std::vector<CGameEntity3D>		m_UnrenderedList{ };
+
+	/**
+	* Base DX resources for simple colored cube
+	*/
+
+	ID3D11VertexShader* BaseVertexShader;
+	ID3D11InputLayout* BaseVertexLayout;
+	ID3D11PixelShader* BasePixelShader;
+	ID3D11Buffer* BaseVertexBuffer;
+	ID3D11Buffer* BaseIndexBuffer;
+	DXGI_FORMAT	BaseFormat;
+	int	BaseOffset;
+	ID3D11Buffer* BaseConstantBuffer;
 
 public:
-	static XMMATRIX                 m_WorldMatrix;
-	static XMMATRIX                 m_ViewMatrix;
-	static XMMATRIX                 m_ProjectionMatrix;
+	static XMMATRIX m_WorldMatrix;
+	static XMMATRIX m_ViewMatrix;
+	static XMMATRIX m_ProjectionMatrix;
 
-	IDXGISwapChain*					m_SwapChain{ nullptr };
-	IDXGISwapChain1*				m_SwapChain1{ nullptr };
+	IDXGISwapChain* m_SwapChain{ nullptr };
+	IDXGISwapChain1* m_SwapChain1{ nullptr };
 
 private:
-	ID3D11Buffer*					m_IndexBufferArray[3]{ };
+	ID3D11Buffer* m_IndexBufferArray[3]{ };
 
-	GameEntity3D					m_CubeEntity = { };
-	GameEntity3D					m_CubeEntity2 = { };
-	GameEntity3D					m_CubeOutlineEntity{ };
-	GameEntity3D					m_Linetrace{ };
-	GameEntity3D					m_CubeOutline{ };
+	CGameEntity3D m_CubeEntity = { };
+	CGameEntity3D m_CubeEntity2 = { };
+	CGameEntity3D m_CubeOutlineEntity{ };
+	CGameEntity3D m_Linetrace{ };
+	CGameEntity3D m_CubeOutline{ };
 
-	UINT							m_ViewportWidth{ };
-	UINT							m_ViewportHeight{ };
+	UINT m_ViewportWidth{ };
+	UINT m_ViewportHeight{ };
 
-	float							m_RotX{ };
-	float							m_RotY{ };
-	float							m_EyeX{ };
-	float							m_EyeY{ };
-	float							m_EyeZ{ };
+	float m_RotX{ };
+	float m_RotY{ };
+	float m_EyeX{ };
+	float m_EyeY{ };
+	float m_EyeZ{ };
+
+	/**
+	* Base variables and functions for a minimum necessary to render a colored cube
+	*/
+
+public:
+
+	/**
+	* Initializes the bare minimum for a colored cube
+	*/
+
+	HRESULT InitBaseCube();
+
+	HRESULT InitTexturedCube();
+
+	HRESULT InitTexturedCube2();
+
+	void RenderFinal(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
+
+	//	HINSTANCE               g_hInst = nullptr;
+	//	HWND                    g_hWnd = nullptr;
+	//	D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
+	//	D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
+	//	ID3D11Device*			g_pd3dDevice = nullptr;
+	//	ID3D11Device1*			g_pd3dDevice1 = nullptr;
+	//	ID3D11DeviceContext*	g_pImmediateContext = nullptr;
+	//	ID3D11DeviceContext1*	g_pImmediateContext1 = nullptr;
+	//	IDXGISwapChain*			g_pSwapChain = nullptr;
+	//	IDXGISwapChain1*		g_pSwapChain1 = nullptr;
+	//	ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
+	//	ID3D11VertexShader*		g_pVertexShader = nullptr;
+	//	ID3D11PixelShader*		g_pPixelShader = nullptr;
+	//	ID3D11InputLayout*		g_pVertexLayout = nullptr;
+	//	ID3D11Buffer*			g_pVertexBuffer = nullptr;
+	//	ID3D11Buffer*			g_pIndexBuffer = nullptr;
+	//	ID3D11Buffer*			g_pConstantBuffer = nullptr;
+	//	XMMATRIX                g_World;
+	//	XMMATRIX                g_View;
+	//	XMMATRIX                g_Projection;
 };
+
+#endif

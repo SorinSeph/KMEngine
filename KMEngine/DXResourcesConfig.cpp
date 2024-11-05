@@ -1,4 +1,5 @@
 #include "DXResourcesConfig.h"
+#include "DX11Device.h"
 
 struct InputLayoutHolder
 {
@@ -29,56 +30,74 @@ struct InputLayoutHolder
 	UINT                       InstanceDataStepRate;
 };
 
-int DXResourcesConfig::UIDCounter = 1;
+int CDXResourcesConfig::UIDCounter = 1;
 
-DXResourcesConfig::DXResourcesConfig() {}
+CDXResourcesConfig::CDXResourcesConfig() {}
 
-void DXResourcesConfig::CreateUID()
+void CDXResourcesConfig::SetContextResourcePtr(std::function<void()> InFn)
 {
-	if (DXResourcesConfig::UIDCounter <= 10)
+	m_pContextResourcePtr.push_back(InFn);
+}
+
+void CDXResourcesConfig::Execute()
+{
+	for (auto It : m_pContextResourcePtr)
+	{
+		It();
+	}
+}
+
+void CDXResourcesConfig::CreateUID()
+{
+	if (CDXResourcesConfig::UIDCounter <= 10)
 	{
 		std::string uid = "dxr00000";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	else if (DXResourcesConfig::UIDCounter / 10 != 0)
+	else if (CDXResourcesConfig::UIDCounter / 10 != 0)
 	{
 		std::string uid = "dxr0000";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	else if (DXResourcesConfig::UIDCounter / 100 != 0)
+	else if (CDXResourcesConfig::UIDCounter / 100 != 0)
 	{
 		std::string uid = "dxr000";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	else if (DXResourcesConfig::UIDCounter / 1000 != 0)
+	else if (CDXResourcesConfig::UIDCounter / 1000 != 0)
 	{
 		std::string uid = "dxr00";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	else if (DXResourcesConfig::UIDCounter / 10000 != 0)
+	else if (CDXResourcesConfig::UIDCounter / 10000 != 0)
 	{
 		std::string uid = "dxr0";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	else if (DXResourcesConfig::UIDCounter / 100000 != 0)
+	else if (CDXResourcesConfig::UIDCounter / 100000 != 0)
 	{
 		std::string uid = "dxr";
-		std::string counter = std::to_string(DXResourcesConfig::UIDCounter);
+		std::string counter = std::to_string(CDXResourcesConfig::UIDCounter);
 
 		m_UID = uid + counter;
 	}
-	DXResourcesConfig::UIDCounter++;
+	CDXResourcesConfig::UIDCounter++;
 }
+
+//void DXResourcesConfig::SetDX11Device(DX11_Device* Device)
+//{
+//	m_pDX11Device = Device;
+//}
 
 void CreateInputLayout(
 	UINT LayoutsNumber,
@@ -98,47 +117,54 @@ void CreateInputLayout(
 	}
 }
 
-void DXResourcesConfig::SetVertexBuffer(ID3D11Buffer* VertexBuffer)
+void CDXResourcesConfig::SetVertexBuffer(ID3D11Buffer* VertexBuffer)
 {
 	m_VertexBuffer = VertexBuffer;
 }
 
-void DXResourcesConfig::SetIndexBuffer(ID3D11Buffer* IndexBuffer, DXGI_FORMAT Format, int Offset)
+void CDXResourcesConfig::SetIndexBuffer(ID3D11Buffer* IndexBuffer, DXGI_FORMAT Format, int Offset)
 {
 	m_IndexBuffer = IndexBuffer;
 	m_IndexBufferFormat = Format;
 	m_IndexBufferOffset = Offset;
 }
 
-void DXResourcesConfig::SetInputLayout(ID3D11InputLayout* InputLayout)
+void CDXResourcesConfig::SetInputLayout(ID3D11InputLayout* InputLayout)
 {
 	m_InputLayout = InputLayout;
 }
 
-void DXResourcesConfig::SetVertexShader(ID3D11VertexShader* VS)
+void CDXResourcesConfig::SetVertexShader(ID3D11VertexShader* VS)
 {
 	m_VertexShader = VS;
 }
 
-void DXResourcesConfig::SetPixelShader(ID3D11PixelShader* PS)
+void CDXResourcesConfig::SetPixelShader(ID3D11PixelShader* PS)
 {
 	m_PixelShader = PS;
 }
 
-void DXResourcesConfig::SetConstantBuffer(ID3D11Buffer* ConstantBuffer)
+void CDXResourcesConfig::SetConstantBuffer(ID3D11Buffer* ConstantBuffer)
 {
 	m_ConstantBuffer = ConstantBuffer;
 }
 
-void DXResourcesConfig::SetArrowConstantBuffer(ID3D11Buffer* ConstantBuffer)
+void CDXResourcesConfig::SetArrowConstantBuffer(ID3D11Buffer* ConstantBuffer)
 {
 	m_ConstantBuffer = ConstantBuffer;
 }
 
-void DXResourcesConfig::SetDepthStencilState(ID3D11DepthStencilState* DepthStencilState)
+void CDXResourcesConfig::SetDepthStencilState(ID3D11DepthStencilState* DepthStencilState)
 {
-	m_DepthStencilState = DepthStencilState;
+	m_pDepthStencilState = DepthStencilState;
 }
+
+void CDXResourcesConfig::SetTextureResourceView(ID3D11ShaderResourceView* TextureRV)
+{
+	m_TextureRV = TextureRV;
+}
+
+
 
 //void DXResourcesConfig::CreateInputLayout(int Size, ID3D11InputLayout Input[])
 //{

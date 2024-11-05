@@ -1,27 +1,27 @@
 #include "Logger.h"
 
-Logger::Logger()
+CLogger::CLogger()
 {
 	KMELog.open("Log.txt");
 }
 
-Logger& Logger::GetLogger()
+CLogger& CLogger::GetLogger()
 {
-	static Logger GLogger;
+	static CLogger GLogger;
 	return GLogger;
 }
 
-void Logger::Log(string Output)
+void CLogger::Log(string Output)
 {
 	KMELog << Output << endl;
 }
 
-void Logger::Log(string Output, float Value)
+void CLogger::Log(string Output, float Value)
 {
 	KMELog << Output << Value << endl;
 }
 
-void Logger::Log()
+void CLogger::Log()
 {
 	KMELog << "Oi";
 	KMELog << "Oi" << std::flush;

@@ -4,16 +4,16 @@
 
 HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 
-class Renderer
+class CRenderer
 {
 public:
-    Renderer(HWND Viewport);
+    CRenderer(HWND Viewport);
 
     void SetViewport(HWND InViewport);
 
     void InitRenderer();
 
-    DX11Device* GetDX11Device();
+    CDX11Device* GetDX11Device();
 
     void CreatePixelShader(HRESULT hr, ID3D11Device* D3D11Device, ID3D11PixelShader* PixelShader)
     {
@@ -51,8 +51,12 @@ private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
-    DX11Device m_DX11Device{ };
+    CDX11Device m_DX11evice{};
     float   m_EyeX{ };
     float   m_EyeY{ };
     float   m_EyeZ{ };
+
+    // Test variables / functions
+
+	float m_CubeLocZ{ 0.0f };
 };

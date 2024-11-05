@@ -12,14 +12,16 @@
 #include <vector>
 #include "SceneGraph.h"
 
-struct ConstantBuffer
+class CDXResourcesConfig;
+
+struct SConstantBuffer
 {
 	XMMATRIX mWorld;
 	XMMATRIX mView;
 	XMMATRIX mProjection;
 };
 
-struct ArrowConstantBuffer
+struct SArrowConstantBuffer
 {
 	XMMATRIX mWorld;
 	XMMATRIX mView;
@@ -27,36 +29,36 @@ struct ArrowConstantBuffer
 	int mIsHovered;
 };
 
-struct CollisionComponent
+struct SCollisionComponent
 {
 	BoundingBox AABox;
 	ContainmentType CollisionType;
 };
 
-//struct SimpleVertex
+//struct Simple_Vertex
 //{
 //	XMFLOAT3 Pos;
 //	XMFLOAT2 Tex;
 //};
 //
-//struct SimpleColorVertex
+//struct Simple_Color_Vertex
 //{
 //	XMFLOAT3 Pos;
 //	XMFLOAT4 Col;
 //};
 
-struct ColorVertex
+struct SColorVertex
 {
 	XMFLOAT3 Pos;
 	XMFLOAT4 Color;
 };
 
-class GameEntity3DComponent;
+class CGameEntity3DComponent;
 
-class GameEntity3D : public GameEntity
+class CGameEntity3D : public CGameEntity
 {
 public:
-	GameEntity3D()
+	CGameEntity3D()
 		: m_ConstantBuffer{ }
 		, m_VerticesList{ 0 }
 		, m_LocationMatrix{ XMMatrixIdentity() }
@@ -64,6 +66,7 @@ public:
 		, m_ScaleMatrix{ XMMatrixIdentity() }
 		, m_Collision{ }
 		, m_DXResConfig{ }
+		, m_LocationX{ 0.0f }
 		, m_SceneGraph{ }
 	{ }
 
@@ -71,9 +74,13 @@ public:
 
 	void SetVertexBuffer(ID3D11Buffer* vb);
 
+	void SetOwnVertexBuffer(ID3D11Buffer* InVertexBuffer);
+
 	void SetIndexBuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
 
-	void SetVerticesList(std::vector<SimpleVertex> VerticesList);
+	void SetIndexOwnBuffer(ID3D11Buffer* InIndexBuffer, DXGI_FORMAT Format, int Offset);
+
+	void SetVerticesList(std::vector<SSimpleVertex> VerticesList);
 
 	void SetInputLayout(ID3D11InputLayout* InputLayout);
 
@@ -83,19 +90,19 @@ public:
 
 	void SetConstantBuffer(ID3D11Buffer* cb);
 
-	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList);
+	void SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList);
 
 	/**
 	* Sets a vertex list
 	*/
 
-	void SetColorVerticesList(std::vector<ColorVertex> VerticesList);
+	void SetColorVerticesList(std::vector<SColorVertex> VerticesList);
 
-	std::vector<SimpleVertex> GetVerticesList();
+	std::vector<SSimpleVertex> GetVerticesList();
 
-	std::vector<SimpleColorVertex> GetSimpleColorVerticesList();
+	std::vector<SSimpleColorVertex> GetSimpleColorVerticesList();
 
-	std::vector<ColorVertex> GetColorVerticesList();
+	std::vector<SColorVertex> GetColorVerticesList();
 
 	void SetLocation(XMMATRIX Location);
 
@@ -125,9 +132,17 @@ public:
 
 	void SetScale(float InX, float InY, float InZ);
 
-	ConstantBuffer GetConstantBuffer();
+	ID3D11Buffer* GetOwnVertexBuffer();
 
-	ArrowConstantBuffer GetArrowConstantBuffer();
+	ID3D11Buffer* GetOwnIndexBuffer();
+
+	DXGI_FORMAT GetOwnFormat();
+
+	int GetOwnOffset();
+
+	SConstantBuffer GetConstantBuffer();
+
+	SArrowConstantBuffer GetArrowConstantBuffer();
 
 	void SetCollisionBoxCenter(XMFLOAT3 NewCenter);
 
@@ -135,9 +150,9 @@ public:
 
 	std::string GetUID();
 
-	CollisionComponent GetCollisionComponent();
+	SCollisionComponent GetCollisionComponent();
 
-	DXResourcesConfig m_DXResConfig{ };
+	CDXResourcesConfig m_DXResConfig{ };
 
 	std::string m_UID;
 
@@ -153,14 +168,14 @@ public:
 
 	std::vector<TEntityPhysicalMesh> m_PhysicalMeshVector;
 
-	std::vector<GameEntity3DComponent> m_GameEntity3DComponent;
+	std::vector<CGameEntity3DComponent> m_GameEntity3DComponent;
 
 	//CollisionComponent m_Collision;
 
 protected:
-	SceneGraph<GameEntity3DComponent*> m_SceneGraph;
+	SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
 
-	CollisionComponent m_Collision;
+	SCollisionComponent m_Collision;
 
 	XMVECTOR m_LocationVector;
 
@@ -179,18 +194,23 @@ protected:
 	float m_ScaleY;
 	float m_ScaleZ;
 
-	std::vector<SimpleVertex> m_VerticesList;
-	std::vector<ColorVertex> m_ColorVerticesList;
-	std::vector<SimpleColorVertex> m_SimpleColorVerticesList;
-	ConstantBuffer m_ConstantBuffer;
-	ArrowConstantBuffer m_ArrowConstantBuffer;
+	std::vector<SSimpleVertex> m_VerticesList;
+	std::vector<SColorVertex> m_ColorVerticesList;
+	std::vector<SSimpleColorVertex> m_SimpleColorVerticesList;
+	SConstantBuffer m_ConstantBuffer;
+	SArrowConstantBuffer m_ArrowConstantBuffer;
 	int m_UIDTest{ };
 
-	std::uint16_t MaterialHashIndex;
+	ID3D11Buffer* m_IndexBuffer;
+	ID3D11Buffer* m_VertexBuffer;
+	DXGI_FORMAT m_Format;
+	int m_Offset;
+
+	std::uint16_t m_MaterialHashIndex;
 };
 
 
-class GameEntity3DComponent : public GameEntity3D
+class CGameEntity3DComponent : public CGameEntity3D
 {
 public:
 

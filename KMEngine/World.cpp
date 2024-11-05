@@ -1,6 +1,10 @@
 #include "World.h"
+#include "Scene.h"
 
-void TWorld::Init()
+CWorld::CWorld()
+{}
+
+void CWorld::Init()
 {
 
 }

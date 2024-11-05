@@ -51,13 +51,13 @@
     <ClCompile Include="ViewportWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoreTimer.cpp">
+    <ClCompile Include="CoreClock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEntityBuilder.cpp">
+    <ClCompile Include="TerrainGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,10 +116,13 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoreTimer.h">
+    <ClInclude Include="CoreClock.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityPhysicalMesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntity3DComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneGraph.h">
@@ -128,10 +131,13 @@
     <ClInclude Include="World.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEntityBuilder.h">
+    <ClInclude Include="TerrainGenerator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="TerrainGenerator.h">
+    <ClInclude Include="Math.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreEngine.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,8 +146,6 @@
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
     <None Include="texture.vs" />
-    <None Include="GizmoRedArrow.vs" />
-    <None Include="GizmoRedArrow.ps" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">
@@ -153,6 +157,9 @@
       <Filter>Source Files</Filter>
     </Image>
     <Image Include="grey_grid.dds">
+      <Filter>Source Files</Filter>
+    </Image>
+    <Image Include="tex_stickman.dds">
       <Filter>Source Files</Filter>
     </Image>
   </ItemGroup>

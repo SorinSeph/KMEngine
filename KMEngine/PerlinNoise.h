@@ -2,10 +2,10 @@
 
 #include <vector>
 
-class PerlinNoise
+class CPerlinNoise
 {
 public:
-	PerlinNoise();
+	CPerlinNoise();
 	double Noise(double x, double y, double z);
 
 private:

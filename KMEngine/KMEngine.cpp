@@ -26,9 +26,8 @@
 #include "Logger.h"
 #include "Scene.h"
 
-#include "DX11Device.h"
-#include "CoreTimer.h"
-#include "EngineInitializer.h"
+#include "CoreClock.h"
+#include "CoreEngine.h"
 
 using namespace DirectX;
 using namespace std;
@@ -46,8 +45,8 @@ XMMATRIX                        g_Projection;
 Cube                            g_Cube;
 Cube                            g_ObstacleCube;
 Cube                            g_PositionTestCube;
-GameEntity3D                    g_CubeEntity;
-GameEntity3D                    g_CubeEntity2;
+CGameEntity3D                   g_CubeEntity;
+CGameEntity3D                   g_CubeEntity2;
 
 // Pointer inits
 //ID3D11Buffer* g_pIndexBuffer = nullptr;
@@ -58,7 +57,7 @@ ID3D11Buffer* g_aIndexBuffer[2] = {};
 
 HRESULT g_hr = S_OK;
 
-std::vector<GameEntity3D> m_GameEntityList;
+std::vector<CGameEntity3D> m_GameEntityList;
 
 //bool bClipCursor = false;
 
@@ -140,59 +139,63 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 {
     KMEngine_Log.open("Log.txt");
 
-    EngineInitializer FEngineInitializer(hInstance, nCmdShow);
-    BCoreTimer CoreTimer;
-    Logger& SLogger = Logger::GetLogger();
+    CCoreEngine CoreEngine(hInstance, nCmdShow);
+    CCoreClock CoreClock;
+    CLogger& SLogger = CLogger::GetLogger();
 
-    FTimerManager& TimerManager = FTimerManager::GetTimerManager();
-    TimerManager.CoreTimerRef = &CoreTimer;
+    SLogger.Log("KMEngine.cpp, engine started\n");
 
-    Scene& SScene = Scene::GetScene();
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+    TimerManager.m_pCoreClock = &CoreClock;
 
-    if (FAILED(FEngineInitializer.InitEngine()))
+    CScene& Scene = CScene::GetScene();
+
+    if (FAILED(CoreEngine.InitEngine()))
         return 0;
 
-    Renderer MRenderer = FEngineInitializer.GetRenderer();
+    CRenderer* Renderer = CoreEngine.GetRenderer();
 
-    if (!FEngineInitializer.GetViewportWindow().InitViewportDirectInput(hInstance, g_hWnd))
+    if (!CoreEngine.GetViewportWindow().InitViewportDirectInput(hInstance, g_hWnd))
     {
         MessageBox(0, L"Failed to initialize Direct Input", L"Error", MB_OK);
         return 0;
     }
 
-    CoreTimer.Reset();
+    CoreClock.Reset();
 
-    MSG msg = { 0 };
-    while (WM_QUIT != msg.message)
+    MSG Msg = { 0 };
+    while (WM_QUIT != Msg.message)
     {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if (PeekMessage(&Msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            TranslateMessage(&Msg);
+            DispatchMessage(&Msg);
         }
         else
         {
-            CoreTimer.Tick();
-            CoreTimer.EngineTick();
-            FEngineInitializer.DetectInput();
-            float X = FEngineInitializer.GetXRotation();
-            float Y = FEngineInitializer.GetYRotation();
-            float eyeX = FEngineInitializer.GetEyeX();
-            float eyeY = FEngineInitializer.GetEyeY();
-            float eyeZ = FEngineInitializer.GetEyeZ();
-            MRenderer.Render(X, Y, eyeX, eyeY, eyeZ);
-            SLogger.Log("KMEngine.cpp, wWinMain() \nTotalTime: ", CoreTimer.GetFTotalTime(), "\n");
+            CoreClock.Tick();
+            CoreClock.EngineTick();
+            CoreEngine.DetectInput();
+            float X = CoreEngine.GetXRotation();
+            float Y = CoreEngine.GetYRotation();
+            float eyeX = CoreEngine.GetEyeX();
+            float eyeY = CoreEngine.GetEyeY();
+            float eyeZ = CoreEngine.GetEyeZ();
+
+            Renderer->Render(X, Y, eyeX, eyeY, eyeZ);
+
+            SLogger.Log("KMEngine.cpp, wWinMain() \nTotalTime: ", CoreClock.GetFTotalTime(), "\n");
             SLogger.Log("KMEngine.cpp, wWinMain() \n", "RotX = ", X, "\nRotY = ", Y, "\nEyeX = ", EyeX, "\nEyeY = ", EyeY, "\nEyeZ = ", EyeZ, "\n");
 
-            float RayX = FEngineInitializer.GetRaycastX();
-            float RayY = FEngineInitializer.GetRaycastY();
+            float RayX = CoreEngine.GetRaycastX();
+            float RayY = CoreEngine.GetRaycastY();
 
             SLogger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
-            FEngineInitializer.RayCast(RayX, RayY);
+            CoreEngine.RayCast(RayX, RayY);
 
             int SceneListIndex = 0;
 
-            for (auto SceneListIt : Scene::GetScene().GetSceneList())
+            for (auto SceneListIt : CScene::GetScene().GetSceneList())
             {
                 std::string EntityTag = SceneListIt.m_GameEntityTag;
                 SLogger.Log("Entity Tag at ", SceneListIndex, " is: ", EntityTag);
@@ -207,7 +210,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
             //}
         }
     }
-    MRenderer.CleanupRenderer();
+    Renderer->CleanupRenderer();
     //CleanupDevice();
 
     return 0;

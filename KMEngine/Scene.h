@@ -5,10 +5,10 @@
 #include <unordered_map>
 #include "GameEntity3D.h"
 
-class SceneList
+class CSceneList
 {
 public:
-	std::vector<GameEntity3D> m_GameEntityList{ };
+	std::vector<CGameEntity3D> m_GameEntityList{ };
 
 	void RemoveLastElement();
 
@@ -19,26 +19,36 @@ public:
 	//void TestOutput();
 };
 
-class Scene
+class CScene
 {
 private:
-	Scene() {}
+	CScene() {}
 	//static Scene* GScene;
-	std::vector<GameEntity3D> m_GameEntityList;
+	std::vector<CGameEntity3D> m_GameEntityList{ };
+
+
+
+	// Temp members, to delete later
+
+	ID3D11VertexShader* m_VertexShader{ nullptr };
+
+	ID3D11PixelShader* m_PixelShader{ nullptr };
 
 public:
 	//static Scene* GetScene();
-	static Scene& GetScene();
+	static CScene& GetScene();
 
-	std::unordered_map<uint16_t, DXResourcesConfig> DXResourceConfigMap;
+	SConstantBuffer m_SceneConstantBuffer;
 
-	void InsertDXResourceConfig(int Key, DXResourcesConfig Config);
+	std::unordered_map<uint16_t, CDXResourcesConfig> DXResourceConfigMap;
 
-	DXResourcesConfig GetDXResourceConfig(int Key);
+	void InsertDXResourceConfig(int Key, CDXResourcesConfig Config);
 
-	void AddEntityToScene(GameEntity3D Entity);
+	CDXResourcesConfig GetDXResourceConfig(int Key);
 
-	void AddEntityToScene(int Location, GameEntity3D Entity);
+	void AddEntityToScene(CGameEntity3D Entity);
+
+	void AddEntityToScene(int Location, CGameEntity3D Entity);
 
 	void RemoveLastEntityFromScene();
 
@@ -58,37 +68,9 @@ public:
 
 	void SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 
-	SceneList m_SceneList;
+	CSceneList m_SceneList;
 
-	std::vector<GameEntity3D> GetSceneList();
-
-
-	////////
-
-
-	void AddEntityToScene2(GameEntity3D Entity);
-
-	void AddEntityToScene2(int Location, GameEntity3D Entity);
-
-	void RemoveLastEntityFromScene2();
-
-	void RemoveEntityFromScene2(std::string EntityTag);
-
-	void SetConstantBuffer2(int Location, ID3D11Buffer* cb);
-
-	void SetVertexbuffer2(int Location, ID3D11Buffer* vb);
-
-	void SetIndexbuffer2(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
-
-	void SetInputLayout2(int Location, ID3D11InputLayout* InputLayout);
-
-	void SetVertexShader2(int Location, ID3D11VertexShader* VS);
-
-	void SetPixelShader2(int Location, ID3D11PixelShader* PS);
-
-	void SetCollisionParams2(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
-
-	//std::vector<GameEntity3D> GetSceneList2();
+	std::vector<CGameEntity3D> GetSceneList();
 
 	// Methods for entity components
 
@@ -103,4 +85,14 @@ public:
 	void SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb);
 
 	void SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
+
+	// Temp fix, to delete
+
+	void SetOwnVertexShader(ID3D11VertexShader* VertexShader);
+
+	ID3D11VertexShader* GetOwnVertexShader();
+
+	void SetOwnPixelShader(ID3D11PixelShader* PixelShader);
+
+	ID3D11PixelShader* GetOwnPixelShader();
 };

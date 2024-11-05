@@ -6,15 +6,15 @@
 
 using namespace DirectX;
 
-class DXStructuresInitializer
+class CDXStructuresInitializer
 {
 public:
-	DXStructuresInitializer(HRESULT hr) :
-		m_hr{ hr },
+	CDXStructuresInitializer(HRESULT hr) :
+		m_HR{ hr },
 		m_DriverType{ D3D_DRIVER_TYPE_NULL },
 		m_FeatureLevel{ D3D_FEATURE_LEVEL_11_0 },
 		m_D3DDevice{ nullptr },
-		m_ImmediateContext{ nullptr },
+		m_pImmediateContext{ nullptr },
 		m_SwapChainDesc1{},
 		m_SwapChainDesc{},
 		m_VerticesList{},
@@ -38,7 +38,7 @@ public:
 	void SetBufferDesc();
 	D3D11_BUFFER_DESC GetBufferDesc();
 
-	void SetSubresourceData(std::vector<GameEntity3D> GameEntityList);
+	void SetSubresourceData(std::vector<CGameEntity3D> GameEntityList);
 	D3D11_SUBRESOURCE_DATA GetSubresourceData();
 
 	void SetSamplerDesc();
@@ -57,15 +57,15 @@ public:
 	D3D11_VIEWPORT GetViewPort();
 
 private:
-	HRESULT m_hr;
+	HRESULT m_HR;
 
-	std::vector<GameEntity3D> m_GameEntityList;
-	SimpleVertex m_VerticesList;
+	std::vector<CGameEntity3D> m_GameEntityList;
+	SSimpleVertex m_VerticesList;
 
 	D3D_DRIVER_TYPE m_DriverType;
 	D3D_FEATURE_LEVEL m_FeatureLevel;
 	ID3D11Device* m_D3DDevice;
-	ID3D11DeviceContext* m_ImmediateContext;
+	ID3D11DeviceContext* m_pImmediateContext;
 	DXGI_SWAP_CHAIN_DESC1 m_SwapChainDesc1;
 	DXGI_SWAP_CHAIN_DESC m_SwapChainDesc;
 	D3D11_BUFFER_DESC m_BufferDesc;

@@ -4,11 +4,15 @@
 #include "DX11Device.h"
 #include "DXResourcesConfig.h"
 
-class TWorld
+class CWorld
 {
 public:
+	CWorld();
+
 	void Init();
 
+	CScene& m_Scene{ CScene::GetScene() };
+
 private:
-	std::unordered_map<uint16_t, DXResourcesConfig> DXResourceConfigMap;
+	std::unordered_map<uint16_t, CDXResourcesConfig> DXResourceConfigMap;
 };
