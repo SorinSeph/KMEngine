@@ -75,12 +75,12 @@ void Scene::RemoveLastEntityFromScene()
 
 void Scene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
 {
-	m_GameEntityList.at(Location).SetVertexbuffer(vb);
+	m_GameEntityList.at(Location).SetVertexBuffer(vb);
 }
 
 void Scene::SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
-	m_GameEntityList.at(Location).SetIndexbuffer(ib, Format, Offset);
+	m_GameEntityList.at(Location).SetIndexBuffer(ib, Format, Offset);
 }
 
 void Scene::SetInputLayout(int Location, ID3D11InputLayout* InputLayout)
@@ -108,10 +108,10 @@ void Scene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, 
 	m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
 }
 
-std::vector<GameEntity3D> Scene::GetSceneList()
-{
-	return m_GameEntityList;
-}
+//std::vector<GameEntity3D> Scene::GetSceneList()
+//{
+//	return m_GameEntityList;
+//}
 
 
 
@@ -150,12 +150,12 @@ void Scene::RemoveLastEntityFromScene2()
 
 void Scene::SetVertexbuffer2(int Location, ID3D11Buffer* vb)
 {
-	m_SceneList.m_GameEntityList.at(Location).SetVertexbuffer(vb);
+	m_SceneList.m_GameEntityList.at(Location).SetVertexBuffer(vb);
 }
 
 void Scene::SetIndexbuffer2(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
-	m_SceneList.m_GameEntityList.at(Location).SetIndexbuffer(ib, Format, Offset);
+	m_SceneList.m_GameEntityList.at(Location).SetIndexBuffer(ib, Format, Offset);
 }
 
 void Scene::SetInputLayout2(int Location, ID3D11InputLayout* InputLayout)
@@ -183,39 +183,49 @@ void Scene::SetCollisionParams2(int Location, XMFLOAT3 Center, XMFLOAT3 Extents,
 	m_SceneList.m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
 }
 
-std::vector<GameEntity3D> Scene::GetSceneList2()
+std::vector<GameEntity3D> Scene::GetSceneList()
 {
 	return m_SceneList.m_GameEntityList;
 }
 
 ////// Setting GameEntity3DComponent objects in Scene
 
-void Scene::SetComponentConstantBuffer(int Location, ID3D11Buffer* cb)
+void Scene::SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetConstantBuffer(cb);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetConstantBuffer(cb);
 }
 
-void Scene::SetComponentVertexShader(int Location, ID3D11VertexShader* VS)
+void Scene::SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetVertexShader(VS);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexShader(VS);
 }
 
-void Scene::SetComponentPixelShader(int Location, ID3D11PixelShader* PS)
+void Scene::SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetPixelShader(PS);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetPixelShader(PS);
 }
 
-void Scene::SetComponentInputLayout(int Location, ID3D11InputLayout* InputLayout)
+void Scene::SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetInputLayout(InputLayout);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetInputLayout(InputLayout);
 }
 
-void Scene::SetComponentVertexbuffer(int Location, ID3D11Buffer* vb)
+void Scene::SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetVertexbuffer(vb);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexBuffer(vb);
 }
 
-void Scene::SetComponentIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+void Scene::SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(0).SetIndexbuffer(ib, Format, Offset);
+	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetIndexBuffer(ib, Format, Offset);
+}
+
+void Scene::InsertDXResourceConfig(int Key, DXResourcesConfig Config)
+{
+	DXResourceConfigMap.emplace(std::make_pair(Key, Config));
+}
+
+DXResourcesConfig Scene::GetDXResourceConfig(int Key)
+{
+	return DXResourceConfigMap.at(Key);
 }

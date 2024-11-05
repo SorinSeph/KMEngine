@@ -13,6 +13,8 @@ public:
 
     void InitRenderer();
 
+    DX11Device* GetDX11Device();
+
     void CreatePixelShader(HRESULT hr, ID3D11Device* D3D11Device, ID3D11PixelShader* PixelShader)
     {
         // Compile the pixel shader
@@ -41,7 +43,7 @@ public:
 
     void AddGizmo();
 
-    void Render(float RotX, float RotY, float LocX, float LocY, float LocZ);
+    void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 
     void CleanupRenderer();
 
@@ -50,4 +52,7 @@ private:
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
     DX11Device m_DX11Device{ };
+    float   m_EyeX{ };
+    float   m_EyeY{ };
+    float   m_EyeZ{ };
 };

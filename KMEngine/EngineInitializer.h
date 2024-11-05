@@ -5,6 +5,9 @@
 #include <Windows.h>
 #include "resource.h"
 #include "Renderer.h"
+#include "Logger.h"
+#include "World.h"
+#include "GameEntityBuilder.h"
 
 const wchar_t CLASS_NAME[] = L"KME Engine";
 //const wchar_t VIEWPORT_NAME[] = L"Viewport";
@@ -51,7 +54,7 @@ public:
         , m_RotY{ m_ViewportWindow.GetYRotation() }
         , m_RotX2{ m_ViewportWindow.GetXRotation3() }
         , m_RotY2{ m_ViewportWindow.GetYRotation3() }
-        //, m_DX11Device{ new DX11Device }
+        , m_Logger{ Logger::GetLogger()}
     {
         g_Renderer = &m_Renderer;
     }
@@ -63,6 +66,7 @@ public:
             // Test
             //XMVECTOR OriginPoint = XMVectorSet(InX, InY, 0, 0);
             XMFLOAT3 OriginPointFloat3 = XMFLOAT3(InX, InY, 0);
+            m_Logger.Log("EngineInitializer.h, RayCast() : InX = ", InX, ", InY = ", InY, "\n");
             XMVECTOR OriginPoint = XMLoadFloat3(&OriginPointFloat3);
 
             XMFLOAT3 DestinationPointFloat3 = XMFLOAT3(InX, InY, 1);
@@ -78,20 +82,11 @@ public:
             XMFLOAT3 OriginPointUnprojectedFloat3;
             XMStoreFloat3(&OriginPointUnprojectedFloat3, OriginPointUnprojected);
 
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: OriginPointUnprojected X = " << OriginPointUnprojectedFloat3.x << endl;
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: OriginPointUnprojected Y = " << OriginPointUnprojectedFloat3.y << endl;
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: OriginPointUnprojected Z = " << OriginPointUnprojectedFloat3.z << endl;
-
-
             XMVECTOR RayDirection = DestinationPointUnprojected - OriginPointUnprojected;
             RayDirection = XMVector4Normalize(RayDirection);
 
             XMFLOAT4 RayDirectionFloat4;
             XMStoreFloat4(&RayDirectionFloat4, RayDirection);
-
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: Raydirection X = " << RayDirectionFloat4.x << endl;
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: Raydirection Y = " << RayDirectionFloat4.y << endl;
-            //KMEngine_Log << "KMEngine.cpp, void UnprojectClick3: Raydirection Z = " << RayDirectionFloat4.z << endl;
 
             XMFLOAT4 RayOriginFloat4;
             XMStoreFloat4(&RayOriginFloat4, DestinationPointUnprojected);
@@ -259,6 +254,11 @@ public:
         m_Renderer.SetViewport(m_ViewportWindow.GetViewportWnd());
         m_Renderer.InitRenderer();
 
+        m_World.Init();
+        GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
+        EntityBuilder.InitDefaultEntities();
+        EntityBuilder.TestDevice();
+
         return S_OK;
     }
 
@@ -356,11 +356,13 @@ public:
 
     float GetRaycastX()
     {
+        m_Logger.Log("EngineInitializer.h, GetRaycastX(): Raycast X =  ", m_ViewportWindow.GetRaycastX(), "\n");
         return m_ViewportWindow.GetRaycastX();
     }
 
     float GetRaycastY()
     {
+        m_Logger.Log("EngineInitializer.h, GetRaycastY(): Raycast Y =  ", m_ViewportWindow.GetRaycastY(), "\n");
         return m_ViewportWindow.GetRaycastY();
     }
 
@@ -380,17 +382,27 @@ public:
     }
 
 private:
+
+    /**
+    * Rendering, gameplay and memory classes initialization
+    * ! To be split into their own module
+    */
+
     HINSTANCE m_HInstance{ };
     int m_NCmdShow{ };
     Renderer m_Renderer;
     Renderer* m_pRenderer;
-    DX11Device m_DX11Device{ };
+    TWorld m_World{ };
     ViewportWindow m_ViewportWindow;
+
+
     float m_RotX;
     float m_RotY;
 
     float* m_RotX2;
     float* m_RotY2;
+
+    Logger& m_Logger;
 };
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

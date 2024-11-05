@@ -24,12 +24,12 @@ void GameEntity3D::SetColorVerticesList(std::vector<ColorVertex> VerticesList)
 	m_ColorVerticesList = VerticesList;
 }
 
-void GameEntity3D::SetVertexbuffer(ID3D11Buffer* vb)
+void GameEntity3D::SetVertexBuffer(ID3D11Buffer* vb)
 {
 	m_DXResConfig.SetVertexBuffer(vb);
 }
 
-void GameEntity3D::SetIndexbuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+void GameEntity3D::SetIndexBuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
 	m_DXResConfig.SetIndexBuffer(ib, Format, Offset);
 }
@@ -146,6 +146,11 @@ void GameEntity3D::SetScale(float InX, float InY, float InZ)
 ConstantBuffer GameEntity3D::GetConstantBuffer()
 {
 	return m_ConstantBuffer;
+}
+
+ArrowConstantBuffer GameEntity3D::GetArrowConstantBuffer()
+{
+	return m_ArrowConstantBuffer;
 }
 
 void GameEntity3D::SetCollisionBoxCenter(XMFLOAT3 NewCenter)

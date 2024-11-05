@@ -88,10 +88,18 @@ public:
 	*/
 	void InitCube();
 
+	void InitCubeComponents();
+
+	void InitSingleCubeComponent();
+
 	/**
 	* Initializes a yellow cube, with outline stencil state
 	*/
 	void InitCubeOutline();
+
+	void InitCubeOutline2();
+
+	void InitSingleCubeOutline();
 
 	/**
 	* Initializes a red arrow object, with fixed value scaling
@@ -110,7 +118,7 @@ public:
 	/**
 	* Check the intersection of the raycast with the first cube
 	*/
-	void CheckCollision();
+	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
 	void AddOutline();
 
@@ -131,7 +139,11 @@ public:
 
 	void RemoveLastElementFromScene();
 
-private:
+	UINT GetViewportWidth();
+
+	UINT GetViewportHeight();
+
+public:
 	HWND							m_Viewport{ };
 	HRESULT							m_hr{ };
 	D3D_DRIVER_TYPE                 m_DriverType{ D3D_DRIVER_TYPE_NULL };
@@ -140,8 +152,6 @@ private:
 	ID3D11Device1*					m_D3D11Device1{ nullptr };
 	ID3D11DeviceContext*			m_ImmediateContext{ nullptr };
 	ID3D11DeviceContext1*			m_ImmediateContext1{ nullptr };
-	IDXGISwapChain*					m_SwapChain{ nullptr };
-	IDXGISwapChain1*				m_SwapChain1{ nullptr };
 	ID3D11RenderTargetView*			m_RenderTargetView{ nullptr };
 	ID3D11Texture2D*				m_DepthStencil{ nullptr };
 	D3D11_DEPTH_STENCIL_DESC        m_DepthStencilDesc{ };
@@ -216,6 +226,9 @@ public:
 	static XMMATRIX                 m_WorldMatrix;
 	static XMMATRIX                 m_ViewMatrix;
 	static XMMATRIX                 m_ProjectionMatrix;
+
+	IDXGISwapChain*					m_SwapChain{ nullptr };
+	IDXGISwapChain1*				m_SwapChain1{ nullptr };
 
 private:
 	ID3D11Buffer*					m_IndexBufferArray[3]{ };
