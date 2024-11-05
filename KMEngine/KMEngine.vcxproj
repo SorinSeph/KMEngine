@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -129,24 +129,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CoreTimer.cpp" />
+    <ClCompile Include="CoreClock.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="DX11Device.cpp" />
     <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="DXStructuresInitializer.cpp" />
     <ClCompile Include="GameEntity3D.cpp" />
-    <ClCompile Include="GameEntityBuilder.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TerrainGenerator.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoreTimer.h" />
+    <ClInclude Include="CoreClock.h" />
+    <ClInclude Include="CoreEngine.h" />
     <ClInclude Include="CoreWindowsApp.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeTerrainGenerator.h" />
@@ -158,9 +159,10 @@
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
-    <ClInclude Include="GameEntityBuilder.h" />
+    <ClInclude Include="GameEntity3DComponent.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer.h" />
@@ -172,8 +174,6 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GizmoRedArrow.ps" />
-    <None Include="GizmoRedArrow.vs" />
     <None Include="solid_color.ps" />
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
@@ -184,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="grey_grid.dds" />
+    <Image Include="tex_stickman.dds" />
     <Image Include="UV_Color_Grid.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,8 +4,6 @@
 #include <cmath>
 #include "Logger.h"
 
-#define SpeedScale 0.00025f
-
 const float XM_PI = 3.141592654f;
 
 static float g_RotX;
@@ -20,14 +18,15 @@ const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
 static LPDIRECTINPUT8 _DirectInput;
 static IDirectInputDevice8* _DIKeyboard;
 
-class ViewportWindow
+class CViewportWindow
 {
 public:
-	ViewportWindow()
+	CViewportWindow()
 		: m_RotX{ &g_RotX }
 		, m_RotY{ &g_RotY }
 		, m_RotX2{ g_RotX }
 		, m_RotY2{ g_RotY }
+		, m_SpeedScale{ 0.01f }
 	{}
 
 	static void SetViewportParentHWND(HWND hwnd);
@@ -78,6 +77,9 @@ private:
 	static bool bClipCursor;
 
 	HWND MainHWND{ };
+
+	bool bSpeedScale;
+	float m_SpeedScale;
 
 	float* m_RotX;
 	float* m_RotY;

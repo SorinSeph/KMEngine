@@ -1,318 +1,207 @@
 #include "Renderer.h"
-#include "CoreTimer.h"
+#include "CoreClock.h"
 #include "Scene.h"
 #include "Logger.h"
+#include "Math.h"
 
-Renderer::Renderer(HWND Viewport)
+CRenderer::CRenderer(HWND Viewport)
 {
-    m_DX11Device.SetViewport(m_Viewport);
+    CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("CRenderer constructor from", __FILE__);
+    m_DX11evice.SetViewport(m_Viewport);
 }
 
-void Renderer::SetViewport(HWND InViewport)
+void CRenderer::SetViewport(HWND InViewport)
 {
-    m_DX11Device.SetViewport(InViewport);
+    m_DX11evice.SetViewport(InViewport);
 }
 
-void Renderer::InitRenderer()
+void CRenderer::InitRenderer()
 {
-    m_DX11Device.InitDX11Device();
+    m_DX11evice.InitDX11Device();
 
     //m_DX11Device.AddTestLine();
 }
 
-DX11Device* Renderer::GetDX11Device()
+CDX11Device* CRenderer::GetDX11Device()
 {
-    return &m_DX11Device;
+    return &m_DX11evice;
 }
 
-void Renderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
+void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
-    //m_DX11Device.Render(RotX, RotY, LocX, LocY, LocZ);
+    CScene& Scene = CScene::GetScene();
 
-    
-        Logger& SLogger = Logger::GetLogger();
-        Scene& SScene = Scene::GetScene();
-        //std::vector<GameEntity3D> SceneList = SScene.GetSceneList2();
+    XMFLOAT3 CameraPos(EyeX, EyeY, EyeZ);
+    XMVECTOR CameraVec = XMLoadFloat3(&CameraPos);
 
-        XMFLOAT3 CameraPos(EyeX, EyeY, EyeZ);
-        XMVECTOR CameraVec = XMLoadFloat3(&CameraPos);
+    // To modify according to every object
 
-        // To modify according to every object
+    XMFLOAT3 ObjectPos(0.0f, 0.0f, 4.0f);
+    XMVECTOR ObjectVec = XMLoadFloat3(&ObjectPos);
 
-        XMFLOAT3 ObjectPos(0.0f, 0.0f, 4.0f);
-        XMVECTOR ObjectVec = XMLoadFloat3(&ObjectPos);
+    XMVECTOR CameraObjectSub = XMVectorSubtract(CameraVec, ObjectVec);
+    XMVECTOR length = XMVector3Length(CameraObjectSub);
 
-        XMVECTOR CameraObjectSub = XMVectorSubtract(CameraVec, ObjectVec);
-        XMVECTOR length = XMVector3Length(CameraObjectSub);
+    float distance = 0.0f;
+    XMStoreFloat(&distance, length);
 
-        float distance = 0.0f;
-        XMStoreFloat(&distance, length);
+    // 2.0 * atan(tan(FovAngleY * 0.5) / AspectRatio).
+    float ratio = (float)m_ViewportWidth / m_ViewportHeight;
+    float worldSize = (std::tan(XM_PIDIV4 * 0.5) / ratio) * distance;
+    float size = 0.004f * worldSize;
 
-        // 2.0 * atan(tan(FovAngleY * 0.5) / AspectRatio).
-        float ratio = (float)m_ViewportWidth / m_ViewportHeight;
-        float worldSize = (std::tan(XM_PIDIV4 * 0.5) / ratio) * distance;
-        float size = 0.004f * worldSize;
+    CDX11Device::m_ViewMatrix = XMMatrixIdentity();
+    XMMATRIX RotationMatrixX
+    (
+        1.f, 0.f, 0.f, 0.f,
+        0.f, std::cosf(XMConvertToRadians(RotX)), -std::sinf(XMConvertToRadians(RotX)), 0.f,
+        0.f, std::sinf(XMConvertToRadians(RotX)), std::cosf(XMConvertToRadians(RotX)), 0.f,
+        0.f, 0.f, 0.f, 1.f
+    );
 
-        DX11Device::m_ViewMatrix = XMMatrixIdentity();
-        XMMATRIX RotationMatrixX
-        (
-            1.f, 0.f, 0.f, 0.f,
-            0.f, std::cosf(XMConvertToRadians(RotX)), -std::sinf(XMConvertToRadians(RotX)), 0.f,
-            0.f, std::sinf(XMConvertToRadians(RotX)), std::cosf(XMConvertToRadians(RotX)), 0.f,
-            0.f, 0.f, 0.f, 1.f
-        );
+    XMMATRIX RotationMatrixY
+    (
+        std::cosf(XMConvertToRadians(RotY)), 0.f, std::sinf(XMConvertToRadians(RotY)), 0.f,
+        0.f, 1.f, 0.f, 0.f,
+        -std::sinf(XMConvertToRadians(RotY)), 0.f, std::cosf(XMConvertToRadians(RotY)), 0.f,
+        0.f, 0.f, 0.f, 1.f
+    );
 
-        XMMATRIX RotationMatrixY
-        (
-            std::cosf(XMConvertToRadians(RotY)), 0.f, std::sinf(XMConvertToRadians(RotY)), 0.f,
-            0.f, 1.f, 0.f, 0.f,
-            -std::sinf(XMConvertToRadians(RotY)), 0.f, std::cosf(XMConvertToRadians(RotY)), 0.f,
-            0.f, 0.f, 0.f, 1.f
-        );
+    XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
+    CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
 
-        XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
-        DX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
+    m_DX11evice.m_pImmediateContext->ClearRenderTargetView(m_DX11evice.m_pRenderTargetView, Colors::MidnightBlue);
+    m_DX11evice.m_pImmediateContext->ClearDepthStencilView(m_DX11evice.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+    m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
 
-        m_DX11Device.m_ImmediateContext->ClearRenderTargetView(m_DX11Device.m_RenderTargetView, Colors::MidnightBlue);
-        m_DX11Device.m_ImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-        m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    auto SceneEntityList = Scene.GetSceneList();
 
-        UINT stride = sizeof(SimpleVertex);
-        UINT stride2 = sizeof(SimpleColorVertex);
-        UINT offset = 0;
+    /**
+    * Render loop
+    */
 
-        int SceneEntityIndex = 0;
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+	m_CubeLocZ = FInterpConstantTo(m_CubeLocZ, 10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 2.0f);
 
-        auto Entity = SScene.GetSceneList().at(0);
+	for (auto SceneEntityIt : SceneEntityList)
+    {
+        if (SceneEntityIt.m_GameEntityTag == "TexturedCube")
+        {
+			SceneEntityIt.SetLocationF(0.0f, 0.0f, m_CubeLocZ);
+        }
+    }
 
-        // Main rendering loop
+    CLogger& Logger = CLogger::GetLogger();  
 
-        //for (auto SceneEntityIt : SScene.GetSceneList())
+    Logger.Log();
+
+    for (auto SceneEntityIt : SceneEntityList)
+    {
+        if (SceneEntityIt.m_GameEntityTag == "TexturedCube")
+        {
+            SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
+            ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
+			//SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
+			auto LocationMatrix = SceneEntityIt.GetLocation();
+
+            CB.mWorld = LocationMatrix;
+			//CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
+
+            CB.mWorld = XMMatrixTranspose(CB.mWorld);
+            CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+            CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+            m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+
+            SceneEntityIt.m_DXResConfig.Execute();
+
+            m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+
+            m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+            m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+        }
+        //else if (SceneEntityIt.m_GameEntityTag == "TexturedCube2")
         //{
-        //    // Render Cube 
-        //    if (SceneEntityIt.m_GameEntityTag == "SingleCubeComponentEntity")
-        //    {
-        //        if (SceneEntityIt.m_GameEntity3DComponent.size())
-        //        {
-        //            for (auto SceneEntityComponentIt : SceneEntityIt.m_GameEntity3DComponent)
-        //            {
-        //                ConstantBuffer cb = SceneEntityComponentIt.GetConstantBuffer();
-        //                cb.mWorld = XMMatrixTranspose(cb.mWorld);
-        //                cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-        //                cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
+        //    SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
+        //    ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
+        //    CB.mWorld = XMMatrixTranspose(CB.mWorld);
+        //    CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+        //    CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+        //    m_DX11Device.m_ImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-        //                ID3D11Buffer* ConstantBuffer = SceneEntityComponentIt.m_DXResConfig.m_ConstantBuffer;
-        //                m_DX11Device.m_ImmediateContext->UpdateSubresource(ConstantBuffer, 0, nullptr, &cb, 0, 0);
+        //    SceneEntityIt.m_DXResConfig.Execute();
 
-        //                ID3D11Buffer* VertexBuffer = SceneEntityComponentIt.m_DXResConfig.m_VertexBuffer;
-        //                assert(VertexBuffer != nullptr);
+        //    m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
-        //                m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
-
-        //                ID3D11Buffer* IndexBuffer = SceneEntityComponentIt.m_DXResConfig.m_IndexBuffer;
-        //                DXGI_FORMAT IndexBufferFormat = SceneEntityComponentIt.m_DXResConfig.m_IndexBufferFormat;
-        //                UINT IndexBufferOffset = SceneEntityComponentIt.m_DXResConfig.m_IndexBufferOffset;
-        //                m_DX11Device.m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
-
-        //                ID3D11InputLayout* InputLayout = SceneEntityComponentIt.m_DXResConfig.GetInputLayout();
-        //                m_DX11Device.m_ImmediateContext->IASetInputLayout(InputLayout);
-
-        //                ID3D11VertexShader* VertexShader = SceneEntityComponentIt.m_DXResConfig.m_VertexShader;
-        //                ID3D11PixelShader* PixelShader = SceneEntityComponentIt.m_DXResConfig.m_PixelShader;
-
-        //                m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-        //                m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
-
-        //                m_DX11Device.m_ImmediateContext->VSSetConstantBuffers(0, 1, &ConstantBuffer);
-        //                m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState, 0);
-
-        //                m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-        //                m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-        //            }
-        //        }
-        //    }
-        //    // Render Cube yellow outline
-        //    else if (SceneEntityIt.m_GameEntityTag != "Linetrace")
-        //    {
-        //        ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-        //        cb.mWorld = XMMatrixTranspose(cb.mWorld);
-        //        cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-        //        cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
-
-        //        ID3D11Buffer* CB = SceneEntityIt.m_DXResConfig.m_ConstantBuffer;
-        //        m_DX11Device.m_ImmediateContext->UpdateSubresource(CB, 0, nullptr, &cb, 0, 0);
-
-        //        ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_VertexBuffer;
-        //        assert(VertexBuffer != nullptr);
-
-        //        m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride2, &offset);
-
-        //        ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
-        //        DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.m_IndexBufferFormat;
-        //        UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.m_IndexBufferOffset;
-        //        m_DX11Device.m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
-
-        //        ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
-        //        m_DX11Device.m_ImmediateContext->IASetInputLayout(InputLayout);
-
-        //        ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.m_VertexShader;
-        //        ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.m_PixelShader;
-
-        //        m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-        //        m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
-
-        //        m_DX11Device.m_ImmediateContext->VSSetConstantBuffers(0, 1, &CB);
-        //        m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDepthStencilStateOutline, 0);
-
-        //        m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-        //        m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-        //    }
-        //    else
-        //    {
-        //        ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.GetVertexBuffer();
-        //        m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-        //        m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
-
-        //        ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-        //        cb.mWorld = XMMatrixTranspose(cb.mWorld);
-        //        cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-        //        cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
-
-        //        ID3D11Buffer* ConstantBuffer = SceneEntityIt.m_DXResConfig.m_ConstantBuffer;
-        //        m_DX11Device.m_ImmediateContext->UpdateSubresource(ConstantBuffer, 0, nullptr, &cb, 0, 0);
-
-        //        m_DX11Device.m_ImmediateContext->Draw(2, 0);
-        //    }
+        //    m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+        //    m_DX11Device.m_ImmediateContext->DrawIndexed(36, 0, 0);
         //}
+        else if (SceneEntityIt.m_GameEntityTag == "Terrain")
+        {
+            SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
+            ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
+            CB.mWorld = XMMatrixTranspose(CB.mWorld);
+            CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+            CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+            m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
+            UINT Stride = sizeof(SSimpleVertex);
+            UINT Offset = 0;
 
+            ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_VertexBuffer;
+            m_DX11evice.m_pImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
 
-            for (auto SceneEntityIt : SScene.GetSceneList())
-            {
-                // Render Cube 
-                if (SceneEntityIt.m_GameEntityTag == "SingleCubeComponentEntity")
-                {
-                    if (SceneEntityIt.m_GameEntity3DComponent.size())
-                    {
-                        for (auto SceneEntityComponentIt : SceneEntityIt.m_GameEntity3DComponent)
-                        {
-                            auto TempConfigMap = SScene.DXResourceConfigMap;
-                            int HashKey = SceneEntityComponentIt.DXResourceHashKey;
-                            DXResourcesConfig DXConfig = SScene.GetDXResourceConfig(HashKey);
+            ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
+            DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.m_IndexBufferFormat;
+            UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.m_IndexBufferOffset;
+            m_DX11evice.m_pImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
 
-                            ConstantBuffer cb = SceneEntityComponentIt.GetConstantBuffer();
-                            cb.mWorld = XMMatrixTranspose(cb.mWorld);
-                            cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-                            cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
+            ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
+            m_DX11evice.m_pImmediateContext->IASetInputLayout(InputLayout);
 
-                            //ID3D11Buffer* ConstantBuffer = SceneEntityComponentIt.m_DXResConfig.GetConstantBuffer();
-                            ID3D11Buffer* ConstantBuffer = DXConfig.GetConstantBuffer();
-                            m_DX11Device.m_ImmediateContext->UpdateSubresource(ConstantBuffer, 0, nullptr, &cb, 0, 0);
+            //ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.m_VertexShader;
+            //ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.m_PixelShader;
+            //m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+            //m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
+            SceneEntityIt.m_DXResConfig.Execute();
 
-                            //ID3D11Buffer* VertexBuffer = SceneEntityComponentIt.m_DXResConfig.GetVertexBuffer();
-                            ID3D11Buffer* VertexBuffer = DXConfig.GetVertexBuffer();
-                            assert(VertexBuffer != nullptr);
-                            m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
+            m_DX11evice.m_pImmediateContext->VSSetConstantBuffers(0, 1, &CB2);
+            m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
 
-                            //ID3D11Buffer* IndexBuffer = SceneEntityComponentIt.m_DXResConfig.GetIndexBuffer();
-                            //DXGI_FORMAT IndexBufferFormat = SceneEntityComponentIt.m_DXResConfig.GetIndexBufferFormat();
-                            //UINT IndexBufferOffset = SceneEntityComponentIt.m_DXResConfig.GetIndexBufferOffset();
-                            ID3D11Buffer* IndexBuffer = DXConfig.GetIndexBuffer();                        
-                            DXGI_FORMAT IndexBufferFormat = DXConfig.GetIndexBufferFormat();
-                            UINT IndexBufferOffset = DXConfig.GetIndexBufferOffset();
-                            m_DX11Device.m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
+            m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+            //m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
+            m_DX11evice.m_pImmediateContext->DrawIndexed(6, 0, 0);
+        }
+        else if (SceneEntityIt.m_GameEntityTag == "Raycast")
+        {
+            SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
+            ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
+            CB.mWorld = XMMatrixTranspose(CB.mWorld);
+            CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+            CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+            m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-                            //ID3D11InputLayout* InputLayout = SceneEntityComponentIt.m_DXResConfig.GetInputLayout();
-                            ID3D11InputLayout* InputLayout = DXConfig.GetInputLayout();
-                            m_DX11Device.m_ImmediateContext->IASetInputLayout(InputLayout);
+            m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
-                            //ID3D11VertexShader* VertexShader = SceneEntityComponentIt.m_DXResConfig.GetVertexShader();
-                            //ID3D11PixelShader* PixelShader = SceneEntityComponentIt.m_DXResConfig.GetPixelShader();
-                            ID3D11VertexShader* VertexShader = DXConfig.GetVertexShader();
-                            ID3D11PixelShader* PixelShader = DXConfig.GetPixelShader();
+            SceneEntityIt.m_DXResConfig.Execute();
 
-                            m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-                            m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
+            m_DX11evice.m_pImmediateContext->Draw(2, 0);
+        }
+    }
 
-                            m_DX11Device.m_ImmediateContext->VSSetConstantBuffers(0, 1, &ConstantBuffer);
-
-                            //ID3D11DepthStencilState* DepthStencilState = DXConfig.GetDepthStencilState();
-                            //m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(DepthStencilState, 0);
-                            m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState, 0);
-
-                            m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                            m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-                        }
-                    }
-                }
-                 //Render Cube yellow outline
-                else if (SceneEntityIt.m_GameEntityTag != "Linetrace")
-                {
-                    ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-                    cb.mWorld = XMMatrixTranspose(cb.mWorld);
-                    cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-                    cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
-
-                    ID3D11Buffer* CB = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-                    m_DX11Device.m_ImmediateContext->UpdateSubresource(CB, 0, nullptr, &cb, 0, 0);
-
-                    ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.GetVertexBuffer();
-                    assert(VertexBuffer != nullptr);
-
-                    m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride2, &offset);
-
-                    ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.GetIndexBuffer();
-                    DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.GetIndexBufferFormat();
-                    UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.GetIndexBufferOffset();
-                    m_DX11Device.m_ImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
-
-                    ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
-                    m_DX11Device.m_ImmediateContext->IASetInputLayout(InputLayout);
-
-                    ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.GetVertexShader();
-                    ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.GetPixelShader();
-
-                    m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-                    m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
-
-                    m_DX11Device.m_ImmediateContext->VSSetConstantBuffers(0, 1, &CB);
-                    m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDepthStencilStateOutline, 0);
-
-                    m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                    m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-                }
-                else
-                {
-                    ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.GetVertexBuffer();
-                    m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-                    m_DX11Device.m_ImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &stride, &offset);
-
-                    ConstantBuffer cb = SceneEntityIt.GetConstantBuffer();
-                    cb.mWorld = XMMatrixTranspose(cb.mWorld);
-                    cb.mView = XMMatrixTranspose(DX11Device::m_ViewMatrix);
-                    cb.mProjection = XMMatrixTranspose(DX11Device::m_ProjectionMatrix);
-
-                    ID3D11Buffer* ConstantBuffer = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-                    m_DX11Device.m_ImmediateContext->UpdateSubresource(ConstantBuffer, 0, nullptr, &cb, 0, 0);
-
-                    m_DX11Device.m_ImmediateContext->Draw(2, 0);
-                }
-            }
-
-            m_DX11Device.m_SwapChain->Present(0, 0);
-        //}
-    
+    m_DX11evice.m_SwapChain->Present(0, 0);
 }
 
-void Renderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ)
+void CRenderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ)
 {
-    FTimerManager& TimerManager = FTimerManager::GetTimerManager();
-    Scene& SScene = Scene::GetScene();
-    Logger& SLogger = Logger::GetLogger();
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+    CScene& SScene = CScene::GetScene();
+    CLogger& SLogger = CLogger::GetLogger();
 
-    //m_DX11Device.InitLine(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+    m_DX11evice.InitRaycast(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
 
-    SLogger.Log("Renderer.cpp, Raycast() : ",
+    SLogger.Log(
+        "Renderer_.cpp, Raycast() : ",
         "\nOriginX = ", OriginX,
         "\nOriginY = ", OriginY,
         "\nOriginZ = ", OriginZ,
@@ -321,30 +210,20 @@ void Renderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX,
         "\nDestZ = ", DestZ
     );
 
-    m_DX11Device.CheckCollision(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
-
-    //SceneList& TempSceneList = SScene.m_SceneList; 
-
-    //TimerManager.SetTimer<SceneList, void, &SceneList::RemoveLastElement>(TempSceneList, 3.0f);
-    //TimerManager.SetTimer<SceneList, void, &SceneList::BreakpointTest>(SScene.m_SceneList, 3.0f);
-     
-    //TimerManager.SetTimer<DX11Device, void, &DX11Device::RemoveLastElementFromScene>(m_DX11Device, 3.0f); // Working
-
-    //TimerManager.SetTimer<Scene, void, >
-    //TimerManager.SetTimer<Scene, void, &Scene::RemoveLastEntityFromScene>(&Scene::GetScene());
+    //m_DX11Device.CheckCollision(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
 }
 
-void Renderer::AddOutline()
+void CRenderer::AddOutline()
 {
     //m_DX11Device.CheckCollision();
 }
 
-void Renderer::AddGizmo()
+void CRenderer::AddGizmo()
 {
-    m_DX11Device.AddGizmo();
+    m_DX11evice.AddGizmo();
 }
 
-void Renderer::CleanupRenderer()
+void CRenderer::CleanupRenderer()
 {
-    m_DX11Device.CleanupDX11Device();
+    m_DX11evice.CleanupDX11Device();
 }

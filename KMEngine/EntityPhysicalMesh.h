@@ -2,13 +2,13 @@
 
 #include <vector>
 
-struct SimpleVertex
+struct SSimpleVertex
 {
 	XMFLOAT3 Pos;
 	XMFLOAT2 Tex;
 };
 
-struct SimpleColorVertex
+struct SSimpleColorVertex
 {
 	XMFLOAT3 Pos;
 	XMFLOAT4 Col;
@@ -17,28 +17,22 @@ struct SimpleColorVertex
 class TEntityPhysicalMesh
 {
 public:
-
-	~TEntityPhysicalMesh()
-	{
-
-	}
-
-	void SetSimpleVerticesList(std::vector<SimpleVertex> VerticesList)
+	void SetSimpleVerticesList(std::vector<SSimpleVertex> VerticesList)
 	{
 		m_VerticesList = VerticesList;
 	}
 
-	std::vector<SimpleVertex> GetSimpleVerticesList()
+	std::vector<SSimpleVertex> GetSimpleVerticesList()
 	{
 		return m_VerticesList;
 	}
 
-	void SetSimpleColorVerticesList(std::vector<SimpleColorVertex> VerticesList)
+	void SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList)
 	{
 		m_ColorVerticesList = VerticesList;
 	}
 
-	std::vector<SimpleColorVertex> GetSimpleColorVerticesList()
+	std::vector<SSimpleColorVertex> GetSimpleColorVerticesList()
 	{
 		return m_ColorVerticesList;
 	}
@@ -69,9 +63,9 @@ public:
 	}
 
 private:
-	std::vector<SimpleVertex> m_VerticesList;
+	std::vector<SSimpleVertex> m_VerticesList;
 	
-	std::vector<SimpleColorVertex> m_ColorVerticesList;
+	std::vector<SSimpleColorVertex> m_ColorVerticesList;
 
 	std::vector<WORD> m_IndicesList;
 

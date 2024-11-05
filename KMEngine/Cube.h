@@ -4,10 +4,10 @@
 #include "GameEntity3D.h"
 #include <vector>
 
-class GameEntity3D;
-struct ConstantBuffer;
+class CGameEntity3D;
+struct SConstantBuffer;
 
-class Cube : public GameEntity3D
+class Cube : public CGameEntity3D
 {
 public:
 	Cube()

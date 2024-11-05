@@ -22,7 +22,7 @@ public:
 	//CoreWindowsApp() { } 
 
 private:
-	DX11Device m_DX11Device;
+	DX11Device m_pDX11evice;
 
 	LRez EngineLoop()
 	{

@@ -3,19 +3,19 @@
 
 //Scene* Scene::GScene = new Scene;
 
-void SceneList::RemoveLastElement()
+void CSceneList::RemoveLastElement()
 {
-	Logger& Logger_ = Logger::GetLogger();
+	CLogger& Logger = CLogger::GetLogger();
 	m_GameEntityList.pop_back();
 
-	Logger_.Log("Scene.cpp, RemoveLastElement: Pop back on GameEntityList called");
+	Logger.Log("Scene.cpp, RemoveLastElement: Pop back on GameEntityList called");
 }
 
 
 
-void SceneList::TestRemoveLinetrace()
+void CSceneList::TestRemoveLinetrace()
 {
-	Logger& Logger_ = Logger::GetLogger();
+	CLogger& Logger = CLogger::GetLogger();
 
 	for (int It = 0; It < m_GameEntityList.size(); It++)
 	{
@@ -23,113 +23,37 @@ void SceneList::TestRemoveLinetrace()
 		{
 			m_GameEntityList.at(It).m_GameEntityTag = "LinetraceNEW";
 			m_GameEntityList.erase(m_GameEntityList.begin() + It);
-			Logger_.Log("Scene.cpp, TestRemoveLinetrace: Linetrace removed");
+			Logger.Log("Scene.cpp, TestRemoveLinetrace: Linetrace removed");
 		}
 	}
 
-	Logger_.Log("Scene.cpp, TestRemoveLinetrace: TestRemoveLinetrace called");
+	Logger.Log("Scene.cpp, TestRemoveLinetrace: TestRemoveLinetrace called");
 }
 
-void SceneList::BreakpointTest()
+void CSceneList::BreakpointTest()
 {
-	Logger& Logger_ = Logger::GetLogger();
-	Logger_.Log("Scene.cpp, BreakpointTest");
+	CLogger& Logger = CLogger::GetLogger();
+	Logger.Log("Scene.cpp, BreakpointTest");
 }
 
-Scene& Scene::GetScene()
+CScene& CScene::GetScene()
 {
-	static Scene GScene;
-	return GScene;
+	static CScene Scene;
+	return Scene;
 }
 
-void Scene::AddEntityToScene(GameEntity3D Entity)
-{
-	m_GameEntityList.push_back(Entity);
-}
-
-void Scene::AddEntityToScene(int Location, GameEntity3D Entity)
-{
-	auto Loc = m_GameEntityList.begin() + Location - 1;
-	m_GameEntityList.emplace(Loc, Entity);
-}
-
-void Scene::RemoveEntityFromScene(std::string EntityTag)
-{
-	for (int It = 0; It < m_GameEntityList.size(); It++)
-	{
-		if (m_GameEntityList.at(It).m_GameEntityTag == EntityTag)
-		{
-			m_GameEntityList.erase(m_GameEntityList.begin() + It);
-		}
-	}
-}
-
-void Scene::RemoveLastEntityFromScene() 
-{
-
-	m_GameEntityList.pop_back();
-	Logger& Logger_ = Logger::GetLogger();
-	Logger_.Log ( "Scene.cpp, RemoveLastEntityFromScene: Removing ", m_GameEntityList.at(m_GameEntityList.size() - 1).m_GameEntityTag );
-
-}
-
-void Scene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
-{
-	m_GameEntityList.at(Location).SetVertexBuffer(vb);
-}
-
-void Scene::SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
-{
-	m_GameEntityList.at(Location).SetIndexBuffer(ib, Format, Offset);
-}
-
-void Scene::SetInputLayout(int Location, ID3D11InputLayout* InputLayout)
-{
-	m_GameEntityList.at(Location).SetInputLayout(InputLayout);
-}
-
-void Scene::SetVertexShader(int Location, ID3D11VertexShader* VS)
-{
-	m_GameEntityList.at(Location).SetVertexShader(VS);
-}
-
-void Scene::SetPixelShader(int Location, ID3D11PixelShader* PS)
-{
-	m_GameEntityList.at(Location).SetPixelShader(PS);
-}
-
-void Scene::SetConstantBuffer(int Location, ID3D11Buffer* cb)
-{
-	m_GameEntityList.at(Location).SetConstantBuffer(cb);
-}
-
-void Scene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
-{
-	m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
-}
-
-//std::vector<GameEntity3D> Scene::GetSceneList()
-//{
-//	return m_GameEntityList;
-//}
-
-
-
-////////
-
-
-void Scene::AddEntityToScene2(GameEntity3D Entity)
+void CScene::AddEntityToScene(CGameEntity3D Entity)
 {
 	m_SceneList.m_GameEntityList.push_back(Entity);
 }
 
-void Scene::AddEntityToScene2(int Location, GameEntity3D Entity)
+void CScene::AddEntityToScene(int Location, CGameEntity3D Entity)
 {
 	auto Loc = m_SceneList.m_GameEntityList.begin() + Location - 1;
 	m_SceneList.m_GameEntityList.emplace(Loc, Entity);
 }
 
-void Scene::RemoveEntityFromScene2(std::string EntityTag)
+void CScene::RemoveEntityFromScene(std::string EntityTag)
 {
 	for (int It = 0; It < m_SceneList.m_GameEntityList.size(); It++)
 	{
@@ -140,92 +64,112 @@ void Scene::RemoveEntityFromScene2(std::string EntityTag)
 	}
 }
 
-void Scene::RemoveLastEntityFromScene2()
+void CScene::RemoveLastEntityFromScene()
 {
 	int Resize = m_SceneList.m_GameEntityList.size() - 1;
 	m_SceneList.m_GameEntityList.pop_back();
-	Logger& Logger_ = Logger::GetLogger();
-	Logger_.Log("Scene.cpp, RemoveLastEntityFromScene2()\n");
+	CLogger& Logger = CLogger::GetLogger();
+	Logger.Log("Scene.cpp, RemoveLastEntityFromScene2()\n");
 }
 
-void Scene::SetVertexbuffer2(int Location, ID3D11Buffer* vb)
+void CScene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetVertexBuffer(vb);
 }
 
-void Scene::SetIndexbuffer2(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+void CScene::SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetIndexBuffer(ib, Format, Offset);
 }
 
-void Scene::SetInputLayout2(int Location, ID3D11InputLayout* InputLayout)
+void CScene::SetInputLayout(int Location, ID3D11InputLayout* InputLayout)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetInputLayout(InputLayout);
 }
 
-void Scene::SetVertexShader2(int Location, ID3D11VertexShader* VS)
+void CScene::SetVertexShader(int Location, ID3D11VertexShader* VS)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetVertexShader(VS);
 }
 
-void Scene::SetPixelShader2(int Location, ID3D11PixelShader* PS)
+void CScene::SetPixelShader(int Location, ID3D11PixelShader* PS)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetPixelShader(PS);
 }
 
-void Scene::SetConstantBuffer2(int Location, ID3D11Buffer* cb)
+void CScene::SetConstantBuffer(int Location, ID3D11Buffer* cb)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetConstantBuffer(cb);
 }
 
-void Scene::SetCollisionParams2(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
+void CScene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
 }
 
-std::vector<GameEntity3D> Scene::GetSceneList()
+std::vector<CGameEntity3D> CScene::GetSceneList()
 {
 	return m_SceneList.m_GameEntityList;
 }
 
 ////// Setting GameEntity3DComponent objects in Scene
 
-void Scene::SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb)
+void CScene::SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetConstantBuffer(cb);
 }
 
-void Scene::SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS)
+void CScene::SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexShader(VS);
 }
 
-void Scene::SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS)
+void CScene::SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetPixelShader(PS);
 }
 
-void Scene::SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout)
+void CScene::SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetInputLayout(InputLayout);
 }
 
-void Scene::SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb)
+void CScene::SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexBuffer(vb);
 }
 
-void Scene::SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
+void CScene::SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
 {
 	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetIndexBuffer(ib, Format, Offset);
 }
 
-void Scene::InsertDXResourceConfig(int Key, DXResourcesConfig Config)
+void CScene::InsertDXResourceConfig(int Key, CDXResourcesConfig Config)
 {
 	DXResourceConfigMap.emplace(std::make_pair(Key, Config));
 }
 
-DXResourcesConfig Scene::GetDXResourceConfig(int Key)
+CDXResourcesConfig CScene::GetDXResourceConfig(int Key)
 {
 	return DXResourceConfigMap.at(Key);
+}
+
+void CScene::SetOwnVertexShader(ID3D11VertexShader* VertexShader)
+{
+	m_VertexShader = VertexShader;
+}
+
+ID3D11VertexShader* CScene::GetOwnVertexShader()
+{
+	return m_VertexShader;
+}
+
+void CScene::SetOwnPixelShader(ID3D11PixelShader* PixelShader)
+{
+	m_PixelShader = PixelShader;
+}
+
+ID3D11PixelShader* CScene::GetOwnPixelShader()
+{
+	return m_PixelShader;
 }

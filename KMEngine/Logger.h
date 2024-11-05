@@ -5,13 +5,13 @@
 
 using namespace std;
 
-class Logger
+class CLogger
 {
 private:
-	Logger();
+	CLogger();
 
 public:
-	static Logger& GetLogger();
+	static CLogger& GetLogger();
 
 	void Log();
 

@@ -2,7 +2,7 @@
 
 #include "DXStructuresInitializer.h"
 
-void DXStructuresInitializer::CreateDriverType()
+void CDXStructuresInitializer::CreateDriverType()
 {
     UINT createDeviceFlags = 0;
 #ifdef _DEBUG
@@ -29,25 +29,25 @@ void DXStructuresInitializer::CreateDriverType()
     for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++)
     {
         m_DriverType = driverTypes[driverTypeIndex];
-        m_hr = D3D11CreateDevice(nullptr, m_DriverType, nullptr, createDeviceFlags, featureLevels, numFeatureLevels,
-            D3D11_SDK_VERSION, &m_D3DDevice, &m_FeatureLevel, &m_ImmediateContext);
+        m_HR = D3D11CreateDevice(nullptr, m_DriverType, nullptr, createDeviceFlags, featureLevels, numFeatureLevels,
+            D3D11_SDK_VERSION, &m_D3DDevice, &m_FeatureLevel, &m_pImmediateContext);
 
-        if (m_hr == E_INVALIDARG)
+        if (m_HR == E_INVALIDARG)
         {
             // DirectX 11.0 platforms will not recognize D3D_FEATURE_LEVEL_11_1 so we need to retry without it
-            m_hr = D3D11CreateDevice(nullptr, m_DriverType, nullptr, createDeviceFlags, &featureLevels[1], numFeatureLevels - 1,
-                D3D11_SDK_VERSION, &m_D3DDevice, &m_FeatureLevel, &m_ImmediateContext);
+            m_HR = D3D11CreateDevice(nullptr, m_DriverType, nullptr, createDeviceFlags, &featureLevels[1], numFeatureLevels - 1,
+                D3D11_SDK_VERSION, &m_D3DDevice, &m_FeatureLevel, &m_pImmediateContext);
         }
 
-        if (SUCCEEDED(m_hr))
+        if (SUCCEEDED(m_HR))
             break;
     }
 
-    if (FAILED(m_hr))
+    if (FAILED(m_HR))
         return;
 }
 
-void DXStructuresInitializer::SetSwapChainDesc1(int Width, int Height)
+void CDXStructuresInitializer::SetSwapChainDesc1(int Width, int Height)
 {
     m_SwapChainDesc1.Width = Width;
     m_SwapChainDesc1.Height = Height;
@@ -58,12 +58,12 @@ void DXStructuresInitializer::SetSwapChainDesc1(int Width, int Height)
     m_SwapChainDesc1.BufferCount = 1;
 }
 
-DXGI_SWAP_CHAIN_DESC1 DXStructuresInitializer::GetSwapChainDesc1()
+DXGI_SWAP_CHAIN_DESC1 CDXStructuresInitializer::GetSwapChainDesc1()
 {
     return m_SwapChainDesc1;
 }
 
-void DXStructuresInitializer::SetSwapChainDesc(int Width, int Height, HWND OutputHWnd)
+void CDXStructuresInitializer::SetSwapChainDesc(int Width, int Height, HWND OutputHWnd)
 {
     m_SwapChainDesc.BufferCount = 1;
     m_SwapChainDesc.BufferDesc.Width = Width;
@@ -78,29 +78,29 @@ void DXStructuresInitializer::SetSwapChainDesc(int Width, int Height, HWND Outpu
     m_SwapChainDesc.Windowed = TRUE;
 }
 
-DXGI_SWAP_CHAIN_DESC DXStructuresInitializer::GetSwapChainDesc()
+DXGI_SWAP_CHAIN_DESC CDXStructuresInitializer::GetSwapChainDesc()
 {
     return m_SwapChainDesc;
 }
 
-void DXStructuresInitializer::SetBufferDesc()
+void CDXStructuresInitializer::SetBufferDesc()
 {
     m_BufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    m_BufferDesc.ByteWidth = sizeof(SimpleVertex) * 24;
+    m_BufferDesc.ByteWidth = sizeof(SSimpleVertex) * 24;
     m_BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     m_BufferDesc.CPUAccessFlags = 0;
 }
 
-D3D11_BUFFER_DESC DXStructuresInitializer::GetBufferDesc()
+D3D11_BUFFER_DESC CDXStructuresInitializer::GetBufferDesc()
 {
     return m_BufferDesc;
 }
 
 
-void DXStructuresInitializer::SetSubresourceData(std::vector<GameEntity3D> GameEntityList)
+void CDXStructuresInitializer::SetSubresourceData(std::vector<CGameEntity3D> GameEntityList)
 {
     int GameEntityListSize = GameEntityList.size();
-    std::vector<SimpleVertex> TotalVerticesVector;
+    std::vector<SSimpleVertex> TotalVerticesVector;
 
     for (int i = 0; i < GameEntityListSize; i++)
     {
@@ -114,7 +114,7 @@ void DXStructuresInitializer::SetSubresourceData(std::vector<GameEntity3D> GameE
 
     int TotalVerticesVectorSize = TotalVerticesVector.size();
 
-    SimpleVertex* VerticesArray = new SimpleVertex[TotalVerticesVectorSize];
+    SSimpleVertex* VerticesArray = new SSimpleVertex[TotalVerticesVectorSize];
 
     for (int i = 0; i < TotalVerticesVectorSize; i++)
     {
@@ -124,12 +124,12 @@ void DXStructuresInitializer::SetSubresourceData(std::vector<GameEntity3D> GameE
     m_SubresourceData.pSysMem = VerticesArray;
 }
 
-D3D11_SUBRESOURCE_DATA DXStructuresInitializer::GetSubresourceData()
+D3D11_SUBRESOURCE_DATA CDXStructuresInitializer::GetSubresourceData()
 {
     return m_SubresourceData;
 }
 
-void DXStructuresInitializer::SetSamplerDesc()
+void CDXStructuresInitializer::SetSamplerDesc()
 {
     ZeroMemory(&m_SamplerDesc, sizeof(m_SamplerDesc));
     m_SamplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -141,12 +141,12 @@ void DXStructuresInitializer::SetSamplerDesc()
     m_SamplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 }
 
-D3D11_SAMPLER_DESC DXStructuresInitializer::GetSamplerDesc()
+D3D11_SAMPLER_DESC CDXStructuresInitializer::GetSamplerDesc()
 {
     return m_SamplerDesc;
 }
 
-void DXStructuresInitializer::SetDepthStencilDesc()
+void CDXStructuresInitializer::SetDepthStencilDesc()
 {
     m_DepthStencilDesc.DepthEnable = TRUE;
     m_DepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -156,12 +156,12 @@ void DXStructuresInitializer::SetDepthStencilDesc()
     m_DepthStencilDesc.StencilWriteMask = 0xFF;
 }
 
-D3D11_DEPTH_STENCIL_DESC DXStructuresInitializer::GetDepthStencilDesc()
+D3D11_DEPTH_STENCIL_DESC CDXStructuresInitializer::GetDepthStencilDesc()
 {
     return m_DepthStencilDesc;
 }
 
-void DXStructuresInitializer::SetTexture2DDesc(int Width, int Height)
+void CDXStructuresInitializer::SetTexture2DDesc(int Width, int Height)
 {
     m_Texture2DDesc.Width = Width;
     m_Texture2DDesc.Height = Height;
@@ -176,24 +176,24 @@ void DXStructuresInitializer::SetTexture2DDesc(int Width, int Height)
     m_Texture2DDesc.MiscFlags = 0;
 }
 
-D3D11_TEXTURE2D_DESC DXStructuresInitializer::GetTexture2DDesc()
+D3D11_TEXTURE2D_DESC CDXStructuresInitializer::GetTexture2DDesc()
 {
     return m_Texture2DDesc;
 }
 
-void DXStructuresInitializer::SetDepthStencilViewDesc(D3D11_TEXTURE2D_DESC Texture2DDesc)
+void CDXStructuresInitializer::SetDepthStencilViewDesc(D3D11_TEXTURE2D_DESC Texture2DDesc)
 {
     m_DepthStencilViewDesc.Format = Texture2DDesc.Format;
     m_DepthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
     m_DepthStencilViewDesc.Texture2D.MipSlice = 0;
 }
 
-D3D11_DEPTH_STENCIL_VIEW_DESC DXStructuresInitializer::GetDepthStencilViewDesc()
+D3D11_DEPTH_STENCIL_VIEW_DESC CDXStructuresInitializer::GetDepthStencilViewDesc()
 {
     return m_DepthStencilViewDesc;
 }
 
-void DXStructuresInitializer::SetViewPort(int Width, int Height)
+void CDXStructuresInitializer::SetViewPort(int Width, int Height)
 {
     m_ViewPort.Width = (FLOAT)Width;
     m_ViewPort.Height = (FLOAT)Height;
@@ -203,7 +203,7 @@ void DXStructuresInitializer::SetViewPort(int Width, int Height)
     m_ViewPort.MaxDepth = 1.0f;
 }
 
-D3D11_VIEWPORT DXStructuresInitializer::GetViewPort()
+D3D11_VIEWPORT CDXStructuresInitializer::GetViewPort()
 {
     return m_ViewPort;
 }

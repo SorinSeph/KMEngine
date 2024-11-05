@@ -1,6 +1,6 @@
 #include "PerlinNoise.h"
 
-PerlinNoise::PerlinNoise()
+CPerlinNoise::CPerlinNoise()
 {
 	Permutation = {
 	151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,
@@ -19,7 +19,7 @@ PerlinNoise::PerlinNoise()
 	Permutation.insert(Permutation.end(), Permutation.begin(), Permutation.end());
 }
 
-double PerlinNoise::Noise(double x, double y, double z)
+double CPerlinNoise::Noise(double x, double y, double z)
 {
 	// Find the unit cube that contains the point
 	int X = (int)floor(x) & 255;
@@ -50,15 +50,15 @@ double PerlinNoise::Noise(double x, double y, double z)
 }
 
 
-double PerlinNoise::Fade(double t) {
+double CPerlinNoise::Fade(double t) {
 	return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-double PerlinNoise::Lerp(double t, double a, double b) {
+double CPerlinNoise::Lerp(double t, double a, double b) {
 	return a + t * (b - a);
 }
 
-double PerlinNoise::Gradient(int hash, double x, double y, double z) {
+double CPerlinNoise::Gradient(int hash, double x, double y, double z) {
 	int h = hash & 15;
 	// Convert lower 4 bits of hash into 12 gradient directions
 	double u = h < 8 ? x : y,

@@ -1,78 +1,78 @@
 #include "PrimitiveGeometryFactory.h"
 #include "EntityPhysicalMesh.h"
 
-int PrimitiveGeometryFactory::m_Entity3D_UID = 1;
+int CPrimitiveGeometryFactory::m_Entity3D_UID = 1;
 
-void PrimitiveGeometryFactory::SetUID(GameEntity3D& Entity3D)
+void CPrimitiveGeometryFactory::SetUID(CGameEntity3D& Entity3D)
 {
     std::string UID{ };
 
-    if (PrimitiveGeometryFactory::m_Entity3D_UID <= 10)
+    if (CPrimitiveGeometryFactory::m_Entity3D_UID <= 10)
     {
         std::string uid = "e3d00000";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    else if (PrimitiveGeometryFactory::m_Entity3D_UID / 10 != 0)
+    else if (CPrimitiveGeometryFactory::m_Entity3D_UID / 10 != 0)
     {
         std::string uid = "dxr0000";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    else if (PrimitiveGeometryFactory::m_Entity3D_UID / 100 != 0)
+    else if (CPrimitiveGeometryFactory::m_Entity3D_UID / 100 != 0)
     {
         std::string uid = "e3d000";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    else if (PrimitiveGeometryFactory::m_Entity3D_UID / 1000 != 0)
+    else if (CPrimitiveGeometryFactory::m_Entity3D_UID / 1000 != 0)
     {
         std::string uid = "e3d00";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    else if (PrimitiveGeometryFactory::m_Entity3D_UID / 10000 != 0)
+    else if (CPrimitiveGeometryFactory::m_Entity3D_UID / 10000 != 0)
     {
         std::string uid = "e3d0";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    else if (PrimitiveGeometryFactory::m_Entity3D_UID / 100000 != 0)
+    else if (CPrimitiveGeometryFactory::m_Entity3D_UID / 100000 != 0)
     {
         std::string uid = "e3d";
-        std::string counter = std::to_string(PrimitiveGeometryFactory::m_Entity3D_UID);
+        std::string counter = std::to_string(CPrimitiveGeometryFactory::m_Entity3D_UID);
 
         UID = uid + counter;
         Entity3D.SetUID(UID);
     }
-    PrimitiveGeometryFactory::m_Entity3D_UID++;
+    CPrimitiveGeometryFactory::m_Entity3D_UID++;
 }
 
-void PrimitiveGeometryFactory::SetUIDTest(GameEntity3D& Entity3D)
+void CPrimitiveGeometryFactory::SetUIDTest(CGameEntity3D& Entity3D)
 {
-    Entity3D.SetUIDTest(PrimitiveGeometryFactory::m_Entity3D_UID);
-    PrimitiveGeometryFactory::m_Entity3D_UID++;
+    Entity3D.SetUIDTest(CPrimitiveGeometryFactory::m_Entity3D_UID);
+    CPrimitiveGeometryFactory::m_Entity3D_UID++;
 }
 
-GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type)
+CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType Type)
 {
-    GameEntity3D Entity;
+    CGameEntity3D Entity;
 
     switch (Type)
     {
-        case PrimitiveGeometryType::Plane:
+        case EPrimitiveGeometryType::Plane:
         {
-            std::vector<SimpleVertex> VerticesList = {
+            std::vector<SSimpleVertex> VerticesList = {
                 { XMFLOAT3(-5.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
                 { XMFLOAT3(5.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
                 { XMFLOAT3(5.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
@@ -104,9 +104,9 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             return Entity;
             break;
         }
-        case PrimitiveGeometryType::PlaneColored:
+        case EPrimitiveGeometryType::PlaneColored:
         {
-            std::vector<SimpleColorVertex> VerticesList = {
+            std::vector<SSimpleColorVertex> VerticesList = {
                 { XMFLOAT3(-5.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
                 { XMFLOAT3(5.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
                 { XMFLOAT3(5.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
@@ -117,9 +117,9 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             return Entity;
             break;
         }
-        case PrimitiveGeometryType::Cube:
+        case EPrimitiveGeometryType::Cube:
         {
-            std::vector<SimpleVertex> VerticesList = {
+            std::vector<SSimpleVertex> VerticesList = {
                 { XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT2(1.0f, 0.0f) },
                 { XMFLOAT3(0.5f, 0.5f, -0.5f), XMFLOAT2(0.0f, 0.0f) },
                 { XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT2(0.0f, 1.0f) },
@@ -159,9 +159,9 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             return Entity;
             break;
         }
-        case PrimitiveGeometryType::Pyramid:
+        case EPrimitiveGeometryType::Pyramid:
         {
-            std::vector<SimpleVertex> VerticesList = {
+            std::vector<SSimpleVertex> VerticesList = {
                 // Base
                 { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
                 { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
@@ -193,9 +193,9 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             return Entity;
             break;
         }
-        case PrimitiveGeometryType::CubeTest:
+        case EPrimitiveGeometryType::CubeTest:
         {
-            std::vector<SimpleColorVertex> VerticesList = {
+            std::vector<SSimpleColorVertex> VerticesList = {
                 { XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
                 { XMFLOAT3(0.5f, 0.5f, -0.5f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
                 { XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
@@ -265,9 +265,9 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             return Entity;
             break;
         }
-        case PrimitiveGeometryType::Arrow:
+        case EPrimitiveGeometryType::Arrow:
         {
-            std::vector<SimpleColorVertex> VerticesList = {
+            std::vector<SSimpleColorVertex> VerticesList = {
                 { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
                 //{ XMFLOAT3(cosf(XMConvertToRadians(0)), 0.0f, sinf(XMConvertToRadians(0))), XMFLOAT2(1.0f, 1.0f) },
                 //{ XMFLOAT3(cosf(XMConvertToRadians(22.5)), 0.0f, sinf(XMConvertToRadians(22.5))), XMFLOAT2(1.0f, 1.0f) },
@@ -421,14 +421,14 @@ GameEntity3D PrimitiveGeometryFactory::CreateEntity3D(PrimitiveGeometryType Type
             Entity.m_PhysicalMeshVector.push_back(ArrowPhysicalMesh);
             Entity.m_PhysicalMeshVector.at(0).SetSimpleColorVerticesList(VerticesList);
             Entity.m_PhysicalMeshVector.at(0).SetIndicesList(ArrowIndices);
-            Entity.m_PhysicalMeshVector.at(0).SetStride(sizeof(SimpleColorVertex));
+            Entity.m_PhysicalMeshVector.at(0).SetStride(sizeof(SSimpleColorVertex));
             return Entity;
             break;
         }
     }
 }
 
-std::vector<WORD> PrimitiveGeometryFactory::GetIndicesList()
+std::vector<WORD> CPrimitiveGeometryFactory::GetIndicesList()
 {
     std::vector<WORD> IndicesVector {
                 3,1,0,
@@ -453,15 +453,15 @@ std::vector<WORD> PrimitiveGeometryFactory::GetIndicesList()
     return IndicesVector;
 }
 
-GameEntity3DComponent PrimitiveGeometryFactory::CreateEntity3DComponent(PrimitiveGeometryType Type)
+CGameEntity3DComponent CPrimitiveGeometryFactory::CreateEntity3DComponent(EPrimitiveGeometryType Type)
 {
-    GameEntity3DComponent EntityComponent;
+    CGameEntity3DComponent EntityComponent;
 
     switch (Type)
     {
-        case PrimitiveGeometryType::Cube:
+        case EPrimitiveGeometryType::Cube:
         {
-            std::vector<SimpleVertex> VerticesList = {
+            std::vector<SSimpleVertex> VerticesList = {
                 { XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT2(1.0f, 0.0f) },
                 { XMFLOAT3(0.5f, 0.5f, -0.5f), XMFLOAT2(0.0f, 0.0f) },
                 { XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT2(0.0f, 1.0f) },
@@ -502,11 +502,11 @@ GameEntity3DComponent PrimitiveGeometryFactory::CreateEntity3DComponent(Primitiv
     }
 }
 
-GameEntity3D PrimitiveGeometryFactory::CreateLinetrace(float X_Origin, float Y_Origin, float Z_Origin, float X_Destination, float Y_Destination, float Z_Destination)
+CGameEntity3D CPrimitiveGeometryFactory::CreateLinetrace(float X_Origin, float Y_Origin, float Z_Origin, float X_Destination, float Y_Destination, float Z_Destination)
 {
-    GameEntity3D LineEntity;
+    CGameEntity3D LineEntity;
 
-    std::vector<SimpleColorVertex> VerticesList = {
+    std::vector<SSimpleColorVertex> VerticesList = {
         { XMFLOAT3(X_Origin, Y_Origin, Z_Origin), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
         { XMFLOAT3(X_Destination, Y_Destination, Z_Destination), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
     };

@@ -5,12 +5,13 @@
 
 using namespace DirectX;
 
-class GameEntity
+class CGameEntity
 {
 public:
-	GameEntity()
+	CGameEntity()
 		: m_GameEntityTag{ }
 	{}
 
 	std::string m_GameEntityTag;
 };
+

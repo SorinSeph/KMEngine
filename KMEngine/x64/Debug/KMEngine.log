@@ -1,3 +1,5 @@
 ﻿  Renderer.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp(53,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp(51,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
