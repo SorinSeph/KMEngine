@@ -46,7 +46,7 @@ public:
 
 	CDXResourcesConfig GetDXResourceConfig(int Key);
 
-	void AddEntityToScene(CGameEntity3D Entity);
+	void AddEntityToScene(CGameEntity3D& Entity);
 
 	void AddEntityToScene(int Location, CGameEntity3D Entity);
 
@@ -70,7 +70,7 @@ public:
 
 	CSceneList m_SceneList;
 
-	std::vector<CGameEntity3D> GetSceneList();
+	std::vector<CGameEntity3D>& GetSceneList();
 
 	// Methods for entity components
 

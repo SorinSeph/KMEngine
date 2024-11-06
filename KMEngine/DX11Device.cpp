@@ -5075,7 +5075,7 @@ void CDX11Device::InterpMoveCube()
         //CScene& Scene = CScene::
 
     CScene& Scene = CScene::GetScene();
-    for (auto SceneIt : Scene.GetSceneList())
+    for (auto& SceneIt : Scene.GetSceneList())
     {
 		if (SceneIt.m_GameEntityTag == "TexturedCube")
 		{
