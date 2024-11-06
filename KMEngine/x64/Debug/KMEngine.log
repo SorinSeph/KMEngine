@@ -1,5 +1,31 @@
-﻿  Renderer.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp(51,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  DX11Device.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(63,10): warning C4101: 'rc': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(431,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1898,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2199,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2465,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2742,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2974,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3198,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3323,62): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3323,47): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3323,29): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3272,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3447,62): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3447,47): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3447,29): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3367,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3648,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3649,28): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3649,28): warning C4056: overflow in floating-point constant arithmetic
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3650,30): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3650,30): warning C4056: overflow in floating-point constant arithmetic
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3716,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(3825,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(4030,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(4378,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(4379,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(5401,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

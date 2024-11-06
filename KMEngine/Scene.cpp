@@ -42,7 +42,7 @@ CScene& CScene::GetScene()
 	return Scene;
 }
 
-void CScene::AddEntityToScene(CGameEntity3D Entity)
+void CScene::AddEntityToScene(CGameEntity3D& Entity)
 {
 	m_SceneList.m_GameEntityList.push_back(Entity);
 }
@@ -107,7 +107,7 @@ void CScene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents,
 	m_SceneList.m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
 }
 
-std::vector<CGameEntity3D> CScene::GetSceneList()
+std::vector<CGameEntity3D>& CScene::GetSceneList()
 {
 	return m_SceneList.m_GameEntityList;
 }

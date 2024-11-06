@@ -96,7 +96,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
     Logger.Log();
 
-    for (auto SceneEntityIt : SceneEntityList)
+    for (auto& SceneEntityIt : SceneEntityList)
     {
         if (SceneEntityIt.m_GameEntityTag == "TexturedCube")
         {
