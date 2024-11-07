@@ -54,39 +54,11 @@ public:
 
 	void RemoveEntityFromScene(std::string EntityTag);
 
-	void SetConstantBuffer(int Location, ID3D11Buffer* cb);
-
-	void SetVertexbuffer(int Location, ID3D11Buffer* vb);
-
-	void SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
-
-	void SetInputLayout(int Location, ID3D11InputLayout* InputLayout);
-
-	void SetVertexShader(int Location, ID3D11VertexShader* VS);
-
-	void SetPixelShader(int Location, ID3D11PixelShader* PS);
-
 	void SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 
 	CSceneList m_SceneList;
 
 	std::vector<CGameEntity3D>& GetSceneList();
-
-	// Methods for entity components
-
-	void SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb);
-
-	void SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS);
-
-	void SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS);
-
-	void SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout);
-
-	void SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb);
-
-	void SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
-
-	// Temp fix, to delete
 
 	void SetOwnVertexShader(ID3D11VertexShader* VertexShader);
 

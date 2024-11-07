@@ -153,7 +153,7 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType T
                 { XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT2(1.0f, 0.0f) },
             };
 
-            Entity.SetVerticesList(VerticesList);
+            //Entity.SetVerticesList(VerticesList);
             SetUID(Entity);
             SetUIDTest(Entity);
             return Entity;
@@ -189,7 +189,7 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType T
                 { XMFLOAT3(-1.0f, 0.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
             };
 
-            Entity.SetVerticesList(VerticesList);
+            //Entity.SetVerticesList(VerticesList);
             return Entity;
             break;
         }
@@ -495,7 +495,7 @@ CGameEntity3DComponent CPrimitiveGeometryFactory::CreateEntity3DComponent(EPrimi
                 { XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT2(1.0f, 0.0f) },
             };
 
-            EntityComponent.SetVerticesList(VerticesList);
+            //EntityComponent.SetVerticesList(VerticesList);
             return EntityComponent;
             break;
         }

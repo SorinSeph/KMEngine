@@ -72,24 +72,6 @@ public:
 
 	XMMATRIX TransformationMatrix();
 
-	void SetVertexBuffer(ID3D11Buffer* vb);
-
-	void SetOwnVertexBuffer(ID3D11Buffer* InVertexBuffer);
-
-	void SetIndexBuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset);
-
-	void SetIndexOwnBuffer(ID3D11Buffer* InIndexBuffer, DXGI_FORMAT Format, int Offset);
-
-	void SetVerticesList(std::vector<SSimpleVertex> VerticesList);
-
-	void SetInputLayout(ID3D11InputLayout* InputLayout);
-
-	void SetVertexShader(ID3D11VertexShader* VS);
-
-	void SetPixelShader(ID3D11PixelShader* VS);
-
-	void SetConstantBuffer(ID3D11Buffer* cb);
-
 	void SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList);
 
 	/**
@@ -131,10 +113,6 @@ public:
 	void SetRotation(float InPitch, float InYaw, float InRoll);
 
 	void SetScale(float InX, float InY, float InZ);
-
-	ID3D11Buffer* GetOwnVertexBuffer();
-
-	ID3D11Buffer* GetOwnIndexBuffer();
 
 	DXGI_FORMAT GetOwnFormat();
 
