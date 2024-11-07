@@ -5,53 +5,10 @@ XMMATRIX CGameEntity3D::TransformationMatrix()
 	return m_ScaleMatrix * m_RotationMatrix * m_LocationMatrix;
 }
 
-void CGameEntity3D::SetVerticesList(std::vector<SSimpleVertex> VerticesList)
-{
-	m_VerticesList = VerticesList;
-}
 
 void CGameEntity3D::SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList)
 {
 	m_SimpleColorVerticesList = VerticesList;
-}
-
-/**
-* Sets a vertex list
-*/
-
-void CGameEntity3D::SetColorVerticesList(std::vector<SColorVertex> VerticesList)
-{
-	m_ColorVerticesList = VerticesList;
-}
-
-void CGameEntity3D::SetVertexBuffer(ID3D11Buffer* vb)
-{
-	m_DXResConfig.SetVertexBuffer(vb);
-}
-
-void CGameEntity3D::SetIndexBuffer(ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
-{
-	m_DXResConfig.SetIndexBuffer(ib, Format, Offset);
-}
-
-void CGameEntity3D::SetInputLayout(ID3D11InputLayout* InputLayout)
-{
-	m_DXResConfig.SetInputLayout(InputLayout);
-}
-
-void CGameEntity3D::SetVertexShader(ID3D11VertexShader* VS)
-{
-	m_DXResConfig.SetVertexShader(VS);
-}
-
-void CGameEntity3D::SetPixelShader(ID3D11PixelShader* PS)
-{
-	m_DXResConfig.SetPixelShader(PS);
-}
-
-void CGameEntity3D::SetConstantBuffer(ID3D11Buffer* cb)
-{
-	m_DXResConfig.SetConstantBuffer(cb);
 }
 
 std::vector<SSimpleVertex> CGameEntity3D::GetVerticesList()
@@ -194,28 +151,6 @@ void CGameEntity3D::SetCollisionParams(XMFLOAT3 Center, XMFLOAT3 Extents, Contai
 	m_Collision.AABox.Center = Center;
 	m_Collision.AABox.Extents = Extents;
 	m_Collision.CollisionType = CollisionType;
-}
-
-void CGameEntity3D::SetOwnVertexBuffer(ID3D11Buffer* InVertexBuffer)
-{
-	m_VertexBuffer = InVertexBuffer;
-}
-
-void CGameEntity3D::SetIndexOwnBuffer(ID3D11Buffer* InIndexBuffer, DXGI_FORMAT InFormat, int InOffset)
-{
-	m_IndexBuffer = InIndexBuffer;
-	m_Format = InFormat;
-	m_Offset = InOffset;
-}
-
-ID3D11Buffer* CGameEntity3D::GetOwnVertexBuffer()
-{
-	return m_VertexBuffer;
-}
-
-ID3D11Buffer* CGameEntity3D::GetOwnIndexBuffer()
-{
-	return m_IndexBuffer;
 }
 
 DXGI_FORMAT CGameEntity3D::GetOwnFormat()

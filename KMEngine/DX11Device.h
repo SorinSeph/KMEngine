@@ -81,35 +81,25 @@ public:
 	void InitDisabledDepthStencil();
 	//void InitOutlineDepthStencil();
 	void InitViewportFinal();
-
-	/**
-	* Initializes a plain, textured cube
-	*/
-	void InitCube();
-
-	void InitCubeComponents();
-
-	void InitSingleCubeComponent();
+	void CleanupDX11Device();
 
 	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
-	* Initializes a yellow cube, with outline stencil state
+	* Functional but WIP function with initializing a textured cube, to check texture coordinates
 	*/
+
+	HRESULT InitTexturedCube();
+
+	/**
+	* Outline tests
+	*/
+
 	void InitCubeOutline();
 
 	void InitCubeOutline2();
 
 	void InitSingleCubeOutline();
-
-	/**
-	* Initializes a red arrow object, with fixed value scaling
-	*/
-	void InitArrow();
-
-	void AddLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
-	void InitLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
-	//void CleanupDX11Device();
 
 	/**
 	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
@@ -121,31 +111,9 @@ public:
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
-	HRESULT GenerateTerrain();
-
-	HRESULT AddLight();
-
 	void AddOutline();
 
 	void AddGizmo();
-
-	void AddTestLine();
-
-	void AddTestLine2();
-
-	HRESULT AddTestLine3();
-
-	// Testing vector normalizing, because the DirectXCollision assert for IsUnitVector fails
-	void TestVector();
-
-	void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
-	void CleanupDX11Device();
-	//void Render2();
-
-	// Testing a timer function for removing a linetrace
-	void RemoveLineTraceTimer();
-
-	void RemoveLastElementFromScene();
 
 	UINT GetViewportWidth();
 
@@ -293,45 +261,6 @@ private:
 	float m_EyeX{ };
 	float m_EyeY{ };
 	float m_EyeZ{ };
-
-	/**
-	* Base variables and functions for a minimum necessary to render a colored cube
-	*/
-
-public:
-
-	/**
-	* Initializes the bare minimum for a colored cube
-	*/
-
-	HRESULT InitBaseCube();
-
-	HRESULT InitTexturedCube();
-
-	HRESULT InitTexturedCube2();
-
-	void RenderFinal(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
-
-	//	HINSTANCE               g_hInst = nullptr;
-	//	HWND                    g_hWnd = nullptr;
-	//	D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
-	//	D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-	//	ID3D11Device*			g_pd3dDevice = nullptr;
-	//	ID3D11Device1*			g_pd3dDevice1 = nullptr;
-	//	ID3D11DeviceContext*	g_pImmediateContext = nullptr;
-	//	ID3D11DeviceContext1*	g_pImmediateContext1 = nullptr;
-	//	IDXGISwapChain*			g_pSwapChain = nullptr;
-	//	IDXGISwapChain1*		g_pSwapChain1 = nullptr;
-	//	ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
-	//	ID3D11VertexShader*		g_pVertexShader = nullptr;
-	//	ID3D11PixelShader*		g_pPixelShader = nullptr;
-	//	ID3D11InputLayout*		g_pVertexLayout = nullptr;
-	//	ID3D11Buffer*			g_pVertexBuffer = nullptr;
-	//	ID3D11Buffer*			g_pIndexBuffer = nullptr;
-	//	ID3D11Buffer*			g_pConstantBuffer = nullptr;
-	//	XMMATRIX                g_World;
-	//	XMMATRIX                g_View;
-	//	XMMATRIX                g_Projection;
 };
 
 #endif

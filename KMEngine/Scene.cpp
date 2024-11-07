@@ -72,36 +72,6 @@ void CScene::RemoveLastEntityFromScene()
 	Logger.Log("Scene.cpp, RemoveLastEntityFromScene2()\n");
 }
 
-void CScene::SetVertexbuffer(int Location, ID3D11Buffer* vb)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetVertexBuffer(vb);
-}
-
-void CScene::SetIndexbuffer(int Location, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetIndexBuffer(ib, Format, Offset);
-}
-
-void CScene::SetInputLayout(int Location, ID3D11InputLayout* InputLayout)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetInputLayout(InputLayout);
-}
-
-void CScene::SetVertexShader(int Location, ID3D11VertexShader* VS)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetVertexShader(VS);
-}
-
-void CScene::SetPixelShader(int Location, ID3D11PixelShader* PS)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetPixelShader(PS);
-}
-
-void CScene::SetConstantBuffer(int Location, ID3D11Buffer* cb)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetConstantBuffer(cb);
-}
-
 void CScene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
 {
 	m_SceneList.m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
@@ -114,35 +84,6 @@ std::vector<CGameEntity3D>& CScene::GetSceneList()
 
 ////// Setting GameEntity3DComponent objects in Scene
 
-void CScene::SetComponentConstantBuffer(int Location, int ComponentLocation, ID3D11Buffer* cb)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetConstantBuffer(cb);
-}
-
-void CScene::SetComponentVertexShader(int Location, int ComponentLocation, ID3D11VertexShader* VS)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexShader(VS);
-}
-
-void CScene::SetComponentPixelShader(int Location, int ComponentLocation, ID3D11PixelShader* PS)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetPixelShader(PS);
-}
-
-void CScene::SetComponentInputLayout(int Location, int ComponentLocation, ID3D11InputLayout* InputLayout)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetInputLayout(InputLayout);
-}
-
-void CScene::SetComponentVertexbuffer(int Location, int ComponentLocation, ID3D11Buffer* vb)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetVertexBuffer(vb);
-}
-
-void CScene::SetComponentIndexbuffer(int Location, int ComponentLocation, ID3D11Buffer* ib, DXGI_FORMAT Format, int Offset)
-{
-	m_SceneList.m_GameEntityList.at(Location).m_GameEntity3DComponent.at(ComponentLocation).SetIndexBuffer(ib, Format, Offset);
-}
 
 void CScene::InsertDXResourceConfig(int Key, CDXResourcesConfig Config)
 {

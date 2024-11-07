@@ -12,12 +12,12 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
 
     CLogger& SLogger = CLogger::GetLogger();
 
-    CGameEntity3D BaseCube = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::Cube);
-    BaseCube.m_GameEntityTag = "Terrain";
-    BaseCube.SetLocationF(0.0f, -4.0f, 0.0f);
-    BaseCube.SetScale(2.5f, 2.5f, 2.5f);
+    CGameEntity3D Terrain = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::Cube);
+    Terrain.m_GameEntityTag = "Terrain";
+    Terrain.SetLocationF(0.0f, -4.0f, 0.0f);
+    Terrain.SetScale(2.5f, 2.5f, 2.5f);
 
-    BaseCube.m_DXResConfig.m_pDX11Device = m_pDX11Device;
+    Terrain.m_DXResConfig.m_pDX11Device = m_pDX11Device;
 
     HRESULT m_HR{};
 
@@ -43,11 +43,10 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         pVSBlob->Release();
         return m_HR;
     }
-    BaseCube.SetVertexShader(TempVertexShader);
     auto VertexShaderLambda = [=]() {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
         };
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -65,14 +64,13 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
 
     // Set the input layout
-    BaseCube.SetInputLayout(TempVertexLayout);
     m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
 
     auto InputLayoutLambda = [=]() {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
         };
 
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
@@ -89,11 +87,10 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     pPSBlob->Release();
     if (FAILED(m_HR))
         return m_HR;
-    BaseCube.SetPixelShader(m_pDX11Device->m_PixelShader);
     auto PixelShaderLambda = [=]() mutable {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
         };
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     // Create vertex buffer
     //Simple_Color_Vertex vertices[] =
@@ -157,13 +154,12 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     // Set vertex buffer
     UINT stride = sizeof(SSimpleVertex);
     UINT offset = 0;
-    BaseCube.SetVertexBuffer(TempVertexBuffer);
     m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
 
     auto VertexBufferLambda = [=]() mutable {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
         };
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
 
     // Create index buffer
@@ -200,14 +196,13 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
 
     // Set index buffer
-    BaseCube.SetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
     m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
     auto IndexBufferLambda = [=]() mutable {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
         };
 
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
     // Set primitive topology
     m_pDX11Device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -221,13 +216,12 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     m_HR = m_pDX11Device->m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
     if (FAILED(m_HR))
         return m_HR;
-    BaseCube.SetConstantBuffer(TempConstantBuffer);
     auto ConstantBufferLambda = [=]()
         {
-            BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+            Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    BaseCube.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    Terrain.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
     const wchar_t* TextureName = L"grey_grid.dds";
@@ -238,9 +232,9 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
     }
     auto TextureLambda = [=]() mutable {
-        BaseCube.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShaderResources(0, 1, &BaseCube.m_DXResConfig.m_pDX11Device->m_TextureRV);
+        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShaderResources(0, 1, &Terrain.m_DXResConfig.m_pDX11Device->m_TextureRV);
         };
-    BaseCube.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
     //D3D11_SAMPLER_DESC sampDesc{};
     //ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -286,7 +280,7 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
 
     //m_ImmediateContext->RSSetState(m_RasterizerState);
 
-    SScene.AddEntityToScene(BaseCube);
+    SScene.AddEntityToScene(Terrain);
 
     //// Initialize the world matrix
     //g_World = XMMatrixIdentity();
