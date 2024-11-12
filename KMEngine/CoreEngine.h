@@ -255,7 +255,7 @@ public:
         //EntityBuilder.InitDefaultEntities();
         //EntityBuilder.TestDevice();
         CTerrainGenerator TerrainGenerator{ m_Renderer.GetDX11Device() };
-        TerrainGenerator.GenerateTestTerrain();
+        //TerrainGenerator.GenerateTestTerrain();
 
         return S_OK;
     }

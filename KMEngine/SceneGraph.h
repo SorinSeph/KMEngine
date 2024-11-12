@@ -13,16 +13,16 @@ class SceneGraph
 {
 public:
 	SceneGraph()
-		: RootNode{ nullptr }
+		: m_pRootNode{ nullptr }
 	{}
 
 	SceneGraph(SceneGraphNode<T>* InRoot)
-		: RootNode{ InRoot }
+		: m_pRootNode{ InRoot }
 	{}
 
 	void SetRoot(SceneGraphNode<T>* InRoot)
 	{
-		RootNode = InRoot;
+		m_pRootNode = InRoot;
 	}
 
 	void AddChild(SceneGraphNode<T>* Node)
@@ -55,5 +55,5 @@ public:
 		}
 	}
 
-	SceneGraphNode<T>* RootNode;
+	SceneGraphNode<T>* m_pRootNode;
 };
