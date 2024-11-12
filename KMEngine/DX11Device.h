@@ -86,10 +86,12 @@ public:
 	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
-	* Functional but WIP function with initializing a textured cube, to check texture coordinates
+	* Functional but WIP functions for initializing various game primitives
 	*/
 
 	HRESULT InitTexturedCube();
+
+	HRESULT InitTexturedCube2();
 
 	/**
 	* Outline tests
@@ -125,7 +127,7 @@ public:
 
 	void InterpMoveCube();
 
-	CGameEntity3D MainBaseCube{ };
+	CGameEntity3DComponent CubeEntityComponent{ };
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 
