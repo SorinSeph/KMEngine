@@ -148,7 +148,7 @@ public:
 
 	std::vector<CGameEntity3DComponent> m_GameEntity3DComponent;
 
-	SceneGraph<CGameEntity3DComponent> m_SceneGraph;
+	CSceneGraph<CGameEntity3DComponent> m_SceneGraph;
 	//CollisionComponent m_Collision;
 
 protected:

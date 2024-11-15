@@ -44,7 +44,7 @@ HRESULT CDX11Device::InitDX11Device()
 
     //AddLight();
     InitTexturedCube();
-    //InitTexturedCube2();
+    InitTexturedCube2();
     //InitRaycast(0, 0, 0, 100, 2, 3);
     //InterpMoveCube();
     //InitTexturedCube2();
@@ -1579,7 +1579,6 @@ HRESULT CDX11Device::InitTexturedCube()
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
 
-    CGameEntity3D CubeEntity;
 	CubeEntity.m_GameEntityTag = "TexturedCube";
 
     CubeEntityComponent.m_GameEntityTag = "TexturedCubeComponent";
@@ -1857,13 +1856,13 @@ HRESULT CDX11Device::InitTexturedCube()
     // Initialize the projection matrix
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
-    SceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new SceneGraphNode<CGameEntity3DComponent>();
+    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     CubeComponentNode->Type = CubeEntityComponent;
     //CubeEntity.m_Sce
 
 	CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
-    SScene.AddEntityToScene(CubeEntity);
+    //SScene.AddEntityToScene(CubeEntity);
     //SScene.AddEntityToScene(CubeEntityComponent);
 
     return S_OK;
@@ -1883,8 +1882,10 @@ void CDX11Device::InterpMoveCube()
 		if (SceneIt.m_GameEntityTag == "TexturedCube")
 		{
 			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->Type;
+            auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
             Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
             EntityComponent.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
+            EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
 		}
     }
 }
@@ -1893,6 +1894,7 @@ HRESULT CDX11Device::InitTexturedCube2()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+
     CGameEntity3DComponent Cube;
     //Cube = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::Cube);
     Cube.m_GameEntityTag = "TexturedCube2";
@@ -2167,7 +2169,13 @@ HRESULT CDX11Device::InitTexturedCube2()
     // Initialize the projection matrix
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
-    SScene.AddEntityToScene(Cube);
+	CSceneGraphNode<CGameEntity3DComponent>* CubeSubcomponent = new CSceneGraphNode<CGameEntity3DComponent>();
+	CubeSubcomponent->Type = Cube;
+
+	CubeEntity.m_SceneGraph.m_pRootNode->ChildNode.push_back(CubeSubcomponent);
+
+    SScene.AddEntityToScene(CubeEntity);
+    //SScene.AddEntityToScene(Cube);
 
     return S_OK;
 }

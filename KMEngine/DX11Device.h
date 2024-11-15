@@ -127,6 +127,8 @@ public:
 
 	void InterpMoveCube();
 
+	CGameEntity3D CubeEntity;
+
 	CGameEntity3DComponent CubeEntityComponent{ };
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
