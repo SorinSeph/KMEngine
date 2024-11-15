@@ -1,37 +1,39 @@
 #pragma once
 
+#include <queue>
+
 template <typename T>
-class SceneGraphNode
+class CSceneGraphNode
 {
 public:
-	std::vector<SceneGraphNode*> ChildNode;
+	std::vector<CSceneGraphNode*> ChildNode;
 	T Type;
 };
 
 template <typename T>
-class SceneGraph
+class CSceneGraph
 {
 public:
-	SceneGraph()
+	CSceneGraph()
 		: m_pRootNode{ nullptr }
 	{}
 
-	SceneGraph(SceneGraphNode<T>* InRoot)
+	CSceneGraph(CSceneGraphNode<T>* InRoot)
 		: m_pRootNode{ InRoot }
 	{}
 
-	void SetRoot(SceneGraphNode<T>* InRoot)
+	void SetRoot(CSceneGraphNode<T>* InRoot)
 	{
 		m_pRootNode = InRoot;
 	}
 
-	void AddChild(SceneGraphNode<T>* Node)
+	void AddChild(CSceneGraphNode<T>* Node)
 	{
-		SceneGraphNode<T>* NewNode = new SceneGraphNode<T>;
+		CSceneGraphNode<T>* NewNode = new CSceneGraphNode<T>;
 		Node->ChildNode.push_back(NewNode);
 	}
 
-	void Loop(SceneGraphNode<T>* StartNode, std::vector<SceneGraphNode<T>*> TempNodeVector)
+	void Loop(CSceneGraphNode<T>* StartNode, std::vector<CSceneGraphNode<T>*> TempNodeVector)
 	{
 		for (auto NodeIt : StartNode->ChildNode)
 		{
@@ -40,7 +42,7 @@ public:
 		}
 	}
 
-	void Traverse(SceneGraphNode<T>* StartNode, std::vector<SceneGraphNode<T>*>& NodeVectorTemp)
+	void Traverse(CSceneGraphNode<T>* StartNode, std::vector<CSceneGraphNode<T>*>& NodeVectorTemp)
 	{
 		if (StartNode->ChildNode.size())
 		{
@@ -55,5 +57,29 @@ public:
 		}
 	}
 
-	SceneGraphNode<T>* m_pRootNode;
+	void BFS(CSceneGraphNode<T> Root, std::vector<CSceneGraphNode<T>*>& NodeVector)
+	{
+		if (Root == nullptr)
+		{
+			return;
+		}
+
+		std::queue<CSceneGraphNode<T>*> Queue;
+		Queue.push(Root);
+
+		while (!Queue.empty())
+		{
+			CSceneGraphNode<T>* CurrentNode = Queue.front();
+			Queue.pop();
+
+			NodeVector.push_back(CurrentNode);
+
+			for (auto NodeIt : CurrentNode->ChildNode)
+			{
+				Queue.push(NodeIt);
+			}
+		}
+	}
+
+	CSceneGraphNode<T>* m_pRootNode;
 };

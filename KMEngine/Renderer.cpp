@@ -191,29 +191,36 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
-        auto EntityComponent = SceneEntityIt.m_SceneGraph.m_pRootNode->Type;
+        //auto EntityComponent = SceneEntityIt.m_SceneGraph.m_pRootNode->Type;
+        std::vector<CSceneGraphNode<CGameEntity3DComponent>*> EntityComponentVector;
+		//SceneEntityIt.m_SceneGraph.Traverse(SceneEntityIt.m_SceneGraph.m_pRootNode, EntityComponentVector);
+		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
+		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
 
-        if (EntityComponent.m_GameEntityTag == "TexturedCubeComponent")
+        for (auto& EntityComponent : EntityComponentVector)
         {
-            SConstantBuffer CB = EntityComponent.GetConstantBuffer();
-            ID3D11Buffer* CB2 = EntityComponent.m_DXResConfig.GetConstantBuffer();
-            //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-            auto LocationMatrix = EntityComponent.GetLocation();
+            //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
+            //{
+                SConstantBuffer CB = EntityComponent->Type.GetConstantBuffer();
+                ID3D11Buffer* CB2 = EntityComponent->Type.m_DXResConfig.GetConstantBuffer();
+                //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
+                auto LocationMatrix = EntityComponent->Type.GetLocation();
 
-            CB.mWorld = LocationMatrix;
-            //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
+                CB.mWorld = LocationMatrix;
+                //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
 
-            CB.mWorld = XMMatrixTranspose(CB.mWorld);
-            CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-            CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-            m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+                CB.mWorld = XMMatrixTranspose(CB.mWorld);
+                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-            EntityComponent.m_DXResConfig.Execute();
+                EntityComponent->Type.m_DXResConfig.Execute();
 
-            m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+                m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
 
-            m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-            m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+                m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+            //}
         }
     }
 
