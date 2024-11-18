@@ -178,6 +178,7 @@
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
     <None Include="texture.vs" />
+    <None Include="TextureShader.fxh" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc" />
@@ -186,6 +187,17 @@
     <Image Include="grey_grid.dds" />
     <Image Include="tex_stickman.dds" />
     <Image Include="UV_Color_Grid.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="TextureShader_PS.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <DisableOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableOptimizations>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="TextureShader_VS.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

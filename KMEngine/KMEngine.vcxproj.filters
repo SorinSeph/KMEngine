@@ -146,6 +146,9 @@
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
     <None Include="texture.vs" />
+    <None Include="TextureShader.fxh">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">
@@ -162,5 +165,13 @@
     <Image Include="tex_stickman.dds">
       <Filter>Source Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="TextureShader_PS.hlsl">
+      <Filter>Source Files</Filter>
+    </FxCompile>
+    <FxCompile Include="TextureShader_VS.hlsl">
+      <Filter>Source Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

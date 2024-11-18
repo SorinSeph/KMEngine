@@ -195,7 +195,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
         std::vector<CSceneGraphNode<CGameEntity3DComponent>*> EntityComponentVector;
 		//SceneEntityIt.m_SceneGraph.Traverse(SceneEntityIt.m_SceneGraph.m_pRootNode, EntityComponentVector);
 		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
-		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
+		//EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
 
         for (auto& EntityComponent : EntityComponentVector)
         {
@@ -205,8 +205,10 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 ID3D11Buffer* CB2 = EntityComponent->Type.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
                 auto LocationMatrix = EntityComponent->Type.GetLocation();
+                auto RotationMatrix = EntityComponent->Type.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->Type.GetScale();
 
-                CB.mWorld = LocationMatrix;
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
                 //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);

@@ -44,10 +44,9 @@ HRESULT CDX11Device::InitDX11Device()
 
     //AddLight();
     InitTexturedCube();
-    InitTexturedCube2();
-    //InitRaycast(0, 0, 0, 100, 2, 3);
-    //InterpMoveCube();
     //InitTexturedCube2();
+    //InitRaycast(0, 0, 0, 100, 2, 3);
+    //InterpMoveCube();InitTexturedCube2
     //AddTestLine2();
     //GenerateTerrain();
     //AddTestLine3();
@@ -1582,7 +1581,7 @@ HRESULT CDX11Device::InitTexturedCube()
 	CubeEntity.m_GameEntityTag = "TexturedCube";
 
     CubeEntityComponent.m_GameEntityTag = "TexturedCubeComponent";
-    CubeEntityComponent.SetLocationF(-6.f, 0.0f, 0.0f);
+    CubeEntityComponent.SetLocationF(-1.f, 0.0f, 0.0f);
     CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
 
 	CTimerManager& TimerManager = CTimerManager::GetTimerManager();
@@ -1858,11 +1857,10 @@ HRESULT CDX11Device::InitTexturedCube()
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     CubeComponentNode->Type = CubeEntityComponent;
-    //CubeEntity.m_Sce
 
 	CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
-    //SScene.AddEntityToScene(CubeEntity);
+    SScene.AddEntityToScene(CubeEntity);
     //SScene.AddEntityToScene(CubeEntityComponent);
 
     return S_OK;
@@ -1882,10 +1880,16 @@ void CDX11Device::InterpMoveCube()
 		if (SceneIt.m_GameEntityTag == "TexturedCube")
 		{
 			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->Type;
-            auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
+            //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
             Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
-            EntityComponent.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
-            EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
+            EntityComponent.SetLocationF(-1.f, 0.0f, InterpMoveLoc);
+            //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
+            XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
+                0.0f,
+                XMConvertToRadians(InterpMoveLoc * 50),
+                0.0f
+            );
+            EntityComponent.m_QuatRotationMatrix = XMMatrixRotationQuaternion(quaternionRotation);
 		}
     }
 }

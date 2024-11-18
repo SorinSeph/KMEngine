@@ -93,6 +93,7 @@ public:
 
 	HRESULT InitTexturedCube2();
 
+	//HRESULT InitQuatCube();
 	/**
 	* Outline tests
 	*/
@@ -102,6 +103,8 @@ public:
 	void InitCubeOutline2();
 
 	void InitSingleCubeOutline();
+
+
 
 	/**
 	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
