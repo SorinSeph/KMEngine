@@ -2,10 +2,17 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe</FullPath>
+      <FullPath>C:\Users\sefce\source\repos\MyEngine\x64\Debug\KMEngine.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
-  <ContentFiles />
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\sefce\source\repos\MyEngine\x64\Debug\TextureShader_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\sefce\source\repos\MyEngine\x64\Debug\TextureShader_VS.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />
 </Project>
