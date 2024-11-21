@@ -208,7 +208,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 auto RotationMatrix = EntityComponent->Type.m_QuatRotationMatrix;
                 auto ScaleMatrix = EntityComponent->Type.GetScale();
 
-                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
+                CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
                 //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
