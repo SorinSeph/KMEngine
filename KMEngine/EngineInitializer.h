@@ -13,13 +13,13 @@ const wchar_t SIDETOOLBAR_NAME[] = L"SideToolbar";
 //const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK ToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK SideToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 //LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 HWND ViewportHwnd;
-HWND SideToolbarHwnd;
-HWND ToolbarHwnd;
+HWND RightToolbarHwnd;
+HWND LeftToolbarHwnd;
 
 float ViewportWidth{ };
 float ViewportHeight{ };
@@ -137,7 +137,7 @@ public:
         wc[0].lpszClassName = CLASS_NAME;
 
         wc[1].style = CS_HREDRAW | CS_VREDRAW;
-        wc[1].lpfnWndProc = ToolbarHwndProc;
+        wc[1].lpfnWndProc = LeftToolbarHwndProc;
         wc[1].cbClsExtra = 0;
         wc[1].cbWndExtra = 0;
         wc[1].hInstance = m_HInstance;
@@ -155,7 +155,7 @@ public:
         wc[2].lpszClassName = VIEWPORT_NAME;
 
         wc[3].style = CS_HREDRAW | CS_VREDRAW;
-        wc[3].lpfnWndProc = SideToolbarHwndProc;
+        wc[3].lpfnWndProc = RightToolbarHwndProc;
         wc[3].cbClsExtra = 0;
         wc[3].cbWndExtra = 0;
         wc[3].hInstance = m_HInstance;
@@ -188,7 +188,7 @@ public:
             NULL
         );
 
-        ToolbarHwnd = CreateWindow(
+        LeftToolbarHwnd = CreateWindow(
             TOOLBAR_NAME,
             NULL,
             WS_CHILDWINDOW | WS_VISIBLE | WS_CLIPSIBLINGS,
@@ -222,7 +222,7 @@ public:
 
         ViewportHwnd = m_ViewportWindow.GetViewportWnd();
 
-        SideToolbarHwnd = CreateWindow(
+        RightToolbarHwnd = CreateWindow(
             SIDETOOLBAR_NAME,
             NULL,
             WS_CHILDWINDOW | WS_VISIBLE | WS_CLIPSIBLINGS,
@@ -420,7 +420,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             if (x == 0)
             {
-                MoveWindow(ToolbarHwnd, x * cxBlock, 50, cxBlock + 5, cyBlock * 3, TRUE);
+                MoveWindow(LeftToolbarHwnd, x * cxBlock, 50, cxBlock + 5, cyBlock * 3, TRUE);
             }
             else if (x == 1)
             {
@@ -430,7 +430,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             }
             else if (x == 2)
             {
-                MoveWindow(SideToolbarHwnd, x * cxBlock, 50, cxBlock + 5, cyBlock * 3, TRUE);
+                MoveWindow(RightToolbarHwnd, x * cxBlock, 50, cxBlock + 5, cyBlock * 3, TRUE);
             }
         }
         return 0;
@@ -456,7 +456,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-LRESULT CALLBACK ToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     HDC         hdc;
     PAINTSTRUCT ps;
@@ -648,7 +648,7 @@ LRESULT CALLBACK ToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 //    return DefWindowProc(hwnd, message, wParam, lParam);
 //}
 
-LRESULT CALLBACK SideToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     HDC         hdc;
     PAINTSTRUCT ps;
