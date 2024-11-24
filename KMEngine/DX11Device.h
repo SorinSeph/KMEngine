@@ -86,11 +86,14 @@ public:
 	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
-	* Functional but WIP function with initializing a textured cube, to check texture coordinates
+	* Functional but WIP functions for initializing various game primitives
 	*/
 
 	HRESULT InitTexturedCube();
 
+	HRESULT InitTexturedCube2();
+
+	//HRESULT InitQuatCube();
 	/**
 	* Outline tests
 	*/
@@ -100,6 +103,8 @@ public:
 	void InitCubeOutline2();
 
 	void InitSingleCubeOutline();
+
+
 
 	/**
 	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
@@ -125,7 +130,9 @@ public:
 
 	void InterpMoveCube();
 
-	CGameEntity3D MainBaseCube{ };
+	CGameEntity3D CubeEntity;
+
+	CGameEntity3DComponent CubeEntityComponent{ };
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 

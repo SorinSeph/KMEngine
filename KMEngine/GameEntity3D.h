@@ -63,6 +63,7 @@ public:
 		, m_VerticesList{ 0 }
 		, m_LocationMatrix{ XMMatrixIdentity() }
 		, m_RotationMatrix{ XMMatrixIdentity() }
+		, m_QuatRotationMatrix{ XMMatrixIdentity() }
 		, m_ScaleMatrix{ XMMatrixIdentity() }
 		, m_Collision{ }
 		, m_DXResConfig{ }
@@ -148,10 +149,13 @@ public:
 
 	std::vector<CGameEntity3DComponent> m_GameEntity3DComponent;
 
+	CSceneGraph<CGameEntity3DComponent> m_SceneGraph;
 	//CollisionComponent m_Collision;
 
+	XMMATRIX m_QuatRotationMatrix;
+
 protected:
-	SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
+	//SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
 
 	SCollisionComponent m_Collision;
 
@@ -166,6 +170,7 @@ protected:
 	float m_RotationX;
 	float m_RotationY;
 	float m_RotationZ;
+
 
 	XMMATRIX m_ScaleMatrix;
 	float m_ScaleX;
