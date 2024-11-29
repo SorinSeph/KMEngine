@@ -201,12 +201,12 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
         {
             //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
             //{
-                SConstantBuffer CB = EntityComponent->Type.GetConstantBuffer();
-                ID3D11Buffer* CB2 = EntityComponent->Type.m_DXResConfig.GetConstantBuffer();
+                SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
+                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-                auto LocationMatrix = EntityComponent->Type.GetLocation();
-                auto RotationMatrix = EntityComponent->Type.m_QuatRotationMatrix;
-                auto ScaleMatrix = EntityComponent->Type.GetScale();
+                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
                 CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
                 //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
@@ -216,12 +216,20 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
                 m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-                EntityComponent->Type.m_DXResConfig.Execute();
+                EntityComponent->m_TType.m_DXResConfig.Execute();
 
                 m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
 
-                m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-                m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                if (EntityComponent->m_TType.m_GameEntityTag == "Frustum")
+                {
+                    m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                    m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                }
+                else
+                {
+                    m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+                    m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                }
             //}
         }
     }
