@@ -64,11 +64,11 @@ void CPrimitiveGeometryFactory::SetUIDTest(CGameEntity3D& Entity3D)
     CPrimitiveGeometryFactory::m_Entity3D_UID++;
 }
 
-CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType Type)
+CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m_TType)
 {
     CGameEntity3D Entity;
 
-    switch (Type)
+    switch (m_TType)
     {
         case EPrimitiveGeometryType::Plane:
         {
@@ -453,11 +453,11 @@ std::vector<WORD> CPrimitiveGeometryFactory::GetIndicesList()
     return IndicesVector;
 }
 
-CGameEntity3DComponent CPrimitiveGeometryFactory::CreateEntity3DComponent(EPrimitiveGeometryType Type)
+CGameEntity3DComponent CPrimitiveGeometryFactory::CreateEntity3DComponent(EPrimitiveGeometryType m_TType)
 {
     CGameEntity3DComponent EntityComponent;
 
-    switch (Type)
+    switch (m_TType)
     {
         case EPrimitiveGeometryType::Cube:
         {

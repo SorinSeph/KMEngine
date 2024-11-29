@@ -93,6 +93,10 @@ public:
 
 	HRESULT InitTexturedCube2();
 
+	HRESULT InitSolidColorCube();
+
+	HRESULT InitFrustum();
+
 	//HRESULT InitQuatCube();
 	/**
 	* Outline tests
