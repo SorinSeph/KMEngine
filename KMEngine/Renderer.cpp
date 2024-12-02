@@ -96,98 +96,11 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
     Logger.Log();
 
-   // for (auto& SceneEntityIt : SceneEntityList)
-   // {
-   //     if (SceneEntityIt.m_GameEntityTag == "TexturedCube" || "TexturedCube2")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-			////SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-			//auto LocationMatrix = SceneEntityIt.GetLocation();
+    /**
+    * WIP Collision checking section, to be refactored into its own function
+    */
 
-   //         CB.mWorld = LocationMatrix;
-			////CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
 
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-   //         m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
-   //     }
-   //     //else if (SceneEntityIt.m_GameEntityTag == "TexturedCube2")
-   //     //{
-   //     //    SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //     //    ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //     //    CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //     //    CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //     //    CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //     //    m_DX11Device.m_ImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //     //    SceneEntityIt.m_DXResConfig.Execute();
-
-   //     //    m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
-
-   //     //    m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-   //     //    m_DX11Device.m_ImmediateContext->DrawIndexed(36, 0, 0);
-   //     //}
-   //     else if (SceneEntityIt.m_GameEntityTag == "Terrain")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         UINT Stride = sizeof(SSimpleVertex);
-   //         UINT Offset = 0;
-
-   //         ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_VertexBuffer;
-   //         m_DX11evice.m_pImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
-
-   //         ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
-   //         DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.m_IndexBufferFormat;
-   //         UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.m_IndexBufferOffset;
-   //         m_DX11evice.m_pImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
-
-   //         ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
-   //         m_DX11evice.m_pImmediateContext->IASetInputLayout(InputLayout);
-
-   //         //ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.m_VertexShader;
-   //         //ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.m_PixelShader;
-   //         //m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-   //         //m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->VSSetConstantBuffers(0, 1, &CB2);
-   //         m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-   //         //m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-   //         m_DX11evice.m_pImmediateContext->DrawIndexed(6, 0, 0);
-   //     }
-   //     else if (SceneEntityIt.m_GameEntityTag == "Raycast")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->Draw(2, 0);
-   //     }
-   // }
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
@@ -201,6 +114,25 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
         {
             //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
             //{
+            if (EntityComponent->m_TType.m_GameEntityTag == "FrustumComponent")
+            {
+                SCollisionBuffer CB = EntityComponent->m_TType.m_CollisionBuffer;
+                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
+                //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
+                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
+
+                CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
+
+                CB.mWorld = XMMatrixTranspose(CB.mWorld);
+                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                CB.mDoesFrustumContain = g_DoesFrustumContain;
+                m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+            }
+            else 
+            {
                 SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
                 ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
@@ -209,27 +141,20 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
                 CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
-                //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
                 m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+            }
+
 
                 EntityComponent->m_TType.m_DXResConfig.Execute();
 
                 m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
 
-                if (EntityComponent->m_TType.m_GameEntityTag == "Frustum")
-                {
-                    m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                    m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
-                }
-                else
-                {
-                    m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-                    m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
-                }
+                m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
             //}
         }
     }

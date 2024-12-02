@@ -149,6 +149,15 @@
     <None Include="TextureShader.fxh">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="FrustumShader.fxh">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="FrustumShader.ps">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="FrustumShader.vs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">
