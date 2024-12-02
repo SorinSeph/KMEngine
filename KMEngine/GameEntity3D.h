@@ -21,6 +21,15 @@ struct SConstantBuffer
 	XMMATRIX mProjection;
 };
 
+struct SCollisionBuffer
+{
+	XMMATRIX mWorld;
+	XMMATRIX mView;
+	XMMATRIX mProjection;
+	BOOL mDoesFrustumContain;
+	BOOL mPadding[15];
+};
+
 struct SArrowConstantBuffer
 {
 	XMMATRIX mWorld;
@@ -153,6 +162,7 @@ public:
 	//CollisionComponent m_Collision;
 
 	XMMATRIX m_QuatRotationMatrix;
+	SCollisionBuffer m_CollisionBuffer;
 
 protected:
 	//SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
@@ -181,6 +191,7 @@ protected:
 	std::vector<SColorVertex> m_ColorVerticesList;
 	std::vector<SSimpleColorVertex> m_SimpleColorVerticesList;
 	SConstantBuffer m_ConstantBuffer;
+
 	SArrowConstantBuffer m_ArrowConstantBuffer;
 	int m_UIDTest{ };
 

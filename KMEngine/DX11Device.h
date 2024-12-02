@@ -19,6 +19,8 @@
 #include "Logger.h"
 #include "Math.h"
 
+static BOOL g_DoesFrustumContain;
+
 static WORD* GetIndices(std::vector<WORD> InVector)
 {
 	WORD* Vector = InVector.data();
@@ -132,7 +134,7 @@ public:
 	* Temporary helper section of functions / variables
 	*/
 
-	void InterpMoveCube();
+	void InterpMoveEntity();
 
 	CGameEntity3D CubeEntity;
 
@@ -140,7 +142,7 @@ public:
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 
-	float InterpMoveLoc{ 0.0f };
+	float InterpMoveLoc{ 10.0f };
 
 	ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
 

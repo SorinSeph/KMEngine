@@ -46,7 +46,7 @@ HRESULT CDX11Device::InitDX11Device()
 
     //InitTexturedCube();
     //InitTexturedCube2();
-    //InitSolidColorCube();
+    InitSolidColorCube();
     InitFrustum();
     //InitRaycast(0, 0, 0, 100, 2, 3);
     //InterpMoveCube();InitTexturedCube2
@@ -1882,7 +1882,7 @@ HRESULT CDX11Device::InitTexturedCube()
     m_pImmediateContext->RSSetState(m_RasterizerState);
 
     InterpMoveCubeRef = &CubeEntityComponent;
-	TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveCube>(this, 2.0f, 10.0f);
+	TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
 
     // Initialize the projection matrix
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
@@ -1898,23 +1898,23 @@ HRESULT CDX11Device::InitTexturedCube()
     return S_OK;
 }
 
-void CDX11Device::InterpMoveCube()
+void CDX11Device::InterpMoveEntity()
 {
 	CLogger& Logger = CLogger::GetLogger();
     Logger.Log("InterpMoveCube Called");
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
-    InterpMoveLoc = FInterpConstantTo(InterpMoveLoc, 10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 0.9f);
+    InterpMoveLoc = FInterpConstantTo(InterpMoveLoc, -10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 2.9f);
 
     CScene& Scene = CScene::GetScene();
     for (auto& SceneIt : Scene.GetSceneList())
     {
-		if (SceneIt.m_GameEntityTag == "TexturedCube")
+		if (SceneIt.m_GameEntityTag == "SolidColorCubeEntity")
 		{
 			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
             //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
             Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
-            EntityComponent.SetLocationF(-1.f, 0.0f, InterpMoveLoc);
+            EntityComponent.SetLocationF(InterpMoveLoc, 0.0f, 10.f);
             //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
             XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
                 0.0f,
@@ -2221,10 +2221,10 @@ HRESULT CDX11Device::InitSolidColorCube()
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
 
-    CubeEntity.m_GameEntityTag = "SolidColorCube";
+    CubeEntity.m_GameEntityTag = "SolidColorCubeEntity";
 
-    CubeEntityComponent.m_GameEntityTag = "TexturedCubeComponent";
-    CubeEntityComponent.SetLocationF(-1.f, 0.0f, 0.0f);
+    CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
+    CubeEntityComponent.SetLocationF(10.f, 0.0f, 10.0f);
     CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
@@ -2496,6 +2496,8 @@ HRESULT CDX11Device::InitSolidColorCube()
 
     CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
+    TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 30.0f);
+
     SScene.AddEntityToScene(CubeEntity);
     //SScene.AddEntityToScene(CubeEntityComponent);
 
@@ -2506,18 +2508,20 @@ HRESULT CDX11Device::InitFrustum()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D FrustumEntity;
+    FrustumEntity.m_GameEntityTag = "FrustumEntity";
 
-    CubeEntity.m_GameEntityTag = "SolidColorCube";
+    CGameEntity3DComponent FrustumComponent;
 
-    CubeEntityComponent.m_GameEntityTag = "Frustum";
-    CubeEntityComponent.SetLocationF(-1.f, 0.0f, 0.0f);
-    CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
+    FrustumComponent.m_GameEntityTag = "FrustumComponent";
+    FrustumComponent.SetLocationF(-1.f, 0.0f, 0.0f);
+    FrustumComponent.SetScale(0.25f, 0.25f, 0.25f);
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "VS", "vs_5_0", &pVSBlob);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
@@ -2535,7 +2539,7 @@ HRESULT CDX11Device::InitFrustum()
     auto VertexShaderLambda = [=]() {
         m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -2559,11 +2563,11 @@ HRESULT CDX11Device::InitFrustum()
         m_pImmediateContext->IASetInputLayout(TempVertexLayout);
     };
 
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "PS", "ps_5_0", &pPSBlob);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
@@ -2580,7 +2584,7 @@ HRESULT CDX11Device::InitFrustum()
     auto PixelShaderLambda = [=]() {
         m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     // Create vertex buffer
     //Simple_Color_Vertex vertices[] =
@@ -2667,7 +2671,7 @@ HRESULT CDX11Device::InitFrustum()
     auto VertexBufferLambda = [=]() {
         m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
 
     // Create index buffer
@@ -2708,7 +2712,7 @@ HRESULT CDX11Device::InitFrustum()
     auto IndexBufferLambda = [=]() {
         m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
     // Set primitive topology
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -2716,7 +2720,7 @@ HRESULT CDX11Device::InitFrustum()
     // Create the constant buffer
     ID3D11Buffer* TempConstantBuffer{ nullptr };
     bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SConstantBuffer);
+    bd.ByteWidth = sizeof(SCollisionBuffer);
     bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     bd.CPUAccessFlags = 0;
     m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
@@ -2726,8 +2730,9 @@ HRESULT CDX11Device::InitFrustum()
     auto ConstantBufferLambda = [=]() {
         m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
     };
-    CubeEntityComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    FrustumComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    //FrustumComponent.m_CollisionBuffer = TempConstantBuffer;
 
 
     //const wchar_t* TextureName = L"tex_stickman.dds";
@@ -2777,12 +2782,12 @@ HRESULT CDX11Device::InitFrustum()
 
     //InterpMoveCubeRef = &CubeEntityComponent;
 
-    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = CubeEntityComponent;
+    CSceneGraphNode<CGameEntity3DComponent>* FrustumComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    FrustumComponentNode->m_TType = FrustumComponent;
 
-    CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+    FrustumEntity.m_SceneGraph.m_pRootNode = FrustumComponentNode;
 
-    SScene.AddEntityToScene(CubeEntity);
+    SScene.AddEntityToScene(FrustumEntity);
     //SScene.AddEntityToScene(CubeEntityComponent);
 
     return S_OK;

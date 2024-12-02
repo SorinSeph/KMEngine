@@ -1,15 +1,13 @@
 ﻿  DX11Device.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(65,10): warning C4101: 'rc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(448,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(725,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(956,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1205,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1570,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1571,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1582,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1932,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2222,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2508,31): warning C4101: 'GeometryFactory': unreferenced local variable
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(65,10): warning C4101: 'rc': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(448,84): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(725,90): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(956,90): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1205,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1570,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1571,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1582,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1932,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2222,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2510,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
