@@ -2,15 +2,15 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe</FullPath>
+      <FullPath>C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\TextureShader_PS.cso</FullPath>
+      <FullPath>C:\Users\sefce\source\KMEngine\x64\Debug\TextureShader_PS.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\TextureShader_VS.cso</FullPath>
+      <FullPath>C:\Users\sefce\source\KMEngine\x64\Debug\TextureShader_VS.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

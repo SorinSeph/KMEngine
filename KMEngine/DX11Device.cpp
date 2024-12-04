@@ -1914,7 +1914,7 @@ void CDX11Device::InterpMoveEntity()
 			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
             //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
             Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
-            EntityComponent.SetLocationF(InterpMoveLoc, 0.0f, 10.f);
+            EntityComponent.SetLocationF(InterpMoveLoc, 0.0f, 5.f);
             //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
             XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
                 0.0f,
@@ -2224,7 +2224,7 @@ HRESULT CDX11Device::InitSolidColorCube()
     CubeEntity.m_GameEntityTag = "SolidColorCubeEntity";
 
     CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
-    CubeEntityComponent.SetLocationF(10.f, 0.0f, 10.0f);
+    CubeEntityComponent.SetLocationF(10.f, 0.0f, 5.0f);
     CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
@@ -2511,11 +2511,12 @@ HRESULT CDX11Device::InitFrustum()
     CGameEntity3D FrustumEntity;
     FrustumEntity.m_GameEntityTag = "FrustumEntity";
 
-    CGameEntity3DComponent FrustumComponent;
+    CFrustumComponent FrustumComponent;
+    XMMATRIX xmProj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1.77778f, 0.5f, 10.0f);
+    CreateFrustumFromMatrix(FrustumComponent, xmProj);
 
     FrustumComponent.m_GameEntityTag = "FrustumComponent";
-    FrustumComponent.SetLocationF(-1.f, 0.0f, 0.0f);
-    FrustumComponent.SetScale(0.25f, 0.25f, 0.25f);
+    FrustumComponent.SetLocationF(0.f, 0.0f, 0.0f);
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
@@ -2599,60 +2600,33 @@ HRESULT CDX11Device::InitFrustum()
     //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
     //};
 
+    XMFLOAT3 verts[8];
+	GetFrustumCorners(verts, FrustumComponent);
+
     SSimpleColorVertex vertices[] =
     {
-        { XMFLOAT3(-5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
-        { XMFLOAT3(5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
-        { XMFLOAT3(5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
-        { XMFLOAT3(-5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
-        { XMFLOAT3(-0.25f,  0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
-        { XMFLOAT3(0.25f,  0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
-        { XMFLOAT3(0.25f,  -0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
-        { XMFLOAT3(-0.25f,  -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V6
+        //{ XMFLOAT3(-5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        //{ XMFLOAT3(5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+        //{ XMFLOAT3(5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+        //{ XMFLOAT3(-5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+        //{ XMFLOAT3(-0.25f,  0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+        //{ XMFLOAT3(0.25f,  0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+        //{ XMFLOAT3(0.25f,  -0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
+        //{ XMFLOAT3(-0.25f,  -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V6
 
-
-
-
-
-
-
-
-
-
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f),XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) }
+        { verts[7], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        { verts[6], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        { verts[5], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+        { verts[4], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+        { verts[3], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+        { verts[2], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+        { verts[1], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+        { verts[0], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
     };
 
     D3D11_BUFFER_DESC bd{};
     bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    bd.ByteWidth = sizeof(SSimpleColorVertex) * 8;
     bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     bd.CPUAccessFlags = 0;
 
@@ -2677,23 +2651,39 @@ HRESULT CDX11Device::InitFrustum()
     // Create index buffer
     WORD indices[] =
     {
-        0, 1, 2,
-        0, 2, 3,
+        3,1,0,
+        2,1,3,
 
-        4, 5, 6,
-        4, 6, 7,
+        0,5,4,
+        1,5,0,
 
-        0, 4, 5,
-        0, 5, 1,
+        3,4,7,
+        0,4,3,
 
-        1, 5, 6,
-        1, 6, 2,
+        1,6,5,
+        2,6,1,
 
-        2, 6, 7,
-        2, 7, 3,
+        2,7,6,
+        3,7,2,
 
-        3, 7, 4,
-        3, 4, 0,
+        6,4,5,
+        7,4,6,
+        7,4,6,
+
+        //4, 5, 6,
+        //4, 6, 7,
+
+        //0, 4, 5,
+        //0, 5, 1,
+
+        //1, 5, 6,
+        //1, 6, 2,
+
+        //2, 6, 7,
+        //2, 7, 3,
+
+        //3, 7, 4,
+        //3, 4, 0,
     };
 
     ID3D11Buffer* TempIndexBuffer{ nullptr };
@@ -2791,4 +2781,103 @@ HRESULT CDX11Device::InitFrustum()
     //SScene.AddEntityToScene(CubeEntityComponent);
 
     return S_OK;
+}
+
+_Use_decl_annotations_
+inline void XM_CALLCONV CDX11Device::CreateFrustumFromMatrix(CFrustumComponent& Out, FXMMATRIX Projection, bool rhcoords) noexcept
+{
+    // Corners of the projection frustum in homogenous space.
+    static XMVECTORF32 HomogenousPoints[6] =
+    {
+        { { {  1.0f,  0.0f, 1.0f, 1.0f } } },   // right (at far plane)
+        { { { -1.0f,  0.0f, 1.0f, 1.0f } } },   // left
+        { { {  0.0f,  1.0f, 1.0f, 1.0f } } },   // top
+        { { {  0.0f, -1.0f, 1.0f, 1.0f } } },   // bottom
+
+        { { { 0.0f, 0.0f, 0.0f, 1.0f } } },     // near
+        { { { 0.0f, 0.0f, 1.0f, 1.0f } } }      // far
+    };
+
+    XMVECTOR Determinant;
+    XMMATRIX matInverse = XMMatrixInverse(&Determinant, Projection);
+
+    // Compute the frustum corners in world space.
+    XMVECTOR Points[6];
+
+    for (size_t i = 0; i < 6; ++i)
+    {
+        // Transform point.
+        Points[i] = XMVector4Transform(HomogenousPoints[i], matInverse);
+    }
+
+    Out.Origin = XMFLOAT3(0.0f, 0.0f, 0.0f);
+    Out.Orientation = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+
+    // Compute the slopes.
+    Points[0] = XMVectorMultiply(Points[0], XMVectorReciprocal(XMVectorSplatZ(Points[0])));
+    Points[1] = XMVectorMultiply(Points[1], XMVectorReciprocal(XMVectorSplatZ(Points[1])));
+    Points[2] = XMVectorMultiply(Points[2], XMVectorReciprocal(XMVectorSplatZ(Points[2])));
+    Points[3] = XMVectorMultiply(Points[3], XMVectorReciprocal(XMVectorSplatZ(Points[3])));
+
+    Out.RightSlope = XMVectorGetX(Points[0]);
+    Out.LeftSlope = XMVectorGetX(Points[1]);
+    Out.TopSlope = XMVectorGetY(Points[2]);
+    Out.BottomSlope = XMVectorGetY(Points[3]);
+
+    // Compute near and far.
+    Points[4] = XMVectorMultiply(Points[4], XMVectorReciprocal(XMVectorSplatW(Points[4])));
+    Points[5] = XMVectorMultiply(Points[5], XMVectorReciprocal(XMVectorSplatW(Points[5])));
+
+    if (rhcoords)
+    {
+        Out.Near = XMVectorGetZ(Points[5]);
+        Out.Far = XMVectorGetZ(Points[4]);
+    }
+    else
+    {
+        Out.Near = XMVectorGetZ(Points[4]);
+        Out.Far = XMVectorGetZ(Points[5]);
+    }
+}
+
+inline void CDX11Device::GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out)
+{
+    assert(Corners != nullptr);
+
+    // Load origin and orientation of the frustum.
+    XMVECTOR vOrigin = XMLoadFloat3(&Out.Origin);
+    XMVECTOR vOrientation = XMLoadFloat4(&Out.Orientation);
+
+    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+
+    // Build the corners of the frustum.
+    XMVECTOR vRightTop = XMVectorSet(Out.RightSlope, Out.TopSlope, 1.0f, 0.0f);
+    XMVECTOR vRightBottom = XMVectorSet(Out.RightSlope, Out.BottomSlope, 1.0f, 0.0f);
+    XMVECTOR vLeftTop = XMVectorSet(Out.LeftSlope, Out.TopSlope, 1.0f, 0.0f);
+    XMVECTOR vLeftBottom = XMVectorSet(Out.LeftSlope, Out.BottomSlope, 1.0f, 0.0f);
+    XMVECTOR vNear = XMVectorReplicatePtr(&Out.Near);
+    XMVECTOR vFar = XMVectorReplicatePtr(&Out.Far);
+
+    // Returns 8 corners position of bounding frustum.
+    //     Near    Far
+    //    0----1  4----5
+    //    |    |  |    |
+    //    |    |  |    |
+    //    3----2  7----6
+
+    XMVECTOR vCorners[8];
+    vCorners[0] = XMVectorMultiply(vLeftTop, vNear);
+    vCorners[1] = XMVectorMultiply(vRightTop, vNear);
+    vCorners[2] = XMVectorMultiply(vRightBottom, vNear);
+    vCorners[3] = XMVectorMultiply(vLeftBottom, vNear);
+    vCorners[4] = XMVectorMultiply(vLeftTop, vFar);
+    vCorners[5] = XMVectorMultiply(vRightTop, vFar);
+    vCorners[6] = XMVectorMultiply(vRightBottom, vFar);
+    vCorners[7] = XMVectorMultiply(vLeftBottom, vFar);
+
+    for (size_t i = 0; i < 8; ++i)
+    {
+        XMVECTOR C = XMVectorAdd(XMVector3Rotate(vCorners[i], vOrientation), vOrigin);
+        XMStoreFloat3(&Corners[i], C);
+    }
 }
