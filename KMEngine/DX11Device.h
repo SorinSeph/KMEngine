@@ -110,6 +110,13 @@ public:
 
 	void InitSingleCubeOutline();
 
+	/**
+	* WIP methods of DirectXCollision, to be implemented into their own file later
+	*/
+
+	void XM_CALLCONV CreateFrustumFromMatrix(_Out_ CFrustumComponent& Out, _In_ FXMMATRIX Projection, bool rhcoords = false) noexcept;
+
+	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
 
 
 	/**

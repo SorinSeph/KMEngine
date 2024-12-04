@@ -122,9 +122,6 @@
     <ClInclude Include="EntityPhysicalMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameEntity3DComponent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGraph.h">
       <Filter>Source Files</Filter>
     </ClInclude>
