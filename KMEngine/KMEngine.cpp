@@ -6,7 +6,6 @@
 #include "Cube.h"
 #include "CubeTerrainGenerator.h"
 #include "PrimitiveGeometryFactory.h"
-#include "DXStructuresInitializer.h"
 #include "DDSTextureLoader.h"
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib") //adds link to control control DLL

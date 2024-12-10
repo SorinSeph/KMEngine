@@ -54,8 +54,6 @@ public:
 
 	void RemoveEntityFromScene(std::string EntityTag);
 
-	void SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
-
 	CSceneList m_SceneList;
 
 	std::vector<CGameEntity3D>& GetSceneList();

@@ -1,15 +1,62 @@
 ﻿  DX11Device.cpp
 C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(65,10): warning C4101: 'rc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(448,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(725,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(956,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1205,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1570,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1571,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1582,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1932,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2222,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2510,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1186,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1543,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1544,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1555,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1905,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2195,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2483,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  DXResourcesConfig.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\DXResourcesConfig.cpp(114,20): warning C4018: '<=': signed/unsigned mismatch
+  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(64,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(64,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(68,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(68,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(182,27): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(235,28): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(266,43): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(267,38): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(455,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(456,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(428,30): warning C4101: 'y': unreferenced local variable
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(434,22): warning C4101: 'hSubMenu': unreferenced local variable
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(193,38): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(193,32): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
+  Renderer.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp(51,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  TerrainGenerator.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\cbt.h(617,27): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+  (compiling source file 'TerrainGenerator.cpp')
+  
+  World.cpp
+  Generating Code...
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

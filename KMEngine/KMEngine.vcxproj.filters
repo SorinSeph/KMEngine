@@ -27,9 +27,6 @@
     <ClCompile Include="DXResourcesConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DXStructuresInitializer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEntity3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DXResourcesConfig.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DXStructuresInitializer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="EngineInitializer.h">

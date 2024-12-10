@@ -44,18 +44,6 @@ struct SCollisionComponent
 	ContainmentType CollisionType;
 };
 
-//struct Simple_Vertex
-//{
-//	XMFLOAT3 Pos;
-//	XMFLOAT2 Tex;
-//};
-//
-//struct Simple_Color_Vertex
-//{
-//	XMFLOAT3 Pos;
-//	XMFLOAT4 Col;
-//};
-
 struct SColorVertex
 {
 	XMFLOAT3 Pos;
@@ -69,7 +57,6 @@ class CGameEntity3D : public CGameEntity
 public:
 	CGameEntity3D()
 		: m_ConstantBuffer{ }
-		, m_VerticesList{ 0 }
 		, m_LocationMatrix{ XMMatrixIdentity() }
 		, m_RotationMatrix{ XMMatrixIdentity() }
 		, m_QuatRotationMatrix{ XMMatrixIdentity() }
@@ -81,20 +68,6 @@ public:
 	{ }
 
 	XMMATRIX TransformationMatrix();
-
-	void SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList);
-
-	/**
-	* Sets a vertex list
-	*/
-
-	void SetColorVerticesList(std::vector<SColorVertex> VerticesList);
-
-	std::vector<SSimpleVertex> GetVerticesList();
-
-	std::vector<SSimpleColorVertex> GetSimpleColorVerticesList();
-
-	std::vector<SColorVertex> GetColorVerticesList();
 
 	void SetLocation(XMMATRIX Location);
 
@@ -124,16 +97,6 @@ public:
 
 	void SetScale(float InX, float InY, float InZ);
 
-	DXGI_FORMAT GetOwnFormat();
-
-	int GetOwnOffset();
-
-	SConstantBuffer GetConstantBuffer();
-
-	SArrowConstantBuffer GetArrowConstantBuffer();
-
-	void SetCollisionBoxCenter(XMFLOAT3 NewCenter);
-
 	void SetUID(std::string uid);
 
 	std::string GetUID();
@@ -144,22 +107,11 @@ public:
 
 	std::string m_UID;
 
-	// Test
-
-	void SetUIDTest(int uid);
-
-	int GetUIDTest();
-
-	void SetCollisionParams(XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
-
 	TEntityPhysicalMesh PhysicalMesh;
 
-	std::vector<TEntityPhysicalMesh> m_PhysicalMeshVector;
-
-	std::vector<CGameEntity3DComponent> m_GameEntity3DComponent;
-
 	CSceneGraph<CGameEntity3DComponent> m_SceneGraph;
-	//CollisionComponent m_Collision;
+
+	SConstantBuffer GetConstantBuffer();
 
 	XMMATRIX m_QuatRotationMatrix;
 	SCollisionBuffer m_CollisionBuffer;
@@ -181,26 +133,12 @@ protected:
 	float m_RotationY;
 	float m_RotationZ;
 
-
 	XMMATRIX m_ScaleMatrix;
 	float m_ScaleX;
 	float m_ScaleY;
 	float m_ScaleZ;
 
-	std::vector<SSimpleVertex> m_VerticesList;
-	std::vector<SColorVertex> m_ColorVerticesList;
-	std::vector<SSimpleColorVertex> m_SimpleColorVerticesList;
 	SConstantBuffer m_ConstantBuffer;
-
-	SArrowConstantBuffer m_ArrowConstantBuffer;
-	int m_UIDTest{ };
-
-	ID3D11Buffer* m_IndexBuffer;
-	ID3D11Buffer* m_VertexBuffer;
-	DXGI_FORMAT m_Format;
-	int m_Offset;
-
-	std::uint16_t m_MaterialHashIndex;
 };
 
 

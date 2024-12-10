@@ -178,3 +178,4 @@ public:
 
 	CCoreClock* m_pCoreClock{ nullptr };
 };
+
