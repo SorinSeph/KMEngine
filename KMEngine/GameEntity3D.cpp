@@ -5,27 +5,6 @@ XMMATRIX CGameEntity3D::TransformationMatrix()
 	return m_ScaleMatrix * m_RotationMatrix * m_LocationMatrix;
 }
 
-
-void CGameEntity3D::SetSimpleColorVerticesList(std::vector<SSimpleColorVertex> VerticesList)
-{
-	m_SimpleColorVerticesList = VerticesList;
-}
-
-std::vector<SSimpleVertex> CGameEntity3D::GetVerticesList()
-{
-	return m_VerticesList;
-}
-
-std::vector<SSimpleColorVertex> CGameEntity3D::GetSimpleColorVerticesList()
-{
-	return m_SimpleColorVerticesList;
-}
-
-std::vector<SColorVertex> CGameEntity3D::GetColorVerticesList()
-{
-	return m_ColorVerticesList;
-}
-
 void CGameEntity3D::SetLocation(XMMATRIX Location)
 {
 	m_ConstantBuffer.mWorld = Location;
@@ -102,23 +81,6 @@ void CGameEntity3D::SetScale(float InX, float InY, float InZ)
 	m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
-SConstantBuffer CGameEntity3D::GetConstantBuffer()
-{
-	return m_ConstantBuffer;
-}
-
-SArrowConstantBuffer CGameEntity3D::GetArrowConstantBuffer()
-{
-	return m_ArrowConstantBuffer;
-}
-
-void CGameEntity3D::SetCollisionBoxCenter(XMFLOAT3 NewCenter)
-{
-	m_Collision.AABox.Center = NewCenter;
-	m_Collision.AABox.Extents = XMFLOAT3(0.5f, 0.5f, 0.5f);
-	m_Collision.CollisionType = DISJOINT;
-}
-
 void CGameEntity3D::SetUID(std::string uid)
 {
 	m_UID = uid;
@@ -134,33 +96,9 @@ SCollisionComponent CGameEntity3D::GetCollisionComponent()
 	return m_Collision;
 }
 
-// Test
-
-void CGameEntity3D::SetUIDTest(int uid)
+SConstantBuffer CGameEntity3D::GetConstantBuffer()
 {
-	m_UIDTest = uid;
-}
-
-int CGameEntity3D::GetUIDTest()
-{
-	return m_UIDTest;
-}
-
-void CGameEntity3D::SetCollisionParams(XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
-{
-	m_Collision.AABox.Center = Center;
-	m_Collision.AABox.Extents = Extents;
-	m_Collision.CollisionType = CollisionType;
-}
-
-DXGI_FORMAT CGameEntity3D::GetOwnFormat()
-{
-	return m_Format;
-}
-
-int CGameEntity3D::GetOwnOffset()
-{
-	return m_Offset;
+    return m_ConstantBuffer;
 }
 
 _Use_decl_annotations_

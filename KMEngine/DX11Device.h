@@ -118,7 +118,6 @@ public:
 
 	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
 
-
 	/**
 	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
 	*/
@@ -128,8 +127,6 @@ public:
 	* Check the intersection of the raycast with the first cube
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
-
-	void AddOutline();
 
 	void AddGizmo();
 
@@ -212,28 +209,11 @@ public:
 	/**
 	* For InitShaders2()
 	*/
-	ID3D11VertexShader* m_VertexShader2{ nullptr };
-	ID3D11PixelShader* m_PixelShader2{ nullptr };
 	ID3D11InputLayout* m_VertexLayout2{ nullptr };
 	ID3D11Buffer* m_VertexBuffer2{ nullptr };
 	ID3D11Buffer* m_IndexBuffer2{ nullptr };
 	ID3D11Buffer* m_ConstantBuffer2{ nullptr };
 	//ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
-
-	/**
-	* For InitShaders3()
-	*/
-	ID3D11VertexShader* m_VertexShader3{ nullptr };
-	ID3D11PixelShader* m_PixelShader3{ nullptr };
-	ID3D11InputLayout* m_VertexLayout3{ nullptr };
-	ID3D11Buffer* m_VertexBuffer3{ nullptr };
-	ID3D11Buffer* m_IndexBuffer3{ nullptr };
-	ID3D11Buffer* m_ConstantBuffer3{ nullptr };
-	//ID3D11ShaderResourceView* m_TextureRV3{ nullptr };
-
-	// Used for line
-	ID3D11Buffer* m_VertexBuffer4{ nullptr };
-	ID3D11Buffer* m_ConstantBuffer4{ nullptr };
 
 	ID3D11InputLayout* m_LinetraceVertexLayout{ nullptr };
 	ID3D11Buffer* m_LinetraceVertexBuffer{ nullptr };
@@ -269,7 +249,7 @@ private:
 
 	CGameEntity3D m_CubeEntity = { };
 	CGameEntity3D m_CubeEntity2 = { };
-	CGameEntity3D m_CubeOutlineEntity{ };
+	//CGameEntity3D m_CubeOutlineEntity{ };
 	CGameEntity3D m_Linetrace{ };
 	CGameEntity3D m_CubeOutline{ };
 

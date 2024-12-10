@@ -72,11 +72,6 @@ void CScene::RemoveLastEntityFromScene()
 	Logger.Log("Scene.cpp, RemoveLastEntityFromScene2()\n");
 }
 
-void CScene::SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType)
-{
-	m_SceneList.m_GameEntityList.at(Location).SetCollisionParams(Center, Extents, CollisionType);
-}
-
 std::vector<CGameEntity3D>& CScene::GetSceneList()
 {
 	return m_SceneList.m_GameEntityList;

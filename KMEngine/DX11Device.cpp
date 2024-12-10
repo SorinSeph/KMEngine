@@ -367,6 +367,8 @@ void CDX11Device::InitCubeOutline()
     m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+
     ID3DBlob* pVSBlob = nullptr;
     // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
     m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.vs", "VS", "vs_5_0", &pVSBlob);
@@ -379,7 +381,7 @@ void CDX11Device::InitCubeOutline()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -387,7 +389,7 @@ void CDX11Device::InitCubeOutline()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutline.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -425,7 +427,8 @@ void CDX11Device::InitCubeOutline()
     }
 
     // Create the pixel shader
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
+	ID3D11PixelShader* PixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &PixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
     {
@@ -433,7 +436,7 @@ void CDX11Device::InitCubeOutline()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetPixelShader(m_PixelShader2);
+    m_CubeOutline.m_DXResConfig.SetPixelShader(PixelShader);
     //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
 
     D3D11_BUFFER_DESC bd{};
@@ -443,16 +446,6 @@ void CDX11Device::InitCubeOutline()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutline.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutline.GetSimpleColorVerticesList().at(i);
-    }
-
 
     SSimpleColorVertex CubeOutlineVertices[] = {
                 { XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
@@ -489,7 +482,6 @@ void CDX11Device::InitCubeOutline()
     };
 
     InitData.pSysMem = CubeOutlineVertices;
-    //InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -608,6 +600,7 @@ void CDX11Device::InitCubeOutline2()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D m_CubeOutlineEntity{ };
 
     m_CubeOutlineEntity = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::CubeTest);
     m_CubeOutlineEntity.SetLocationF(-3.0f, 0.0f, 0.0f);
@@ -656,7 +649,9 @@ void CDX11Device::InitCubeOutline2()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    ID3D11VertexShader* VertexShader{ nullptr };
+
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -664,7 +659,7 @@ void CDX11Device::InitCubeOutline2()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -702,7 +697,8 @@ void CDX11Device::InitCubeOutline2()
     }
 
     // Create the pixel shader
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
+	ID3D11PixelShader* PixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &PixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
     {
@@ -710,7 +706,7 @@ void CDX11Device::InitCubeOutline2()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetPixelShader(m_PixelShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetPixelShader(PixelShader);
     //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
 
     D3D11_BUFFER_DESC bd{};
@@ -720,16 +716,6 @@ void CDX11Device::InitCubeOutline2()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutlineEntity.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutlineEntity.GetSimpleColorVerticesList().at(i);
-    }
-    InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -838,6 +824,7 @@ void CDX11Device::InitSingleCubeOutline()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D m_CubeOutlineEntity{ };
 
     m_CubeOutlineEntity = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::CubeTest);
     m_CubeOutlineEntity.SetLocationF(3.0f, 0.0f, 0.0f);
@@ -875,6 +862,8 @@ void CDX11Device::InitSingleCubeOutline()
     m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+
     ID3DBlob* pVSBlob = nullptr;
     // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
     m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.vs", "VS", "vs_5_0", &pVSBlob);
@@ -887,7 +876,7 @@ void CDX11Device::InitSingleCubeOutline()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -895,7 +884,7 @@ void CDX11Device::InitSingleCubeOutline()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -933,6 +922,8 @@ void CDX11Device::InitSingleCubeOutline()
     }
 
     // Create the pixel shader
+    ID3D11PixelShader* m_PixelShader2{ nullptr };
+
     m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
     pPSBlob->Release();
     if (FAILED(m_HR))
@@ -951,16 +942,6 @@ void CDX11Device::InitSingleCubeOutline()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutlineEntity.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutlineEntity.GetSimpleColorVerticesList().at(i);
-    }
-    InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -1362,7 +1343,7 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
     {
         fDistance = fDist;
         Collision.CollisionType = INTERSECTS;
-        AddOutline();
+        //AddOutline();
         SLogger.Log("DX11_Device.cpp - CheckCollision(): Collision TRUE");
         //AddGizmo();
     }
@@ -1381,13 +1362,6 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
     //}
 }
 
-void CDX11Device::AddOutline()
-{
-    CScene& SScene = CScene::GetScene();
-    SScene.AddEntityToScene(m_CubeOutlineEntity);
-    SceneLoc++;
-}
-
 void CDX11Device::AddGizmo()
 {
     CScene& SScene = CScene::GetScene();
@@ -1400,7 +1374,6 @@ void CDX11Device::CleanupDX11Device()
     if (m_pImmediateContext) m_pImmediateContext->ClearState();
 
     if (m_ConstantBuffer) m_ConstantBuffer->Release();
-    if (m_ConstantBuffer3) m_ConstantBuffer3->Release();
     if (m_VertexBuffer) m_VertexBuffer->Release();
     for (auto indexBuffer : m_IndexBufferArray)
     {
@@ -2239,15 +2212,15 @@ HRESULT CDX11Device::InitSolidColorCube()
     }
 
     // Create the vertex shader
-    ID3D11VertexShader* TempVertexShader{ nullptr };
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &TempVertexShader);
+    ID3D11VertexShader* VertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
     if (FAILED(m_HR))
     {
         pVSBlob->Release();
         return m_HR;
     }
     auto VertexShaderLambda = [=]() {
-        m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
+        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
     };
     CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
@@ -2360,16 +2333,16 @@ HRESULT CDX11Device::InitSolidColorCube()
             //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) }
     };
 
-    D3D11_BUFFER_DESC bd{};
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SSimpleColorVertex) * 24;
-    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    bd.CPUAccessFlags = 0;
+    D3D11_BUFFER_DESC BufferDescriptor{};
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
 
     ID3D11Buffer* TempVertexBuffer{ nullptr };
     D3D11_SUBRESOURCE_DATA InitData{};
     InitData.pSysMem = vertices;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempVertexBuffer);
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
@@ -2385,7 +2358,7 @@ HRESULT CDX11Device::InitSolidColorCube()
 
 
     // Create index buffer
-    WORD indices[] =
+    WORD Indices[] =
     {
 	    0, 1, 2,
 	    0, 2, 3,
@@ -2406,21 +2379,21 @@ HRESULT CDX11Device::InitSolidColorCube()
 	    3, 4, 0,
     };
 
-    ID3D11Buffer* TempIndexBuffer{ nullptr };
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
-    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    bd.CPUAccessFlags = 0;
-    InitData.pSysMem = indices;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempIndexBuffer);
+    ID3D11Buffer* IndexBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    InitData.pSysMem = Indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &IndexBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
     // Set index buffer
-    m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
     auto IndexBufferLambda = [=]() {
-        m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+        m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
     };
     CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
@@ -2429,11 +2402,11 @@ HRESULT CDX11Device::InitSolidColorCube()
 
     // Create the constant buffer
     ID3D11Buffer* TempConstantBuffer{ nullptr };
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SConstantBuffer);
-    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    bd.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
     if (FAILED(m_HR))
         return m_HR;
 

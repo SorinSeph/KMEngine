@@ -60,7 +60,7 @@ void CPrimitiveGeometryFactory::SetUID(CGameEntity3D& Entity3D)
 
 void CPrimitiveGeometryFactory::SetUIDTest(CGameEntity3D& Entity3D)
 {
-    Entity3D.SetUIDTest(CPrimitiveGeometryFactory::m_Entity3D_UID);
+    //Entity3D.SetUID(CPrimitiveGeometryFactory::m_Entity3D_UID);
     CPrimitiveGeometryFactory::m_Entity3D_UID++;
 }
 
@@ -113,7 +113,6 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m
                 { XMFLOAT3(-5.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
             };
 
-            Entity.SetSimpleColorVerticesList(VerticesList);
             return Entity;
             break;
         }
@@ -261,7 +260,6 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m
                 //{ XMFLOAT3(-0.25f, 0.25f, 0.25f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
             };
 
-            Entity.SetSimpleColorVerticesList(VerticesList);
             return Entity;
             break;
         }
@@ -410,18 +408,14 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m
                 49, 46, 47,
                 49, 47, 48
             };
-
-            Entity.SetSimpleColorVerticesList(VerticesList);
-
-            Entity.PhysicalMesh.SetSimpleColorVerticesList(VerticesList);
             Entity.PhysicalMesh.SetIndicesList(ArrowIndices);
 
             TEntityPhysicalMesh ArrowPhysicalMesh;
 
-            Entity.m_PhysicalMeshVector.push_back(ArrowPhysicalMesh);
-            Entity.m_PhysicalMeshVector.at(0).SetSimpleColorVerticesList(VerticesList);
-            Entity.m_PhysicalMeshVector.at(0).SetIndicesList(ArrowIndices);
-            Entity.m_PhysicalMeshVector.at(0).SetStride(sizeof(SSimpleColorVertex));
+            //Entity.m_PhysicalMeshVector.push_back(ArrowPhysicalMesh);
+            //Entity.m_PhysicalMeshVector.at(0).SetSimpleColorVerticesList(VerticesList);
+            //Entity.m_PhysicalMeshVector.at(0).SetIndicesList(ArrowIndices);
+            //Entity.m_PhysicalMeshVector.at(0).SetStride(sizeof(SSimpleColorVertex));
             return Entity;
             break;
         }
@@ -511,6 +505,5 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateLinetrace(float X_Origin, float Y
         { XMFLOAT3(X_Destination, Y_Destination, Z_Destination), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
     };
 
-    LineEntity.SetSimpleColorVerticesList(VerticesList);
     return LineEntity;
 }
