@@ -19,7 +19,14 @@
 #include "Logger.h"
 #include "Math.h"
 
-static BOOL g_DoesFrustumContain;
+static BOOL g_DoesFrustumContain = false;
+
+static float g_Near;
+static float g_Far;
+static float g_RightSlope;
+static float g_LeftSlope;
+static float g_TopSlope;
+static float g_BottomSlope;
 
 static WORD* GetIndices(std::vector<WORD> InVector)
 {
@@ -90,6 +97,8 @@ public:
 	/**
 	* Functional but WIP functions for initializing various game primitives
 	*/
+
+	ContainmentType CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube);
 
 	HRESULT InitTexturedCube();
 
