@@ -100,7 +100,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     * WIP Collision checking section, to be refactored into its own function
     */
 
-
+    
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
@@ -128,8 +128,9 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-                CB.mDoesFrustumContain = g_DoesFrustumContain;
+                //CB.mDoesFrustumContain = g_DoesFrustumContain;
                 m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
             }
             else 
             {

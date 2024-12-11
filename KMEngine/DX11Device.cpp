@@ -1873,6 +1873,10 @@ HRESULT CDX11Device::InitTexturedCube()
 
 void CDX11Device::InterpMoveEntity()
 {
+	g_DoesFrustumContain = true;
+    CGameEntity3DComponent* Cube{ nullptr };
+    CGameEntity3DComponent* Frustum{ nullptr };
+
 	CLogger& Logger = CLogger::GetLogger();
     Logger.Log("InterpMoveCube Called");
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
@@ -1884,19 +1888,36 @@ void CDX11Device::InterpMoveEntity()
     {
 		if (SceneIt.m_GameEntityTag == "SolidColorCubeEntity")
 		{
-			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
-            //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
-            Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
-            EntityComponent.SetLocationF(InterpMoveLoc, 0.0f, 5.f);
-            //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
-            XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
-                0.0f,
-                XMConvertToRadians(InterpMoveLoc * 50),
-                0.0f
-            );
-            EntityComponent.m_QuatRotationMatrix = XMMatrixRotationQuaternion(quaternionRotation);
+            Cube = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
 		}
-    }
+		else if (SceneIt.m_GameEntityTag == "FrustumEntity")
+		{
+			Frustum = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+		}
+    }	
+   // auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+    //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
+    Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
+    Cube->SetLocationF(InterpMoveLoc, 0.0f, 5.f);
+    //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
+    XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
+        0.0f,
+        XMConvertToRadians(InterpMoveLoc * 50),
+        0.0f
+    );
+    Cube->m_QuatRotationMatrix = XMMatrixRotationQuaternion(quaternionRotation);
+
+	auto CollisionType = CollisionCheck(Frustum, Cube);
+    SCollisionBuffer& CB = Frustum->m_CollisionBuffer;
+
+    if (CollisionType == ContainmentType::DISJOINT)
+        CB.mDoesFrustumContain = false;
+    else if (CollisionType == ContainmentType::INTERSECTS)
+        CB.mDoesFrustumContain = true;
+	else if (CollisionType == ContainmentType::CONTAINS)
+        CB.mDoesFrustumContain = true;
+
+	Logger.Log("InterpMoveCube Function, ContainmentType = ", CollisionType);
 }
 
 HRESULT CDX11Device::InitTexturedCube2()
@@ -2198,7 +2219,7 @@ HRESULT CDX11Device::InitSolidColorCube()
 
     CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
     CubeEntityComponent.SetLocationF(10.f, 0.0f, 5.0f);
-    CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
+    //CubeEntityComponent.SetScale(15.25f, 15.25f, 15.25f);
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
@@ -2756,6 +2777,94 @@ HRESULT CDX11Device::InitFrustum()
     return S_OK;
 }
 
+ContainmentType CDX11Device::CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube)
+{
+    XMVECTOR FrustumOrigin = Frustum->GetLocationVector();
+	XMFLOAT4 FrustumOrientationF4{ 0, 0, 0, 1 };
+    XMVECTOR FrustumOrientation = XMLoadFloat4(&FrustumOrientationF4);
+
+	XMFLOAT3 CubeOrigin{ Cube->GetLocationX(), Cube->GetLocationY(), Cube->GetLocationZ() };
+    XMVECTOR BoxOrigin = XMLoadFloat3(&CubeOrigin);
+	XMFLOAT3 CubeExtentsF3{ 1.0f, 1.0f, 1.0f };
+    XMVECTOR BoxExtents = XMLoadFloat3(&CubeExtentsF3);
+    XMVECTOR BoxOrientation = XMLoadFloat4(&FrustumOrientationF4);
+
+    // Init frustum planes
+    XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, g_Near);
+    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, FrustumOrientation, FrustumOrigin);
+    NearPlane = XMPlaneNormalize(NearPlane);
+
+    XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -g_Far);
+    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, FrustumOrientation, FrustumOrigin);
+    FarPlane = XMPlaneNormalize(FarPlane);
+
+    XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -g_RightSlope, 0.0f);
+    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, FrustumOrientation, FrustumOrigin);
+    RightPlane = XMPlaneNormalize(RightPlane);
+
+    XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, g_LeftSlope, 0.0f);
+    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, FrustumOrientation, FrustumOrigin);
+    LeftPlane = XMPlaneNormalize(LeftPlane);
+
+    XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -g_TopSlope, 0.0f);
+    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, FrustumOrientation, FrustumOrigin);
+    TopPlane = XMPlaneNormalize(TopPlane);
+
+    XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, g_BottomSlope, 0.0f);
+    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, FrustumOrientation, FrustumOrigin);
+    BottomPlane = XMPlaneNormalize(BottomPlane);
+
+
+
+    // Actual collision check
+    assert(DirectX::Internal::XMQuaternionIsUnit(BoxOrientation));
+
+    // Set w of the center to one so we can dot4 with a plane.
+    BoxOrigin = XMVectorInsert<0, 0, 0, 0, 1>(BoxOrigin, XMVectorSplatOne());
+
+    // Build the 3x3 rotation matrix that defines the box axes.
+    XMMATRIX R = XMMatrixRotationQuaternion(BoxOrientation);
+
+    XMVECTOR Outside, Inside;
+
+    // Test against each plane.
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], NearPlane, Outside, Inside);
+
+    XMVECTOR AnyOutside = Outside;
+    XMVECTOR AllInside = Inside;
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], FarPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], RightPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], LeftPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], TopPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], BottomPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    // If the box is outside any plane it is outside.
+    if (XMVector4EqualInt(AnyOutside, XMVectorTrueInt()))
+        return DISJOINT;
+
+    // If the box is inside all planes it is inside.
+    if (XMVector4EqualInt(AllInside, XMVectorTrueInt()))
+        return CONTAINS;
+
+    // The box is not inside all planes or outside a plane, it may intersect.
+    return INTERSECTS;
+}
+
 _Use_decl_annotations_
 inline void XM_CALLCONV CDX11Device::CreateFrustumFromMatrix(CFrustumComponent& Out, FXMMATRIX Projection, bool rhcoords) noexcept
 {
@@ -2793,9 +2902,13 @@ inline void XM_CALLCONV CDX11Device::CreateFrustumFromMatrix(CFrustumComponent& 
     Points[3] = XMVectorMultiply(Points[3], XMVectorReciprocal(XMVectorSplatZ(Points[3])));
 
     Out.RightSlope = XMVectorGetX(Points[0]);
+    g_RightSlope = XMVectorGetX(Points[0]);
     Out.LeftSlope = XMVectorGetX(Points[1]);
+    g_LeftSlope = XMVectorGetX(Points[1]);
     Out.TopSlope = XMVectorGetY(Points[2]);
+    g_TopSlope = XMVectorGetY(Points[2]);
     Out.BottomSlope = XMVectorGetY(Points[3]);
+    g_BottomSlope = XMVectorGetY(Points[3]);
 
     // Compute near and far.
     Points[4] = XMVectorMultiply(Points[4], XMVectorReciprocal(XMVectorSplatW(Points[4])));
@@ -2804,12 +2917,16 @@ inline void XM_CALLCONV CDX11Device::CreateFrustumFromMatrix(CFrustumComponent& 
     if (rhcoords)
     {
         Out.Near = XMVectorGetZ(Points[5]);
+        g_Near = XMVectorGetZ(Points[5]);
         Out.Far = XMVectorGetZ(Points[4]);
+        g_Far = XMVectorGetZ(Points[4]);
     }
     else
     {
         Out.Near = XMVectorGetZ(Points[4]);
+		g_Near = XMVectorGetZ(Points[4]);
         Out.Far = XMVectorGetZ(Points[5]);
+		g_Far = XMVectorGetZ(Points[5]);
     }
 }
 
