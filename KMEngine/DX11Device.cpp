@@ -12,7 +12,7 @@ int gClicked = 0;
 using namespace Internal;
 using namespace std;
 
-XMMATRIX CDX11Device::m_WorldMatrix;
+XMMATRIX CDX11Device::m_WorldMatrix{ XMMatrixIdentity() };
 XMMATRIX CDX11Device::m_ViewMatrix;
 XMMATRIX CDX11Device::m_ProjectionMatrix;
 
@@ -1178,7 +1178,7 @@ bool CDX11Device::DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 
 }
 
 
-void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
+void CDX11Device::Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
 {
 	// Lambdas: vertes shader, pixel shader, vertex buffer, constant buffer
     CScene& SScene = CScene::GetScene();
@@ -1187,7 +1187,7 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
 
     CGameEntity3D Linetrace;
     Linetrace.m_GameEntityTag = "Raycast";
-    Linetrace.SetLocationF(0.0f, 0.0f, 0.0f);
+	CGameEntity3DComponent LinetraceComponent;
 
     ID3DBlob* pVSBlob = nullptr;
     m_HR = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_5_0", &pVSBlob);
@@ -1229,10 +1229,10 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
         m_pImmediateContext->PSSetShader(m_LinetracePixelShader, nullptr, 0);
     };
 
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     SSimpleVertex RayVertices[] = {
-        { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT2(1.0f, 0.0f)},
+        { XMFLOAT3(0, 0, 0), XMFLOAT2(1.0f, 0.0f)},
         { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT2(1.0f, 0.0f)}
     };
 
@@ -1259,7 +1259,7 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
         m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
     };
 
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
     //m_HR = m_pD3D11Device->CreateBuffer(&RayBuffer, nullptr, &m_LinetraceConstantBuffer);
     //SScene.SetConstantBuffer(SceneLoc, m_LinetraceConstantBuffer);
 
@@ -1276,8 +1276,13 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
     auto ConstantBufferLambda = [=]() {
         m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    Linetrace.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    LinetraceComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+    CSceneGraphNode<CGameEntity3DComponent>* LinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    LinetraceComponentNode->m_TType = LinetraceComponent;
+
+    Linetrace.m_SceneGraph.m_pRootNode = LinetraceComponentNode;
 
     CLogger& SLogger = CLogger::GetLogger();
     SLogger.Log("InitLine, called from DX11_Device.cpp");

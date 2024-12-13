@@ -163,25 +163,42 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     m_DX11evice.m_SwapChain->Present(0, 0);
 }
 
-void CRenderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ)
+void CRenderer::Raycast(float DestinationX, float DestinationY)
 {
-    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-    CScene& SScene = CScene::GetScene();
-    CLogger& SLogger = CLogger::GetLogger();
+	CLogger& Logger = CLogger::GetLogger();
 
-    m_DX11evice.InitRaycast(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+    XMVECTOR Origin = XMVector3Unproject(
+        XMVECTOR{0, 0, 0},
+        0,
+        0,
+        518,
+        825,
+        0,
+        1,
+        CDX11Device::m_ProjectionMatrix,
+        CDX11Device::m_ViewMatrix,
+        CDX11Device::m_WorldMatrix);
 
-    SLogger.Log(
-        "Renderer_.cpp, Raycast() : ",
-        "\nOriginX = ", OriginX,
-        "\nOriginY = ", OriginY,
-        "\nOriginZ = ", OriginZ,
-        "\nDestX = ", DestX,
-        "\nDestY = ", DestY,
-        "\nDestZ = ", DestZ
-    );
+	XMVECTOR Destination = XMVector3Unproject(
+		XMVECTOR{ DestinationX, DestinationY, 1 },
+		0,
+		0,
+		518,
+		825,
+		0,
+		1,
+		CDX11Device::m_ProjectionMatrix,
+		CDX11Device::m_ViewMatrix,
+		CDX11Device::m_WorldMatrix);
 
-    //m_DX11Device.CheckCollision(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+	XMVECTOR Direction = XMVector3Normalize(Destination - Origin);
+    XMFLOAT3 OriginF;
+	XMStoreFloat3(&OriginF, Origin);
+	XMFLOAT3 DirectionF;
+	XMStoreFloat3(&DirectionF, Direction);
+
+    m_DX11evice.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
+    Logger.Log("Renderer.cpp, Raycast2()");
 }
 
 void CRenderer::AddOutline()
