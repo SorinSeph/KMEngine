@@ -37,7 +37,7 @@ public:
         }
     }
 
-    void Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
+    void Raycast(float DestinationX, float DestinationY);
 
     void AddOutline();
 

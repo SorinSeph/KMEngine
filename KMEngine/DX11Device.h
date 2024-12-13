@@ -92,7 +92,7 @@ public:
 	void InitViewportFinal();
 	void CleanupDX11Device();
 
-	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+	void Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
 	* Functional but WIP functions for initializing various game primitives

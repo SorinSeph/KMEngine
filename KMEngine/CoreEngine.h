@@ -87,9 +87,13 @@ public:
             XMFLOAT4 RayOriginFloat4;
             XMStoreFloat4(&RayOriginFloat4, DestinationPointUnprojected);
 
-            RaycastOriginX = OriginPointUnprojectedFloat3.x;
-            RaycastOriginY = OriginPointUnprojectedFloat3.y;
-            RaycastOriginZ = OriginPointUnprojectedFloat3.z;
+            //RaycastOriginX = OriginPointUnprojectedFloat3.x;
+            //RaycastOriginY = OriginPointUnprojectedFloat3.y;
+            //RaycastOriginZ = OriginPointUnprojectedFloat3.z;
+
+            RaycastOriginX = 0;
+            RaycastOriginY = 0;
+            RaycastOriginZ = 0;
 
             RaycastDestinationX = RayDirectionFloat4.x * 100;
             RaycastDestinationY = RayDirectionFloat4.y * 100;
@@ -97,7 +101,8 @@ public:
             //DX11Device* dx11Device = DX11Device::GetDX11Device();
             //dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
 
-            m_Renderer.Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+            //m_Renderer.Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
+            //m_Renderer.Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
         }
 
         SetCanRaycast(false);
