@@ -7,6 +7,8 @@ HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LP
 class CRenderer
 {
 public:
+    CRenderer();
+
     CRenderer(HWND Viewport);
 
     void SetViewport(HWND InViewport);

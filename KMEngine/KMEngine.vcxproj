@@ -145,6 +145,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseModule.h" />
     <ClInclude Include="CoreClock.h" />
     <ClInclude Include="CoreEngine.h" />
     <ClInclude Include="CoreWindowsApp.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
+    <ClInclude Include="GraphicsModule.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
@@ -167,6 +169,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="TerrainGenerator.h" />
+    <ClInclude Include="UIModule.h" />
     <ClInclude Include="ViewportWindow.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

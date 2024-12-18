@@ -1,42 +1,42 @@
 ﻿  KMEngine.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(64,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(90,27): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(64,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(143,28): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(68,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(174,43): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(68,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(175,38): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(187,27): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(231,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(240,28): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(232,46): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(271,43): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(204,30): warning C4101: 'y': unreferenced local variable
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(272,38): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(210,26): warning C4101: 'hSubMenu': unreferenced local variable
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(460,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(66,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(461,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(66,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(433,30): warning C4101: 'y': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(70,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(439,22): warning C4101: 'hSubMenu': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(70,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
   Renderer.cpp
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(51,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(53,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
