@@ -89,7 +89,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             float mouseXUnprojected = ((2 * mouseX) / m_ViewportWidth - 1);
             float mouseYUnprojected = 1 - ((2 * mouseY) / m_ViewportHeight);
 
-
             g_RaycastX = mouseX;
             g_RaycastY = mouseY;
 

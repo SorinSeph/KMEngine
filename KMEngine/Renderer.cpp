@@ -4,6 +4,8 @@
 #include "Logger.h"
 #include "Math.h"
 
+CRenderer::CRenderer() {}
+
 CRenderer::CRenderer(HWND Viewport)
 {
     CLogger& Logger = CLogger::GetLogger();
