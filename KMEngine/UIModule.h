@@ -138,7 +138,7 @@ public:
         //    NULL
         //);
 
-        ViewportHwnd = m_ViewportWindow.GetViewportWnd();
+        ViewportHwnd = m_ViewportWindow.GetViewportHwnd();
 
         RightToolbarHwnd = CreateWindow(
             SIDETOOLBAR_NAME,
@@ -163,14 +163,14 @@ public:
         Rid[0].usUsagePage = 0x01;
         Rid[0].usUsage = 0x02;
         Rid[0].dwFlags = RIDEV_INPUTSINK;
-        Rid[0].hwndTarget = m_ViewportWindow.GetViewportWnd();
+        Rid[0].hwndTarget = m_ViewportWindow.GetViewportHwnd();
         RegisterRawInputDevices(Rid, 1, sizeof(Rid[0]));
 
         ShowWindow(hwnd, nCmdShow);
         UpdateWindow(hwnd);
 
         RECT RectViewport;
-        GetClientRect(m_ViewportWindow.GetViewportWnd(), &RectViewport);
+        GetClientRect(m_ViewportWindow.GetViewportHwnd(), &RectViewport);
         ViewportWidth = RectViewport.left + RectViewport.right;
         ViewportHeight = RectViewport.bottom;
 
@@ -316,29 +316,29 @@ LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LP
 
     switch (message)
     {
-    case WM_CREATE:
-    {
-        SetWindowLong(hwnd, 0, 0);
-        return 0;
-    }
+        case WM_CREATE:
+        {
+            SetWindowLong(hwnd, 0, 0);
+            return 0;
+        }
 
-    case WM_PAINT:
-    {
-        hdc = BeginPaint(hwnd, &ps);
+        case WM_PAINT:
+        {
+            hdc = BeginPaint(hwnd, &ps);
 
-        GetClientRect(hwnd, &rect);
-        Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-        HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 40));
-        FillRect(hdc, &rect, Brush);
+            GetClientRect(hwnd, &rect);
+            Rectangle(hdc, 0, 0, rect.right, rect.bottom);
+            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 40));
+            FillRect(hdc, &rect, Brush);
 
-        EndPaint(hwnd, &ps);
-        return 0;
-    }
-    case WM_DESTROY:
-    {
-        PostQuitMessage(0);
-        return 0;
-    }
+            EndPaint(hwnd, &ps);
+            return 0;
+        }
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
     }
     return DefWindowProc(hwnd, message, wParam, lParam);
 }

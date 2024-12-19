@@ -220,7 +220,7 @@ public:
         //    NULL
         //);
 
-        ViewportHwnd = m_ViewportWindow.GetViewportWnd();
+        ViewportHwnd = m_ViewportWindow.GetViewportHwnd();
 
         RightToolbarHwnd = CreateWindow(
             SIDETOOLBAR_NAME,
@@ -245,18 +245,18 @@ public:
         Rid[0].usUsagePage = 0x01;
         Rid[0].usUsage = 0x02;
         Rid[0].dwFlags = RIDEV_INPUTSINK;
-        Rid[0].hwndTarget = m_ViewportWindow.GetViewportWnd();
+        Rid[0].hwndTarget = m_ViewportWindow.GetViewportHwnd();
         RegisterRawInputDevices(Rid, 1, sizeof(Rid[0]));
 
         ShowWindow(hwnd, m_NCmdShow);
         UpdateWindow(hwnd);
 
         RECT RectViewport;
-        GetClientRect(m_ViewportWindow.GetViewportWnd(), &RectViewport);
+        GetClientRect(m_ViewportWindow.GetViewportHwnd(), &RectViewport);
         ViewportWidth = RectViewport.left + RectViewport.right;
         ViewportHeight = RectViewport.bottom;
 
-        m_Renderer.SetViewport(m_ViewportWindow.GetViewportWnd());
+        m_Renderer.SetViewport(m_ViewportWindow.GetViewportHwnd());
         m_Renderer.InitRenderer();
 
         return S_OK;

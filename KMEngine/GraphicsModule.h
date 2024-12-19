@@ -2,10 +2,10 @@
 #include "BaseModule.h"
 #include "Renderer.h"
 
-class Graphics_Module : public CBaseModule
+class CGraphicsModule : public CBaseModule
 {
 public:
-	Graphics_Module() {};
+	CGraphicsModule() {};
 
 	CRenderer m_Renderer;
 };

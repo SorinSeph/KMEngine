@@ -37,7 +37,7 @@ public:
 
 	void CreateViewport();
 
-	HWND GetViewportWnd();
+	HWND GetViewportHwnd();
 
 	float GetXRotation();
 	float GetYRotation();
@@ -66,12 +66,14 @@ public:
 	bool InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd);
 	void DetectKeyboardInput();
 
+	static HWND m_ViewportHwnd;
+
 private:
 
 	float ConvertToRadians(float Degrees);
 
 	static HWND m_ParentHwnd;
-	static HWND m_ViewportHwnd;
+
 	static float m_ViewportWidth;
 	static float m_ViewportHeight;
 	static bool bClipCursor;

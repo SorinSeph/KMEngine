@@ -10,6 +10,7 @@
 //#include "GameEntityBuilder.h"
 #include "BaseModule.h"
 #include "UIModule.h"
+#include "GraphicsModule.h"
 #include "TerrainGenerator.h"
 
 //const wchar_t CLASS_NAME[] = L"KME Engine";
@@ -54,8 +55,9 @@ public:
         , m_RotY{ m_ViewportWindow.GetYRotation() }
         , m_RotX2{ m_ViewportWindow.GetXRotation3() }
         , m_RotY2{ m_ViewportWindow.GetYRotation3() }
-        , m_Logger{ CLogger::GetLogger()}
-    {}
+        , m_Logger{ CLogger::GetLogger() }
+    {
+    }
 
     void RayCast(long InX, long InY)
     {
@@ -123,15 +125,21 @@ public:
     // UI Module
     HRESULT InitEngine()
     {
-        // Initialize modules
         CMediator Mediator;
 
         m_UIModule.SetMediator(Mediator);
         m_UIModule.Initialize(m_HInstance, m_NCmdShow);
 
+        m_GraphicsModule.SetMediator(Mediator);
 
-        m_Renderer.SetViewport(m_ViewportWindow.GetViewportWnd());
-        m_Renderer.InitRenderer();
+        m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
+            GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
+        }, m_GraphicsModule);
+
+        //m_Renderer.SetViewport(m_ViewportWindow.GetViewportHwnd());
+        //m_Renderer.InitRenderer();
+		//m_GraphicsModule.m_Renderer.SetViewport(viewportHwnd);
+        m_GraphicsModule.m_Renderer.InitRenderer();
 
         //m_World.Init();
         //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
@@ -155,7 +163,7 @@ public:
 
     CRenderer* GetRenderer()
     {
-        return &m_Renderer;
+        return &(m_GraphicsModule.m_Renderer);
     }
 
     float GetXRotation()
@@ -283,7 +291,9 @@ private:
 
     CLogger& m_Logger;
 
+    //std::unique_ptr<CMediator> m_Mediator;
     CUIModule m_UIModule;
+    CGraphicsModule m_GraphicsModule;
 };
 
 //LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

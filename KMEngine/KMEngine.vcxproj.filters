@@ -140,6 +140,9 @@
     <ClInclude Include="GraphicsModule.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleInitializer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="solid_color.ps" />

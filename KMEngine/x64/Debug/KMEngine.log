@@ -24,19 +24,16 @@ C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(204,30): warning C410
 C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.h(210,26): warning C4101: 'hSubMenu': unreferenced local variable
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(66,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(68,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(66,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(68,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(70,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(72,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(70,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(72,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   (compiling source file 'KMEngine.cpp')
   
-  Renderer.cpp
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(53,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
   KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
