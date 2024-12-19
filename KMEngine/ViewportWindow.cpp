@@ -200,7 +200,7 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-HWND CViewportWindow::GetViewportWnd()
+HWND CViewportWindow::GetViewportHwnd()
 {
     return m_ViewportHwnd;
 }
