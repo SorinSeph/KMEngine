@@ -141,6 +141,8 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
+    <ClCompile Include="UIModule.cpp" />
+    <ClCompile Include="ViewportMessage.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -171,6 +173,7 @@
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="TerrainGenerator.h" />
     <ClInclude Include="UIModule.h" />
+    <ClInclude Include="ViewportMessage.h" />
     <ClInclude Include="ViewportWindow.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

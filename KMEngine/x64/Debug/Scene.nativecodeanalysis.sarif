@@ -1,0 +1,517 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'TEntityPhysicalMesh::m_Stride' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
+                },
+                "region": {
+                  "startLine": 73,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "TEntityPhysicalMesh::{ctor}",
+                  "decoratedName": "??0TEntityPhysicalMesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TEntityPhysicalMesh::m_Stride"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_CollisionBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_CollisionBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationVector' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationVector"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3DComponent::DXResourceHashKey' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3DComponent::{ctor}",
+                  "decoratedName": "??0CGameEntity3DComponent@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3DComponent::DXResourceHashKey"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CScene::m_SceneConstantBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CScene::{ctor}",
+                  "decoratedName": "??0CScene@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CScene::m_SceneConstantBuffer"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.42.34435.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scene.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "a0a634b659dd9918fef5352da185d15a526c1d21f52261bc202ad48d2161e79c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "fdeb461aef16ec69df608252aaac2a8a7657c52841b26462ccb91e424ea217d7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "43f5d1017bb9205685e94fef075fd6f19a317b63e6be11af4561468d3e91c79d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "86cb55d5a4a78c2a0c69aff4384cd3a88810108726691d59828fe7e040811112"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/gameentity.h"
+          },
+          "hashes": {
+            "sha-256": "3d4af1e90bc7986279c6f2d7dff835c07c69ee69c5999c2c25251e47cf949021"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/dxresourcesconfig.h"
+          },
+          "hashes": {
+            "sha-256": "517c2fc7df8f753b3d1e72f2a0055d4dbdbfed78fa2d5c2222507d21e7a05fa8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scenegraph.h"
+          },
+          "hashes": {
+            "sha-256": "da2aecc63a4a1d5f74570da5cd31b0ac2d6dd38ec72dde8e7f112971ad1d1d68"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/logger.h"
+          },
+          "hashes": {
+            "sha-256": "71872e4e825c7d4da36042c4e1b4e8ed4e35c76b59c1d5caf745cc9bec0b5191"
+          }
+        }
+      ]
+    }
+  ]
+}

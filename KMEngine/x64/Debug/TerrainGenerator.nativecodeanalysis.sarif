@@ -1,0 +1,1335 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'TEntityPhysicalMesh::m_Stride' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
+                },
+                "region": {
+                  "startLine": 73,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "TEntityPhysicalMesh::{ctor}",
+                  "decoratedName": "??0TEntityPhysicalMesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TEntityPhysicalMesh::m_Stride"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_CollisionBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_CollisionBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationVector' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationVector"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_LocationZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_RotationZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_RotationZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_ScaleZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_ScaleZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3DComponent::DXResourceHashKey' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3DComponent::{ctor}",
+                  "decoratedName": "??0CGameEntity3DComponent@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3DComponent::DXResourceHashKey"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CScene::m_SceneConstantBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CScene::{ctor}",
+                  "decoratedName": "??0CScene@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CScene::m_SceneConstantBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseVertexShader' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseVertexShader"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseVertexLayout' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseVertexLayout"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BasePixelShader' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BasePixelShader"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseVertexBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseVertexBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseIndexBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseIndexBuffer"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseFormat' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseFormat"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseOffset' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseOffset"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CDX11Device::BaseConstantBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CDX11Device::{ctor}",
+                  "decoratedName": "??0CDX11Device@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CDX11Device::BaseConstantBuffer"
+          }
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'tree'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                },
+                "region": {
+                  "startLine": 774,
+                  "startColumn": 5,
+                  "endLine": 774,
+                  "endColumn": 29
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "cbt_CreateAtDepth",
+                  "decoratedName": "cbt_CreateAtDepth",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 770,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 771,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 772,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "'tree' may be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 774,
+                            "startColumn": 16
+                          }
+                        },
+                        "message": {
+                          "text": "'tree' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'tree->heap'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                },
+                "region": {
+                  "startLine": 775,
+                  "startColumn": 5,
+                  "endLine": 775,
+                  "endColumn": 30
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "cbt_CreateAtDepth",
+                  "decoratedName": "cbt_CreateAtDepth",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 770,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 771,
+                            "startColumn": 5
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 772,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 774,
+                            "startColumn": 16
+                          }
+                        },
+                        "message": {
+                          "text": "'<symbol>' may be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+                          },
+                          "region": {
+                            "startLine": 775,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "'<symbol>' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'm_pDX11Device'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 5,
+                  "endLine": 40,
+                  "endColumn": 127
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CTerrainGenerator::GenerateTestTerrain",
+                  "decoratedName": "?GenerateTestTerrain@CTerrainGenerator@@QEAAJXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 10,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 11,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 13,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 15,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 16,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 17,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 18,
+                            "startColumn": 21
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 41
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 24,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "'m_pDX11Device' may be NULL (Skip this branch)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume 'FAILED(m_HR)' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 39,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/TerrainGenerator.cpp"
+                          },
+                          "region": {
+                            "startLine": 40,
+                            "startColumn": 10
+                          }
+                        },
+                        "message": {
+                          "text": "'m_pDX11Device' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.42.34435.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "bc3efc3164e4abfa9a9240214b008d60a47be3f09a9613e4a4780c567266f7df"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "fdeb461aef16ec69df608252aaac2a8a7657c52841b26462ccb91e424ea217d7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "43f5d1017bb9205685e94fef075fd6f19a317b63e6be11af4561468d3e91c79d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "86cb55d5a4a78c2a0c69aff4384cd3a88810108726691d59828fe7e040811112"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DX11Device.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "6cc3043c1b2c5f2d055d1f60e025ea0e67008a9d36ea284f83bd238a229ee9fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/cbt.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "61120da91ccc79b68ad60c9b68829859e179a5d8193fadf65d0b27285b5c2fd9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/terraingenerator.h"
+          },
+          "hashes": {
+            "sha-256": "7c3e6da4a02cd26b33cef11a1d00419f44e3911d08139e4f76518a63bb33bc5d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/gameentity.h"
+          },
+          "hashes": {
+            "sha-256": "3d4af1e90bc7986279c6f2d7dff835c07c69ee69c5999c2c25251e47cf949021"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/dxresourcesconfig.h"
+          },
+          "hashes": {
+            "sha-256": "517c2fc7df8f753b3d1e72f2a0055d4dbdbfed78fa2d5c2222507d21e7a05fa8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scenegraph.h"
+          },
+          "hashes": {
+            "sha-256": "da2aecc63a4a1d5f74570da5cd31b0ac2d6dd38ec72dde8e7f112971ad1d1d68"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.h"
+          },
+          "hashes": {
+            "sha-256": "a1ab8836c72073a46b414726ed111e6761972ad78697dccc9b58b31dedaa9a8d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/ddstextureloader.h"
+          },
+          "hashes": {
+            "sha-256": "7a34ee5315086cb4efc10ff955cb9a5ce36198fded61ae01a39d4f75c781e723"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/cube.h"
+          },
+          "hashes": {
+            "sha-256": "5100efe4ff9fe63523786b6f5a30a8a75ed78bf5bd4de84e0d1204eb5ccd205d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/logger.h"
+          },
+          "hashes": {
+            "sha-256": "71872e4e825c7d4da36042c4e1b4e8ed4e35c76b59c1d5caf745cc9bec0b5191"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/math.h"
+          },
+          "hashes": {
+            "sha-256": "e18800e3857ea3674cc9dc7c6785119d39f35fecd03674ee6125bc087d4a5916"
+          }
+        }
+      ]
+    }
+  ]
+}
