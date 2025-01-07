@@ -1,7 +1,8 @@
 #pragma once
+#ifndef COREENGINE_H
+#define COREENGINE_H
 
 #include "DX11Device.h"
-#include "ViewportWindow.h"
 #include <Windows.h>
 #include "resource.h"
 #include "Renderer.h"
@@ -10,6 +11,7 @@
 //#include "GameEntityBuilder.h"
 #include "BaseModule.h"
 #include "UIModule.h"
+//#include "ViewportWindow.h"
 #include "GraphicsModule.h"
 #include "TerrainGenerator.h"
 
@@ -125,12 +127,14 @@ public:
     // UI Module
     HRESULT InitEngine()
     {
-        CMediator Mediator;
-
         m_UIModule.SetMediator(Mediator);
         m_UIModule.Initialize(m_HInstance, m_NCmdShow);
+		Mediator.m_Modules.push_back(&m_UIModule);
+		Mediator.m_ModuleVector.push_back(&m_UIModule);
 
         m_GraphicsModule.SetMediator(Mediator);
+        Mediator.m_Modules.push_back(&m_GraphicsModule);
+        Mediator.m_ModuleVector.push_back(&m_GraphicsModule);
 
         m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
             GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
@@ -294,8 +298,10 @@ private:
     //std::unique_ptr<CMediator> m_Mediator;
     CUIModule m_UIModule;
     CGraphicsModule m_GraphicsModule;
+    CMediator Mediator;
 };
 
+#endif
 //LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //{
 //    HDC hdc;

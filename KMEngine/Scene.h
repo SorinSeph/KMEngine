@@ -26,8 +26,6 @@ private:
 	//static Scene* GScene;
 	std::vector<CGameEntity3D> m_GameEntityList{ };
 
-
-
 	// Temp members, to delete later
 
 	ID3D11VertexShader* m_VertexShader{ nullptr };

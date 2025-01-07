@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include <any>
+
+class CBaseModule;
 
 class CMediator
 {
@@ -8,6 +12,10 @@ public:
 	{
 		Ptr(args...);
 	}
+
+	std::vector<CBaseModule*> m_Modules;
+
+	std::vector<std::any> m_ModuleVector;
 };
 
 class CBaseModule

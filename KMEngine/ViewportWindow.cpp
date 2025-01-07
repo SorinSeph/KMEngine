@@ -92,6 +92,9 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             g_RaycastX = mouseX;
             g_RaycastY = mouseY;
 
+			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            ViewportMessage.SendToUIModule(g_RaycastX, g_RaycastY);
+
             Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\nMouseX on click is: ", mouseX);
 		    Logger.Log("\nMouseY on click is: ", mouseY);
             //RaycastX = mouseXUnprojected;
@@ -384,11 +387,11 @@ void CViewportWindow::DetectKeyboardInput()
 
     if (keyboardState[DIK_LSHIFT] & 0x80)
     {
-        m_SpeedScale = 0.06f;
+        m_SpeedScale = 0.6f;
     }
     else
     {
-		m_SpeedScale = 0.01f;
+        m_SpeedScale = 0.0001;
     }
 }
 

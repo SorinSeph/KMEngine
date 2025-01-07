@@ -194,7 +194,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
             if (RayX && RayY)
             {
-                Renderer->Raycast(RayX, RayY);
+                //Renderer->Raycast(RayX, RayY);
 				g_CanRaycast = false;
             }
 
