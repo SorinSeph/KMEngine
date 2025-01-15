@@ -50,6 +50,17 @@ struct SColorVertex
 	XMFLOAT4 Color;
 };
 
+enum class EGameEntityType
+{
+	Default,
+	Ray,
+	Triangle,
+	Plane,
+	Cube,
+	Sphere,
+	Frustum
+};
+
 class CGameEntity3DComponent;
 
 class CGameEntity3D : public CGameEntity
@@ -66,6 +77,8 @@ public:
 		, m_LocationX{ 0.0f }
 		, m_SceneGraph{ }
 	{ }
+
+	EGameEntityType m_GameEntityType;
 
 	XMMATRIX TransformationMatrix();
 

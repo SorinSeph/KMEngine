@@ -13,6 +13,8 @@ public:
 
     void SetViewport(HWND InViewport);
 
+	void SetViewportSize(int Width, int Height);
+
     void InitRenderer();
 
     CDX11Device* GetDX11Device();

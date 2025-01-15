@@ -18,6 +18,12 @@ void CRenderer::SetViewport(HWND InViewport)
     m_DX11evice.SetViewport(InViewport);
 }
 
+void CRenderer::SetViewportSize(int Width, int Height)
+{
+	m_ViewportWidth = Width;
+	m_ViewportHeight = Height;
+}
+
 void CRenderer::InitRenderer()
 {
     m_DX11evice.InitDX11Device();
@@ -173,8 +179,8 @@ void CRenderer::Raycast(float DestinationX, float DestinationY)
         XMVECTOR{0, 0, 0},
         0,
         0,
-        853,
-        1380,
+        m_ViewportWidth,
+        m_ViewportHeight,
         0,
         1,
         CDX11Device::m_ProjectionMatrix,
@@ -185,8 +191,8 @@ void CRenderer::Raycast(float DestinationX, float DestinationY)
 		XMVECTOR{ DestinationX, DestinationY, 1 },
 		0,
 		0,
-        853,
-        1380,
+        m_ViewportWidth,
+        m_ViewportHeight,
 		0,
 		1,
 		CDX11Device::m_ProjectionMatrix,
