@@ -1,20 +1,5 @@
-﻿  ViewportWindow.cpp
+﻿  ViewportMessage.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(21,22): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(54,49): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(55,44): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(92,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(93,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(96,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(96,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(179,36): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(180,36): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(38,17): warning C4101: 'hdc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(39,17): warning C4101: 'ps': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(41,17): warning C4101: 'CursorPoint': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(115,19): warning C4101: 'CursorPoint': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(394,24): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(326,18): warning C4101: 'mouseCurrState': unreferenced local variable
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(184,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(184,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

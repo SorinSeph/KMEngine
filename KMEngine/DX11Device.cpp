@@ -2221,6 +2221,7 @@ HRESULT CDX11Device::InitSolidColorCube()
     CPrimitiveGeometryFactory GeometryFactory;
 
     CubeEntity.m_GameEntityTag = "SolidColorCubeEntity";
+	CubeEntity.m_GameEntityType = EGameEntityType::Cube;
 
     CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
     CubeEntityComponent.SetLocationF(10.f, 0.0f, 5.0f);
@@ -2509,6 +2510,7 @@ HRESULT CDX11Device::InitFrustum()
     CPrimitiveGeometryFactory GeometryFactory;
     CGameEntity3D FrustumEntity;
     FrustumEntity.m_GameEntityTag = "FrustumEntity";
+	FrustumEntity.m_GameEntityType = EGameEntityType::Frustum;
 
     CFrustumComponent FrustumComponent;
     XMMATRIX xmProj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1.77778f, 0.5f, 10.0f);
