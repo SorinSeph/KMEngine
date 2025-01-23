@@ -153,6 +153,30 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     BoxOrientation,
                     fDist))
                 {
+                    if (m_pUIModule->m_Mediator)
+                    {
+                        try
+                        {
+                            auto GraphicsModule = std::any_cast<CGraphicsModule*>(m_pUIModule->m_Mediator->m_ModuleVector[1]);
+                            if (GraphicsModule)
+                            {
+								GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
+                                //EntityComponent.SetScale(5.f, 5.f, 5.f);
+                            }
+                            else
+                            {
+                                Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
+                            }
+                        }
+                        catch (const std::bad_any_cast& e)
+                        {
+                            Logger.Log("ViewportMessage.cpp, SendToUIModule(): Bad any cast: ", e.what());
+                        }
+                    }
+                    else
+                    {
+			            Logger.Log("ViewportMessage.cpp, SendToUIModule(): Pointer to Mediator in UI Module is null");
+                    }
 					MessageBox(nullptr, L"Ray intersects OBB", L"Message", MB_OK);
 				}
                 else
@@ -174,28 +198,6 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
             }
         }
 
-        if (m_pUIModule->m_Mediator)
-        {
-            try
-            {
-                auto GraphicsModule = std::any_cast<CGraphicsModule*>(m_pUIModule->m_Mediator->m_ModuleVector[1]);
-                if (GraphicsModule)
-                {
-                    GraphicsModule->m_Renderer.Raycast(MouseX, MouseY);
-                }
-                else
-                {
-                    Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
-                }
-            }
-            catch (const std::bad_any_cast& e)
-            {
-                Logger.Log("ViewportMessage.cpp, SendToUIModule(): Bad any cast: ", e.what());
-            }
-        }
-        else
-        {
-			Logger.Log("ViewportMessage.cpp, SendToUIModule(): Pointer to Mediator in UI Module is null");
-        }
+        
     }
 }
