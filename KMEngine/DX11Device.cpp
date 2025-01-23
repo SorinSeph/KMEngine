@@ -46,8 +46,9 @@ HRESULT CDX11Device::InitDX11Device()
 
     //InitTexturedCube();
     //InitTexturedCube2();
-    InitSolidColorCube();
     InitFrustum();
+    InitSolidColorCube();
+
     //InitRaycast(0, 0, 0, 100, 2, 3);
     //InterpMoveCube();InitTexturedCube2
     //AddTestLine2();
@@ -1559,11 +1560,13 @@ HRESULT CDX11Device::InitTexturedCube()
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
 
-	CubeEntity.m_GameEntityTag = "TexturedCube";
+	CGameEntity3D TexturedCubeEntity;
+    TexturedCubeEntity.m_GameEntityTag = "TexturedCube";
 
-    CubeEntityComponent.m_GameEntityTag = "TexturedCubeComponent";
-    CubeEntityComponent.SetLocationF(-1.f, 0.0f, 0.0f);
-    CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
+    CGameEntity3DComponent TexturedCubeComponent;
+    TexturedCubeComponent.m_GameEntityTag = "TexturedCubeComponent";
+    TexturedCubeComponent.SetLocationF(-5.f, 0.0f, 0.0f);
+    TexturedCubeComponent.SetScale(0.25f, 0.25f, 0.25f);
 
 	CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
@@ -1587,7 +1590,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto VertexShaderLambda = [=]() {
         m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -1611,7 +1614,7 @@ HRESULT CDX11Device::InitTexturedCube()
         m_pImmediateContext->IASetInputLayout(TempVertexLayout);
         };
 
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
@@ -1632,7 +1635,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto PixelShaderLambda = [=]() {
         m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     // Create vertex buffer
     //Simple_Color_Vertex vertices[] =
@@ -1733,7 +1736,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto VertexBufferLambda = [=]() {
         m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
 
     // Create index buffer
@@ -1792,7 +1795,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto IndexBufferLambda = [=]() {
         m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
     // Set primitive topology
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -1810,8 +1813,8 @@ HRESULT CDX11Device::InitTexturedCube()
     auto ConstantBufferLambda = [=]() {
         m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    CubeEntityComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
     const wchar_t* TextureName = L"tex_stickman.dds";
@@ -1824,7 +1827,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto TextureLambda = [=]() {
         m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
     D3D11_RASTERIZER_DESC rasterDesc = {};
     rasterDesc.FillMode = D3D11_FILL_SOLID;
@@ -1859,19 +1862,18 @@ HRESULT CDX11Device::InitTexturedCube()
 
     m_pImmediateContext->RSSetState(m_RasterizerState);
 
-    InterpMoveCubeRef = &CubeEntityComponent;
-	TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
+    InterpMoveCubeRef = &TexturedCubeComponent;
+	//TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
 
     // Initialize the projection matrix
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = CubeEntityComponent;
+    CubeComponentNode->m_TType = TexturedCubeComponent;
 
-	CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+    TexturedCubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
-    SScene.AddEntityToScene(CubeEntity);
-    //SScene.AddEntityToScene(CubeEntityComponent);
+    SScene.AddEntityToScene(TexturedCubeEntity);
 
     return S_OK;
 }
@@ -2977,4 +2979,21 @@ inline void CDX11Device::GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent&
         XMVECTOR C = XMVectorAdd(XMVector3Rotate(vCorners[i], vOrientation), vOrigin);
         XMStoreFloat3(&Corners[i], C);
     }
+}
+
+void CDX11Device::CopyEntity(CGameEntity3D Entity)
+{
+    CScene& Scene = CScene::GetScene();
+
+    CGameEntity3D NewEntity{ Entity };  
+    CGameEntity3DComponent NewEntityComponent;
+    NewEntityComponent = Entity.m_SceneGraph.m_pRootNode->m_TType;
+	NewEntity.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
+
+    //NewEntityComponent = NewEntity.m_SceneGraph.m_pRootNode->m_TType;
+    NewEntityComponent.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
+	NewEntityComponent.SetScale(5.5f, 5.5f, 5.5f);
+	NewEntity.m_SceneGraph.m_pRootNode->m_TType = NewEntityComponent;
+
+	Scene.AddEntityToScene(NewEntity);
 }

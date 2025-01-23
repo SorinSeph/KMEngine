@@ -133,6 +133,12 @@ public:
 	bool DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist);
 
 	/**
+	* Copies an entity and adds it to the scene list
+	*/
+
+	void CopyEntity(CGameEntity3D Entity);
+
+	/**
 	* Check the intersection of the raycast with the first cube
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);

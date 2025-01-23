@@ -51,11 +51,13 @@ public:
 
     void CleanupRenderer();
 
+    CDX11Device m_DX11Device{};
+
 private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
-    CDX11Device m_DX11evice{};
+
     float   m_EyeX{ };
     float   m_EyeY{ };
     float   m_EyeZ{ };

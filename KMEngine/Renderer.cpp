@@ -10,12 +10,12 @@ CRenderer::CRenderer(HWND Viewport)
 {
     CLogger& Logger = CLogger::GetLogger();
     Logger.Log("CRenderer constructor from", __FILE__);
-    m_DX11evice.SetViewport(m_Viewport);
+    m_DX11Device.SetViewport(m_Viewport);
 }
 
 void CRenderer::SetViewport(HWND InViewport)
 {
-    m_DX11evice.SetViewport(InViewport);
+    m_DX11Device.SetViewport(InViewport);
 }
 
 void CRenderer::SetViewportSize(int Width, int Height)
@@ -26,14 +26,14 @@ void CRenderer::SetViewportSize(int Width, int Height)
 
 void CRenderer::InitRenderer()
 {
-    m_DX11evice.InitDX11Device();
+    m_DX11Device.InitDX11Device();
 
     //m_DX11Device.AddTestLine();
 }
 
 CDX11Device* CRenderer::GetDX11Device()
 {
-    return &m_DX11evice;
+    return &m_DX11Device;
 }
 
 void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
@@ -79,9 +79,9 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
     CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
 
-    m_DX11evice.m_pImmediateContext->ClearRenderTargetView(m_DX11evice.m_pRenderTargetView, Colors::MidnightBlue);
-    m_DX11evice.m_pImmediateContext->ClearDepthStencilView(m_DX11evice.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-    m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+    m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
+    m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+    m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
     auto SceneEntityList = Scene.GetSceneList();
 
@@ -131,13 +131,13 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
                 auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
-                CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
                 //CB.mDoesFrustumContain = g_DoesFrustumContain;
-                m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+                m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
             }
             else 
@@ -149,26 +149,28 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
                 auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
-                CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-                m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+                m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+
+				Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);
             }
 
 
                 EntityComponent->m_TType.m_DXResConfig.Execute();
 
-                m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+                m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
-                m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                m_DX11Device.m_pImmediateContext->DrawIndexed(36, 0, 0);
             //}
         }
     }
 
-    m_DX11evice.m_SwapChain->Present(0, 0);
+    m_DX11Device.m_SwapChain->Present(0, 0);
 }
 
 void CRenderer::Raycast(float DestinationX, float DestinationY)
@@ -205,7 +207,7 @@ void CRenderer::Raycast(float DestinationX, float DestinationY)
 	XMFLOAT3 DirectionF;
 	XMStoreFloat3(&DirectionF, Direction);
 
-    m_DX11evice.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
+    m_DX11Device.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
     Logger.Log("Renderer.cpp, Raycast2()");
 }
 
@@ -216,10 +218,10 @@ void CRenderer::AddOutline()
 
 void CRenderer::AddGizmo()
 {
-    m_DX11evice.AddGizmo();
+    m_DX11Device.AddGizmo();
 }
 
 void CRenderer::CleanupRenderer()
 {
-    m_DX11evice.CleanupDX11Device();
+    m_DX11Device.CleanupDX11Device();
 }
