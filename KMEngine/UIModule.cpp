@@ -1,4 +1,5 @@
 #include "UIModule.h"
+#include "Scene.h"
 
 HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 {
@@ -53,11 +54,28 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         }
     }
 
-    // Create the window.
+
+    WNDCLASS OutlinerWC = { };
+    OutlinerWC.lpfnWndProc = OutlinerProc;
+    OutlinerWC.hInstance = hInstance;
+    OutlinerWC.lpszClassName = L"Outliner";
+    OutlinerWC.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+
+    RegisterClass(&OutlinerWC);
+
+    WNDCLASS PropertiesWC = { };
+    PropertiesWC.lpfnWndProc = PropertiesProc;
+    PropertiesWC.hInstance = hInstance;
+    PropertiesWC.lpszClassName = L"Properties";
+    PropertiesWC.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+
+    RegisterClass(&PropertiesWC);
+
+
 
     HWND hwnd = CreateWindow(
         CLASS_NAME,
-        L"KMEngine",
+        L"KMEApp",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -105,21 +123,6 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     CViewportWindow::SetViewportParentHWND(hwnd);
     m_pViewportWindow->CreateViewport();
 
-
-    //ViewportHwnd = CreateWindow(
-    //    VIEWPORT_NAME,
-    //    NULL,
-    //    WS_CHILDWINDOW | WS_VISIBLE | WS_CLIPSIBLINGS,
-    //    0,
-    //    0,
-    //    0,
-    //    0,
-    //    hwnd,
-    //    NULL,
-    //    (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE),
-    //    NULL
-    //);
-
     ViewportHwnd = m_pViewportWindow->GetViewportHwnd();
 
     RightToolbarHwnd = CreateWindow(
@@ -135,6 +138,8 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE),
         NULL
     );
+
+
 
     if (hwnd == NULL)
     {
@@ -304,6 +309,50 @@ LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LP
         case WM_CREATE:
         {
             SetWindowLong(hwnd, 0, 0);
+
+            GetClientRect(hwnd, &rect);
+
+            int width = rect.right - rect.left;
+            int height = rect.bottom - rect.top;
+
+            // Create the blue child window (top half)
+            OutlinerHwnd = CreateWindowEx(
+                0,                              // Optional window styles
+                L"Outliner",           // Window class
+                NULL,                           // No window text
+                WS_CHILD | WS_VISIBLE,          // Window style
+                0, 0,                           // Position
+                width, height / 2,              // Size
+                hwnd,                           // Parent window
+                NULL,                           // No menu
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
+                NULL                            // Additional application data
+            );
+
+            if (OutlinerHwnd == NULL)
+            {
+                MessageBox(hwnd, L"Could not create outliner window.", L"Error", MB_OK | MB_ICONERROR);
+            }
+
+            // Create the red child window (bottom half)
+            PropertiesHwnd = CreateWindowEx(
+                0,                              // Optional window styles
+                L"Properties",            // Window class
+                NULL,                           // No window text
+                WS_CHILD | WS_VISIBLE,          // Window style
+                0, height / 2,                  // Position
+                width, height / 2,              // Size
+                hwnd,                           // Parent window
+                NULL,                           // No menu
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
+                NULL                            // Additional application data
+            );
+
+            if (PropertiesHwnd == NULL)
+            {
+                MessageBox(hwnd, L"Could not create properties window.", L"Error", MB_OK | MB_ICONERROR);
+            }
+
             return 0;
         }
 
@@ -314,6 +363,121 @@ LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LP
             GetClientRect(hwnd, &rect);
             Rectangle(hdc, 0, 0, rect.right, rect.bottom);
             HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 40));
+            FillRect(hdc, &rect, Brush);
+
+            EndPaint(hwnd, &ps);
+            return 0;
+        }
+
+        case WM_SIZE:
+        {
+            int width = LOWORD(lParam);
+            int height = HIWORD(lParam);
+
+            // Resize the blue child window to top half
+            if (OutlinerProc)
+            {
+                SetWindowPos(OutlinerHwnd, NULL, 0, 0, width, height / 4, SWP_NOZORDER);
+            }
+
+            // Resize the red child window to bottom half
+            if (PropertiesProc)
+            {
+                SetWindowPos(PropertiesHwnd, NULL, 0, height / 4, width, (height * 3) / 4, SWP_NOZORDER);
+            }
+
+            return 0;
+        }
+
+
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+    }
+    return DefWindowProc(hwnd, message, wParam, lParam);
+}
+
+LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    HDC         hdc;
+    PAINTSTRUCT ps;
+    RECT        rect;
+
+    switch (message)
+    {
+        case WM_CREATE:
+        {
+            SetWindowLong(hwnd, 0, 0);
+            return 0;
+        }
+
+        case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
+
+            // Fill the child window with blue color
+            HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255)); // Blue
+            FillRect(hdc, &ps.rcPaint, hBrush);
+            DeleteObject(hBrush);
+
+            // Set text color to white and background mode to transparent
+            SetTextColor(hdc, RGB(255, 255, 255)); // White text
+            SetBkMode(hdc, TRANSPARENT);
+
+            CScene& Scene = CScene::GetScene();
+            auto& SceneEntityList = Scene.GetSceneList();
+            std::string EntityName = SceneEntityList.at(0).m_GameEntityTag;
+
+            // Define the text to display
+            const wchar_t* szText = L"Test text";
+
+            // Get the client rectangle for text positioning
+            RECT rect;
+            GetClientRect(hwnd, &rect);
+
+            const int Padding = 10;
+
+			rect.left += Padding;
+
+            // Draw the text aligned to top-left within the child window
+            DrawText(hdc, szText, -1, &rect, DT_SINGLELINE | DT_LEFT | DT_TOP | DT_NOPREFIX);
+
+            EndPaint(hwnd, &ps);
+            return 0;
+        }
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+    }
+    return DefWindowProc(hwnd, message, wParam, lParam);
+}
+
+LRESULT CALLBACK PropertiesProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    HDC         hdc;
+    PAINTSTRUCT ps;
+    RECT        rect;
+
+    switch (message)
+    {
+        case WM_CREATE:
+        {
+            SetWindowLong(hwnd, 0, 0);
+            return 0;
+        }
+
+        case WM_PAINT:
+        {
+            hdc = BeginPaint(hwnd, &ps);
+
+            GetClientRect(hwnd, &rect);
+            Rectangle(hdc, 0, 0, rect.right, rect.bottom);
+            HBRUSH Brush = CreateSolidBrush(RGB(60, 0, 0));
             FillRect(hdc, &rect, Brush);
 
             EndPaint(hwnd, &ps);

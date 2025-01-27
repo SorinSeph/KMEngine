@@ -11,13 +11,25 @@ const wchar_t CLASS_NAME[] = L"KME Engine";
 const wchar_t TOOLBAR_NAME[] = L"Toolbar";
 const wchar_t SIDETOOLBAR_NAME[] = L"SideToolbar";
 
+/**
+* To refactor window handles and procedures in their own class
+*/
+
+// Main windows procedures
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK PropertiesProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+// Main window handles
 inline HWND ViewportHwnd;
 inline HWND RightToolbarHwnd;
 inline HWND LeftToolbarHwnd;
+
+// Subwindows handles
+inline HWND OutlinerHwnd;
+inline HWND PropertiesHwnd;
 
 inline float ViewportWidth{ };
 inline float ViewportHeight{ };
