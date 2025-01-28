@@ -7,7 +7,7 @@ class CSceneGraphNode
 {
 public:
 	std::vector<CSceneGraphNode*> ChildNode;
-	T Type;
+	T m_TType;
 };
 
 template <typename T>
@@ -21,6 +21,14 @@ public:
 	CSceneGraph(CSceneGraphNode<T>* InRoot)
 		: m_pRootNode{ InRoot }
 	{}
+
+	CSceneGraph(const CSceneGraph& SceneGraphCopy)
+	{
+		if (SceneGraphCopy.m_pRootNode)
+			m_pRootNode = new CSceneGraphNode<T>(*SceneGraphCopy.m_pRootNode);
+		else
+			m_pRootNode = nullptr;
+	}
 
 	void SetRoot(CSceneGraphNode<T>* InRoot)
 	{

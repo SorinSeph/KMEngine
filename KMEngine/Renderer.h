@@ -7,9 +7,13 @@ HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LP
 class CRenderer
 {
 public:
+    CRenderer();
+
     CRenderer(HWND Viewport);
 
     void SetViewport(HWND InViewport);
+
+	void SetViewportSize(int Width, int Height);
 
     void InitRenderer();
 
@@ -37,7 +41,7 @@ public:
         }
     }
 
-    void Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
+    void Raycast(float DestinationX, float DestinationY);
 
     void AddOutline();
 
@@ -47,11 +51,13 @@ public:
 
     void CleanupRenderer();
 
+    CDX11Device m_DX11Device{};
+
 private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
-    CDX11Device m_DX11evice{};
+
     float   m_EyeX{ };
     float   m_EyeY{ };
     float   m_EyeZ{ };

@@ -26,8 +26,6 @@ private:
 	//static Scene* GScene;
 	std::vector<CGameEntity3D> m_GameEntityList{ };
 
-
-
 	// Temp members, to delete later
 
 	ID3D11VertexShader* m_VertexShader{ nullptr };
@@ -53,8 +51,6 @@ public:
 	void RemoveLastEntityFromScene();
 
 	void RemoveEntityFromScene(std::string EntityTag);
-
-	void SetCollisionParams(int Location, XMFLOAT3 Center, XMFLOAT3 Extents, ContainmentType CollisionType);
 
 	CSceneList m_SceneList;
 

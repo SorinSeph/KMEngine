@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>CoreClock.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CCoreClock::{ctor}</FUNCTION>
+    <DECORATED>??0CCoreClock@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CCoreClock::m_PrevTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

@@ -1,8 +1,11 @@
 #pragma once
 #include "BaseModule.h"
+#include "Renderer.h"
 
-class Graphics_Module : public Base_Module
+class CGraphicsModule : public CBaseModule
 {
 public:
-	Graphics_Module() {}
+	CGraphicsModule() {};
+
+	CRenderer m_Renderer;
 };

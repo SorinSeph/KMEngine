@@ -1,17 +1,37 @@
 #pragma once
+#include <vector>
+#include <any>
 
-class Mediator_
-{
+class CBaseModule;
 
-};
-
-class Base_Module
+class CMediator
 {
 public:
-	Base_Module(Mediator_* Mediator = nullptr)
-		: m_Mediator{ Mediator }
-	{}
+	template <typename TObject, typename... Args>
+	void Notify(TObject&& Ptr, Args&&... args) const
+	{
+		Ptr(args...);
+	}
 
-private:
-	Mediator_* m_Mediator;
+	std::vector<CBaseModule*> m_Modules;
+
+	std::vector<std::any> m_ModuleVector;
+};
+
+class CBaseModule
+{
+public:
+	void SetMediator(CMediator& Mediator)
+	{
+		m_Mediator = &Mediator;
+	}
+
+	template <typename... Args>
+	void Notify(auto&& Ptr, Args&&... args)
+	{
+		//std::cout << "Component 2 does Variadic C.\n";
+		m_Mediator->Notify(Ptr, args...);
+	}
+
+	CMediator* m_Mediator;
 };

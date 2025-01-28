@@ -24,9 +24,9 @@ public:
 
     void SetUIDTest(CGameEntity3D& Entity3D);
 
-    CGameEntity3D CreateEntity3D(EPrimitiveGeometryType Type);
+    CGameEntity3D CreateEntity3D(EPrimitiveGeometryType m_TType);
 
-    CGameEntity3DComponent CreateEntity3DComponent(EPrimitiveGeometryType Type);
+    CGameEntity3DComponent CreateEntity3DComponent(EPrimitiveGeometryType m_TType);
 
     CGameEntity3D CreateLinetrace(float X_Origin, float Y_Origin, float Z_Origin, float X_Destination, float Y_Destination, float Z_Destination);
 

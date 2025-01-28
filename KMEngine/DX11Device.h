@@ -19,6 +19,15 @@
 #include "Logger.h"
 #include "Math.h"
 
+static BOOL g_DoesFrustumContain = false;
+
+static float g_Near;
+static float g_Far;
+static float g_RightSlope;
+static float g_LeftSlope;
+static float g_TopSlope;
+static float g_BottomSlope;
+
 static WORD* GetIndices(std::vector<WORD> InVector)
 {
 	WORD* Vector = InVector.data();
@@ -83,15 +92,21 @@ public:
 	void InitViewportFinal();
 	void CleanupDX11Device();
 
-	void InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+	void Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	/**
 	* Functional but WIP functions for initializing various game primitives
 	*/
 
+	ContainmentType CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube);
+
 	HRESULT InitTexturedCube();
 
 	HRESULT InitTexturedCube2();
+
+	HRESULT InitSolidColorCube();
+
+	HRESULT InitFrustum();
 
 	//HRESULT InitQuatCube();
 	/**
@@ -104,7 +119,13 @@ public:
 
 	void InitSingleCubeOutline();
 
+	/**
+	* WIP methods of DirectXCollision, to be implemented into their own file later
+	*/
 
+	void XM_CALLCONV CreateFrustumFromMatrix(_Out_ CFrustumComponent& Out, _In_ FXMMATRIX Projection, bool rhcoords = false) noexcept;
+
+	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
 
 	/**
 	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
@@ -112,11 +133,15 @@ public:
 	bool DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist);
 
 	/**
+	* Copies an entity and adds it to the scene list
+	*/
+
+	void CopyEntity(CGameEntity3D Entity);
+
+	/**
 	* Check the intersection of the raycast with the first cube
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
-
-	void AddOutline();
 
 	void AddGizmo();
 
@@ -128,7 +153,7 @@ public:
 	* Temporary helper section of functions / variables
 	*/
 
-	void InterpMoveCube();
+	void InterpMoveEntity();
 
 	CGameEntity3D CubeEntity;
 
@@ -136,7 +161,7 @@ public:
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 
-	float InterpMoveLoc{ 0.0f };
+	float InterpMoveLoc{ 10.0f };
 
 	ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
 
@@ -199,28 +224,11 @@ public:
 	/**
 	* For InitShaders2()
 	*/
-	ID3D11VertexShader* m_VertexShader2{ nullptr };
-	ID3D11PixelShader* m_PixelShader2{ nullptr };
 	ID3D11InputLayout* m_VertexLayout2{ nullptr };
 	ID3D11Buffer* m_VertexBuffer2{ nullptr };
 	ID3D11Buffer* m_IndexBuffer2{ nullptr };
 	ID3D11Buffer* m_ConstantBuffer2{ nullptr };
 	//ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
-
-	/**
-	* For InitShaders3()
-	*/
-	ID3D11VertexShader* m_VertexShader3{ nullptr };
-	ID3D11PixelShader* m_PixelShader3{ nullptr };
-	ID3D11InputLayout* m_VertexLayout3{ nullptr };
-	ID3D11Buffer* m_VertexBuffer3{ nullptr };
-	ID3D11Buffer* m_IndexBuffer3{ nullptr };
-	ID3D11Buffer* m_ConstantBuffer3{ nullptr };
-	//ID3D11ShaderResourceView* m_TextureRV3{ nullptr };
-
-	// Used for line
-	ID3D11Buffer* m_VertexBuffer4{ nullptr };
-	ID3D11Buffer* m_ConstantBuffer4{ nullptr };
 
 	ID3D11InputLayout* m_LinetraceVertexLayout{ nullptr };
 	ID3D11Buffer* m_LinetraceVertexBuffer{ nullptr };
@@ -256,7 +264,7 @@ private:
 
 	CGameEntity3D m_CubeEntity = { };
 	CGameEntity3D m_CubeEntity2 = { };
-	CGameEntity3D m_CubeOutlineEntity{ };
+	//CGameEntity3D m_CubeOutlineEntity{ };
 	CGameEntity3D m_Linetrace{ };
 	CGameEntity3D m_CubeOutline{ };
 

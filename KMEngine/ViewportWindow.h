@@ -1,8 +1,11 @@
-#pragma once
+#ifndef VIEWPORTWINDOW_H
+#define VIEWPORTWINDOW_H
+
 #include <Windows.h>
 #include <dinput.h>
 #include <cmath>
 #include "Logger.h"
+#include "ViewportMessage.h"
 
 const float XM_PI = 3.141592654f;
 
@@ -18,6 +21,9 @@ const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
 static LPDIRECTINPUT8 _DirectInput;
 static IDirectInputDevice8* _DIKeyboard;
 
+class CUIModule;
+class CViewportMessage;
+
 class CViewportWindow
 {
 public:
@@ -26,7 +32,7 @@ public:
 		, m_RotY{ &g_RotY }
 		, m_RotX2{ g_RotX }
 		, m_RotY2{ g_RotY }
-		, m_SpeedScale{ 0.01f }
+		, m_SpeedScale{}
 	{}
 
 	static void SetViewportParentHWND(HWND hwnd);
@@ -37,7 +43,7 @@ public:
 
 	void CreateViewport();
 
-	HWND GetViewportWnd();
+	HWND GetViewportHwnd();
 
 	float GetXRotation();
 	float GetYRotation();
@@ -66,12 +72,14 @@ public:
 	bool InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd);
 	void DetectKeyboardInput();
 
+	static HWND m_ViewportHwnd;
+
 private:
 
 	float ConvertToRadians(float Degrees);
 
 	static HWND m_ParentHwnd;
-	static HWND m_ViewportHwnd;
+
 	static float m_ViewportWidth;
 	static float m_ViewportHeight;
 	static bool bClipCursor;
@@ -91,4 +99,8 @@ private:
 	float vpEyeY;
 	float vpEyeZ;
 	float vpEyeXOffset;
+
+	CUIModule* m_pUIModule{ nullptr };
 };
+
+#endif

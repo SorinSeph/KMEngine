@@ -12,7 +12,7 @@ int gClicked = 0;
 using namespace Internal;
 using namespace std;
 
-XMMATRIX CDX11Device::m_WorldMatrix;
+XMMATRIX CDX11Device::m_WorldMatrix{ XMMatrixIdentity() };
 XMMATRIX CDX11Device::m_ViewMatrix;
 XMMATRIX CDX11Device::m_ProjectionMatrix;
 
@@ -30,6 +30,8 @@ XMGLOBALCONST XMVECTORF32 _FltMax = { { { FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX } }
 
 HRESULT CDX11Device::InitDX11Device()
 {
+    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+
     InitDriveTypeAndFeatureLevelFinal();
     IDXGIFactory1* dxgiFactory = InitDXGIFactoryFinal();
     InitSwapChainFinal(dxgiFactory);
@@ -42,9 +44,11 @@ HRESULT CDX11Device::InitDX11Device()
     InitDefaultDepthStencil3();
     //InitBaseCube();
 
-    //AddLight();
-    InitTexturedCube();
+    //InitTexturedCube();
     //InitTexturedCube2();
+    InitFrustum();
+    InitSolidColorCube();
+
     //InitRaycast(0, 0, 0, 100, 2, 3);
     //InterpMoveCube();InitTexturedCube2
     //AddTestLine2();
@@ -364,6 +368,8 @@ void CDX11Device::InitCubeOutline()
     m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+
     ID3DBlob* pVSBlob = nullptr;
     // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
     m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.vs", "VS", "vs_5_0", &pVSBlob);
@@ -376,7 +382,7 @@ void CDX11Device::InitCubeOutline()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -384,7 +390,7 @@ void CDX11Device::InitCubeOutline()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutline.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -422,7 +428,8 @@ void CDX11Device::InitCubeOutline()
     }
 
     // Create the pixel shader
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
+	ID3D11PixelShader* PixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &PixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
     {
@@ -430,7 +437,7 @@ void CDX11Device::InitCubeOutline()
         return;
     }
 
-    m_CubeOutline.m_DXResConfig.SetPixelShader(m_PixelShader2);
+    m_CubeOutline.m_DXResConfig.SetPixelShader(PixelShader);
     //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
 
     D3D11_BUFFER_DESC bd{};
@@ -440,16 +447,6 @@ void CDX11Device::InitCubeOutline()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutline.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutline.GetSimpleColorVerticesList().at(i);
-    }
-
 
     SSimpleColorVertex CubeOutlineVertices[] = {
                 { XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
@@ -486,7 +483,6 @@ void CDX11Device::InitCubeOutline()
     };
 
     InitData.pSysMem = CubeOutlineVertices;
-    //InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -605,6 +601,7 @@ void CDX11Device::InitCubeOutline2()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D m_CubeOutlineEntity{ };
 
     m_CubeOutlineEntity = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::CubeTest);
     m_CubeOutlineEntity.SetLocationF(-3.0f, 0.0f, 0.0f);
@@ -653,7 +650,9 @@ void CDX11Device::InitCubeOutline2()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    ID3D11VertexShader* VertexShader{ nullptr };
+
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -661,7 +660,7 @@ void CDX11Device::InitCubeOutline2()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -699,7 +698,8 @@ void CDX11Device::InitCubeOutline2()
     }
 
     // Create the pixel shader
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
+	ID3D11PixelShader* PixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &PixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
     {
@@ -707,7 +707,7 @@ void CDX11Device::InitCubeOutline2()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetPixelShader(m_PixelShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetPixelShader(PixelShader);
     //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
 
     D3D11_BUFFER_DESC bd{};
@@ -717,16 +717,6 @@ void CDX11Device::InitCubeOutline2()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutlineEntity.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutlineEntity.GetSimpleColorVerticesList().at(i);
-    }
-    InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -835,6 +825,7 @@ void CDX11Device::InitSingleCubeOutline()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D m_CubeOutlineEntity{ };
 
     m_CubeOutlineEntity = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::CubeTest);
     m_CubeOutlineEntity.SetLocationF(3.0f, 0.0f, 0.0f);
@@ -872,6 +863,8 @@ void CDX11Device::InitSingleCubeOutline()
     m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
 
     // Compile the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+
     ID3DBlob* pVSBlob = nullptr;
     // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
     m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.vs", "VS", "vs_5_0", &pVSBlob);
@@ -884,7 +877,7 @@ void CDX11Device::InitSingleCubeOutline()
     }
 
     // Create the vertex shader
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &m_VertexShader2);
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
 
     if (FAILED(m_HR))
     {
@@ -892,7 +885,7 @@ void CDX11Device::InitSingleCubeOutline()
         return;
     }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(m_VertexShader2);
+    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(VertexShader);
     //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
 
     // Define the input layout
@@ -930,6 +923,8 @@ void CDX11Device::InitSingleCubeOutline()
     }
 
     // Create the pixel shader
+    ID3D11PixelShader* m_PixelShader2{ nullptr };
+
     m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
     pPSBlob->Release();
     if (FAILED(m_HR))
@@ -948,16 +943,6 @@ void CDX11Device::InitSingleCubeOutline()
     bd.CPUAccessFlags = 0;
 
     D3D11_SUBRESOURCE_DATA InitData{};
-    //std::vector<Simple_Color_Vertex> TotalVerticesVector{ SScene.GetSceneList().at(SceneLoc).GetSimpleColorVerticesList() };
-    //int TotalVerticesVectorSize = TotalVerticesVector.size();
-    int TotalVerticesVectorSize = m_CubeOutlineEntity.GetSimpleColorVerticesList().size();
-
-    SSimpleColorVertex* VerticesArray = new SSimpleColorVertex[TotalVerticesVectorSize];
-    for (int i = 0; i < TotalVerticesVectorSize; i++)
-    {
-        VerticesArray[i] = m_CubeOutlineEntity.GetSimpleColorVerticesList().at(i);
-    }
-    InitData.pSysMem = VerticesArray;
 
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
     if (FAILED(m_HR))
@@ -1194,7 +1179,7 @@ bool CDX11Device::DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 
 }
 
 
-void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
+void CDX11Device::Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
 {
 	// Lambdas: vertes shader, pixel shader, vertex buffer, constant buffer
     CScene& SScene = CScene::GetScene();
@@ -1203,7 +1188,7 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
 
     CGameEntity3D Linetrace;
     Linetrace.m_GameEntityTag = "Raycast";
-    Linetrace.SetLocationF(0.0f, 0.0f, 0.0f);
+	CGameEntity3DComponent LinetraceComponent;
 
     ID3DBlob* pVSBlob = nullptr;
     m_HR = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_5_0", &pVSBlob);
@@ -1245,10 +1230,10 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
         m_pImmediateContext->PSSetShader(m_LinetracePixelShader, nullptr, 0);
     };
 
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     SSimpleVertex RayVertices[] = {
-        { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT2(1.0f, 0.0f)},
+        { XMFLOAT3(0, 0, 0), XMFLOAT2(1.0f, 0.0f)},
         { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT2(1.0f, 0.0f)}
     };
 
@@ -1275,7 +1260,7 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
         m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
     };
 
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
     //m_HR = m_pD3D11Device->CreateBuffer(&RayBuffer, nullptr, &m_LinetraceConstantBuffer);
     //SScene.SetConstantBuffer(SceneLoc, m_LinetraceConstantBuffer);
 
@@ -1292,8 +1277,13 @@ void CDX11Device::InitRaycast(float OriginX, float OriginY, float OriginZ, float
     auto ConstantBufferLambda = [=]() {
         m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    Linetrace.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    Linetrace.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    LinetraceComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+    CSceneGraphNode<CGameEntity3DComponent>* LinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    LinetraceComponentNode->m_TType = LinetraceComponent;
+
+    Linetrace.m_SceneGraph.m_pRootNode = LinetraceComponentNode;
 
     CLogger& SLogger = CLogger::GetLogger();
     SLogger.Log("InitLine, called from DX11_Device.cpp");
@@ -1359,7 +1349,7 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
     {
         fDistance = fDist;
         Collision.CollisionType = INTERSECTS;
-        AddOutline();
+        //AddOutline();
         SLogger.Log("DX11_Device.cpp - CheckCollision(): Collision TRUE");
         //AddGizmo();
     }
@@ -1378,13 +1368,6 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
     //}
 }
 
-void CDX11Device::AddOutline()
-{
-    CScene& SScene = CScene::GetScene();
-    SScene.AddEntityToScene(m_CubeOutlineEntity);
-    SceneLoc++;
-}
-
 void CDX11Device::AddGizmo()
 {
     CScene& SScene = CScene::GetScene();
@@ -1397,7 +1380,6 @@ void CDX11Device::CleanupDX11Device()
     if (m_pImmediateContext) m_pImmediateContext->ClearState();
 
     if (m_ConstantBuffer) m_ConstantBuffer->Release();
-    if (m_ConstantBuffer3) m_ConstantBuffer3->Release();
     if (m_VertexBuffer) m_VertexBuffer->Release();
     for (auto indexBuffer : m_IndexBufferArray)
     {
@@ -1578,11 +1560,13 @@ HRESULT CDX11Device::InitTexturedCube()
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
 
-	CubeEntity.m_GameEntityTag = "TexturedCube";
+	CGameEntity3D TexturedCubeEntity;
+    TexturedCubeEntity.m_GameEntityTag = "TexturedCube";
 
-    CubeEntityComponent.m_GameEntityTag = "TexturedCubeComponent";
-    CubeEntityComponent.SetLocationF(-1.f, 0.0f, 0.0f);
-    CubeEntityComponent.SetScale(0.25f, 0.25f, 0.25f);
+    CGameEntity3DComponent TexturedCubeComponent;
+    TexturedCubeComponent.m_GameEntityTag = "TexturedCubeComponent";
+    TexturedCubeComponent.SetLocationF(-5.f, 0.0f, 0.0f);
+    TexturedCubeComponent.SetScale(0.25f, 0.25f, 0.25f);
 
 	CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
@@ -1606,7 +1590,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto VertexShaderLambda = [=]() {
         m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -1630,7 +1614,7 @@ HRESULT CDX11Device::InitTexturedCube()
         m_pImmediateContext->IASetInputLayout(TempVertexLayout);
         };
 
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
@@ -1651,7 +1635,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto PixelShaderLambda = [=]() {
         m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     // Create vertex buffer
     //Simple_Color_Vertex vertices[] =
@@ -1752,7 +1736,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto VertexBufferLambda = [=]() {
         m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
 
     // Create index buffer
@@ -1811,7 +1795,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto IndexBufferLambda = [=]() {
         m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
         };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
     // Set primitive topology
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -1829,8 +1813,8 @@ HRESULT CDX11Device::InitTexturedCube()
     auto ConstantBufferLambda = [=]() {
         m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    CubeEntityComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    TexturedCubeComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
     const wchar_t* TextureName = L"tex_stickman.dds";
@@ -1843,7 +1827,7 @@ HRESULT CDX11Device::InitTexturedCube()
     auto TextureLambda = [=]() {
         m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
     };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
     D3D11_RASTERIZER_DESC rasterDesc = {};
     rasterDesc.FillMode = D3D11_FILL_SOLID;
@@ -1878,49 +1862,69 @@ HRESULT CDX11Device::InitTexturedCube()
 
     m_pImmediateContext->RSSetState(m_RasterizerState);
 
-    InterpMoveCubeRef = &CubeEntityComponent;
-	TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveCube>(this, 2.0f, 10.0f);
+    InterpMoveCubeRef = &TexturedCubeComponent;
+	//TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
 
     // Initialize the projection matrix
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->Type = CubeEntityComponent;
+    CubeComponentNode->m_TType = TexturedCubeComponent;
 
-	CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+    TexturedCubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
-    SScene.AddEntityToScene(CubeEntity);
-    //SScene.AddEntityToScene(CubeEntityComponent);
+    SScene.AddEntityToScene(TexturedCubeEntity);
 
     return S_OK;
 }
 
-void CDX11Device::InterpMoveCube()
+void CDX11Device::InterpMoveEntity()
 {
+	g_DoesFrustumContain = true;
+    CGameEntity3DComponent* Cube{ nullptr };
+    CGameEntity3DComponent* Frustum{ nullptr };
+
 	CLogger& Logger = CLogger::GetLogger();
     Logger.Log("InterpMoveCube Called");
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
-    InterpMoveLoc = FInterpConstantTo(InterpMoveLoc, 10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 0.9f);
+    InterpMoveLoc = FInterpConstantTo(InterpMoveLoc, -10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 2.9f);
 
     CScene& Scene = CScene::GetScene();
     for (auto& SceneIt : Scene.GetSceneList())
     {
-		if (SceneIt.m_GameEntityTag == "TexturedCube")
+		if (SceneIt.m_GameEntityTag == "SolidColorCubeEntity")
 		{
-			auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->Type;
-            //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
-            Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
-            EntityComponent.SetLocationF(-1.f, 0.0f, InterpMoveLoc);
-            //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
-            XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
-                0.0f,
-                XMConvertToRadians(InterpMoveLoc * 50),
-                0.0f
-            );
-            EntityComponent.m_QuatRotationMatrix = XMMatrixRotationQuaternion(quaternionRotation);
+            Cube = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
 		}
-    }
+		else if (SceneIt.m_GameEntityTag == "FrustumEntity")
+		{
+			Frustum = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+		}
+    }	
+   // auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+    //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
+    Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
+    Cube->SetLocationF(InterpMoveLoc, 0.0f, 5.f);
+    //EntityComponent2.SetLocationF(-6.f, 0.0f, InterpMoveLoc);
+    XMVECTOR quaternionRotation = XMQuaternionRotationRollPitchYaw(
+        0.0f,
+        XMConvertToRadians(InterpMoveLoc * 50),
+        0.0f
+    );
+    Cube->m_QuatRotationMatrix = XMMatrixRotationQuaternion(quaternionRotation);
+
+	auto CollisionType = CollisionCheck(Frustum, Cube);
+    SCollisionBuffer& CB = Frustum->m_CollisionBuffer;
+
+    if (CollisionType == ContainmentType::DISJOINT)
+        CB.mDoesFrustumContain = false;
+    else if (CollisionType == ContainmentType::INTERSECTS)
+        CB.mDoesFrustumContain = true;
+	else if (CollisionType == ContainmentType::CONTAINS)
+        CB.mDoesFrustumContain = true;
+
+	Logger.Log("InterpMoveCube Function, ContainmentType = ", CollisionType);
 }
 
 HRESULT CDX11Device::InitTexturedCube2()
@@ -2203,7 +2207,7 @@ HRESULT CDX11Device::InitTexturedCube2()
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
 	CSceneGraphNode<CGameEntity3DComponent>* CubeSubcomponent = new CSceneGraphNode<CGameEntity3DComponent>();
-	CubeSubcomponent->Type = Cube;
+	CubeSubcomponent->m_TType = Cube;
 
 	CubeEntity.m_SceneGraph.m_pRootNode->ChildNode.push_back(CubeSubcomponent);
 
@@ -2211,4 +2215,785 @@ HRESULT CDX11Device::InitTexturedCube2()
     //SScene.AddEntityToScene(Cube);
 
     return S_OK;
+}
+
+HRESULT CDX11Device::InitSolidColorCube()
+{
+    CScene& SScene = CScene::GetScene();
+    CPrimitiveGeometryFactory GeometryFactory;
+
+    CubeEntity.m_GameEntityTag = "SolidColorCubeEntity";
+	CubeEntity.m_GameEntityType = EGameEntityType::Cube;
+
+    CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
+    CubeEntityComponent.SetLocationF(10.f, 0.0f, 5.0f);
+    //CubeEntityComponent.SetScale(15.25f, 15.25f, 15.25f);
+
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
+    if (FAILED(m_HR))
+    {
+        pVSBlob->Release();
+        return m_HR;
+    }
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+    };
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set the input layout
+    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the pixel shader
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+
+    // Create vertex buffer
+    //Simple_Color_Vertex vertices[] =
+    //{
+    //    { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
+    //};
+
+    SSimpleColorVertex vertices[] =
+    {
+		{ XMFLOAT3(-1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        { XMFLOAT3(1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+        { XMFLOAT3(1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+        { XMFLOAT3(-1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+        { XMFLOAT3(-1.f,  1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+        { XMFLOAT3(1.f,  1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+        { XMFLOAT3(1.f,  -1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
+        { XMFLOAT3(-1.f,  -1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V6
+
+
+
+
+
+
+
+
+
+
+            //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+            //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+            //{ XMFLOAT3(-1.0f, -1.0f, 1.0f),XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+            //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+            //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+            //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+            //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) }
+    };
+
+    D3D11_BUFFER_DESC BufferDescriptor{};
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    D3D11_SUBRESOURCE_DATA InitData{};
+    InitData.pSysMem = vertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set vertex buffer
+    UINT stride = sizeof(SSimpleColorVertex);
+    UINT offset = 0;
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+
+
+    // Create index buffer
+    WORD Indices[] =
+    {
+	    0, 1, 2,
+	    0, 2, 3,
+
+	    4, 5, 6,
+	    4, 6, 7,
+
+	    0, 4, 5,
+	    0, 5, 1,
+
+	    1, 5, 6,
+	    1, 6, 2,
+
+	    2, 6, 7,
+	    2, 7, 3,
+
+	    3, 7, 4,
+	    3, 4, 0,
+    };
+
+    ID3D11Buffer* IndexBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    InitData.pSysMem = Indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &IndexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set index buffer
+    m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Create the constant buffer
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    CubeEntityComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+    //auto TextureLambda = [=]() {
+    //    m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
+    //};
+    //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+
+    D3D11_RASTERIZER_DESC rasterDesc = {};
+    rasterDesc.FillMode = D3D11_FILL_SOLID;
+    rasterDesc.CullMode = D3D11_CULL_NONE;
+    rasterDesc.FrontCounterClockwise = false;
+    rasterDesc.DepthBias = 0;
+    rasterDesc.DepthBiasClamp = 0.0f;
+    rasterDesc.SlopeScaledDepthBias = 0.0f;
+    rasterDesc.DepthClipEnable = true;
+    rasterDesc.ScissorEnable = false;
+    rasterDesc.MultisampleEnable = false;
+    rasterDesc.AntialiasedLineEnable = false;
+
+    D3D11_SAMPLER_DESC sampDesc = {};
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    sampDesc.MinLOD = 0;
+    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    m_pImmediateContext->RSSetState(m_RasterizerState);
+
+    //InterpMoveCubeRef = &CubeEntityComponent;
+
+    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    CubeComponentNode->m_TType = CubeEntityComponent;
+
+    CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+
+    TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 30.0f);
+
+    SScene.AddEntityToScene(CubeEntity);
+    //SScene.AddEntityToScene(CubeEntityComponent);
+
+    return S_OK;
+}
+
+HRESULT CDX11Device::InitFrustum()
+{
+    CScene& SScene = CScene::GetScene();
+    CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D FrustumEntity;
+    FrustumEntity.m_GameEntityTag = "FrustumEntity";
+	FrustumEntity.m_GameEntityType = EGameEntityType::Frustum;
+
+    CFrustumComponent FrustumComponent;
+    XMMATRIX xmProj = XMMatrixPerspectiveFovLH(XM_PIDIV4, 1.77778f, 0.5f, 10.0f);
+    CreateFrustumFromMatrix(FrustumComponent, xmProj);
+
+    FrustumComponent.m_GameEntityTag = "FrustumComponent";
+    FrustumComponent.SetLocationF(0.f, 0.0f, 0.0f);
+
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the vertex shader
+    ID3D11VertexShader* TempVertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &TempVertexShader);
+    if (FAILED(m_HR))
+    {
+        pVSBlob->Release();
+        return m_HR;
+    }
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
+    };
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set the input layout
+    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the pixel shader
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+
+    // Create vertex buffer
+    //Simple_Color_Vertex vertices[] =
+    //{
+    //    { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
+    //};
+
+    XMFLOAT3 verts[8];
+	GetFrustumCorners(verts, FrustumComponent);
+
+    SSimpleColorVertex vertices[] =
+    {
+        //{ XMFLOAT3(-5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        //{ XMFLOAT3(5.f,  5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+        //{ XMFLOAT3(5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+        //{ XMFLOAT3(-5.f, -5.f,  15.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+        //{ XMFLOAT3(-0.25f,  0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+        //{ XMFLOAT3(0.25f,  0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+        //{ XMFLOAT3(0.25f,  -0.25f,  -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
+        //{ XMFLOAT3(-0.25f,  -0.25f, -0.25f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V6
+
+        { verts[7], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        { verts[6], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+        { verts[5], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+        { verts[4], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+        { verts[3], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+        { verts[2], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+        { verts[1], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+        { verts[0], XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
+    };
+
+    D3D11_BUFFER_DESC bd{};
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(SSimpleColorVertex) * 8;
+    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    D3D11_SUBRESOURCE_DATA InitData{};
+    InitData.pSysMem = vertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempVertexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set vertex buffer
+    UINT stride = sizeof(SSimpleColorVertex);
+    UINT offset = 0;
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+
+
+    // Create index buffer
+    WORD indices[] =
+    {
+        3,1,0,
+        2,1,3,
+
+        0,5,4,
+        1,5,0,
+
+        3,4,7,
+        0,4,3,
+
+        1,6,5,
+        2,6,1,
+
+        2,7,6,
+        3,7,2,
+
+        6,4,5,
+        7,4,6,
+        7,4,6,
+
+        //4, 5, 6,
+        //4, 6, 7,
+
+        //0, 4, 5,
+        //0, 5, 1,
+
+        //1, 5, 6,
+        //1, 6, 2,
+
+        //2, 6, 7,
+        //2, 7, 3,
+
+        //3, 7, 4,
+        //3, 4, 0,
+    };
+
+    ID3D11Buffer* TempIndexBuffer{ nullptr };
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+    InitData.pSysMem = indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempIndexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set index buffer
+    m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Create the constant buffer
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(SCollisionBuffer);
+    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    bd.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    FrustumComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    //FrustumComponent.m_CollisionBuffer = TempConstantBuffer;
+
+
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+    //auto TextureLambda = [=]() {
+    //    m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
+    //};
+    //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+
+    D3D11_RASTERIZER_DESC rasterDesc = {};
+    rasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+    rasterDesc.CullMode = D3D11_CULL_NONE;
+    rasterDesc.FrontCounterClockwise = false;
+    rasterDesc.DepthBias = 0;
+    rasterDesc.DepthBiasClamp = 0.0f;
+    rasterDesc.SlopeScaledDepthBias = 0.0f;
+    rasterDesc.DepthClipEnable = true;
+    rasterDesc.ScissorEnable = false;
+    rasterDesc.MultisampleEnable = false;
+    rasterDesc.AntialiasedLineEnable = false;
+
+    D3D11_SAMPLER_DESC sampDesc = {};
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    sampDesc.MinLOD = 0;
+    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    m_pImmediateContext->RSSetState(m_RasterizerState);
+
+    //InterpMoveCubeRef = &CubeEntityComponent;
+
+    CSceneGraphNode<CGameEntity3DComponent>* FrustumComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    FrustumComponentNode->m_TType = FrustumComponent;
+
+    FrustumEntity.m_SceneGraph.m_pRootNode = FrustumComponentNode;
+
+    SScene.AddEntityToScene(FrustumEntity);
+    //SScene.AddEntityToScene(CubeEntityComponent);
+
+    return S_OK;
+}
+
+ContainmentType CDX11Device::CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube)
+{
+    XMVECTOR FrustumOrigin = Frustum->GetLocationVector();
+	XMFLOAT4 FrustumOrientationF4{ 0, 0, 0, 1 };
+    XMVECTOR FrustumOrientation = XMLoadFloat4(&FrustumOrientationF4);
+
+	XMFLOAT3 CubeOrigin{ Cube->GetLocationX(), Cube->GetLocationY(), Cube->GetLocationZ() };
+    XMVECTOR BoxOrigin = XMLoadFloat3(&CubeOrigin);
+	XMFLOAT3 CubeExtentsF3{ 1.0f, 1.0f, 1.0f };
+    XMVECTOR BoxExtents = XMLoadFloat3(&CubeExtentsF3);
+    XMVECTOR BoxOrientation = XMLoadFloat4(&FrustumOrientationF4);
+
+    // Init frustum planes
+    XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, g_Near);
+    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, FrustumOrientation, FrustumOrigin);
+    NearPlane = XMPlaneNormalize(NearPlane);
+
+    XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -g_Far);
+    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, FrustumOrientation, FrustumOrigin);
+    FarPlane = XMPlaneNormalize(FarPlane);
+
+    XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -g_RightSlope, 0.0f);
+    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, FrustumOrientation, FrustumOrigin);
+    RightPlane = XMPlaneNormalize(RightPlane);
+
+    XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, g_LeftSlope, 0.0f);
+    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, FrustumOrientation, FrustumOrigin);
+    LeftPlane = XMPlaneNormalize(LeftPlane);
+
+    XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -g_TopSlope, 0.0f);
+    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, FrustumOrientation, FrustumOrigin);
+    TopPlane = XMPlaneNormalize(TopPlane);
+
+    XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, g_BottomSlope, 0.0f);
+    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, FrustumOrientation, FrustumOrigin);
+    BottomPlane = XMPlaneNormalize(BottomPlane);
+
+
+
+    // Actual collision check
+    assert(DirectX::Internal::XMQuaternionIsUnit(BoxOrientation));
+
+    // Set w of the center to one so we can dot4 with a plane.
+    BoxOrigin = XMVectorInsert<0, 0, 0, 0, 1>(BoxOrigin, XMVectorSplatOne());
+
+    // Build the 3x3 rotation matrix that defines the box axes.
+    XMMATRIX R = XMMatrixRotationQuaternion(BoxOrientation);
+
+    XMVECTOR Outside, Inside;
+
+    // Test against each plane.
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], NearPlane, Outside, Inside);
+
+    XMVECTOR AnyOutside = Outside;
+    XMVECTOR AllInside = Inside;
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], FarPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], RightPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], LeftPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], TopPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], BottomPlane, Outside, Inside);
+    AnyOutside = XMVectorOrInt(AnyOutside, Outside);
+    AllInside = XMVectorAndInt(AllInside, Inside);
+
+    // If the box is outside any plane it is outside.
+    if (XMVector4EqualInt(AnyOutside, XMVectorTrueInt()))
+        return DISJOINT;
+
+    // If the box is inside all planes it is inside.
+    if (XMVector4EqualInt(AllInside, XMVectorTrueInt()))
+        return CONTAINS;
+
+    // The box is not inside all planes or outside a plane, it may intersect.
+    return INTERSECTS;
+}
+
+_Use_decl_annotations_
+inline void XM_CALLCONV CDX11Device::CreateFrustumFromMatrix(CFrustumComponent& Out, FXMMATRIX Projection, bool rhcoords) noexcept
+{
+    // Corners of the projection frustum in homogenous space.
+    static XMVECTORF32 HomogenousPoints[6] =
+    {
+        { { {  1.0f,  0.0f, 1.0f, 1.0f } } },   // right (at far plane)
+        { { { -1.0f,  0.0f, 1.0f, 1.0f } } },   // left
+        { { {  0.0f,  1.0f, 1.0f, 1.0f } } },   // top
+        { { {  0.0f, -1.0f, 1.0f, 1.0f } } },   // bottom
+
+        { { { 0.0f, 0.0f, 0.0f, 1.0f } } },     // near
+        { { { 0.0f, 0.0f, 1.0f, 1.0f } } }      // far
+    };
+
+    XMVECTOR Determinant;
+    XMMATRIX matInverse = XMMatrixInverse(&Determinant, Projection);
+
+    // Compute the frustum corners in world space.
+    XMVECTOR Points[6];
+
+    for (size_t i = 0; i < 6; ++i)
+    {
+        // Transform point.
+        Points[i] = XMVector4Transform(HomogenousPoints[i], matInverse);
+    }
+
+    Out.Origin = XMFLOAT3(0.0f, 0.0f, 0.0f);
+    Out.Orientation = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+
+    // Compute the slopes.
+    Points[0] = XMVectorMultiply(Points[0], XMVectorReciprocal(XMVectorSplatZ(Points[0])));
+    Points[1] = XMVectorMultiply(Points[1], XMVectorReciprocal(XMVectorSplatZ(Points[1])));
+    Points[2] = XMVectorMultiply(Points[2], XMVectorReciprocal(XMVectorSplatZ(Points[2])));
+    Points[3] = XMVectorMultiply(Points[3], XMVectorReciprocal(XMVectorSplatZ(Points[3])));
+
+    Out.RightSlope = XMVectorGetX(Points[0]);
+    g_RightSlope = XMVectorGetX(Points[0]);
+    Out.LeftSlope = XMVectorGetX(Points[1]);
+    g_LeftSlope = XMVectorGetX(Points[1]);
+    Out.TopSlope = XMVectorGetY(Points[2]);
+    g_TopSlope = XMVectorGetY(Points[2]);
+    Out.BottomSlope = XMVectorGetY(Points[3]);
+    g_BottomSlope = XMVectorGetY(Points[3]);
+
+    // Compute near and far.
+    Points[4] = XMVectorMultiply(Points[4], XMVectorReciprocal(XMVectorSplatW(Points[4])));
+    Points[5] = XMVectorMultiply(Points[5], XMVectorReciprocal(XMVectorSplatW(Points[5])));
+
+    if (rhcoords)
+    {
+        Out.Near = XMVectorGetZ(Points[5]);
+        g_Near = XMVectorGetZ(Points[5]);
+        Out.Far = XMVectorGetZ(Points[4]);
+        g_Far = XMVectorGetZ(Points[4]);
+    }
+    else
+    {
+        Out.Near = XMVectorGetZ(Points[4]);
+		g_Near = XMVectorGetZ(Points[4]);
+        Out.Far = XMVectorGetZ(Points[5]);
+		g_Far = XMVectorGetZ(Points[5]);
+    }
+}
+
+inline void CDX11Device::GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out)
+{
+    assert(Corners != nullptr);
+
+    // Load origin and orientation of the frustum.
+    XMVECTOR vOrigin = XMLoadFloat3(&Out.Origin);
+    XMVECTOR vOrientation = XMLoadFloat4(&Out.Orientation);
+
+    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+
+    // Build the corners of the frustum.
+    XMVECTOR vRightTop = XMVectorSet(Out.RightSlope, Out.TopSlope, 1.0f, 0.0f);
+    XMVECTOR vRightBottom = XMVectorSet(Out.RightSlope, Out.BottomSlope, 1.0f, 0.0f);
+    XMVECTOR vLeftTop = XMVectorSet(Out.LeftSlope, Out.TopSlope, 1.0f, 0.0f);
+    XMVECTOR vLeftBottom = XMVectorSet(Out.LeftSlope, Out.BottomSlope, 1.0f, 0.0f);
+    XMVECTOR vNear = XMVectorReplicatePtr(&Out.Near);
+    XMVECTOR vFar = XMVectorReplicatePtr(&Out.Far);
+
+    // Returns 8 corners position of bounding frustum.
+    //     Near    Far
+    //    0----1  4----5
+    //    |    |  |    |
+    //    |    |  |    |
+    //    3----2  7----6
+
+    XMVECTOR vCorners[8];
+    vCorners[0] = XMVectorMultiply(vLeftTop, vNear);
+    vCorners[1] = XMVectorMultiply(vRightTop, vNear);
+    vCorners[2] = XMVectorMultiply(vRightBottom, vNear);
+    vCorners[3] = XMVectorMultiply(vLeftBottom, vNear);
+    vCorners[4] = XMVectorMultiply(vLeftTop, vFar);
+    vCorners[5] = XMVectorMultiply(vRightTop, vFar);
+    vCorners[6] = XMVectorMultiply(vRightBottom, vFar);
+    vCorners[7] = XMVectorMultiply(vLeftBottom, vFar);
+
+    for (size_t i = 0; i < 8; ++i)
+    {
+        XMVECTOR C = XMVectorAdd(XMVector3Rotate(vCorners[i], vOrientation), vOrigin);
+        XMStoreFloat3(&Corners[i], C);
+    }
+}
+
+void CDX11Device::CopyEntity(CGameEntity3D Entity)
+{
+    CScene& Scene = CScene::GetScene();
+
+    CGameEntity3D NewEntity{ Entity };  
+    CGameEntity3DComponent NewEntityComponent;
+    NewEntityComponent = Entity.m_SceneGraph.m_pRootNode->m_TType;
+	NewEntity.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
+
+    //NewEntityComponent = NewEntity.m_SceneGraph.m_pRootNode->m_TType;
+    NewEntityComponent.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
+	NewEntityComponent.SetScale(5.5f, 5.5f, 5.5f);
+	NewEntity.m_SceneGraph.m_pRootNode->m_TType = NewEntityComponent;
+
+	Scene.AddEntityToScene(NewEntity);
 }

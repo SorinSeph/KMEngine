@@ -6,7 +6,6 @@
 #include "Cube.h"
 #include "CubeTerrainGenerator.h"
 #include "PrimitiveGeometryFactory.h"
-#include "DXStructuresInitializer.h"
 #include "DDSTextureLoader.h"
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib") //adds link to control control DLL
@@ -191,7 +190,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
             float RayY = CoreEngine.GetRaycastY();
 
             SLogger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
-            CoreEngine.RayCast(RayX, RayY);
+            //CoreEngine.RayCast(RayX, RayY);
+
+            if (RayX && RayY)
+            {
+                //Renderer->Raycast(RayX, RayY);
+				g_CanRaycast = false;
+            }
 
             int SceneListIndex = 0;
 

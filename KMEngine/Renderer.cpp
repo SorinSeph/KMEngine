@@ -4,28 +4,36 @@
 #include "Logger.h"
 #include "Math.h"
 
+CRenderer::CRenderer() {}
+
 CRenderer::CRenderer(HWND Viewport)
 {
     CLogger& Logger = CLogger::GetLogger();
     Logger.Log("CRenderer constructor from", __FILE__);
-    m_DX11evice.SetViewport(m_Viewport);
+    m_DX11Device.SetViewport(m_Viewport);
 }
 
 void CRenderer::SetViewport(HWND InViewport)
 {
-    m_DX11evice.SetViewport(InViewport);
+    m_DX11Device.SetViewport(InViewport);
+}
+
+void CRenderer::SetViewportSize(int Width, int Height)
+{
+	m_ViewportWidth = Width;
+	m_ViewportHeight = Height;
 }
 
 void CRenderer::InitRenderer()
 {
-    m_DX11evice.InitDX11Device();
+    m_DX11Device.InitDX11Device();
 
     //m_DX11Device.AddTestLine();
 }
 
 CDX11Device* CRenderer::GetDX11Device()
 {
-    return &m_DX11evice;
+    return &m_DX11Device;
 }
 
 void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
@@ -71,9 +79,9 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
     CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
 
-    m_DX11evice.m_pImmediateContext->ClearRenderTargetView(m_DX11evice.m_pRenderTargetView, Colors::MidnightBlue);
-    m_DX11evice.m_pImmediateContext->ClearDepthStencilView(m_DX11evice.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-    m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+    m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
+    m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+    m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
     auto SceneEntityList = Scene.GetSceneList();
 
@@ -96,98 +104,11 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
     Logger.Log();
 
-   // for (auto& SceneEntityIt : SceneEntityList)
-   // {
-   //     if (SceneEntityIt.m_GameEntityTag == "TexturedCube" || "TexturedCube2")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-			////SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-			//auto LocationMatrix = SceneEntityIt.GetLocation();
+    /**
+    * WIP Collision checking section, to be refactored into its own function
+    */
 
-   //         CB.mWorld = LocationMatrix;
-			////CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
-
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-   //         m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
-   //     }
-   //     //else if (SceneEntityIt.m_GameEntityTag == "TexturedCube2")
-   //     //{
-   //     //    SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //     //    ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //     //    CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //     //    CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //     //    CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //     //    m_DX11Device.m_ImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //     //    SceneEntityIt.m_DXResConfig.Execute();
-
-   //     //    m_DX11Device.m_ImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
-
-   //     //    m_DX11Device.m_ImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-   //     //    m_DX11Device.m_ImmediateContext->DrawIndexed(36, 0, 0);
-   //     //}
-   //     else if (SceneEntityIt.m_GameEntityTag == "Terrain")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         UINT Stride = sizeof(SSimpleVertex);
-   //         UINT Offset = 0;
-
-   //         ID3D11Buffer* VertexBuffer = SceneEntityIt.m_DXResConfig.m_VertexBuffer;
-   //         m_DX11evice.m_pImmediateContext->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
-
-   //         ID3D11Buffer* IndexBuffer = SceneEntityIt.m_DXResConfig.m_IndexBuffer;
-   //         DXGI_FORMAT IndexBufferFormat = SceneEntityIt.m_DXResConfig.m_IndexBufferFormat;
-   //         UINT IndexBufferOffset = SceneEntityIt.m_DXResConfig.m_IndexBufferOffset;
-   //         m_DX11evice.m_pImmediateContext->IASetIndexBuffer(IndexBuffer, IndexBufferFormat, IndexBufferOffset);
-
-   //         ID3D11InputLayout* InputLayout = SceneEntityIt.m_DXResConfig.GetInputLayout();
-   //         m_DX11evice.m_pImmediateContext->IASetInputLayout(InputLayout);
-
-   //         //ID3D11VertexShader* VertexShader = SceneEntityIt.m_DXResConfig.m_VertexShader;
-   //         //ID3D11PixelShader* PixelShader = SceneEntityIt.m_DXResConfig.m_PixelShader;
-   //         //m_DX11Device.m_ImmediateContext->VSSetShader(VertexShader, nullptr, 0);
-   //         //m_DX11Device.m_ImmediateContext->PSSetShader(PixelShader, nullptr, 0);
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->VSSetConstantBuffers(0, 1, &CB2);
-   //         m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-   //         //m_DX11Device.m_ImmediateContext->DrawIndexed(512, 0, 0);
-   //         m_DX11evice.m_pImmediateContext->DrawIndexed(6, 0, 0);
-   //     }
-   //     else if (SceneEntityIt.m_GameEntityTag == "Raycast")
-   //     {
-   //         SConstantBuffer CB = SceneEntityIt.GetConstantBuffer();
-   //         ID3D11Buffer* CB2 = SceneEntityIt.m_DXResConfig.GetConstantBuffer();
-   //         CB.mWorld = XMMatrixTranspose(CB.mWorld);
-   //         CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-   //         CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-   //         m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-
-   //         m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
-   //         SceneEntityIt.m_DXResConfig.Execute();
-
-   //         m_DX11evice.m_pImmediateContext->Draw(2, 0);
-   //     }
-   // }
+    
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
@@ -201,53 +122,93 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
         {
             //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
             //{
-                SConstantBuffer CB = EntityComponent->Type.GetConstantBuffer();
-                ID3D11Buffer* CB2 = EntityComponent->Type.m_DXResConfig.GetConstantBuffer();
+            if (EntityComponent->m_TType.m_GameEntityTag == "FrustumComponent")
+            {
+                SCollisionBuffer CB = EntityComponent->m_TType.m_CollisionBuffer;
+                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-                auto LocationMatrix = EntityComponent->Type.GetLocation();
-                auto RotationMatrix = EntityComponent->Type.m_QuatRotationMatrix;
-                auto ScaleMatrix = EntityComponent->Type.GetScale();
+                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
-                CB.mWorld = /* ScaleMatrix * RotationMatrix * */LocationMatrix;
-                //CB.mWorld = XMMatrixTranslation(LocX, LocY, LocZ);
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-                m_DX11evice.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+                //CB.mDoesFrustumContain = g_DoesFrustumContain;
+                m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
+            }
+            else 
+            {
+                SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
+                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
+                //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
+                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
 
-                EntityComponent->Type.m_DXResConfig.Execute();
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
-                m_DX11evice.m_pImmediateContext->OMSetDepthStencilState(m_DX11evice.pDefDepthStencilState3, 0);
+                CB.mWorld = XMMatrixTranspose(CB.mWorld);
+                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-                m_DX11evice.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-                m_DX11evice.m_pImmediateContext->DrawIndexed(36, 0, 0);
+				Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);
+            }
+
+
+                EntityComponent->m_TType.m_DXResConfig.Execute();
+
+                m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
+
+                m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+                m_DX11Device.m_pImmediateContext->DrawIndexed(36, 0, 0);
             //}
         }
     }
 
-    m_DX11evice.m_SwapChain->Present(0, 0);
+    m_DX11Device.m_SwapChain->Present(0, 0);
 }
 
-void CRenderer::Raycast(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ)
+void CRenderer::Raycast(float DestinationX, float DestinationY)
 {
-    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-    CScene& SScene = CScene::GetScene();
-    CLogger& SLogger = CLogger::GetLogger();
+	CLogger& Logger = CLogger::GetLogger();
 
-    m_DX11evice.InitRaycast(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+    XMVECTOR Origin = XMVector3Unproject(
+        XMVECTOR{0, 0, 0},
+        0,
+        0,
+        m_ViewportWidth,
+        m_ViewportHeight,
+        0,
+        1,
+        CDX11Device::m_ProjectionMatrix,
+        CDX11Device::m_ViewMatrix,
+        CDX11Device::m_WorldMatrix);
 
-    SLogger.Log(
-        "Renderer_.cpp, Raycast() : ",
-        "\nOriginX = ", OriginX,
-        "\nOriginY = ", OriginY,
-        "\nOriginZ = ", OriginZ,
-        "\nDestX = ", DestX,
-        "\nDestY = ", DestY,
-        "\nDestZ = ", DestZ
-    );
+	XMVECTOR Destination = XMVector3Unproject(
+		XMVECTOR{ DestinationX, DestinationY, 1 },
+		0,
+		0,
+        m_ViewportWidth,
+        m_ViewportHeight,
+		0,
+		1,
+		CDX11Device::m_ProjectionMatrix,
+		CDX11Device::m_ViewMatrix,
+		CDX11Device::m_WorldMatrix);
 
-    //m_DX11Device.CheckCollision(OriginX, OriginY, OriginZ, DestX, DestY, DestZ);
+	XMVECTOR Direction = XMVector3Normalize(Destination - Origin);
+    XMFLOAT3 OriginF;
+	XMStoreFloat3(&OriginF, Origin);
+	XMFLOAT3 DirectionF;
+	XMStoreFloat3(&DirectionF, Direction);
+
+    m_DX11Device.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
+    Logger.Log("Renderer.cpp, Raycast2()");
 }
 
 void CRenderer::AddOutline()
@@ -257,10 +218,10 @@ void CRenderer::AddOutline()
 
 void CRenderer::AddGizmo()
 {
-    m_DX11evice.AddGizmo();
+    m_DX11Device.AddGizmo();
 }
 
 void CRenderer::CleanupRenderer()
 {
-    m_DX11evice.CleanupDX11Device();
+    m_DX11Device.CleanupDX11Device();
 }

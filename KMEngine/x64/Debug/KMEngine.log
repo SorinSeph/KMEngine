@@ -1,43 +1,16 @@
-﻿  KMEngine.cpp
+﻿  UIModule.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(64,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(64,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(68,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(68,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(182,27): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(235,28): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(266,43): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(267,38): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(455,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(456,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(428,30): warning C4101: 'y': unreferenced local variable
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(434,22): warning C4101: 'hSubMenu': unreferenced local variable
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(194,38): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp(194,32): warning C4244: 'argument': conversion from 'float' to 'long', possible loss of data
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(90,23): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(128,24): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(161,39): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(162,34): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(221,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(222,46): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(194,30): warning C4101: 'y': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(200,26): warning C4101: 'hSubMenu': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(378,17): warning C4551: function call missing argument list
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(384,17): warning C4551: function call missing argument list
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(404,17): warning C4101: 'hdc': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(405,17): warning C4101: 'ps': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIModule.cpp(406,17): warning C4101: 'rect': unreferenced local variable
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
