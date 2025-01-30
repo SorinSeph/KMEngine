@@ -139,6 +139,7 @@
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RightSubwindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
     <ClCompile Include="UIModule.cpp" />
@@ -156,7 +157,6 @@
     <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="DX11Device.h" />
     <ClInclude Include="DXResourcesConfig.h" />
-    <ClInclude Include="EngineInitializer.h" />
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
@@ -169,6 +169,7 @@
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="RightSubwindow.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="TerrainGenerator.h" />
