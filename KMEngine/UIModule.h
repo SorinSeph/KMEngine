@@ -6,6 +6,7 @@
 #include "resource.h"
 #include <Windows.h>
 #include "ViewportWindow.h"
+#include "RightSubwindow.h"
 
 const wchar_t CLASS_NAME[] = L"KME Engine";
 const wchar_t TOOLBAR_NAME[] = L"Toolbar";
@@ -18,13 +19,13 @@ const wchar_t SIDETOOLBAR_NAME[] = L"SideToolbar";
 // Main windows procedures
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK PropertiesProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // Main window handles
+inline HWND hwnd;
 inline HWND ViewportHwnd;
-inline HWND RightToolbarHwnd;
+inline HWND RightSubwindowHwnd;
 inline HWND LeftToolbarHwnd;
 
 // Subwindows handles
@@ -47,6 +48,7 @@ public:
     //HWND LeftToolbarHwnd;
 
     CViewportWindow* m_pViewportWindow{ };
+    CRightSubwindow m_RightSubwindow{ };
 
     float ViewportWidth{ };
     float ViewportHeight{ };
