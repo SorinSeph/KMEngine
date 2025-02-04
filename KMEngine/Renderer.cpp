@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Logger.h"
 #include "Math.h"
+#include "GraphicsModule.h"
 
 CRenderer::CRenderer() {}
 
@@ -175,7 +176,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
 void CRenderer::Raycast(float DestinationX, float DestinationY)
 {
-	CLogger& Logger = CLogger::GetLogger();
+    CLogger& Logger = CLogger::GetLogger();
 
     XMVECTOR Origin = XMVector3Unproject(
         XMVECTOR{0, 0, 0},
@@ -209,6 +210,7 @@ void CRenderer::Raycast(float DestinationX, float DestinationY)
 
     m_DX11Device.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
     Logger.Log("Renderer.cpp, Raycast2()");
+
 }
 
 void CRenderer::AddOutline()
@@ -224,4 +226,18 @@ void CRenderer::AddGizmo()
 void CRenderer::CleanupRenderer()
 {
     m_DX11Device.CleanupDX11Device();
+}
+
+void CRenderer::TestGraphicsModuleLog()
+{
+    CLogger& Logger = CLogger::GetLogger();
+
+	if (m_pGraphicsModule)
+	{
+		m_pGraphicsModule->TestLog();
+	}
+	else
+	{
+		Logger.Log("Renderer.cpp, Raycast2() : m_pGraphicsModule is nullptr");
+	}
 }

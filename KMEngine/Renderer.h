@@ -4,12 +4,23 @@
 
 HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 
+class CGraphicsModule;
+
 class CRenderer
 {
 public:
     CRenderer();
 
     CRenderer(HWND Viewport);
+
+    CGraphicsModule* m_pGraphicsModule{ nullptr };
+
+	void SetGraphicsModuleReference(CGraphicsModule* GraphicsModule)
+	{
+		m_pGraphicsModule = GraphicsModule;
+	}
+
+    void TestGraphicsModuleLog();
 
     void SetViewport(HWND InViewport);
 

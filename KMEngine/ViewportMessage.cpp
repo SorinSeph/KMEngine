@@ -119,8 +119,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     XMVECTOR{ 0, 0, 0 },
                     0,
                     0,
-                    518,
-                    825,
+                    ViewportWidth,
+                    ViewportHeight,
                     0,
                     1,
                     CDX11Device::m_ProjectionMatrix,
@@ -131,8 +131,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     XMVECTOR{ (float)MouseX, (float)MouseY, 1 },
                     0,
                     0,
-                    518,
-                    825,
+                    ViewportWidth,
+                    ViewportHeight,
                     0,
                     1,
                     CDX11Device::m_ProjectionMatrix,
@@ -162,6 +162,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                             {
 								GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
                                 //EntityComponent.SetScale(5.f, 5.f, 5.f);
+                                GraphicsModule->m_Renderer.TestGraphicsModuleLog();
+                                Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");
                             }
                             else
                             {

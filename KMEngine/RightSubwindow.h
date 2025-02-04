@@ -7,11 +7,15 @@ class CRightSubwindow
 public:
 	static LRESULT CALLBACK RightSubwindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+	static LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 	void CreateRightSubwindow(HWND& ParentHwnd);
 
 	HWND GetRightSubwindowHwnd() const { return m_RightSubwindowHwnd; }
 
 	HWND m_RightSubwindowHwnd{ };
+
+	static HWND m_OutlinerHwnd;
 };
 
 //LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

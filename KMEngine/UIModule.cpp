@@ -56,7 +56,7 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 
 
     WNDCLASS OutlinerWC = { };
-    OutlinerWC.lpfnWndProc = OutlinerProc;
+    OutlinerWC.lpfnWndProc = CRightSubwindow::OutlinerProc;
     OutlinerWC.hInstance = hInstance;
     OutlinerWC.lpszClassName = L"Outliner";
     OutlinerWC.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
