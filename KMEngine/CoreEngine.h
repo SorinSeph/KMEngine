@@ -133,7 +133,9 @@ public:
 		Mediator.m_ModuleVector.push_back(&m_UIModule);
 
         m_GraphicsModule.SetMediator(Mediator);
+        m_GraphicsModule.SetRenderer();
         m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
+		m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
         Mediator.m_Modules.push_back(&m_GraphicsModule);
         Mediator.m_ModuleVector.push_back(&m_GraphicsModule);
 

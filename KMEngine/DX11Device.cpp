@@ -4,6 +4,7 @@
 
 #include "CoreClock.h"
 #include "DX11Device.h"
+#include "Renderer.h"
 
 #define FLT_MAX          3.402823466e+38F
 
@@ -54,6 +55,11 @@ HRESULT CDX11Device::InitDX11Device()
     //AddTestLine2();
     //GenerateTerrain();
     //AddTestLine3();
+
+    if (m_pRenderer)
+    {
+
+    }
 
     return S_OK;
 }
@@ -2996,4 +3002,9 @@ void CDX11Device::CopyEntity(CGameEntity3D Entity)
 	NewEntity.m_SceneGraph.m_pRootNode->m_TType = NewEntityComponent;
 
 	Scene.AddEntityToScene(NewEntity);
+}
+
+void CDX11Device::SetRenderer(CRenderer* Renderer)
+{
+	m_pRenderer = Renderer;
 }

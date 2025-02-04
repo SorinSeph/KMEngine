@@ -34,6 +34,8 @@ static WORD* GetIndices(std::vector<WORD> InVector)
 	return Vector;
 }
 
+class CRenderer;
+
 class CDX11Device
 {
 public:
@@ -152,6 +154,10 @@ public:
 	/**
 	* Temporary helper section of functions / variables
 	*/
+
+	CRenderer* m_pRenderer{ nullptr };
+
+	void SetRenderer(CRenderer* Renderer);
 
 	void InterpMoveEntity();
 
