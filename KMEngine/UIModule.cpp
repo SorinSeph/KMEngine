@@ -163,6 +163,8 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     ViewportWidth = RectViewport.left + RectViewport.right;
     ViewportHeight = RectViewport.bottom;
 
+    //SetOutlinerText();
+
     //m_World.Init();
     //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
     //EntityBuilder.InitDefaultEntities();
@@ -170,6 +172,15 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     //TerrainGenerator.GenerateTestTerrain();
 
     return S_OK;
+}
+
+void CUIModule::SetOutlinerText()
+{
+    const std::wstring& newText{ L"UI Test" };
+    SetWindowText(CRightSubwindow::m_OutlinerHwnd, newText.c_str());
+    // InvalidateRect and UpdateWindow are optional
+    InvalidateRect(CRightSubwindow::m_OutlinerHwnd, NULL, TRUE);
+    UpdateWindow(CRightSubwindow::m_OutlinerHwnd);
 }
 
 void CUIModule::TestLog(int X, int Y)

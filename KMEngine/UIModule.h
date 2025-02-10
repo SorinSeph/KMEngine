@@ -50,6 +50,8 @@ public:
     CViewportWindow* m_pViewportWindow{ };
     CRightSubwindow m_RightSubwindow{ };
 
+    void SetOutlinerText();
+
     float ViewportWidth{ };
     float ViewportHeight{ };
 

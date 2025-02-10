@@ -157,7 +157,21 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     {
                         try
                         {
-                            auto GraphicsModule = std::any_cast<CGraphicsModule*>(m_pUIModule->m_Mediator->m_ModuleVector[1]);
+							CGraphicsModule* GraphicsModule = nullptr;
+
+                            //auto GraphicsModule = std::any_cast<CGraphicsModule*>(m_pUIModule->m_Mediator->m_ModuleVector[1]);
+
+
+
+                            for (auto ModuleIt : m_pUIModule->m_Mediator->m_ModuleVector)
+                            {
+                                if (ModuleIt.type() == typeid(CGraphicsModule*))
+                                {
+									GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
+									break;
+                                }
+                            }
+
                             if (GraphicsModule)
                             {
 								GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);

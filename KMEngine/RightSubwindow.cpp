@@ -129,6 +129,18 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
         case WM_CREATE:
         {
             SetWindowLong(hwnd, 0, 0);
+
+            CRightSubwindow::m_PositionXEditControl = CreateWindowEx(
+                0, L"STATIC", L"X:", WS_CHILD | WS_VISIBLE,
+                10, 10, 30, 20, hwnd, NULL, (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
+            // Create X edit control
+            CRightSubwindow::m_PositionXEditControl = CreateWindowEx(
+                WS_EX_CLIENTEDGE, L"EDIT", L"", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
+                50, 10, 100, 20, hwnd, NULL, (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
             return 0;
         }
 
@@ -137,36 +149,57 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
 
-            // Fill the child window with blue color
-            HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 0)); // Blue
+            // Fill the window with red color
+            HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 0)); // Red
             FillRect(hdc, &ps.rcPaint, hBrush);
             DeleteObject(hBrush);
 
-            // Set text color to white and background mode to transparent
+            // Set text properties
             SetTextColor(hdc, RGB(255, 255, 255)); // White text
             SetBkMode(hdc, TRANSPARENT);
 
-            //CScene& Scene = CScene::GetScene();
-            //auto& SceneEntityList = Scene.GetSceneList();
-            //std::string EntityName = SceneEntityList.at(0).m_GameEntityTag;
+            // Retrieve the window text
+            wchar_t szText[256] = { 0 };
+            GetWindowText(hwnd, szText, sizeof(szText) / sizeof(wchar_t));
 
-            // Define the text to display
-            const wchar_t* szText = L"Test text";
-
-            // Get the client rectangle for text positioning
+            // Get client rect for text positioning
             RECT rect;
             GetClientRect(hwnd, &rect);
 
             const int Padding = 10;
-
             rect.left += Padding;
 
-            // Draw the text aligned to top-left within the child window
+            // Draw the retrieved text
             DrawText(hdc, szText, -1, &rect, DT_SINGLELINE | DT_LEFT | DT_TOP | DT_NOPREFIX);
 
             EndPaint(hwnd, &ps);
             return 0;
         }
+
+        case WM_CTLCOLORSTATIC: {
+            HDC hdcStatic = (HDC)wParam;
+            HWND hwndStatic = (HWND)lParam;
+            static HBRUSH hbrLabelBackground = NULL;
+
+            // Check if the static control is one of the labels
+            if (hwndStatic == CRightSubwindow::m_PositionXEditControl
+                || hwndStatic == CRightSubwindow::m_PositionYEditControl
+                || hwndStatic == CRightSubwindow::m_PositionZEditControl) 
+            {
+                // Set text color to black
+                SetTextColor(hdcStatic, RGB(0, 0, 0));
+
+                // Set background color to red
+                SetBkColor(hdcStatic, RGB(255, 0, 0));
+
+                // Return the red brush
+                return (INT_PTR)hbrLabelBackground;
+            }
+
+            // For other static controls, use default handling
+            break;
+        }
+
         case WM_DESTROY:
         {
             PostQuitMessage(0);
@@ -177,3 +210,6 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
 }
 
 HWND CRightSubwindow::m_OutlinerHwnd{ };
+HWND CRightSubwindow::m_PositionXEditControl{ };
+HWND CRightSubwindow::m_PositionYEditControl{ };
+HWND CRightSubwindow::m_PositionZEditControl{ };
