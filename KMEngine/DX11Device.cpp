@@ -5,6 +5,8 @@
 #include "CoreClock.h"
 #include "DX11Device.h"
 #include "Renderer.h"
+#include "GraphicsModule.h"
+#include "UIModule.h"
 
 #define FLT_MAX          3.402823466e+38F
 
@@ -31,6 +33,7 @@ XMGLOBALCONST XMVECTORF32 _FltMax = { { { FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX } }
 
 HRESULT CDX11Device::InitDX11Device()
 {
+	CLogger& Logger = CLogger::GetLogger();
     m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     InitDriveTypeAndFeatureLevelFinal();
@@ -56,9 +59,42 @@ HRESULT CDX11Device::InitDX11Device()
     //GenerateTerrain();
     //AddTestLine3();
 
+    CScene& Scene = CScene::GetScene();
+    auto FirstEntity = Scene.GetSceneList().at(0).m_GameEntityType; // Gets the frustum
+
+
     if (m_pRenderer)
     {
+        if (m_pRenderer->m_pGraphicsModule)
+        {
+			Logger.Log("CDX11Device::InitDX11Device(): m_pRenderer->m_pGraphicsModule is not null");
+            m_pRenderer->m_pGraphicsModule->Notify([this]() {
+                CLogger& Logger = CLogger::GetLogger();
 
+                CUIModule* UIModule{ nullptr };
+                for (auto ModuleIt : m_pRenderer->m_pGraphicsModule->m_Mediator->m_ModuleVector)
+                {
+                    if (ModuleIt.type() == typeid(CUIModule*))
+                    {
+                        Logger.Log("CDX11Device::InitDX11Device(): Lambda working");
+                        UIModule = std::any_cast<CUIModule*>(ModuleIt);
+                        break;
+                    }
+                }
+
+                if (UIModule)
+                {
+					CScene& Scene = CScene::GetScene();
+                    auto FirstEntity = Scene.GetSceneList().at(1).m_GameEntityTag; // Gets the frustum
+                    //UIModule->m_RightSubwindow;
+                    //const std::wstring& newText
+                    const std::wstring newText = std::wstring(FirstEntity.begin(), FirstEntity.end());
+                    SetWindowText(CRightSubwindow::m_OutlinerHwnd, newText.c_str());
+                    InvalidateRect(CRightSubwindow::m_OutlinerHwnd, NULL, TRUE);
+                    UpdateWindow(CRightSubwindow::m_OutlinerHwnd);
+                }
+            });
+        }
     }
 
     return S_OK;

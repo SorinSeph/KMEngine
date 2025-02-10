@@ -16,6 +16,11 @@ public:
 	HWND m_RightSubwindowHwnd{ };
 
 	static HWND m_OutlinerHwnd;
+
+	static HWND m_PositionXEditControl;
+	static HWND	m_PositionYEditControl;
+	static HWND m_PositionZEditControl;
+	
 };
 
 //LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
