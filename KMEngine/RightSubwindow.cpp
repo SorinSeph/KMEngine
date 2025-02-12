@@ -1,8 +1,32 @@
 #include "RightSubwindow.h"
+#include "ViewportMessage.h"
+#include "GraphicsModule.h"
+#include "UIModule.h"
+#include <string>
+
+// Initialize static members
+HWND CRightSubwindow::m_OutlinerHwnd = nullptr;
+HWND CRightSubwindow::m_PositionXLabel = nullptr;
+HWND CRightSubwindow::m_PositionXEditControl = nullptr;
+HWND CRightSubwindow::m_PositionYLabel = nullptr;
+HWND CRightSubwindow::m_PositionYEditControl = nullptr;
+HWND CRightSubwindow::m_PositionZLabel = nullptr;
+HWND CRightSubwindow::m_PositionZEditControl = nullptr;
+
+// Define unique IDs for Edit Controls
+#define ID_EDIT_X 101
+#define ID_EDIT_Y 102
+#define ID_EDIT_Z 103
+
+// Original Window Procedures for Edit Controls
+static WNDPROC wpOrigEditProcX = nullptr;
+static WNDPROC wpOrigEditProcY = nullptr;
+static WNDPROC wpOrigEditProcZ = nullptr;
+
 
 void CRightSubwindow::CreateRightSubwindow(HWND& ParentHwnd)
 {
-	m_RightSubwindowHwnd = CreateWindow(
+    m_RightSubwindowHwnd = CreateWindow(
         L"RightSubwindow",
         NULL,
         WS_CHILDWINDOW | WS_VISIBLE | WS_CLIPSIBLINGS,
@@ -12,9 +36,14 @@ void CRightSubwindow::CreateRightSubwindow(HWND& ParentHwnd)
         0,
         ParentHwnd,
         NULL,
-        (HINSTANCE)GetWindowLong(ParentHwnd, GWLP_HINSTANCE),
+        (HINSTANCE)GetWindowLongPtr(ParentHwnd, GWLP_HINSTANCE),
         NULL
     );
+
+    if (m_RightSubwindowHwnd == NULL)
+    {
+        MessageBox(NULL, L"Could not create RightSubwindow window.", L"Error", MB_OK | MB_ICONERROR);
+    }
 }
 
 LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -30,14 +59,13 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
             SetWindowLong(hwnd, 0, 0);
 
             GetClientRect(hwnd, &rect);
-
             int width = rect.right - rect.left;
             int height = rect.bottom - rect.top;
 
-            // Create the blue child window (top half)
+            // Create the Outliner window
             CRightSubwindow::m_OutlinerHwnd = CreateWindowEx(
                 0,                              // Optional window styles
-                L"Outliner",           // Window class
+                L"Outliner",                    // Window class
                 NULL,                           // No window text
                 WS_CHILD | WS_VISIBLE,          // Window style
                 0, 0,                           // Position
@@ -48,29 +76,10 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
                 NULL                            // Additional application data
             );
 
-        //    if (OutlinerHwnd == NULL)
-        //    {
-        //        MessageBox(hwnd, L"Could not create outliner window.", L"Error", MB_OK | MB_ICONERROR);
-        //    }
-
-        //    // Create the red child window (bottom half)
-        //    PropertiesHwnd = CreateWindowEx(
-        //        0,                              // Optional window styles
-        //        L"Properties",            // Window class
-        //        NULL,                           // No window text
-        //        WS_CHILD | WS_VISIBLE,          // Window style
-        //        0, height / 2,                  // Position
-        //        width, height / 2,              // Size
-        //        hwnd,                           // Parent window
-        //        NULL,                           // No menu
-        //        (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-        //        NULL                            // Additional application data
-        //    );
-
-        //    if (PropertiesHwnd == NULL)
-        //    {
-        //        MessageBox(hwnd, L"Could not create properties window.", L"Error", MB_OK | MB_ICONERROR);
-        //    }
+            if (CRightSubwindow::m_OutlinerHwnd == NULL)
+            {
+                MessageBox(hwnd, L"Could not create Outliner window.", L"Error", MB_OK | MB_ICONERROR);
+            }
 
             return 0;
         }
@@ -81,8 +90,9 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
 
             GetClientRect(hwnd, &rect);
             Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 140));
+            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 140)); // Example color
             FillRect(hdc, &rect, Brush);
+            DeleteObject(Brush);
 
             EndPaint(hwnd, &ps);
             return 0;
@@ -93,53 +103,150 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
             int width = LOWORD(lParam);
             int height = HIWORD(lParam);
 
-            // Resize the blue child window to top half
-            if (OutlinerProc)
+            // Resize the Outliner window
+            if (CRightSubwindow::m_OutlinerHwnd)
             {
-                SetWindowPos(CRightSubwindow::m_OutlinerHwnd, NULL, 0, 0, width, height / 4, SWP_NOZORDER);
+                SetWindowPos(CRightSubwindow::m_OutlinerHwnd, NULL, 0, 0, width, height / 2, SWP_NOZORDER);
             }
 
-            // Resize the red child window to bottom half
-            //if (PropertiesProc)
-            //{
-            //    SetWindowPos(PropertiesHwnd, NULL, 0, height / 4, width, (height * 3) / 4, SWP_NOZORDER);
-            //}
-
             return 0;
         }
 
+        // Removed WM_DESTROY handler to prevent premature application termination
 
-        case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-            return 0;
-        }
     }
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
 LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    HDC         hdc;
-    PAINTSTRUCT ps;
-    RECT        rect;
-
     switch (message)
     {
         case WM_CREATE:
         {
-            SetWindowLong(hwnd, 0, 0);
+			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
 
-            CRightSubwindow::m_PositionXEditControl = CreateWindowEx(
-                0, L"STATIC", L"X:", WS_CHILD | WS_VISIBLE,
-                10, 10, 30, 20, hwnd, NULL, (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+			CGraphicsModule* GraphicsModule = nullptr;
+
+			if (ViewportMessage.m_pUIModule)
+			{
+                for (auto ModuleIt : ViewportMessage.m_pUIModule->m_pMediator->m_ModuleVector)
+                {
+                    if (ModuleIt.type() == typeid(CGraphicsModule*))
+                    {
+                        GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
+                        break;
+                    }
+                }
+			}
+
+            // Create Labels and Edit Controls for X, Y, Z inside Outliner
+            // Initial positions will be set in WM_SIZE
+
+            // X Label
+            CRightSubwindow::m_PositionXLabel = CreateWindowEx(
+                0, L"STATIC", L"X:", WS_CHILD | WS_VISIBLE | SS_LEFT,
+                0, 0, 30, 20, hwnd, NULL,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
             );
 
-            // Create X edit control
+            // X Edit Control
             CRightSubwindow::m_PositionXEditControl = CreateWindowEx(
                 WS_EX_CLIENTEDGE, L"EDIT", L"", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
-                50, 10, 100, 20, hwnd, NULL, (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+                0, 0, 100, 20, hwnd, (HMENU)ID_EDIT_X,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
             );
+
+            // Subclass X Edit Control
+            wpOrigEditProcX = (WNDPROC)SetWindowLongPtr(CRightSubwindow::m_PositionXEditControl, GWLP_WNDPROC, (LONG_PTR)EditSubclassProc);
+
+            // Set default text for X Edit Control
+            SetWindowText(CRightSubwindow::m_PositionXEditControl, L"-1");
+
+            // Y Label
+            CRightSubwindow::m_PositionYLabel = CreateWindowEx(
+                0, L"STATIC", L"Y:", WS_CHILD | WS_VISIBLE | SS_LEFT,
+                0, 0, 30, 20, hwnd, NULL,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
+            // Y Edit Control
+            CRightSubwindow::m_PositionYEditControl = CreateWindowEx(
+                WS_EX_CLIENTEDGE, L"EDIT", L"", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
+                0, 0, 100, 20, hwnd, (HMENU)ID_EDIT_Y,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
+            // Subclass Y Edit Control
+            wpOrigEditProcY = (WNDPROC)SetWindowLongPtr(CRightSubwindow::m_PositionYEditControl, GWLP_WNDPROC, (LONG_PTR)EditSubclassProc);
+
+            // Set default text for Y Edit Control
+            SetWindowText(CRightSubwindow::m_PositionYEditControl, L"-1");
+
+            // Z Label
+            CRightSubwindow::m_PositionZLabel = CreateWindowEx(
+                0, L"STATIC", L"Z:", WS_CHILD | WS_VISIBLE | SS_LEFT,
+                0, 0, 30, 20, hwnd, NULL,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
+            // Z Edit Control
+            CRightSubwindow::m_PositionZEditControl = CreateWindowEx(
+                WS_EX_CLIENTEDGE, L"EDIT", L"", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
+                0, 0, 100, 20, hwnd, (HMENU)ID_EDIT_Z,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
+
+            // Subclass Z Edit Control
+            wpOrigEditProcZ = (WNDPROC)SetWindowLongPtr(CRightSubwindow::m_PositionZEditControl, GWLP_WNDPROC, (LONG_PTR)EditSubclassProc);
+
+            // Set default text for Z Edit Control
+            SetWindowText(CRightSubwindow::m_PositionZEditControl, L"-1");
+
+            // Optional: Check creation success
+            if (!CRightSubwindow::m_PositionXLabel || !CRightSubwindow::m_PositionXEditControl ||
+                !CRightSubwindow::m_PositionYLabel || !CRightSubwindow::m_PositionYEditControl ||
+                !CRightSubwindow::m_PositionZLabel || !CRightSubwindow::m_PositionZEditControl)
+            {
+                MessageBox(hwnd, L"Could not create one or more controls.", L"Error", MB_OK | MB_ICONERROR);
+            }
+
+            return 0;
+        }
+
+        case WM_SIZE:
+        {
+            int width = LOWORD(lParam);
+            // int height = HIWORD(lParam); // Not needed for fixed vertical position
+
+            // Define control dimensions and spacing
+            const int labelWidth = 30;
+            const int editWidth = 100;
+            const int controlHeight = 20;
+            const int pairSpacing = 30;      // Space between label-edit pairs
+            const int intraPairSpacing = 10; // Space between label and edit within a pair
+            const int startY = 35;           // Fixed 35-pixel padding from the top
+
+            // Calculate total width of all controls
+            int totalPairs = 3;
+            int totalWidth = totalPairs * (labelWidth + intraPairSpacing + editWidth) + (totalPairs - 1) * pairSpacing;
+
+            // Calculate starting X position to center the controls horizontally
+            int startX = (width - totalWidth) / 2;
+
+            // Position X Label and Edit
+            MoveWindow(CRightSubwindow::m_PositionXLabel, startX, startY, labelWidth, controlHeight, TRUE);
+            MoveWindow(CRightSubwindow::m_PositionXEditControl, startX + labelWidth + intraPairSpacing, startY, editWidth, controlHeight, TRUE);
+
+            // Position Y Label and Edit
+            int startX_Y = startX + labelWidth + intraPairSpacing + editWidth + pairSpacing;
+            MoveWindow(CRightSubwindow::m_PositionYLabel, startX_Y, startY, labelWidth, controlHeight, TRUE);
+            MoveWindow(CRightSubwindow::m_PositionYEditControl, startX_Y + labelWidth + intraPairSpacing, startY, editWidth, controlHeight, TRUE);
+
+            // Position Z Label and Edit
+            int startX_Z = startX_Y + labelWidth + intraPairSpacing + editWidth + pairSpacing;
+            MoveWindow(CRightSubwindow::m_PositionZLabel, startX_Z, startY, labelWidth, controlHeight, TRUE);
+            MoveWindow(CRightSubwindow::m_PositionZEditControl, startX_Z + labelWidth + intraPairSpacing, startY, editWidth, controlHeight, TRUE);
 
             return 0;
         }
@@ -176,40 +283,113 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
             return 0;
         }
 
-        case WM_CTLCOLORSTATIC: {
+        case WM_CTLCOLORSTATIC:
+        {
             HDC hdcStatic = (HDC)wParam;
             HWND hwndStatic = (HWND)lParam;
-            static HBRUSH hbrLabelBackground = NULL;
+
+            // Create a brush for the label background if not already created
+            static HBRUSH hbrLabelBackground = CreateSolidBrush(RGB(255, 0, 0)); // Red
 
             // Check if the static control is one of the labels
-            if (hwndStatic == CRightSubwindow::m_PositionXEditControl
-                || hwndStatic == CRightSubwindow::m_PositionYEditControl
-                || hwndStatic == CRightSubwindow::m_PositionZEditControl) 
+            if (hwndStatic == CRightSubwindow::m_PositionXLabel
+                || hwndStatic == CRightSubwindow::m_PositionYLabel
+                || hwndStatic == CRightSubwindow::m_PositionZLabel)
             {
                 // Set text color to black
                 SetTextColor(hdcStatic, RGB(0, 0, 0));
-
-                // Set background color to red
-                SetBkColor(hdcStatic, RGB(255, 0, 0));
+                SetBkMode(hdcStatic, TRANSPARENT); // Transparent background
 
                 // Return the red brush
                 return (INT_PTR)hbrLabelBackground;
             }
 
             // For other static controls, use default handling
-            break;
+            return DefWindowProc(hwnd, message, wParam, lParam);
         }
 
-        case WM_DESTROY:
+        case WM_CTLCOLOREDIT:
         {
-            PostQuitMessage(0);
-            return 0;
+            HDC hdcEdit = (HDC)wParam;
+            HWND hwndEdit = (HWND)lParam;
+
+            // Create a brush for the edit background if not already created
+            static HBRUSH hbrEditBackground = CreateSolidBrush(RGB(255, 255, 255)); // White
+
+            // Check if the edit control is one of the position edits
+            if (hwndEdit == CRightSubwindow::m_PositionXEditControl
+                || hwndEdit == CRightSubwindow::m_PositionYEditControl
+                || hwndEdit == CRightSubwindow::m_PositionZEditControl)
+            {
+                // Set text color to black
+                SetTextColor(hdcEdit, RGB(0, 0, 0));
+                SetBkMode(hdcEdit, OPAQUE); // Opaque background
+
+                // Set the background color
+                SetBkColor(hdcEdit, RGB(255, 255, 255)); // White
+
+                // Return the white brush
+                return (INT_PTR)hbrEditBackground;
+            }
+
+            // For other edit controls, use default handling
+            return DefWindowProc(hwnd, message, wParam, lParam);
         }
+
+        // Removed WM_DESTROY handler to prevent premature application termination
+
     }
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-HWND CRightSubwindow::m_OutlinerHwnd{ };
-HWND CRightSubwindow::m_PositionXEditControl{ };
-HWND CRightSubwindow::m_PositionYEditControl{ };
-HWND CRightSubwindow::m_PositionZEditControl{ };
+// Subclass Procedure for Edit Controls
+LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+
+    if (msg == WM_KEYDOWN && wParam == VK_RETURN)
+    {
+        if (ViewportMessage.m_pUIModule)
+        {
+            //ViewportMessage.m_pUIModule->Notify([]() {
+            //    m_pUIModule
+            //});
+
+            MessageBox(hwnd, L"UI Module pointer is valid", L"UIModule", MB_OK | MB_ICONINFORMATION);
+        }
+        else
+        {
+            MessageBox(hwnd, L"UI Module pointer is NOT VALID", L"UIModule", MB_OK | MB_ICONINFORMATION);
+        }
+
+        // Buffer to store the input text
+        wchar_t buffer[100];
+        GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
+
+        // Construct the message
+        std::wstring message = L"Input number = ";
+        message += buffer;
+
+        // Display the MessageBox
+        //MessageBox(hwnd, message.c_str(), L"Input Received", MB_OK | MB_ICONINFORMATION);
+
+        // Optionally, prevent the beep sound
+        return 0;
+    }
+
+    // Call the original window procedure for default handling
+    if (hwnd == CRightSubwindow::m_PositionXEditControl)
+    {
+        return CallWindowProc(wpOrigEditProcX, hwnd, msg, wParam, lParam);
+    }
+    else if (hwnd == CRightSubwindow::m_PositionYEditControl)
+    {
+        return CallWindowProc(wpOrigEditProcY, hwnd, msg, wParam, lParam);
+    }
+    else if (hwnd == CRightSubwindow::m_PositionZEditControl)
+    {
+        return CallWindowProc(wpOrigEditProcZ, hwnd, msg, wParam, lParam);
+    }
+
+    return DefWindowProc(hwnd, msg, wParam, lParam);
+}

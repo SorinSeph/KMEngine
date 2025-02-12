@@ -23,15 +23,15 @@ class CBaseModule
 public:
 	void SetMediator(CMediator& Mediator)
 	{
-		m_Mediator = &Mediator;
+		m_pMediator = &Mediator;
 	}
 
 	template <typename... Args>
 	void Notify(auto&& Ptr, Args&&... args)
 	{
 		//std::cout << "Component 2 does Variadic C.\n";
-		m_Mediator->Notify(Ptr, args...);
+		m_pMediator->Notify(Ptr, args...);
 	}
 
-	CMediator* m_Mediator;
+	CMediator* m_pMediator;
 };

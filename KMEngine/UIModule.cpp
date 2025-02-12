@@ -163,14 +163,6 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     ViewportWidth = RectViewport.left + RectViewport.right;
     ViewportHeight = RectViewport.bottom;
 
-    //SetOutlinerText();
-
-    //m_World.Init();
-    //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
-    //EntityBuilder.InitDefaultEntities();
-    //EntityBuilder.TestDevice();
-    //TerrainGenerator.GenerateTestTerrain();
-
     return S_OK;
 }
 

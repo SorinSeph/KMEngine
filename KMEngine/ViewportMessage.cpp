@@ -153,17 +153,13 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     BoxOrientation,
                     fDist))
                 {
-                    if (m_pUIModule->m_Mediator)
+                    if (m_pUIModule->m_pMediator)
                     {
                         try
                         {
 							CGraphicsModule* GraphicsModule = nullptr;
 
-                            //auto GraphicsModule = std::any_cast<CGraphicsModule*>(m_pUIModule->m_Mediator->m_ModuleVector[1]);
-
-
-
-                            for (auto ModuleIt : m_pUIModule->m_Mediator->m_ModuleVector)
+                            for (auto ModuleIt : m_pUIModule->m_pMediator->m_ModuleVector)
                             {
                                 if (ModuleIt.type() == typeid(CGraphicsModule*))
                                 {
