@@ -48,7 +48,7 @@ HRESULT CDX11Device::InitDX11Device()
     InitDefaultDepthStencil3();
     //InitBaseCube();
 
-    //InitTexturedCube();
+    InitTexturedCube();
     //InitTexturedCube2();
     InitFrustum();
     InitSolidColorCube();
@@ -58,9 +58,6 @@ HRESULT CDX11Device::InitDX11Device()
     //AddTestLine2();
     //GenerateTerrain();
     //AddTestLine3();
-
-    CScene& Scene = CScene::GetScene();
-    auto FirstEntity = Scene.GetSceneList().at(0).m_GameEntityType; // Gets the frustum
 
 
     if (m_pRenderer)
@@ -72,7 +69,7 @@ HRESULT CDX11Device::InitDX11Device()
                 CLogger& Logger = CLogger::GetLogger();
 
                 CUIModule* UIModule{ nullptr };
-                for (auto ModuleIt : m_pRenderer->m_pGraphicsModule->m_Mediator->m_ModuleVector)
+                for (auto ModuleIt : m_pRenderer->m_pGraphicsModule->m_pMediator->m_ModuleVector)
                 {
                     if (ModuleIt.type() == typeid(CUIModule*))
                     {
@@ -85,7 +82,7 @@ HRESULT CDX11Device::InitDX11Device()
                 if (UIModule)
                 {
 					CScene& Scene = CScene::GetScene();
-                    auto FirstEntity = Scene.GetSceneList().at(1).m_GameEntityTag; // Gets the frustum
+                    auto FirstEntity = Scene.GetSceneList().at(0).m_GameEntityTag; // Gets the frustum
                     //UIModule->m_RightSubwindow;
                     //const std::wstring& newText
                     const std::wstring newText = std::wstring(FirstEntity.begin(), FirstEntity.end());

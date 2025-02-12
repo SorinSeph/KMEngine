@@ -1,9 +1,5 @@
 ﻿  RightSubwindow.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(5,25): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(97,17): warning C4551: function call missing argument list
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(123,17): warning C4101: 'hdc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(124,17): warning C4101: 'ps': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(125,17): warning C4101: 'rect': unreferenced local variable
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
