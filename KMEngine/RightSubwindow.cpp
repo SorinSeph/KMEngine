@@ -2,6 +2,7 @@
 #include "ViewportMessage.h"
 #include "GraphicsModule.h"
 #include "UIModule.h"
+#include "Scene.h"
 #include <string>
 
 // Initialize static members
@@ -23,6 +24,8 @@ static WNDPROC wpOrigEditProcX = nullptr;
 static WNDPROC wpOrigEditProcY = nullptr;
 static WNDPROC wpOrigEditProcZ = nullptr;
 
+// Forward declaration of Subclass Procedure
+LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void CRightSubwindow::CreateRightSubwindow(HWND& ParentHwnd)
 {
@@ -124,12 +127,12 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
     {
         case WM_CREATE:
         {
-			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
 
-			CGraphicsModule* GraphicsModule = nullptr;
+            CGraphicsModule* GraphicsModule = nullptr;
 
-			if (ViewportMessage.m_pUIModule)
-			{
+            if (ViewportMessage.m_pUIModule)
+            {
                 for (auto ModuleIt : ViewportMessage.m_pUIModule->m_pMediator->m_ModuleVector)
                 {
                     if (ModuleIt.type() == typeid(CGraphicsModule*))
@@ -138,7 +141,7 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
                         break;
                     }
                 }
-			}
+            }
 
             // Create Labels and Edit Controls for X, Y, Z inside Outliner
             // Initial positions will be set in WM_SIZE
@@ -346,34 +349,98 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
 LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+	CLogger& Logger = CLogger::GetLogger();
+    CScene& Scene = CScene::GetScene();
+
+    wchar_t buffer[100];
 
     if (msg == WM_KEYDOWN && wParam == VK_RETURN)
     {
-        if (ViewportMessage.m_pUIModule)
-        {
-            //ViewportMessage.m_pUIModule->Notify([]() {
-            //    m_pUIModule
-            //});
+        // Determine the title based on which edit control is sending the message
+        const wchar_t* title = nullptr;
 
-            MessageBox(hwnd, L"UI Module pointer is valid", L"UIModule", MB_OK | MB_ICONINFORMATION);
+        if (hwnd == CRightSubwindow::m_PositionXEditControl)
+        {
+            title = L"X";
+            GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
+
+            for (auto& EntityIt : Scene.GetSceneList())
+            {
+                if (EntityIt.m_GameEntityTag == "TexturedCube")
+                {
+                    std::wstring ws(buffer);
+                    int LocationX = std::stoi(ws);
+
+					Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationX);
+
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    EntityComponent.SetLocationF(
+                        LocationX,
+                        EntityComponent.GetLocationY(),
+                        EntityComponent.GetLocationZ()
+                    );
+                }
+            }
+        }
+        else if (hwnd == CRightSubwindow::m_PositionYEditControl)
+        {
+            title = L"Y";
+            GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
+
+            for (auto& EntityIt : Scene.GetSceneList())
+            {
+                if (EntityIt.m_GameEntityTag == "TexturedCube")
+                {
+                    std::wstring ws(buffer);
+                    int LocationY = std::stoi(ws);
+
+                    Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationY);
+
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    EntityComponent.SetLocationF(
+                        EntityComponent.GetLocationX(),
+                        LocationY,
+                        EntityComponent.GetLocationZ()
+                    );
+                }
+            }
+        }
+        else if (hwnd == CRightSubwindow::m_PositionZEditControl)
+        {
+            title = L"Z";
+            GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
+
+            for (auto& EntityIt : Scene.GetSceneList())
+            {
+                if (EntityIt.m_GameEntityTag == "TexturedCube")
+                {
+                    std::wstring ws(buffer);
+                    int LocationZ = std::stoi(ws);
+
+                    Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationZ);
+
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    EntityComponent.SetLocationF(
+                        EntityComponent.GetLocationX(),
+                        EntityComponent.GetLocationY(),
+                        LocationZ
+                        );
+                }
+            }
         }
         else
         {
-            MessageBox(hwnd, L"UI Module pointer is NOT VALID", L"UIModule", MB_OK | MB_ICONINFORMATION);
+            title = L"Unknown";
         }
 
-        // Buffer to store the input text
-        wchar_t buffer[100];
-        GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
-
         // Construct the message
-        std::wstring message = L"Input number = ";
-        message += buffer;
+        //std::wstring message = L"Input number = ";
+        //message += buffer;
 
-        // Display the MessageBox
-        //MessageBox(hwnd, message.c_str(), L"Input Received", MB_OK | MB_ICONINFORMATION);
+        // Optionally, display the input received
+        // MessageBox(hwnd, message.c_str(), L"Input Received", MB_OK | MB_ICONINFORMATION);
 
-        // Optionally, prevent the beep sound
+        // Prevent the beep sound by returning 0
         return 0;
     }
 
@@ -393,3 +460,4 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
+
