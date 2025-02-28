@@ -1,6 +1,3 @@
-﻿  RightSubwindow.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(378,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(402,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(426,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  compilation object save succeeded; see C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\TextureShader_PS.cso
+  compilation object save succeeded; see C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\TextureShader_VS.cso
   KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

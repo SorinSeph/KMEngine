@@ -33,5 +33,7 @@ PS_INPUT VS(VS_INPUT input)
 
 float4 PS(PS_INPUT input) : SV_Target
 {
-    return txDiffuse.Sample(samLinear, input.Tex);
+    // Scale the texture coordinates to tile the texture twice
+    float2 tiledUV = frac(input.Tex * 2.0);
+    return txDiffuse.Sample(samLinear, tiledUV);
 }

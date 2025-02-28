@@ -13,11 +13,13 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     CLogger& SLogger = CLogger::GetLogger();
 
     CGameEntity3D Terrain = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::Cube);
-    Terrain.m_GameEntityTag = "Terrain";
-    Terrain.SetLocationF(0.0f, -4.0f, 0.0f);
-    Terrain.SetScale(2.5f, 2.5f, 2.5f);
 
-    Terrain.m_DXResConfig.m_pDX11Device = m_pDX11Device;
+    CGameEntity3DComponent TerrainComponent;
+    TerrainComponent.m_GameEntityTag = "TerrainComponent";
+    TerrainComponent.SetLocationF(0.0f, -4.0f, 0.0f);
+    TerrainComponent.SetScale(2.5f, 2.5f, 2.5f);
+
+    TerrainComponent.m_DXResConfig.m_pDX11Device = this->m_pDX11Device;
 
     HRESULT m_HR{};
 
@@ -44,9 +46,9 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
     }
     auto VertexShaderLambda = [=]() {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
         };
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -67,10 +69,10 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
 
     auto InputLayoutLambda = [=]() {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetInputLayout(TempVertexLayout);
         };
 
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
@@ -88,9 +90,9 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     if (FAILED(m_HR))
         return m_HR;
     auto PixelShaderLambda = [=]() mutable {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
         };
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
     // Create vertex buffer
     //Simple_Color_Vertex vertices[] =
@@ -157,9 +159,9 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
 
     auto VertexBufferLambda = [=]() mutable {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
         };
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
 
     // Create index buffer
@@ -199,10 +201,10 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
     auto IndexBufferLambda = [=]() mutable {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
         };
 
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
 
     // Set primitive topology
     m_pDX11Device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -218,10 +220,10 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
     auto ConstantBufferLambda = [=]()
         {
-            Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
         };
-    Terrain.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    TerrainComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
     const wchar_t* TextureName = L"grey_grid.dds";
@@ -232,9 +234,9 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
         return m_HR;
     }
     auto TextureLambda = [=]() mutable {
-        Terrain.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShaderResources(0, 1, &Terrain.m_DXResConfig.m_pDX11Device->m_TextureRV);
+        TerrainComponent.m_DXResConfig.m_pDX11Device->m_pImmediateContext->PSSetShaderResources(0, 1, &TerrainComponent.m_DXResConfig.m_pDX11Device->m_TextureRV);
         };
-    Terrain.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+    TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
     //D3D11_SAMPLER_DESC sampDesc{};
     //ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -279,6 +281,11 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     //}
 
     //m_ImmediateContext->RSSetState(m_RasterizerState);
+
+    CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    TerrainComponentNode->m_TType = TerrainComponent;
+
+    Terrain.m_SceneGraph.m_pRootNode = TerrainComponentNode;
 
     SScene.AddEntityToScene(Terrain);
 

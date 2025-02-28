@@ -152,8 +152,8 @@ public:
         //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
         //EntityBuilder.InitDefaultEntities();
         //EntityBuilder.TestDevice();
-        CTerrainGenerator TerrainGenerator{ m_Renderer.GetDX11Device() };
-        //TerrainGenerator.GenerateTestTerrain();
+        CTerrainGenerator TerrainGenerator{ m_GraphicsModule.m_Renderer.GetDX11Device() };
+        TerrainGenerator.GenerateTestTerrain();
 
         return S_OK;
     }
