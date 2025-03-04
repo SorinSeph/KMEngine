@@ -387,7 +387,7 @@ void CViewportWindow::DetectKeyboardInput()
 
     if (keyboardState[DIK_LSHIFT] & 0x80)
     {
-        m_SpeedScale = 0.6f;
+        m_SpeedScale = 0.006f;
     }
     else
     {

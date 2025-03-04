@@ -104,8 +104,6 @@ public:
 
 	HRESULT InitTexturedCube();
 
-	HRESULT InitTexturedCube2();
-
 	HRESULT InitSolidColorCube();
 
 	HRESULT InitFrustum();
@@ -145,7 +143,7 @@ public:
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
-	void AddGizmo();
+	HRESULT AddGizmo();
 
 	UINT GetViewportWidth();
 
@@ -161,9 +159,9 @@ public:
 
 	void InterpMoveEntity();
 
-	CGameEntity3D CubeEntity;
+	//CGameEntity3D CubeEntity;
 
-	CGameEntity3DComponent CubeEntityComponent{ };
+	//CGameEntity3DComponent CubeEntityComponent{ };
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 

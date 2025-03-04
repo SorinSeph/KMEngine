@@ -24,6 +24,8 @@ public:
 
     void SetUIDTest(CGameEntity3D& Entity3D);
 
+	void CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimitiveGeometryType GeometryType);
+
     CGameEntity3D CreateEntity3D(EPrimitiveGeometryType m_TType);
 
     CGameEntity3DComponent CreateEntity3DComponent(EPrimitiveGeometryType m_TType);

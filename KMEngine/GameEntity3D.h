@@ -58,7 +58,8 @@ enum class EGameEntityType
 	Plane,
 	Cube,
 	Sphere,
-	Frustum
+	Frustum,
+	Arrow
 };
 
 class CGameEntity3DComponent;
@@ -120,7 +121,7 @@ public:
 
 	std::string m_UID;
 
-	TEntityPhysicalMesh PhysicalMesh;
+	CPhysicalMesh PhysicalMesh;
 
 	CSceneGraph<CGameEntity3DComponent> m_SceneGraph;
 

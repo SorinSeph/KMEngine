@@ -49,9 +49,9 @@ HRESULT CDX11Device::InitDX11Device()
     //InitBaseCube();
 
     InitTexturedCube();
-    //InitTexturedCube2();
     InitFrustum();
     InitSolidColorCube();
+    AddGizmo();
 
     //InitRaycast(0, 0, 0, 100, 2, 3);
     //InterpMoveCube();InitTexturedCube2
@@ -1407,11 +1407,246 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
     //}
 }
 
-void CDX11Device::AddGizmo()
+HRESULT CDX11Device::AddGizmo()
 {
     CScene& SScene = CScene::GetScene();
-    CGameEntity3D& SelectedEntity = SScene.GetSceneList().at(0);
-    CGameEntity3D& SelectedEntity2 = SScene.GetSceneList().at(0);
+    CPrimitiveGeometryFactory GeometryFactory;
+
+    CGameEntity3D GizmoEntity;// = GeometryFactory.CreateEntity3D(EGameEntityType::Arrow);
+    GizmoEntity.m_GameEntityTag = "Gizmo";
+    GizmoEntity.m_GameEntityType = EGameEntityType::Arrow;
+
+	CGameEntity3DComponent GizmoComponent;
+    GizmoComponent.m_GameEntityTag = "GizmoComponent";
+    GizmoComponent.SetLocationF(10.f, 0.0f, 0.0f);
+    GeometryFactory.CreatePhysicalMesh(GizmoComponent.PhysicalMesh, EPrimitiveGeometryType::Arrow);
+    //GizmoComponent.SetScale(15.25f, 15.25f, 15.25f);
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
+    if (FAILED(m_HR))
+    {
+        pVSBlob->Release();
+        return m_HR;
+    }
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+    };
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set the input layout
+    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the pixel shader
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+
+    //SSimpleColorVertex vertices[] =
+    //{
+    //    { XMFLOAT3(-1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V0
+    //    { XMFLOAT3(1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    //V3
+    //    { XMFLOAT3(1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    // V2
+    //    { XMFLOAT3(-1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   // V1
+    //    { XMFLOAT3(-1.f,  1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V4
+    //    { XMFLOAT3(1.f,  1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   //V5
+    //    { XMFLOAT3(1.f,  -1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V7
+    //    { XMFLOAT3(-1.f,  -1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  //V6
+    //};
+
+	auto TempSimpleColorVertices = GizmoComponent.PhysicalMesh.GetSimpleColorVerticesList();
+	SSimpleColorVertex* pSimpleColorVertices = TempSimpleColorVertices.data();
+
+    D3D11_BUFFER_DESC BufferDescriptor{};
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    D3D11_SUBRESOURCE_DATA InitData{};
+    InitData.pSysMem = pSimpleColorVertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set vertex buffer
+    UINT stride = sizeof(SSimpleColorVertex);
+    UINT offset = 0;
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+
+
+    // Create index buffer
+    //WORD Indices[] =
+    //{
+    //    0, 1, 2,
+    //    0, 2, 3,
+
+    //    4, 5, 6,
+    //    4, 6, 7,
+
+    //    0, 4, 5,
+    //    0, 5, 1,
+
+    //    1, 5, 6,
+    //    1, 6, 2,
+
+    //    2, 6, 7,
+    //    2, 7, 3,
+
+    //    3, 7, 4,
+    //    3, 4, 0,
+    //};
+
+    auto TempSimpleColorIndices = GizmoComponent.PhysicalMesh.GetIndicesList();
+    WORD* pSimpleColorIndices = TempSimpleColorIndices.data();
+
+    ID3D11Buffer* IndexBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    InitData.pSysMem = pSimpleColorIndices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &IndexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set index buffer
+    m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Create the constant buffer
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    GizmoComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+    //auto TextureLambda = [=]() {
+    //    m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
+    //};
+    //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+
+    D3D11_RASTERIZER_DESC rasterDesc = {};
+    rasterDesc.FillMode = D3D11_FILL_SOLID;
+    rasterDesc.CullMode = D3D11_CULL_NONE;
+    rasterDesc.FrontCounterClockwise = false;
+    rasterDesc.DepthBias = 0;
+    rasterDesc.DepthBiasClamp = 0.0f;
+    rasterDesc.SlopeScaledDepthBias = 0.0f;
+    rasterDesc.DepthClipEnable = true;
+    rasterDesc.ScissorEnable = false;
+    rasterDesc.MultisampleEnable = false;
+    rasterDesc.AntialiasedLineEnable = false;
+
+    D3D11_SAMPLER_DESC sampDesc = {};
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    sampDesc.MinLOD = 0;
+    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    m_pImmediateContext->RSSetState(m_RasterizerState);
+
+    //InterpMoveCubeRef = &GizmoComponent;
+
+    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    CubeComponentNode->m_TType = GizmoComponent;
+
+    GizmoEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+
+    SScene.AddEntityToScene(GizmoEntity);
+    //SScene.AddEntityToScene(GizmoComponent);
+
+    return S_OK;
 }
 
 void CDX11Device::CleanupDX11Device()
@@ -1689,9 +1924,42 @@ HRESULT CDX11Device::InitTexturedCube()
     //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
     //};
 
+    std::vector<SSimpleVertex> VerticesVector{
+        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
+        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
+        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+
+        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
+        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
+
+        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
+        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
+        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
+
+        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
+        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
+        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+
+        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
+        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
+        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
+        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
+
+        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
+        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
+        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
+    };
+
+    SSimpleVertex* Vertices{ VerticesVector.data() };
+
     SSimpleVertex vertices[] =
     {
-
             { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
             { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
             { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
@@ -1721,37 +1989,6 @@ HRESULT CDX11Device::InitTexturedCube()
             { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
             { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
             { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) }
-
     };
 
     D3D11_BUFFER_DESC bd{};
@@ -1762,7 +1999,7 @@ HRESULT CDX11Device::InitTexturedCube()
 
     ID3D11Buffer* TempVertexBuffer{ nullptr };
     D3D11_SUBRESOURCE_DATA InitData{};
-    InitData.pSysMem = vertices;
+    InitData.pSysMem = Vertices;
     m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempVertexBuffer);
     if (FAILED(m_HR))
         return m_HR;
@@ -1798,24 +2035,6 @@ HRESULT CDX11Device::InitTexturedCube()
 
         22,20,21,
         23,20,22
-
-        //3,1,0,
-        //2,1,3,
-
-        //0,5,4,
-        //1,5,0,
-
-        //3,4,7,
-        //0,4,3,
-
-        //1,6,5,
-        //2,6,1,
-
-        //2,7,6,
-        //3,7,2,
-
-        //6,4,5,
-        //7,4,6,
     };
 
     ID3D11Buffer* TempIndexBuffer{ nullptr };
@@ -1966,304 +2185,17 @@ void CDX11Device::InterpMoveEntity()
 	Logger.Log("InterpMoveCube Function, ContainmentType = ", CollisionType);
 }
 
-HRESULT CDX11Device::InitTexturedCube2()
-{
-    CScene& SScene = CScene::GetScene();
-    CPrimitiveGeometryFactory GeometryFactory;
-
-    CGameEntity3DComponent Cube;
-    //Cube = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::Cube);
-    Cube.m_GameEntityTag = "TexturedCube2";
-    Cube.SetLocationF(-6.f, 3.0f, 0.0f);
-    Cube.SetScale(0.25f, 0.25f, 0.25f);
-
-    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-
-    // Compile the vertex shader
-    ID3DBlob* pVSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"TextureShader.fxh", "VS", "vs_5_0", &pVSBlob);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    // Create the vertex shader
-    ID3D11VertexShader* TempVertexShader{ nullptr };
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &TempVertexShader);
-    if (FAILED(m_HR))
-    {
-        pVSBlob->Release();
-        return m_HR;
-    }
-    auto VertexShaderLambda = [=]() {
-        m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
-    };
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
-
-    // Define the input layout
-    D3D11_INPUT_ELEMENT_DESC layout[] =
-    {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "TEXCOORD", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    };
-    UINT numElements = ARRAYSIZE(layout);
-
-    // Create the input layout
-    ID3D11InputLayout* TempVertexLayout{ nullptr };
-    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
-    pVSBlob->Release();
-    if (FAILED(m_HR))
-        return m_HR;
-
-    // Set the input layout
-    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
-
-    auto InputLayoutLambda = [=]() {
-        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
-    };
-
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
-
-    // Compile the pixel shader
-    ID3DBlob* pPSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"TextureShader.fxh", "PS", "ps_5_0", &pPSBlob);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    // Create the pixel shader
-    ID3D11PixelShader* TempPixelShader{ nullptr };
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
-    pPSBlob->Release();
-    if (FAILED(m_HR))
-        return m_HR;
-
-    auto PixelShaderLambda = [=]() {
-        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
-    };
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
-
-    // Create vertex buffer
-    //Simple_Color_Vertex vertices[] =
-    //{
-    //    { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
-    //    { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
-    //    { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
-    //    { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
-    //    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
-    //    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
-    //    { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
-    //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
-    //};
-
-    SSimpleVertex vertices[] =
-    {
-        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-
-        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-
-        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-
-        { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },
-        { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },
-        { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },
-        { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },
-
-        { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-        { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },
-        { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-        { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) }
-
-        //       //vertex coordinates for the back face
-              //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },     // top left
-              //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 1.0f) },    // bottom left
-              //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(1.0f, 0.0f) },      // top right
-              //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(1.0f, 1.0f) },     // bottom right
-
-              //// vertex coordinates for the front face
-              //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },      // top left
-              //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },     // bottom left
-              //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) },       // top right
-              //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },      // bottom right
-
-        //      { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },     // #0 back top left
-        //      { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },      // #1 back top right
-        //      { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },       // #2 front top right
-        //      { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },      // #3 front top left
-        //      { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },    // #4 back bottom left
-        //      { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT2(0.0f, 0.0f) },     // #5 back bottom right
-        //      { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },      // #6 front bottom right
-              //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },     // #7 front bottom left
-    };
-
-    D3D11_BUFFER_DESC bd{};
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SSimpleVertex) * 36;
-    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    bd.CPUAccessFlags = 0;
-
-    ID3D11Buffer* TempVertexBuffer{ nullptr };
-    D3D11_SUBRESOURCE_DATA InitData{};
-    InitData.pSysMem = vertices;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempVertexBuffer);
-    if (FAILED(m_HR))
-        return m_HR;
-
-    // Set vertex buffer
-    UINT stride = sizeof(SSimpleVertex);
-    UINT offset = 0;
-    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
-
-    auto VertexBufferLambda = [=]() {
-        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
-    };
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
-
-
-    // Create index buffer
-    WORD indices[] =
-    {
-        3,1,0,
-        2,1,3,
-
-        0,5,4,
-        1,5,0,
-
-        3,4,7,
-        0,4,3,
-
-        1,6,5,
-        2,6,1,
-
-        2,7,6,
-        3,7,2,
-
-        6,4,5,
-        7,4,6,
-    };
-
-    ID3D11Buffer* TempIndexBuffer{ nullptr };
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
-    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    bd.CPUAccessFlags = 0;
-    InitData.pSysMem = indices;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempIndexBuffer);
-    if (FAILED(m_HR))
-        return m_HR;
-
-    // Set index buffer
-    m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
-    auto IndexBufferLambda = [=]() {
-        m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-    };
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
-
-    // Set primitive topology
-    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    // Create the constant buffer
-    ID3D11Buffer* TempConstantBuffer{ nullptr };
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SConstantBuffer);
-    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    bd.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
-    if (FAILED(m_HR))
-        return m_HR;
-
-    auto ConstantBufferLambda = [=]() {
-        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
-    };
-    Cube.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
-
-
-    const wchar_t* TextureName = L"tex_stickman.dds";
-    m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
-        return m_HR;
-    }
-    auto TextureLambda = [=]() {
-        m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
-    };
-    Cube.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
-
-    D3D11_RASTERIZER_DESC rasterDesc = {};
-    rasterDesc.FillMode = D3D11_FILL_SOLID;
-    rasterDesc.CullMode = D3D11_CULL_NONE;
-    rasterDesc.FrontCounterClockwise = false;
-    rasterDesc.DepthBias = 0;
-    rasterDesc.DepthBiasClamp = 0.0f;
-    rasterDesc.SlopeScaledDepthBias = 0.0f;
-    rasterDesc.DepthClipEnable = true;
-    rasterDesc.ScissorEnable = false;
-    rasterDesc.MultisampleEnable = false;
-    rasterDesc.AntialiasedLineEnable = false;
-
-    D3D11_SAMPLER_DESC sampDesc = {};
-    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-    sampDesc.MinLOD = 0;
-    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
-    if (FAILED(m_HR))
-        return m_HR;
-
-    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    m_pImmediateContext->RSSetState(m_RasterizerState);
-
-    // Initialize the projection matrix
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
-
-	CSceneGraphNode<CGameEntity3DComponent>* CubeSubcomponent = new CSceneGraphNode<CGameEntity3DComponent>();
-	CubeSubcomponent->m_TType = Cube;
-
-	CubeEntity.m_SceneGraph.m_pRootNode->ChildNode.push_back(CubeSubcomponent);
-
-    SScene.AddEntityToScene(CubeEntity);
-    //SScene.AddEntityToScene(Cube);
-
-    return S_OK;
-}
-
 HRESULT CDX11Device::InitSolidColorCube()
 {
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
 
+
+	CGameEntity3DComponent CubeEntity;
     CubeEntity.m_GameEntityTag = "SolidColorCubeEntity";
 	CubeEntity.m_GameEntityType = EGameEntityType::Cube;
 
+	CGameEntity3DComponent CubeEntityComponent;
     CubeEntityComponent.m_GameEntityTag = "SolidColorCubeComponent";
     CubeEntityComponent.SetLocationF(10.f, 0.0f, 5.0f);
     //CubeEntityComponent.SetScale(15.25f, 15.25f, 15.25f);

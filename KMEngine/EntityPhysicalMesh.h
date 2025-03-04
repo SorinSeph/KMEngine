@@ -14,7 +14,7 @@ struct SSimpleColorVertex
 	XMFLOAT4 Col;
 };
 
-class TEntityPhysicalMesh
+class CPhysicalMesh
 {
 public:
 	void SetSimpleVerticesList(std::vector<SSimpleVertex> VerticesList)
