@@ -170,7 +170,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
 
                             if (GraphicsModule)
                             {
-								GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
+								GraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(EntityComponent);
+								//GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
                                 //EntityComponent.SetScale(5.f, 5.f, 5.f);
                                 GraphicsModule->m_Renderer.TestGraphicsModuleLog();
                                 Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");

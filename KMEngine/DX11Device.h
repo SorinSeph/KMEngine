@@ -143,6 +143,8 @@ public:
 	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
+	HRESULT SpawnGizmo(const CGameEntity3D& SelectedEntity);
+
 	HRESULT AddGizmo();
 
 	UINT GetViewportWidth();

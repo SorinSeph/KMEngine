@@ -95,6 +95,12 @@ public:
 
 	float GetLocationZ();
 
+	float GetFloatLocationX() const;
+
+	float GetFloatLocationY() const;
+
+	float GetFloatLocationZ() const;
+
 	XMVECTOR GetLocationVector();
 
 	XMMATRIX GetRotation();

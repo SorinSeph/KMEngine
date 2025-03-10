@@ -476,13 +476,15 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
             VerticesList.push_back({ XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
 
             const float Increment = 22.5f;
-            const float BodyLength = 15.0f;
-            const float TipLength = 2.0f + BodyLength;
+            const float BodyLength = 3.0f;
+            const float TipLength = 2.0f;
             const double ErrorTolerance = 1e-6;
 
+			// Circle base of cylinder vertices
             for (int i = 1; i <= ARROW_VERTICES; i++)
             {
-                // Floating point precision errors happen at increments dividable by 4. They are handled in the else branch
+                // Floating point precision errors happen at increments dividable by 4,
+                // for a 16 vertex culinder. They are handled in the else branch
                 if ((i - 1) % 4 != 0 && i != 0)
                 {
                     auto Angle = XMConvertToRadians((i - 1) * Increment);
@@ -496,6 +498,7 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 {
                     float Vertex = XMConvertToRadians((i - 1) * Increment);
 
+					// Error tolerance check for floating point precision errors
                     if (std::abs(std::cosf(Vertex)) < ErrorTolerance)
                     {
                         if (sinf(Vertex) < 0)
@@ -538,27 +541,18 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 else
                 {
                     auto NewVertex = Vertex;
-                    NewVertex.Pos.z += 5.f;
+                    NewVertex.Pos.z += BodyLength;
 
                     VerticesList.push_back(NewVertex);
                 }
             }
 
-   //         auto V1 = VerticesList.at(1);
-            //auto V2 = VerticesList.at(2);
-
-            //V1.Pos.z += 5.f;
-   //         V2.Pos.z += 5.f;
-
-            //VerticesList.push_back(V1);
-            //VerticesList.push_back(V2);
-
-            for (int i = 0; i < 16; i++)
-            {
-                VerticesList.push_back({
-                    XMFLOAT3(cosf(XMConvertToRadians(i * Increment)), sinf(XMConvertToRadians(i * Increment)), BodyLength),
-                    XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
-            }
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    VerticesList.push_back({
+            //        XMFLOAT3(cosf(XMConvertToRadians(i * Increment)), sinf(XMConvertToRadians(i * Increment)), BodyLength),
+            //        XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+            //}
 
             int Size = VerticesList.size();
 
@@ -571,7 +565,7 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 VerticesList.push_back({ Position, VertColor });
             }
 
-            VerticesList.push_back({ XMFLOAT3(0.0f, 0.0f, TipLength), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+            VerticesList.push_back({ XMFLOAT3(0.0f, 0.0f, BodyLength + TipLength), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
 
             std::vector<WORD> ArrowIndices = {
                 //3,1,0,
@@ -660,20 +654,21 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 32, 17, 48,
                 48, 33, 17,
 
-                //49, 33, 34,
-                //49, 34, 35,
-                //49, 35, 36,
-                //49, 36, 37,
-                //49, 37, 38,
-                //49, 38, 39,
-                //49, 39, 40,
-                //49, 41, 42,
-                //49, 42, 43,
-                //49, 43, 44,
-                //49, 44, 45,
-                //49, 45, 46,
-                //49, 46, 47,
-                //49, 47, 48
+                49, 33, 34,
+                49, 34, 35,
+                49, 35, 36,
+                49, 36, 37,
+                49, 37, 38,
+                49, 38, 39,
+                49, 39, 40,
+                49, 41, 42,
+                49, 42, 43,
+                49, 43, 44,
+                49, 44, 45,
+                49, 45, 46,
+                49, 46, 47,
+                49, 47, 48,
+                49, 43, 33
             };
 
             Mesh.SetSimpleColorVerticesList(VerticesList);

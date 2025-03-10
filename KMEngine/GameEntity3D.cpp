@@ -24,6 +24,21 @@ XMMATRIX CGameEntity3D::GetLocation()
 	return m_LocationMatrix;
 }
 
+float CGameEntity3D::GetFloatLocationX() const
+{
+    return m_LocationX;
+}
+
+float CGameEntity3D::GetFloatLocationY() const
+{
+    return m_LocationY;
+}
+
+float CGameEntity3D::GetFloatLocationZ() const
+{
+    return m_LocationZ;
+}
+
 float CGameEntity3D::GetLocationX()
 {
 	return m_LocationX;

@@ -24,6 +24,11 @@ public:
 		CLogger& Logger = CLogger::GetLogger();
 		Logger.Log("CGraphicsModule::TestLog: ", "TestLog working");
 	}
+
+	void SpawnGizmo(const CGameEntity3D& SelectedEntity)
+	{
+		m_Renderer.GetDX11Device()->SpawnGizmo(SelectedEntity);
+	}
 };
 
 #endif
