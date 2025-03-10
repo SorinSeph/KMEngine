@@ -166,7 +166,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
                 m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                m_DX11Device.m_pImmediateContext->DrawIndexed(36, 0, 0);
+                m_DX11Device.m_pImmediateContext->DrawIndexed(256, 0, 0);
             //}
         }
     }

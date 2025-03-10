@@ -3,23 +3,6 @@
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>CoreClock.h</FILENAME>
-      <LINE>9</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CCoreClock::{ctor}</FUNCTION>
-    <DECORATED>??0CCoreClock@@QEAA@XZ</DECORATED>
-    <FUNCLINE>9</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>CCoreClock::m_PrevTime</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
       <FILENAME>EntityPhysicalMesh.h</FILENAME>
       <LINE>73</LINE>
       <COLUMN>0</COLUMN>
@@ -42,12 +25,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CGameEntity3D::m_GameEntityType' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'CGameEntity3D::m_CollisionBuffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>CGameEntity3D::{ctor}</FUNCTION>
     <DECORATED>??0CGameEntity3D@@QEAA@XZ</DECORATED>
     <FUNCLINE>70</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CGameEntity3D::m_GameEntityType</targetSymbol>
+      <targetSymbol>CGameEntity3D::m_CollisionBuffer</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -59,12 +42,12 @@
       <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CGameEntity3D::m_CollisionBuffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <DESCRIPTION>Variable 'CGameEntity3D::m_GameEntityType' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>CGameEntity3D::{ctor}</FUNCTION>
     <DECORATED>??0CGameEntity3D@@QEAA@XZ</DECORATED>
     <FUNCLINE>70</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CGameEntity3D::m_CollisionBuffer</targetSymbol>
+      <targetSymbol>CGameEntity3D::m_GameEntityType</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -258,6 +241,23 @@
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>CoreClock.h</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CCoreClock::{ctor}</FUNCTION>
+    <DECORATED>??0CCoreClock@@QEAA@XZ</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CCoreClock::m_PrevTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
       <FILENAME>DX11Device.h</FILENAME>
       <LINE>42</LINE>
       <COLUMN>1</COLUMN>
@@ -416,23 +416,6 @@
       <COLUMN>0</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CViewportMessage::m_MouseY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
-    <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
-    <FUNCLINE>27</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>CViewportMessage::m_MouseY</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>ViewportMessage.h</FILENAME>
-      <LINE>27</LINE>
-      <COLUMN>0</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
     <DESCRIPTION>Variable 'CViewportMessage::m_TestInt' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
     <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
     <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
@@ -445,51 +428,17 @@
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>ViewportWindow.h</FILENAME>
-      <LINE>30</LINE>
-      <COLUMN>1</COLUMN>
+      <FILENAME>ViewportMessage.h</FILENAME>
+      <LINE>27</LINE>
+      <COLUMN>0</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CViewportWindow::bSpeedScale' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
-    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
-    <FUNCLINE>30</FUNCLINE>
+    <DESCRIPTION>Variable 'CViewportMessage::m_MouseY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
+    <FUNCLINE>27</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CViewportWindow::bSpeedScale</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>ViewportWindow.h</FILENAME>
-      <LINE>30</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CViewportWindow::vpEyeX' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
-    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
-    <FUNCLINE>30</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>CViewportWindow::vpEyeX</targetSymbol>
-    </ADDITIONALINFO>
-    <PATH></PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>ViewportWindow.h</FILENAME>
-      <LINE>30</LINE>
-      <COLUMN>1</COLUMN>
-    </SFA>
-    <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CViewportWindow::vpEyeY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
-    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
-    <FUNCLINE>30</FUNCLINE>
-    <ADDITIONALINFO>
-      <targetSymbol>CViewportWindow::vpEyeY</targetSymbol>
+      <targetSymbol>CViewportMessage::m_MouseY</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
@@ -530,296 +479,97 @@
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>DX11Device.cpp</FILENAME>
-      <LINE>2150</LINE>
-      <COLUMN>31</COLUMN>
-    </SFA>
-    <DEFECTCODE>6011</DEFECTCODE>
-    <DESCRIPTION>Dereferencing NULL pointer 'Cube'. </DESCRIPTION>
-    <FUNCTION>CDX11Device::InterpMoveEntity</FUNCTION>
-    <DECORATED>?InterpMoveEntity@CDX11Device@@QEAAXXZ</DECORATED>
-    <FUNCLINE>2116</FUNCLINE>
-    <PROBABILITY>1</PROBABILITY>
-    <RANK>4</RANK>
-    <CATEGORY>
-      <RULECATEGORY>mspft</RULECATEGORY>
-    </CATEGORY>
-    <PATH>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2118</LINE>
-        <COLUMN>22</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2119</LINE>
-        <COLUMN>28</COLUMN>
-        <KEYEVENT>
-          <ID>1</ID>
-          <KIND>declaration</KIND>
-          <IMPORTANCE>Essential</IMPORTANCE>
-          <MESSAGE>'Cube' is NULL</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2120</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2122</LINE>
-        <COLUMN>10</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2123</LINE>
-        <COLUMN>14</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2124</LINE>
-        <COLUMN>19</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2126</LINE>
-        <COLUMN>18</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2128</LINE>
-        <COLUMN>12</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2129</LINE>
-        <COLUMN>43</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2142</LINE>
-        <COLUMN>14</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2143</LINE>
-        <COLUMN>22</COLUMN>
-        <KEYEVENT>
-          <ID>2</ID>
-          <KIND>declaration</KIND>
-          <IMPORTANCE>Full</IMPORTANCE>
-          <MESSAGE>'Cube' is an Output from 'CGameEntity3D::SetLocationF' (declared at c:\users\sefce\source\kmengine\kmengine\gameentity3d.h:88)</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2145</LINE>
-        <COLUMN>13</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2150</LINE>
-        <COLUMN>31</COLUMN>
-        <KEYEVENT>
-          <ID>3</ID>
-          <KIND>usage</KIND>
-          <IMPORTANCE>Essential</IMPORTANCE>
-          <MESSAGE>'Cube' is dereferenced, but may still be NULL</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-    </PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>DX11Device.cpp</FILENAME>
-      <LINE>2153</LINE>
-      <COLUMN>22</COLUMN>
-    </SFA>
-    <DEFECTCODE>6011</DEFECTCODE>
-    <DESCRIPTION>Dereferencing NULL pointer 'Frustum'. </DESCRIPTION>
-    <FUNCTION>CDX11Device::InterpMoveEntity</FUNCTION>
-    <DECORATED>?InterpMoveEntity@CDX11Device@@QEAAXXZ</DECORATED>
-    <FUNCLINE>2116</FUNCLINE>
-    <PROBABILITY>1</PROBABILITY>
-    <RANK>4</RANK>
-    <CATEGORY>
-      <RULECATEGORY>mspft</RULECATEGORY>
-    </CATEGORY>
-    <PATH>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2118</LINE>
-        <COLUMN>22</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2119</LINE>
-        <COLUMN>28</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2120</LINE>
-        <COLUMN>28</COLUMN>
-        <KEYEVENT>
-          <ID>1</ID>
-          <KIND>declaration</KIND>
-          <IMPORTANCE>Essential</IMPORTANCE>
-          <MESSAGE>'Frustum' is NULL</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2122</LINE>
-        <COLUMN>10</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2123</LINE>
-        <COLUMN>14</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2124</LINE>
-        <COLUMN>19</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2126</LINE>
-        <COLUMN>18</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2128</LINE>
-        <COLUMN>12</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2129</LINE>
-        <COLUMN>43</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2142</LINE>
-        <COLUMN>14</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2143</LINE>
-        <COLUMN>22</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2145</LINE>
-        <COLUMN>13</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2150</LINE>
-        <COLUMN>31</COLUMN>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2152</LINE>
-        <COLUMN>6</COLUMN>
-        <KEYEVENT>
-          <ID>2</ID>
-          <KIND>declaration</KIND>
-          <IMPORTANCE>Full</IMPORTANCE>
-          <MESSAGE>'Frustum' is an In/Out argument to 'CDX11Device::CollisionCheck' (declared at c:\users\sefce\source\kmengine\kmengine\dx11device.h:103)</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-      <SFA>
-        <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-        <FILENAME>DX11Device.cpp</FILENAME>
-        <LINE>2153</LINE>
-        <COLUMN>22</COLUMN>
-        <KEYEVENT>
-          <ID>3</ID>
-          <KIND>usage</KIND>
-          <IMPORTANCE>Essential</IMPORTANCE>
-          <MESSAGE>'Frustum' is dereferenced, but may still be NULL</MESSAGE>
-        </KEYEVENT>
-      </SFA>
-    </PATH>
-  </DEFECT>
-  <DEFECT>
-    <SFA>
-      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>CoreClock.h</FILENAME>
-      <LINE>60</LINE>
-      <COLUMN>0</COLUMN>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CBaseTimer::bRunning' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CBaseTimer::{ctor}</FUNCTION>
-    <DECORATED>??0CBaseTimer@@QEAA@XZ</DECORATED>
-    <FUNCLINE>60</FUNCLINE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CBaseTimer::bRunning</targetSymbol>
+      <targetSymbol>CViewportWindow::vpEyeY</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>CoreClock.h</FILENAME>
-      <LINE>60</LINE>
-      <COLUMN>0</COLUMN>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CBaseTimer::StartTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CBaseTimer::{ctor}</FUNCTION>
-    <DECORATED>??0CBaseTimer@@QEAA@XZ</DECORATED>
-    <FUNCLINE>60</FUNCLINE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeX' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CBaseTimer::StartTime</targetSymbol>
+      <targetSymbol>CViewportWindow::vpEyeX</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
-      <FILENAME>CoreClock.h</FILENAME>
-      <LINE>60</LINE>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::bSpeedScale' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::bSpeedScale</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>KMEngine.cpp</FILENAME>
+      <LINE>119</LINE>
       <COLUMN>0</COLUMN>
     </SFA>
     <DEFECTCODE>26495</DEFECTCODE>
-    <DESCRIPTION>Variable 'CBaseTimer::EndTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
-    <FUNCTION>CBaseTimer::{ctor}</FUNCTION>
-    <DECORATED>??0CBaseTimer@@QEAA@XZ</DECORATED>
-    <FUNCLINE>60</FUNCLINE>
+    <DESCRIPTION>Variable 'CollisionAABox::collision' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CollisionAABox::{ctor}</FUNCTION>
+    <DECORATED>??0CollisionAABox@@QEAA@XZ</DECORATED>
+    <FUNCLINE>119</FUNCLINE>
     <ADDITIONALINFO>
-      <targetSymbol>CBaseTimer::EndTime</targetSymbol>
+      <targetSymbol>CollisionAABox::collision</targetSymbol>
     </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>KMEngine.cpp</FILENAME>
+      <LINE>131</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>Inconsistent annotation for 'wWinMain': this instance has no annotations. See c:\program files (x86)\windows kits\10\include\10.0.22621.0\um\winbase.h(1050). </DESCRIPTION>
+    <FUNCTION>wWinMain</FUNCTION>
+    <DECORATED>wWinMain</DECORATED>
+    <FUNCLINE>131</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>KMEngine.cpp</FILENAME>
+      <LINE>137</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>28251</DEFECTCODE>
+    <DESCRIPTION>Inconsistent annotation for 'wWinMain': this instance has no annotations. See c:\program files (x86)\windows kits\10\include\10.0.22621.0\um\winbase.h(1050). Note: There are several prototypes for this function. This warning compares the first with instance number 3. </DESCRIPTION>
+    <FUNCTION>wWinMain</FUNCTION>
+    <DECORATED>wWinMain</DECORATED>
+    <FUNCLINE>137</FUNCLINE>
     <PATH></PATH>
   </DEFECT>
 </DEFECTS>

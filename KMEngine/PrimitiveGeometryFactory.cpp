@@ -1,7 +1,7 @@
 #include "PrimitiveGeometryFactory.h"
 #include "EntityPhysicalMesh.h"
 
-#define ARROW_
+#define ARROW_VERTICES 16.f
 
 int CPrimitiveGeometryFactory::m_Entity3D_UID = 1;
 
@@ -282,7 +282,7 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m
                 VerticesArray1[i] = { XMFLOAT3(cosf(XMConvertToRadians(i * Increment)), sinf(XMConvertToRadians(i * Increment)), 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) };
             }
 
-			// Other end of cylinder vertices
+            // Other end of cylinder vertices
             SSimpleColorVertex VerticesArray2[16];
 
             for (int i = 0; i < 16; i++)
@@ -291,7 +291,7 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateEntity3D(EPrimitiveGeometryType m
             }
 
             // Base the arrow cone vertices
-			SSimpleColorVertex VerticesArray3[16];
+            SSimpleColorVertex VerticesArray3[16];
 
             for (int i = 32; i > 16; i--)
             {
@@ -470,21 +470,88 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
 
         case EPrimitiveGeometryType::Arrow:
         {
-            std::vector<SSimpleColorVertex> VerticesList = {
-                            { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
-            };
+            std::vector<SSimpleColorVertex> VerticesList;
+            VerticesList.reserve((ARROW_VERTICES * 2) + 1);
+
+            VerticesList.push_back({ XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
 
             const float Increment = 22.5f;
             const float BodyLength = 15.0f;
             const float TipLength = 2.0f + BodyLength;
+            const double ErrorTolerance = 1e-6;
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 1; i <= ARROW_VERTICES; i++)
             {
-                VerticesList.push_back({
-                    XMFLOAT3(cosf(XMConvertToRadians(i * Increment)), sinf(XMConvertToRadians(i * Increment)), 0.0f),
-                    XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                // Floating point precision errors happen at increments dividable by 4. They are handled in the else branch
+                if ((i - 1) % 4 != 0 && i != 0)
+                {
+                    auto Angle = XMConvertToRadians((i - 1) * Increment);
+                    auto CosAngle = std::cosf(Angle);
+                    auto SinAngle = std::sinf(Angle);
+
+                    VerticesList.push_back({
+                        XMFLOAT3(CosAngle, SinAngle, 0.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                }
+                else
+                {
+                    float Vertex = XMConvertToRadians((i - 1) * Increment);
+
+                    if (std::abs(std::cosf(Vertex)) < ErrorTolerance)
+                    {
+                        if (sinf(Vertex) < 0)
+                        {
+                            VerticesList.push_back({
+                                XMFLOAT3(0, -1, 0.0f),
+                                XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                        }
+                        else
+                        {
+                            VerticesList.push_back({
+                                XMFLOAT3(0, 1, 0.0f),
+                                XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                        }
+                    }
+                    else if (std::abs(std::sinf(Vertex)) < ErrorTolerance)
+                    {
+                        if (cos(Vertex) < 0)
+                        {
+                            VerticesList.push_back({
+                                XMFLOAT3(-1, 0, 0.0f),
+                                XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                        }
+                        else
+                        {
+                            VerticesList.push_back({
+                                XMFLOAT3(1, 0, 0.0f),
+                                XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) });
+                        }
+                    }
+                }
             }
 
+            for (auto& Vertex : VerticesList)
+            {
+                if (Vertex.Pos.x == 00 && Vertex.Pos.y == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    auto NewVertex = Vertex;
+                    NewVertex.Pos.z += 5.f;
+
+                    VerticesList.push_back(NewVertex);
+                }
+            }
+
+   //         auto V1 = VerticesList.at(1);
+            //auto V2 = VerticesList.at(2);
+
+            //V1.Pos.z += 5.f;
+   //         V2.Pos.z += 5.f;
+
+            //VerticesList.push_back(V1);
+            //VerticesList.push_back(V2);
 
             for (int i = 0; i < 16; i++)
             {
@@ -522,14 +589,14 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 0, 10, 11,
                 0, 11, 12,
                 0, 12, 13,
-                0, 13, 14,
+                0, 13, 14, 
                 0, 14, 15,
                 0, 15, 16,
                 0, 1, 16,
 
                 1, 2, 17,
                 17, 18, 2,
-                3, 2, 18,
+                2, 3, 18,
                 18, 19, 3,
                 4, 3, 19,
                 19, 20, 4,
@@ -593,20 +660,20 @@ void CPrimitiveGeometryFactory::CreatePhysicalMesh(CPhysicalMesh& Mesh, EPrimiti
                 32, 17, 48,
                 48, 33, 17,
 
-                49, 33, 34,
-                49, 34, 35,
-                49, 35, 36,
-                49, 36, 37,
-                49, 37, 38,
-                49, 38, 39,
-                49, 39, 40,
-                49, 41, 42,
-                49, 42, 43,
-                49, 43, 44,
-                49, 44, 45,
-                49, 45, 46,
-                49, 46, 47,
-                49, 47, 48
+                //49, 33, 34,
+                //49, 34, 35,
+                //49, 35, 36,
+                //49, 36, 37,
+                //49, 37, 38,
+                //49, 38, 39,
+                //49, 39, 40,
+                //49, 41, 42,
+                //49, 42, 43,
+                //49, 43, 44,
+                //49, 44, 45,
+                //49, 45, 46,
+                //49, 46, 47,
+                //49, 47, 48
             };
 
             Mesh.SetSimpleColorVerticesList(VerticesList);

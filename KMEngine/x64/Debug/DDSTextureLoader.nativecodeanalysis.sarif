@@ -9,9 +9,6 @@
           "message": {
             "text": "Reading invalid data from 'pstrName'."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/ddstextureloader.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -19,8 +16,8 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
                 },
                 "region": {
-                  "startLine": 1812,
-                  "startColumn": 51
+                  "startLine": 1804,
+                  "startColumn": 47
                 }
               },
               "logicalLocations": [
@@ -395,50 +392,12 @@
                             "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
-                            "startLine": 1810,
-                            "startColumn": 38
+                            "startLine": 1804,
+                            "startColumn": 47
                           }
                         },
                         "message": {
-                          "text": "Enter this branch, (assume '<branch condition>')"
-                        }
-                      },
-                      "kinds": [
-                        "branch"
-                      ]
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
-                          },
-                          "region": {
-                            "startLine": 1812,
-                            "startColumn": 51
-                          }
-                        },
-                        "message": {
-                          "text": "'pstrName' is an Input to 'strnlen_s' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\string.h:367)"
-                        }
-                      },
-                      "kinds": [
-                        "usage"
-                      ]
-                    },
-                    {
-                      "location": {
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
-                          },
-                          "region": {
-                            "startLine": 1812,
-                            "startColumn": 51
-                          }
-                        },
-                        "message": {
-                          "text": "'<symbol>' may equal -1"
+                          "text": "'<symbol>' may equal 260"
                         }
                       },
                       "kinds": [
@@ -453,8 +412,8 @@
                             "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
-                            "startLine": 1812,
-                            "startColumn": 51
+                            "startLine": 1804,
+                            "startColumn": 47
                           }
                         },
                         "message": {
@@ -477,7 +436,7 @@
         "driver": {
           "name": "PREfast",
           "fullName": "PREfast Code Analysis",
-          "version": "14.42.34435.0",
+          "version": "14.38.33144.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -489,7 +448,7 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/ddstextureloader.cpp"
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
           },
           "roles": [
             "analysisTarget",

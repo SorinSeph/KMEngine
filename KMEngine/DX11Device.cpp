@@ -1418,7 +1418,7 @@ HRESULT CDX11Device::AddGizmo()
 
 	CGameEntity3DComponent GizmoComponent;
     GizmoComponent.m_GameEntityTag = "GizmoComponent";
-    GizmoComponent.SetLocationF(10.f, 0.0f, 0.0f);
+    GizmoComponent.SetLocationF(3.f, 0.0f, -4.0f);
     GeometryFactory.CreatePhysicalMesh(GizmoComponent.PhysicalMesh, EPrimitiveGeometryType::Arrow);
     //GizmoComponent.SetScale(15.25f, 15.25f, 15.25f);
 
@@ -1432,15 +1432,15 @@ HRESULT CDX11Device::AddGizmo()
     }
 
     // Create the vertex shader
-    ID3D11VertexShader* VertexShader{ nullptr };
-    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
+    ID3D11VertexShader* pVertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &pVertexShader);
     if (FAILED(m_HR))
     {
         pVSBlob->Release();
         return m_HR;
     }
     auto VertexShaderLambda = [=]() {
-        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+        m_pImmediateContext->VSSetShader(pVertexShader, nullptr, 0);
     };
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
@@ -1453,17 +1453,17 @@ HRESULT CDX11Device::AddGizmo()
     UINT numElements = ARRAYSIZE(layout);
 
     // Create the input layout
-    ID3D11InputLayout* TempVertexLayout{ nullptr };
-    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    ID3D11InputLayout* pVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &pVertexLayout);
     pVSBlob->Release();
     if (FAILED(m_HR))
         return m_HR;
 
     // Set the input layout
-    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    m_pImmediateContext->IASetInputLayout(pVertexLayout);
 
     auto InputLayoutLambda = [=]() {
-        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+        m_pImmediateContext->IASetInputLayout(pVertexLayout);
     };
 
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
@@ -1478,14 +1478,14 @@ HRESULT CDX11Device::AddGizmo()
     }
 
     // Create the pixel shader
-    ID3D11PixelShader* TempPixelShader{ nullptr };
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    ID3D11PixelShader* pPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &pPixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
         return m_HR;
 
     auto PixelShaderLambda = [=]() {
-        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+        m_pImmediateContext->PSSetShader(pPixelShader, nullptr, 0);
     };
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
@@ -1506,56 +1506,33 @@ HRESULT CDX11Device::AddGizmo()
 
     D3D11_BUFFER_DESC BufferDescriptor{};
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 126;
     BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
 
-    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    ID3D11Buffer* pVertexBuffer{ nullptr };
     D3D11_SUBRESOURCE_DATA InitData{};
     InitData.pSysMem = pSimpleColorVertices;
-    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &pVertexBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
     // Set vertex buffer
     UINT stride = sizeof(SSimpleColorVertex);
     UINT offset = 0;
-    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
 
     auto VertexBufferLambda = [=]() {
-        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &pVertexBuffer, &stride, &offset);
     };
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
-
-
-    // Create index buffer
-    //WORD Indices[] =
-    //{
-    //    0, 1, 2,
-    //    0, 2, 3,
-
-    //    4, 5, 6,
-    //    4, 6, 7,
-
-    //    0, 4, 5,
-    //    0, 5, 1,
-
-    //    1, 5, 6,
-    //    1, 6, 2,
-
-    //    2, 6, 7,
-    //    2, 7, 3,
-
-    //    3, 7, 4,
-    //    3, 4, 0,
-    //};
 
     auto TempSimpleColorIndices = GizmoComponent.PhysicalMesh.GetIndicesList();
     WORD* pSimpleColorIndices = TempSimpleColorIndices.data();
 
     ID3D11Buffer* IndexBuffer{ nullptr };
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 2000;        // 36 vertices needed for 12 triangles in a triangle list
     BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
     InitData.pSysMem = pSimpleColorIndices;
@@ -1575,19 +1552,19 @@ HRESULT CDX11Device::AddGizmo()
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     // Create the constant buffer
-    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    ID3D11Buffer* pConstantBuffer{ nullptr };
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
     BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
     BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &pConstantBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
     auto ConstantBufferLambda = [=]() {
-        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
     };
-    GizmoComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    GizmoComponent.m_DXResConfig.SetConstantBuffer(pConstantBuffer);
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
@@ -1603,31 +1580,31 @@ HRESULT CDX11Device::AddGizmo()
     //};
     //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC rasterDesc = {};
-    rasterDesc.FillMode = D3D11_FILL_SOLID;
-    rasterDesc.CullMode = D3D11_CULL_NONE;
-    rasterDesc.FrontCounterClockwise = false;
-    rasterDesc.DepthBias = 0;
-    rasterDesc.DepthBiasClamp = 0.0f;
-    rasterDesc.SlopeScaledDepthBias = 0.0f;
-    rasterDesc.DepthClipEnable = true;
-    rasterDesc.ScissorEnable = false;
-    rasterDesc.MultisampleEnable = false;
-    rasterDesc.AntialiasedLineEnable = false;
+    D3D11_RASTERIZER_DESC RasterDesc = {};
+    RasterDesc.FillMode = D3D11_FILL_SOLID;
+    RasterDesc.CullMode = D3D11_CULL_NONE;
+    RasterDesc.FrontCounterClockwise = false;
+    RasterDesc.DepthBias = 0;
+    RasterDesc.DepthBiasClamp = 0.0f;
+    RasterDesc.SlopeScaledDepthBias = 0.0f;
+    RasterDesc.DepthClipEnable = true;
+    RasterDesc.ScissorEnable = false;
+    RasterDesc.MultisampleEnable = false;
+    RasterDesc.AntialiasedLineEnable = false;
 
-    D3D11_SAMPLER_DESC sampDesc = {};
-    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-    sampDesc.MinLOD = 0;
-    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    D3D11_SAMPLER_DESC SampDesc = {};
+    SampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    SampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    SampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    SampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    SampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    SampDesc.MinLOD = 0;
+    SampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_HR = m_pD3D11Device->CreateSamplerState(&SampDesc, &m_SamplerLinear);
     if (FAILED(m_HR))
         return m_HR;
 
-    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
+    m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);

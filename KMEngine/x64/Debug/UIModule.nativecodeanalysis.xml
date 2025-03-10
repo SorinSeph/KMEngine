@@ -3,6 +3,142 @@
   <DEFECT>
     <SFA>
       <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportMessage.h</FILENAME>
+      <LINE>27</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportMessage::m_MouseX' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
+    <FUNCLINE>27</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportMessage::m_MouseX</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportMessage.h</FILENAME>
+      <LINE>27</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportMessage::m_MouseY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
+    <FUNCLINE>27</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportMessage::m_MouseY</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportMessage.h</FILENAME>
+      <LINE>27</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportMessage::m_TestInt' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportMessage::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportMessage@@QEAA@XZ</DECORATED>
+    <FUNCLINE>27</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportMessage::m_TestInt</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::bSpeedScale' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::bSpeedScale</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeX' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::vpEyeX</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::vpEyeY</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeZ' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::vpEyeZ</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>ViewportWindow.h</FILENAME>
+      <LINE>30</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CViewportWindow::vpEyeXOffset' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CViewportWindow::{ctor}</FUNCTION>
+    <DECORATED>??0CViewportWindow@@QEAA@XZ</DECORATED>
+    <FUNCLINE>30</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CViewportWindow::vpEyeXOffset</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
       <FILENAME>EntityPhysicalMesh.h</FILENAME>
       <LINE>73</LINE>
       <COLUMN>0</COLUMN>
@@ -218,6 +354,23 @@
     <FUNCLINE>164</FUNCLINE>
     <ADDITIONALINFO>
       <targetSymbol>CGameEntity3DComponent::DXResourceHashKey</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\sefce\source\KMEngine\KMEngine\</FILEPATH>
+      <FILENAME>Scene.h</FILENAME>
+      <LINE>25</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'CScene::m_SceneConstantBuffer' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>CScene::{ctor}</FUNCTION>
+    <DECORATED>??0CScene@@AEAA@XZ</DECORATED>
+    <FUNCLINE>25</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>CScene::m_SceneConstantBuffer</targetSymbol>
     </ADDITIONALINFO>
     <PATH></PATH>
   </DEFECT>

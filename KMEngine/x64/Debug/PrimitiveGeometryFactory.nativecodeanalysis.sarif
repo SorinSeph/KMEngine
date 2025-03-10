@@ -7,10 +7,7 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Variable 'TEntityPhysicalMesh::m_Stride' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
+            "text": "Variable 'CPhysicalMesh::m_Stride' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -25,24 +22,21 @@
               },
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "TEntityPhysicalMesh::{ctor}",
-                  "decoratedName": "??0TEntityPhysicalMesh@@QEAA@XZ",
+                  "fullyQualifiedName": "CPhysicalMesh::{ctor}",
+                  "decoratedName": "??0CPhysicalMesh@@QEAA@XZ",
                   "kind": "function"
                 }
               ]
             }
           ],
           "properties": {
-            "targetSymbol": "TEntityPhysicalMesh::m_Stride"
+            "targetSymbol": "CPhysicalMesh::m_Stride"
           }
         },
         {
           "ruleId": "C26495",
           "message": {
             "text": "Variable 'CGameEntity3D::m_CollisionBuffer' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
           },
           "locations": [
             {
@@ -51,7 +45,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -71,10 +65,7 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Variable 'CGameEntity3D::m_LocationVector' is uninitialized. Always initialize a member variable (type.6)."
-          },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
+            "text": "Variable 'CGameEntity3D::m_GameEntityType' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
             {
@@ -83,7 +74,36 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CGameEntity3D::{ctor}",
+                  "decoratedName": "??0CGameEntity3D@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CGameEntity3D::m_GameEntityType"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CGameEntity3D::m_LocationVector' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
+                },
+                "region": {
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -105,9 +125,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_LocationY' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -115,7 +132,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -137,9 +154,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_LocationZ' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -147,7 +161,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -169,9 +183,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_RotationX' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -179,7 +190,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -201,9 +212,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_RotationY' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -211,7 +219,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -233,9 +241,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_RotationZ' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -243,7 +248,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -265,9 +270,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_ScaleX' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -275,7 +277,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -297,9 +299,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_ScaleY' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -307,7 +306,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -329,9 +328,6 @@
           "message": {
             "text": "Variable 'CGameEntity3D::m_ScaleZ' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -339,7 +335,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 58,
+                  "startLine": 70,
                   "startColumn": 2
                 }
               },
@@ -361,9 +357,6 @@
           "message": {
             "text": "Variable 'CGameEntity3DComponent::DXResourceHashKey' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -371,7 +364,7 @@
                   "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/GameEntity3D.h"
                 },
                 "region": {
-                  "startLine": 150,
+                  "startLine": 164,
                   "startColumn": 1
                 }
               },
@@ -387,13 +380,1616 @@
           "properties": {
             "targetSymbol": "CGameEntity3DComponent::DXResourceHashKey"
           }
+        },
+        {
+          "ruleId": "C6201",
+          "message": {
+            "text": "Index '17' is out of valid index range '0' to '15' for possibly stack allocated buffer 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 298,
+                  "startColumn": 37,
+                  "endLine": 298,
+                  "endColumn": 53
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6201",
+          "message": {
+            "text": "Index '17' is out of valid index range '0' to '15' for possibly stack allocated buffer 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 301,
+                  "startColumn": 38,
+                  "endLine": 301,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6201",
+          "message": {
+            "text": "Index '17' is out of valid index range '0' to '15' for possibly stack allocated buffer 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 302,
+                  "startColumn": 17,
+                  "endLine": 302,
+                  "endColumn": 33
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6385",
+          "message": {
+            "text": "Reading invalid data from 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 298,
+                  "startColumn": 26,
+                  "endLine": 298,
+                  "endColumn": 54
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 268,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 271,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 273,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 274,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 275,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 278,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 286,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 294,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "'VerticesArray3' is an array of 16 elements (448 bytes)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 22
+                          }
+                        },
+                        "message": {
+                          "text": "'i' is equal to 32"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume 'i>16')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 298,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Invalid read from 'VerticesArray3[32]', (readable range is 0 to 15)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Using uninitialized memory 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 298,
+                  "startColumn": 37
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 268,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 271,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 273,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 274,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 275,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 278,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 286,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 294,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "'VerticesArray3' is not initialized"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume 'i>16')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 298,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 299,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 300,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 301,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 302,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 298,
+                            "startColumn": 37
+                          }
+                        },
+                        "message": {
+                          "text": "'VerticesArray3' is used, but may not have been initialized"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "Buffer overrun while writing to 'VerticesArray3'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                },
+                "region": {
+                  "startLine": 302,
+                  "startColumn": 17,
+                  "endLine": 302,
+                  "endColumn": 49
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CPrimitiveGeometryFactory::CreateEntity3D",
+                  "decoratedName": "?CreateEntity3D@CPrimitiveGeometryFactory@@QEAA?AVCGameEntity3D@@W4EPrimitiveGeometryType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 268,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 271,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 273,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 274,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 275,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 278,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 282,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 280,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 286,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 290,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 38
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 288,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 294,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "'VerticesArray3' is an array of 16 elements (448 bytes)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 22
+                          }
+                        },
+                        "message": {
+                          "text": "'i' is equal to 32"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 296,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume 'i>16')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 298,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 299,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 300,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 301,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+                          },
+                          "region": {
+                            "startLine": 302,
+                            "startColumn": 35
+                          }
+                        },
+                        "message": {
+                          "text": "Invalid write to 'VerticesArray3[32]', (writable range is 0 to 15)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "tool": {
         "driver": {
           "name": "PREfast",
           "fullName": "PREfast Code Analysis",
-          "version": "14.42.34435.0",
+          "version": "14.38.33144.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -405,24 +2001,13 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.cpp"
-          },
-          "roles": [
-            "analysisTarget"
-          ],
-          "hashes": {
-            "sha-256": "e796d701bfcbf924055d8576aa2fee047930f831f4d98fac0f5d06cf1fef0ec6"
-          }
-        },
-        {
-          "location": {
             "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
           },
           "roles": [
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "fdeb461aef16ec69df608252aaac2a8a7657c52841b26462ccb91e424ea217d7"
+            "sha-256": "3190b7eeb3d53c3280385a2d2350d84d7a0d86b450eb9b869b5697dc65ff2861"
           }
         },
         {
@@ -433,7 +2018,19 @@
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "43f5d1017bb9205685e94fef075fd6f19a317b63e6be11af4561468d3e91c79d"
+            "sha-256": "7b94deb07aa67eb42a2dc60414178dfe81bfed92fc8f4b52f3317d9f123e1be9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/PrimitiveGeometryFactory.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "97410f834bf94ff88903856b623bf5514601d8b53ba007de7469e73333c15186"
           }
         },
         {
@@ -441,7 +2038,7 @@
             "uri": "file:///c:/users/sefce/source/kmengine/kmengine/primitivegeometryfactory.h"
           },
           "hashes": {
-            "sha-256": "a1ab8836c72073a46b414726ed111e6761972ad78697dccc9b58b31dedaa9a8d"
+            "sha-256": "ba7a013a3363115e7f2d32435ff038c45cf5ae1247c7701d928dc7e407c97ff5"
           }
         },
         {
@@ -465,7 +2062,7 @@
             "uri": "file:///c:/users/sefce/source/kmengine/kmengine/scenegraph.h"
           },
           "hashes": {
-            "sha-256": "da2aecc63a4a1d5f74570da5cd31b0ac2d6dd38ec72dde8e7f112971ad1d1d68"
+            "sha-256": "e72f51706a39871b01b79f6a9c5b7d4828c53435d5b65a1956613a12ea4d9ba4"
           }
         }
       ]

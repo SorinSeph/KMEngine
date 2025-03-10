@@ -9,9 +9,6 @@
           "message": {
             "text": "Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6)."
           },
-          "analysisTarget": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/coreclock.cpp"
-          },
           "locations": [
             {
               "physicalLocation": {
@@ -41,7 +38,7 @@
         "driver": {
           "name": "PREfast",
           "fullName": "PREfast Code Analysis",
-          "version": "14.42.34435.0",
+          "version": "14.38.33144.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -53,17 +50,6 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/coreclock.cpp"
-          },
-          "roles": [
-            "analysisTarget"
-          ],
-          "hashes": {
-            "sha-256": "6fbe44583c3c219b2d56e9b6344540a2c5008d331caa0e3d509bd5907d7fa00e"
-          }
-        },
-        {
-          "location": {
             "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/CoreClock.h"
           },
           "roles": [
@@ -71,6 +57,17 @@
           ],
           "hashes": {
             "sha-256": "ac77c0115c53318c96a42ba104ce18a7f84300f974984b31c3e2c20b38334cf0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/coreclock.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "6fbe44583c3c219b2d56e9b6344540a2c5008d331caa0e3d509bd5907d7fa00e"
           }
         }
       ]

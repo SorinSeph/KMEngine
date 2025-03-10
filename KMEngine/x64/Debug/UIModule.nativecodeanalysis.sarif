@@ -7,6 +7,238 @@
         {
           "ruleId": "C26495",
           "message": {
+            "text": "Variable 'CViewportMessage::m_MouseX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportMessage.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportMessage::{ctor}",
+                  "decoratedName": "??0CViewportMessage@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportMessage::m_MouseX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportMessage::m_MouseY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportMessage.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportMessage::{ctor}",
+                  "decoratedName": "??0CViewportMessage@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportMessage::m_MouseY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportMessage::m_TestInt' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportMessage.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportMessage::{ctor}",
+                  "decoratedName": "??0CViewportMessage@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportMessage::m_TestInt"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::bSpeedScale' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::bSpeedScale"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::vpEyeX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::vpEyeX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::vpEyeY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::vpEyeY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::vpEyeZ' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::vpEyeZ"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::vpEyeXOffset' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::vpEyeXOffset"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
             "text": "Variable 'CPhysicalMesh::m_Stride' is uninitialized. Always initialize a member variable (type.6)."
           },
           "locations": [
@@ -380,6 +612,35 @@
           "properties": {
             "targetSymbol": "CGameEntity3DComponent::DXResourceHashKey"
           }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CScene::m_SceneConstantBuffer' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CScene::{ctor}",
+                  "decoratedName": "??0CScene@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CScene::m_SceneConstantBuffer"
+          }
         }
       ],
       "tool": {
@@ -396,6 +657,28 @@
         }
       ],
       "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportMessage.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "638419ca279570560af9e41a0eab34884d486e9fb5dea364e4d6a71ee8a07cb6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/ViewportWindow.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ac704ffa37242b38459448d2044f1240eddc61ab3bfa144f46b81e8c1f3a159d"
+          }
+        },
         {
           "location": {
             "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/EntityPhysicalMesh.h"
@@ -420,13 +703,64 @@
         },
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/gameentity3d.cpp"
+            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/Scene.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "0efbaf2b07e24d22b05f0a1b0f7df3dba3d0f916a3d87f3fb4fab7b3e2a6d938"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/uimodule.cpp"
           },
           "roles": [
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "9893c2518e5ea7175afbf7fdeb984faf58cfbc138727709f360dae8dce23ffa9"
+            "sha-256": "a9f3a386f322c9fb85a66b3f2cda793e492ace513e8ecea4332d0f01e8a0c923"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/uimodule.h"
+          },
+          "hashes": {
+            "sha-256": "ade538f42831dc0e107286afe71319ccde89d2c69c29fa269a4d39b668e3dec5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/basemodule.h"
+          },
+          "hashes": {
+            "sha-256": "6ef917f2c9afe24bfc27bf6428de3d79ccb96f57768be4eb0498e4aab34c632e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/resource.h"
+          },
+          "hashes": {
+            "sha-256": "e4223cc21c6c65d6a4801010d788abd595c0e494e2152d81f3702db47b2bcc16"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/logger.h"
+          },
+          "hashes": {
+            "sha-256": "71872e4e825c7d4da36042c4e1b4e8ed4e35c76b59c1d5caf745cc9bec0b5191"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/rightsubwindow.h"
+          },
+          "hashes": {
+            "sha-256": "56bb8cfc102c7aaf5a4480312d0dc9dd352d2dda1adec30f257a8dcfb04fc2f5"
           }
         },
         {
