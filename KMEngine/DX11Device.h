@@ -90,6 +90,7 @@ public:
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
 	void InitDefaultDepthStencil3();
 	void InitDisabledDepthStencil();
+	void InitRasterizerState();
 	//void InitOutlineDepthStencil();
 	void InitViewportFinal();
 	void CleanupDX11Device();

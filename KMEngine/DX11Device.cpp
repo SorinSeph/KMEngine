@@ -46,6 +46,7 @@ HRESULT CDX11Device::InitDX11Device()
     //InitDepthStencilView(Texture2D);
     //InitDisabledDepthStencil();
     InitDefaultDepthStencil3();
+    InitRasterizerState();
     //InitBaseCube();
 
     InitTexturedCube();
@@ -634,6 +635,30 @@ void CDX11Device::InitCubeOutline()
     //m_ImmediateContext->PSSetShaderResources(0, 1, &m_TextureRV4);
     //m_ImmediateContext->PSSetSamplers(0, 1, &m_SamplerLinear);
     //m_ImmediateContext->OMSetDepthStencilState(pDefDepthStencilState, 0);
+}
+
+void CDX11Device::InitRasterizerState()
+{
+    D3D11_RASTERIZER_DESC RasterDesc = {};
+    RasterDesc.FillMode = D3D11_FILL_SOLID;
+    RasterDesc.CullMode = D3D11_CULL_NONE;
+    RasterDesc.FrontCounterClockwise = false;
+    RasterDesc.DepthBias = 0;
+    RasterDesc.DepthBiasClamp = 0.0f;
+    RasterDesc.SlopeScaledDepthBias = 0.0f;
+    RasterDesc.DepthClipEnable = true;
+    RasterDesc.ScissorEnable = false;
+    RasterDesc.MultisampleEnable = false;
+    RasterDesc.AntialiasedLineEnable = false;
+
+    m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+        return;
+    }
+
+    m_pImmediateContext->RSSetState(m_RasterizerState);
 }
 
 void CDX11Device::InitCubeOutline2()
@@ -1424,6 +1449,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     auto SelectedEntityLocationY = SelectedEntity.GetFloatLocationY();
     auto SelectedEntityLocationZ = SelectedEntity.GetFloatLocationZ();
     GizmoComponent.SetLocationF(SelectedEntityLocationX, SelectedEntityLocationY, SelectedEntityLocationZ);
+
     GizmoComponent.SetScale(0.25f, 0.25f, 0.25f);
 
     // Compile the vertex shader
@@ -1584,18 +1610,6 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     //};
     //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC RasterDesc = {};
-    RasterDesc.FillMode = D3D11_FILL_SOLID;
-    RasterDesc.CullMode = D3D11_CULL_NONE;
-    RasterDesc.FrontCounterClockwise = false;
-    RasterDesc.DepthBias = 0;
-    RasterDesc.DepthBiasClamp = 0.0f;
-    RasterDesc.SlopeScaledDepthBias = 0.0f;
-    RasterDesc.DepthClipEnable = true;
-    RasterDesc.ScissorEnable = false;
-    RasterDesc.MultisampleEnable = false;
-    RasterDesc.AntialiasedLineEnable = false;
-
     D3D11_SAMPLER_DESC SampDesc = {};
     SampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     SampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -1607,15 +1621,6 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     m_HR = m_pD3D11Device->CreateSamplerState(&SampDesc, &m_SamplerLinear);
     if (FAILED(m_HR))
         return m_HR;
-
-    m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    m_pImmediateContext->RSSetState(m_RasterizerState);
 
     //InterpMoveCubeRef = &GizmoComponent;
 
@@ -1803,18 +1808,6 @@ HRESULT CDX11Device::AddGizmo()
     //};
     //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC RasterDesc = {};
-    RasterDesc.FillMode = D3D11_FILL_SOLID;
-    RasterDesc.CullMode = D3D11_CULL_NONE;
-    RasterDesc.FrontCounterClockwise = false;
-    RasterDesc.DepthBias = 0;
-    RasterDesc.DepthBiasClamp = 0.0f;
-    RasterDesc.SlopeScaledDepthBias = 0.0f;
-    RasterDesc.DepthClipEnable = true;
-    RasterDesc.ScissorEnable = false;
-    RasterDesc.MultisampleEnable = false;
-    RasterDesc.AntialiasedLineEnable = false;
-
     D3D11_SAMPLER_DESC SampDesc = {};
     SampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     SampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -1826,16 +1819,6 @@ HRESULT CDX11Device::AddGizmo()
     m_HR = m_pD3D11Device->CreateSamplerState(&SampDesc, &m_SamplerLinear);
     if (FAILED(m_HR))
         return m_HR;
-
-    m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
-
-
-    m_pImmediateContext->RSSetState(m_RasterizerState);
 
     //InterpMoveCubeRef = &GizmoComponent;
 
@@ -2289,18 +2272,6 @@ HRESULT CDX11Device::InitTexturedCube()
     };
     TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC rasterDesc = {};
-    rasterDesc.FillMode = D3D11_FILL_SOLID;
-    rasterDesc.CullMode = D3D11_CULL_NONE;
-    rasterDesc.FrontCounterClockwise = false;
-    rasterDesc.DepthBias = 0;
-    rasterDesc.DepthBiasClamp = 0.0f;
-    rasterDesc.SlopeScaledDepthBias = 0.0f;
-    rasterDesc.DepthClipEnable = true;
-    rasterDesc.ScissorEnable = false;
-    rasterDesc.MultisampleEnable = false;
-    rasterDesc.AntialiasedLineEnable = false;
-
     D3D11_SAMPLER_DESC sampDesc = {};
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -2312,19 +2283,6 @@ HRESULT CDX11Device::InitTexturedCube()
     m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
     if (FAILED(m_HR))
         return m_HR;
-
-    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    auto RasterDescriptorLambda = [=]() {
-        m_pImmediateContext->RSSetState(m_RasterizerState);
-    };
-    TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterDescriptorLambda);
-
 
     InterpMoveCubeRef = &TexturedCubeComponent;
 	//TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
@@ -2635,17 +2593,32 @@ HRESULT CDX11Device::InitSolidColorCube()
     //};
     //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC rasterDesc = {};
-    rasterDesc.FillMode = D3D11_FILL_SOLID;
-    rasterDesc.CullMode = D3D11_CULL_NONE;
-    rasterDesc.FrontCounterClockwise = false;
-    rasterDesc.DepthBias = 0;
-    rasterDesc.DepthBiasClamp = 0.0f;
-    rasterDesc.SlopeScaledDepthBias = 0.0f;
-    rasterDesc.DepthClipEnable = true;
-    rasterDesc.ScissorEnable = false;
-    rasterDesc.MultisampleEnable = false;
-    rasterDesc.AntialiasedLineEnable = false;
+    auto RasterizerStateLambda = [=]() {
+        ID3D11RasterizerState* RasterizerState{ nullptr };
+        D3D11_RASTERIZER_DESC RasterDesc = {};
+        RasterDesc.FillMode = D3D11_FILL_SOLID;
+        RasterDesc.CullMode = D3D11_CULL_NONE;
+        RasterDesc.FrontCounterClockwise = false;
+        RasterDesc.DepthBias = 0;
+        RasterDesc.DepthBiasClamp = 0.0f;
+        RasterDesc.SlopeScaledDepthBias = 0.0f;
+        RasterDesc.DepthClipEnable = true;
+        RasterDesc.ScissorEnable = false;
+        RasterDesc.MultisampleEnable = false;
+        RasterDesc.AntialiasedLineEnable = false;
+
+        m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &RasterizerState);
+        if (FAILED(m_HR))
+        {
+            MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+            return;
+        }
+
+        m_pImmediateContext->RSSetState(RasterizerState);
+    };
+
+    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
+
 
     D3D11_SAMPLER_DESC sampDesc = {};
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -2659,18 +2632,6 @@ HRESULT CDX11Device::InitSolidColorCube()
     if (FAILED(m_HR))
         return m_HR;
 
-    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
-
-    auto RasterDescriptorLambda = [=]() {
-        m_pImmediateContext->RSSetState(m_RasterizerState);
-    };
-    CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterDescriptorLambda);
-
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     CubeComponentNode->m_TType = CubeEntityComponent;
 
@@ -2678,8 +2639,29 @@ HRESULT CDX11Device::InitSolidColorCube()
 
     TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 30.0f);
 
+
+
     SScene.AddEntityToScene(CubeEntity);
     //SScene.AddEntityToScene(CubeEntityComponent);
+
+    //D3D11_RASTERIZER_DESC RasterDesc = {};
+    //RasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+    //RasterDesc.CullMode = D3D11_CULL_NONE;
+    //RasterDesc.FrontCounterClockwise = false;
+    //RasterDesc.DepthBias = 0;
+    //RasterDesc.DepthBiasClamp = 0.0f;
+    //RasterDesc.SlopeScaledDepthBias = 0.0f;
+    //RasterDesc.DepthClipEnable = true;
+    //RasterDesc.ScissorEnable = false;
+    //RasterDesc.MultisampleEnable = false;
+    //RasterDesc.AntialiasedLineEnable = false;
+
+    //m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+    //    return m_HR;
+    //}
 
     return S_OK;
 }
@@ -2918,18 +2900,6 @@ HRESULT CDX11Device::InitFrustum()
     //};
     //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
 
-    D3D11_RASTERIZER_DESC rasterDesc = {};
-    rasterDesc.FillMode = D3D11_FILL_WIREFRAME;
-    rasterDesc.CullMode = D3D11_CULL_NONE;
-    rasterDesc.FrontCounterClockwise = false;
-    rasterDesc.DepthBias = 0;
-    rasterDesc.DepthBiasClamp = 0.0f;
-    rasterDesc.SlopeScaledDepthBias = 0.0f;
-    rasterDesc.DepthClipEnable = true;
-    rasterDesc.ScissorEnable = false;
-    rasterDesc.MultisampleEnable = false;
-    rasterDesc.AntialiasedLineEnable = false;
-
     D3D11_SAMPLER_DESC sampDesc = {};
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -2942,17 +2912,31 @@ HRESULT CDX11Device::InitFrustum()
     if (FAILED(m_HR))
         return m_HR;
 
-    m_HR = m_pD3D11Device->CreateRasterizerState(&rasterDesc, &m_RasterizerState);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
-        return m_HR;
-    }
+    auto RasterizerStateLambda = [=]() {
+        ID3D11RasterizerState* RasterizerState{ nullptr };
+        D3D11_RASTERIZER_DESC RasterDesc = {};
+        RasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+        RasterDesc.CullMode = D3D11_CULL_NONE;
+        RasterDesc.FrontCounterClockwise = false;
+        RasterDesc.DepthBias = 0;
+        RasterDesc.DepthBiasClamp = 0.0f;
+        RasterDesc.SlopeScaledDepthBias = 0.0f;
+        RasterDesc.DepthClipEnable = true;
+        RasterDesc.ScissorEnable = false;
+        RasterDesc.MultisampleEnable = false;
+        RasterDesc.AntialiasedLineEnable = false;
 
-    auto RasterDescriptorLambda = [=]() {
-         m_pImmediateContext->RSSetState(m_RasterizerState);
+        m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &RasterizerState);
+        if (FAILED(m_HR))
+        {
+            MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+            return;
+        }
+
+        m_pImmediateContext->RSSetState(RasterizerState);
     };
-    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterDescriptorLambda);
+
+    FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
 
     CSceneGraphNode<CGameEntity3DComponent>* FrustumComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     FrustumComponentNode->m_TType = FrustumComponent;
