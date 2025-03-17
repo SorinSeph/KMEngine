@@ -258,7 +258,7 @@ void CDX11Device::InitDefaultDepthStencil3()
     // Depth test parameters
     defDepthStencilDesc3.DepthEnable = true;
     defDepthStencilDesc3.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_ALWAYS;
+    defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_LESS;
 
     // Stencil test parameters
     defDepthStencilDesc3.StencilEnable = true;
@@ -299,72 +299,86 @@ void CDX11Device::InitDefaultDepthStencil3()
 
 void CDX11Device::InitDisabledDepthStencil()
 {
-    ID3D11Texture2D* pDepthStencil = NULL;
-    D3D11_TEXTURE2D_DESC descDepth;
-    descDepth.Width = m_ViewportWidth;
-    descDepth.Height = m_ViewportWidth;
-    descDepth.MipLevels = 1;
-    descDepth.ArraySize = 1;
-    descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-    descDepth.SampleDesc.Count = 1;
-    descDepth.SampleDesc.Quality = 0;
-    descDepth.Usage = D3D11_USAGE_DEFAULT;
-    descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-    descDepth.CPUAccessFlags = 0;
-    descDepth.MiscFlags = 0;
-    m_HR = m_pD3D11Device->CreateTexture2D(&descDepth, nullptr, &pDepthStencil);
+	CLogger& Logger = CLogger::GetLogger();
 
-    D3D11_DEPTH_STENCIL_DESC dsDesc;
+	Logger.Log("CDX11Device::InitDisabledDepthStencil()");
 
     // Depth test parameters
-    dsDesc.DepthEnable = true;
-    dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    dsDesc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+    defDepthStencilDesc3.DepthEnable = true;
+    defDepthStencilDesc3.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_ALWAYS;
 
     // Stencil test parameters
-    dsDesc.StencilEnable = true;
-    dsDesc.StencilReadMask = 0xFF;
-    dsDesc.StencilWriteMask = 0xFF;
+    defDepthStencilDesc3.StencilEnable = true;
+    defDepthStencilDesc3.StencilReadMask = 0xFF;
+    defDepthStencilDesc3.StencilWriteMask = 0xFF;
 
     // Stencil operations if pixel is front-facing
-    dsDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    dsDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-    dsDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    dsDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+    defDepthStencilDesc3.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc3.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+    defDepthStencilDesc3.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc3.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
     // Stencil operations if pixel is back-facing
-    dsDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    dsDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-    dsDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    dsDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+    defDepthStencilDesc3.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc3.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+    defDepthStencilDesc3.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    defDepthStencilDesc3.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
     // Create depth stencil state
-    m_pD3D11Device->CreateDepthStencilState(&dsDesc, &m_pDepthStencilStateDisabled);
-
-    D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-    descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-    descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-    descDSV.Texture2D.MipSlice = 0;
-
-    // Create the depth stencil view
-//    ID3D11DepthStencilView* pDSV;
-//    m_hr = m_D3D11Device->CreateDepthStencilView(pDepthStencil, // Depth stencil texture
-//        &descDSV, // Depth stencil desc
-//        &pDSV);  // [out] Depth stencil view
-//
-//// Bind the depth stencil view
-//    m_ImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
-//        &m_RenderTargetView,      // Render target view, created earlier
-//        pDSV);     // Depth stencil view for the render target
+    m_pD3D11Device->CreateDepthStencilState(&defDepthStencilDesc3, &pDefDepthStencilState3);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+        return;
+    }
 
 
 
-    // Create the depth stencil outline
-    OutlineDepthStencilDesc.DepthEnable = true;
-    OutlineDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    OutlineDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
 
-    OutlineDepthStencilDesc.StencilEnable = true;
+    // Bind the depth stencil view
+    m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
+        &m_pRenderTargetView,      // Render target view, created earlier
+        pDefDepthStencilView3);     // Depth stencil view for the render target
+
+
+    m_pImmediateContext->OMSetDepthStencilState(pDefDepthStencilState3, 0);
+}
+
+void CDX11Device::EnableDepthStencil()
+{
+	CLogger& Logger = CLogger::GetLogger();
+	Logger.Log("CDX11Device::EnableDepthStencil()");
+
+    defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_LESS;
+
+    // Create depth stencil state
+    m_pD3D11Device->CreateDepthStencilState(&defDepthStencilDesc3, &pDefDepthStencilState3);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+        return;
+    }
+
+    m_pImmediateContext->OMSetDepthStencilState(pDefDepthStencilState3, 0);
+}
+
+void CDX11Device::DisableDepthStencil()
+{
+	CLogger& Logger = CLogger::GetLogger();
+	Logger.Log("CDX11Device::DisableDepthStencil()");
+
+    defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Create depth stencil state
+    m_pD3D11Device->CreateDepthStencilState(&defDepthStencilDesc3, &pDefDepthStencilState3);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+        return;
+    }
+
+    m_pImmediateContext->OMSetDepthStencilState(pDefDepthStencilState3, 0);
 }
 
 void CDX11Device::InitCubeOutline()
@@ -1434,8 +1448,61 @@ void CDX11Device::CheckCollision(float OriginX, float OriginY, float OriginZ, fl
 
 HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 {
+    //m_PostRenderPtr[0] = &CDX11Device::InitDefaultDepthStencil3;
+
+    //InitDisabledDepthStencil();
+
+    // Body of InitDisabledDepthStencicl
+
+    /*defDepthStencilDesc3.DepthEnable = true;
+    defDepthStencilDesc3.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;*/
+    //defDepthStencilDesc3.DepthFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Stencil test parameters
+    //defDepthStencilDesc3.StencilEnable = true;
+    //defDepthStencilDesc3.StencilReadMask = 0xFF;
+    //defDepthStencilDesc3.StencilWriteMask = 0xFF;
+
+    // Stencil operations if pixel is front-facing
+    //defDepthStencilDesc3.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    //defDepthStencilDesc3.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+    //defDepthStencilDesc3.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    //defDepthStencilDesc3.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Stencil operations if pixel is back-facing
+    //defDepthStencilDesc3.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    //defDepthStencilDesc3.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+    //defDepthStencilDesc3.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    //defDepthStencilDesc3.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+    // Create depth stencil state
+    //m_pD3D11Device->CreateDepthStencilState(&defDepthStencilDesc3, &pDefDepthStencilState3);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+
+
+
+
+    // Bind the depth stencil view
+    //m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
+    //    &m_pRenderTargetView,      // Render target view, created earlier
+    //    pDefDepthStencilView3);     // Depth stencil view for the render target
+
+
+    //m_pImmediateContext->OMSetDepthStencilState(pDefDepthStencilState3, 0);
+
+    // End of body of InitDisabledDepthStencil
+
+    m_PreRenderPtr[0] = &CDX11Device::DisableDepthStencil;
+
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
+
+	CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("CDX11Device::SpawnGizmo");
 
     CGameEntity3D GizmoEntity;// = GeometryFactory.CreateEntity3D(EGameEntityType::Arrow);
     GizmoEntity.m_GameEntityTag = "Gizmo";
@@ -1598,6 +1665,12 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
+    //auto DisableDepthStencilLambda = [=]() {
+    //    InitDisabledDepthStencil();
+    //};
+    //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(DisableDepthStencilLambda);
+
+
     //const wchar_t* TextureName = L"tex_stickman.dds";
     //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
     //if (FAILED(m_HR))
@@ -1630,6 +1703,8 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     GizmoEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
     SScene.AddEntityToScene(GizmoEntity);
+
+    m_PostRenderPtr[0] = &CDX11Device::EnableDepthStencil;
     //SScene.AddEntityToScene(GizmoComponent);
 
     return S_OK;
@@ -3165,3 +3240,26 @@ void CDX11Device::SetRenderer(CRenderer* Renderer)
 {
 	m_pRenderer = Renderer;
 }
+
+void CDX11Device::OnPreRender()
+{
+	for (auto& funcPtr : m_PreRenderPtr)
+	{
+		if (funcPtr)
+		{
+			(this->*funcPtr)();
+		}
+	}
+}
+
+void CDX11Device::OnPostRender()
+{
+    for (auto& funcPtr : m_PostRenderPtr)
+    {
+        if (funcPtr)
+        {
+            (this->*funcPtr)();
+        }
+    }
+}
+

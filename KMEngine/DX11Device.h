@@ -90,12 +90,16 @@ public:
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
 	void InitDefaultDepthStencil3();
 	void InitDisabledDepthStencil();
+	void EnableDepthStencil();
+	void DisableDepthStencil();
 	void InitRasterizerState();
 	//void InitOutlineDepthStencil();
 	void InitViewportFinal();
 	void CleanupDX11Device();
-
 	void Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+
+	void OnPreRender();
+	void OnPostRender();
 
 	/**
 	* Functional but WIP functions for initializing various game primitives
@@ -171,6 +175,9 @@ public:
 	float InterpMoveLoc{ 10.0f };
 
 	ID3D11ShaderResourceView* m_TextureRV2{ nullptr };
+
+	void (CDX11Device::*m_PreRenderPtr[5])() { nullptr };
+	void (CDX11Device::*m_PostRenderPtr[5])() { nullptr };
 
 public:
 	HWND m_Viewport{ };
