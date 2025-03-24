@@ -217,27 +217,34 @@ public:
 	ID3D11DepthStencilState* m_NullDepthStencilState{ nullptr };
 
 
-	/*
+	/***
 	* Default Depth Stencil
 	*/
+	D3D11_TEXTURE2D_DESC DefDepthDesc{ };
+	D3D11_DEPTH_STENCIL_VIEW_DESC DefDepthStencilViewDesc{ };
+	ID3D11DepthStencilView* pDefDepthStencilView{ nullptr };
+	D3D11_DEPTH_STENCIL_DESC DefDepthStencilDesc{ };
+	ID3D11DepthStencilState* pDefDepthStencilState{ nullptr };
+
+	/***
+	* Disabled Depth Stencil
+	*/
+
+	D3D11_DEPTH_STENCIL_DESC DisabledDepthDesc{ };
+	ID3D11DepthStencilState* pDisabledDepthStencilState{ nullptr };
+	ID3D11DepthStencilView* pDisabledDepthStencilView{ nullptr };
+
+
+
+
 
 	ID3D11Texture2D* pDefDepthStencil3{ nullptr };
-	D3D11_TEXTURE2D_DESC defDescDepth3{ };
-	ID3D11DepthStencilState* pDefDepthStencilState3{ nullptr };
-	ID3D11DepthStencilView* pDefDepthStencilView3{ nullptr };
-	D3D11_DEPTH_STENCIL_VIEW_DESC defDescDepthStencilViewDesc3{ };
-	D3D11_DEPTH_STENCIL_DESC defDepthStencilDesc3{ };
-
-
 	ID3D11DepthStencilState* pDepthStencilStateOutline{ };
 	D3D11_DEPTH_STENCIL_DESC OutlineDepthStencilDesc{ };
 
-	D3D11_DEPTH_STENCIL_VIEW_DESC defDescDepthStencilViewDesc{ };
-	ID3D11DepthStencilView* pDefDepthStencilView{ nullptr };
 
-	/**
-	* For InitShaders2()
-	*/
+
+
 	ID3D11InputLayout* m_VertexLayout2{ nullptr };
 	ID3D11Buffer* m_VertexBuffer2{ nullptr };
 	ID3D11Buffer* m_IndexBuffer2{ nullptr };

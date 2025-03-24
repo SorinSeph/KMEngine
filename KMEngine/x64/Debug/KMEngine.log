@@ -1,10 +1,7 @@
-﻿  DX11Device.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(106,10): warning C4101: 'rc': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1265,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2082,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2083,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2094,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2430,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2747,31): warning C4101: 'GeometryFactory': unreferenced local variable
+﻿  Renderer.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(60,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(198,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(197,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(210,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(209,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
   KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

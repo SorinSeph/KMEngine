@@ -81,7 +81,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
 
     m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
-    m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView3, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+    m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     //m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
     auto SceneEntityList = Scene.GetSceneList();
@@ -117,9 +117,18 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
 		//EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
 
+        if (SceneEntityIt.m_GameEntityTag != "Gizmo")
+        {
+            m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState, 0);
+        }
+        else
+        {
+            m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDisabledDepthStencilState, 0);
+        }
+
         for (auto& EntityComponent : EntityComponentVector)
         {
-            m_DX11Device.OnPreRender();
+            //m_DX11Device.OnPreRender();
             //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
             //{
             if (EntityComponent->m_TType.m_GameEntityTag == "FrustumComponent")
@@ -162,13 +171,13 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
                 EntityComponent->m_TType.m_DXResConfig.Execute();
 
-                //m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
+                
 
                 m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
                 m_DX11Device.m_pImmediateContext->DrawIndexed(512, 0, 0);
 
 
-                m_DX11Device.OnPostRender();
+                //m_DX11Device.OnPostRender();
             //}
         }
     }
