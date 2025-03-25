@@ -63,6 +63,9 @@
     <ClCompile Include="UIModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RightSubwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KMEngine.h">
@@ -84,9 +87,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DXResourcesConfig.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineInitializer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameEntity.h">
@@ -150,6 +150,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ViewportMessage.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RightSubwindow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsModule.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

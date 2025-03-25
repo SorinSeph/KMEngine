@@ -2,6 +2,8 @@
 #include <vector>
 #include <any>
 
+#define CORE_MODULE_COUNT 5
+
 class CBaseModule;
 
 class CMediator
@@ -16,6 +18,8 @@ public:
 	std::vector<CBaseModule*> m_Modules;
 
 	std::vector<std::any> m_ModuleVector;
+
+	CBaseModule *m_ModuleArray[CORE_MODULE_COUNT];
 };
 
 class CBaseModule

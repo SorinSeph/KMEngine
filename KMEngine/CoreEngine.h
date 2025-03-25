@@ -13,6 +13,7 @@
 #include "UIModule.h"
 //#include "ViewportWindow.h"
 #include "GraphicsModule.h"
+#include "PhysicsModule.h"
 #include "TerrainGenerator.h"
 
 //const wchar_t CLASS_NAME[] = L"KME Engine";
@@ -131,6 +132,7 @@ public:
         m_UIModule.Initialize(m_HInstance, m_NCmdShow);
 		Mediator.m_Modules.push_back(&m_UIModule);
 		Mediator.m_ModuleVector.push_back(&m_UIModule);
+		Mediator.m_ModuleArray[0] = &m_UIModule;
 
         m_GraphicsModule.SetMediator(Mediator);
         m_GraphicsModule.SetRenderer();
@@ -138,10 +140,14 @@ public:
 		m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
         Mediator.m_Modules.push_back(&m_GraphicsModule);
         Mediator.m_ModuleVector.push_back(&m_GraphicsModule);
+		Mediator.m_ModuleArray[1] = &m_GraphicsModule;
 
         m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
             GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
         }, m_GraphicsModule);
+
+        m_PhysicsModule.SetMediator(Mediator);
+        Mediator.m_ModuleArray[2] = &m_PhysicsModule;
 
         //m_Renderer.SetViewport(m_ViewportWindow.GetViewportHwnd());
         //m_Renderer.InitRenderer();
@@ -301,6 +307,7 @@ private:
     //std::unique_ptr<CMediator> m_Mediator;
     CUIModule m_UIModule;
     CGraphicsModule m_GraphicsModule;
+    CPhysicsModule m_PhysicsModule;
     CMediator Mediator;
 };
 

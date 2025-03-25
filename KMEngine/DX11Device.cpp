@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "GraphicsModule.h"
 #include "UIModule.h"
+#include "PhysicsModule.h"
 
 #define FLT_MAX          3.402823466e+38F
 
@@ -1603,7 +1604,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     D3D11_BUFFER_DESC BufferDescriptor{};
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 256;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * TempSimpleColorVertices.size();
     BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
 
@@ -1629,7 +1630,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     ID3D11Buffer* IndexBuffer{ nullptr };
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(WORD) * 2000;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.ByteWidth = sizeof(WORD) * TempSimpleColorIndices.size();        // 36 vertices needed for 12 triangles in a triangle list
     BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
     InitData.pSysMem = pSimpleColorIndices;
@@ -1707,7 +1708,40 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     m_PostRenderPtr[0] = &CDX11Device::EnableDepthStencil;
     //SScene.AddEntityToScene(GizmoComponent);
 
+	CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+    
+    //  !!
+    //  Temporary fix, must remember to change in CoreClock.cpp to accept function pointers and tick for the entire runtime 
+    //  !!
+
+    TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::SetGizmoTimer>(this, 0, 10000);
+
     return S_OK;
+}
+
+void CDX11Device::SetGizmoTimer()
+{
+    CLogger& SLogger = CLogger::GetLogger();
+
+	if (m_pRenderer)
+	{
+		CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pRenderer->m_pGraphicsModule->m_pMediator->m_ModuleArray[2]);
+
+        if (pPhysicsModule)
+        {
+            SLogger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule valid");
+        }
+        else 
+        {
+            SLogger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule NOT valid");
+        }
+
+        SLogger.Log("CDX11Device::SetGizmoTimer: m_pRenderer valid");
+	}
+    else
+    {
+        SLogger.Log("CDX11Device::SetGizmoTimer: m_pRenderer NOT valid");
+    }
 }
 
 HRESULT CDX11Device::AddGizmo()

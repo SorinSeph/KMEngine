@@ -2,80 +2,7 @@
 #include "ViewportMessage.h"
 #include "UIModule.h"
 #include "GraphicsModule.h"
-
-bool DoesRayIntersectOBB(
-    FXMVECTOR RayOrigin, 
-    FXMVECTOR RayDirection, 
-	XMFLOAT3 BoxCenter,
-    XMFLOAT3 BoxExtents,
-	XMFLOAT4 BoxOrientation,
-    float& Dist)
-{
-    static const XMVECTORU32 SelectY = { { { XM_SELECT_0, XM_SELECT_1, XM_SELECT_0, XM_SELECT_0 } } };
-    static const XMVECTORU32 SelectZ = { { { XM_SELECT_0, XM_SELECT_0, XM_SELECT_1, XM_SELECT_0 } } };
-
-    // Load the box.
-    XMVECTOR vCenter = XMLoadFloat3(&BoxCenter);
-    XMVECTOR vExtents = XMLoadFloat3(&BoxExtents);
-    XMVECTOR vOrientation = XMLoadFloat4(&BoxOrientation);
-
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
-
-    // Get the boxes normalized side directions.
-    XMMATRIX R = XMMatrixRotationQuaternion(vOrientation);
-
-    // Adjust ray origin to be relative to center of the box.
-    XMVECTOR TOrigin = XMVectorSubtract(vCenter, RayOrigin);
-
-    // Compute the dot product againt each axis of the box.
-    XMVECTOR AxisDotOrigin = XMVector3Dot(R.r[0], TOrigin);
-    AxisDotOrigin = XMVectorSelect(AxisDotOrigin, XMVector3Dot(R.r[1], TOrigin), SelectY);
-    AxisDotOrigin = XMVectorSelect(AxisDotOrigin, XMVector3Dot(R.r[2], TOrigin), SelectZ);
-
-    XMVECTOR AxisDotDirection = XMVector3Dot(R.r[0], RayDirection);
-    AxisDotDirection = XMVectorSelect(AxisDotDirection, XMVector3Dot(R.r[1], RayDirection), SelectY);
-    AxisDotDirection = XMVectorSelect(AxisDotDirection, XMVector3Dot(R.r[2], RayDirection), SelectZ);
-
-    // if (fabs(AxisDotDirection) <= Epsilon) the ray is nearly parallel to the slab.
-    XMVECTOR IsParallel = XMVectorLessOrEqual(XMVectorAbs(AxisDotDirection), g_RayEpsilon);
-
-    // Test against all three axes simultaneously.
-    XMVECTOR InverseAxisDotDirection = XMVectorReciprocal(AxisDotDirection);
-    XMVECTOR t1 = XMVectorMultiply(XMVectorSubtract(AxisDotOrigin, vExtents), InverseAxisDotDirection);
-    XMVECTOR t2 = XMVectorMultiply(XMVectorAdd(AxisDotOrigin, vExtents), InverseAxisDotDirection);
-
-    // Compute the max of min(t1,t2) and the min of max(t1,t2) ensuring we don't
-    // use the results from any directions parallel to the slab.
-    XMVECTOR t_min = XMVectorSelect(XMVectorMin(t1, t2), g_FltMin, IsParallel);
-    XMVECTOR t_max = XMVectorSelect(XMVectorMax(t1, t2), g_FltMax, IsParallel);
-
-    // t_min.x = maximum( t_min.x, t_min.y, t_min.z );
-    // t_max.x = minimum( t_max.x, t_max.y, t_max.z );
-    t_min = XMVectorMax(t_min, XMVectorSplatY(t_min));  // x = max(x,y)
-    t_min = XMVectorMax(t_min, XMVectorSplatZ(t_min));  // x = max(max(x,y),z)
-    t_max = XMVectorMin(t_max, XMVectorSplatY(t_max));  // x = min(x,y)
-    t_max = XMVectorMin(t_max, XMVectorSplatZ(t_max));  // x = min(min(x,y),z)
-
-    // if ( t_min > t_max ) return false;
-    XMVECTOR NoIntersection = XMVectorGreater(XMVectorSplatX(t_min), XMVectorSplatX(t_max));
-
-    // if ( t_max < 0.0f ) return false;
-    NoIntersection = XMVectorOrInt(NoIntersection, XMVectorLess(XMVectorSplatX(t_max), XMVectorZero()));
-
-    // if (IsParallel && (-Extents > AxisDotOrigin || Extents < AxisDotOrigin)) return false;
-    XMVECTOR ParallelOverlap = XMVectorInBounds(AxisDotOrigin, vExtents);
-    NoIntersection = XMVectorOrInt(NoIntersection, XMVectorAndCInt(IsParallel, ParallelOverlap));
-
-    if (!DirectX::Internal::XMVector3AnyTrue(NoIntersection))
-    {
-        // Store the x-component to *pDist
-        XMStoreFloat(&Dist, t_min);
-        return true;
-    }
-
-    Dist = 0.f;
-    return false;
-}
+#include "PhysicsModule.h"
 
 void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
 {		
@@ -145,7 +72,9 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
 
                 float fDist;
 
-                if (DoesRayIntersectOBB(
+				CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[2]);
+
+                if (pPhysicsModule->DoesRayIntersectOBB(
                     Origin,
                     Destination,
                     BoxCenter,
@@ -155,36 +84,52 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                 {
                     if (m_pUIModule->m_pMediator)
                     {
-                        try
-                        {
-							CGraphicsModule* GraphicsModule = nullptr;
+						CGraphicsModule* GraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
 
-                            for (auto ModuleIt : m_pUIModule->m_pMediator->m_ModuleVector)
-                            {
-                                if (ModuleIt.type() == typeid(CGraphicsModule*))
-                                {
-									GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
-									break;
-                                }
-                            }
-
-                            if (GraphicsModule)
-                            {
-								GraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(EntityComponent);
-								//GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
-                                //EntityComponent.SetScale(5.f, 5.f, 5.f);
-                                GraphicsModule->m_Renderer.TestGraphicsModuleLog();
-                                Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");
-                            }
-                            else
-                            {
-                                Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
-                            }
-                        }
-                        catch (const std::bad_any_cast& e)
+                        if (GraphicsModule)
                         {
-                            Logger.Log("ViewportMessage.cpp, SendToUIModule(): Bad any cast: ", e.what());
+                            GraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(EntityComponent);
+                            //GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
+                            //EntityComponent.SetScale(5.f, 5.f, 5.f);
+                            //GraphicsModule->m_Renderer.TestGraphicsModuleLog();
+                            Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");
                         }
+
+                        else
+                        {
+                             Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
+                        }
+
+       //                 try
+       //                 {
+							//CGraphicsModule* GraphicsModule = nullptr;
+
+       //                     for (auto ModuleIt : m_pUIModule->m_pMediator->m_ModuleVector)
+       //                     {
+       //                         if (ModuleIt.type() == typeid(CGraphicsModule*))
+       //                         {
+							//		GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
+							//		break;
+       //                         }
+       //                     }
+
+       //                     if (GraphicsModule)
+       //                     {
+							//	GraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(EntityComponent);
+							//	//GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
+       //                         //EntityComponent.SetScale(5.f, 5.f, 5.f);
+       //                         GraphicsModule->m_Renderer.TestGraphicsModuleLog();
+       //                         Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");
+       //                     }
+       //                     else
+       //                     {
+       //                         Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
+       //                     }
+       //                 }
+       //                 catch (const std::bad_any_cast& e)
+       //                 {
+       //                     Logger.Log("ViewportMessage.cpp, SendToUIModule(): Bad any cast: ", e.what());
+       //                 }
                     }
                     else
                     {

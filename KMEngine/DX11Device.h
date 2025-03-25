@@ -75,9 +75,6 @@ public:
 	}
 
 public:
-	/**
-	* Calls all of the init functions below
-	*/
 	HRESULT InitDX11Device();
 
 	void SetViewport(HWND InViewport);
@@ -101,10 +98,6 @@ public:
 	void OnPreRender();
 	void OnPostRender();
 
-	/**
-	* Functional but WIP functions for initializing various game primitives
-	*/
-
 	ContainmentType CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube);
 
 	HRESULT InitTexturedCube();
@@ -113,39 +106,20 @@ public:
 
 	HRESULT InitFrustum();
 
-	//HRESULT InitQuatCube();
-	/**
-	* Outline tests
-	*/
-
 	void InitCubeOutline();
 
 	void InitCubeOutline2();
 
 	void InitSingleCubeOutline();
 
-	/**
-	* WIP methods of DirectXCollision, to be implemented into their own file later
-	*/
-
 	void XM_CALLCONV CreateFrustumFromMatrix(_Out_ CFrustumComponent& Out, _In_ FXMMATRIX Projection, bool rhcoords = false) noexcept;
 
 	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
 
-	/**
-	* Recreation of the Intersects() (Ray + AAB) function in DirectXCollision.inl
-	*/
 	bool DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist);
-
-	/**
-	* Copies an entity and adds it to the scene list
-	*/
 
 	void CopyEntity(CGameEntity3D Entity);
 
-	/**
-	* Check the intersection of the raycast with the first cube
-	*/
 	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
 	HRESULT SpawnGizmo(const CGameEntity3D& SelectedEntity);
@@ -156,15 +130,13 @@ public:
 
 	UINT GetViewportHeight();
 
-	/**
-	* Temporary helper section of functions / variables
-	*/
-
 	CRenderer* m_pRenderer{ nullptr };
 
 	void SetRenderer(CRenderer* Renderer);
 
 	void InterpMoveEntity();
+
+	void SetGizmoTimer();
 
 	//CGameEntity3D CubeEntity;
 
@@ -217,7 +189,7 @@ public:
 	ID3D11DepthStencilState* m_NullDepthStencilState{ nullptr };
 
 
-	/***
+	/**
 	* Default Depth Stencil
 	*/
 	D3D11_TEXTURE2D_DESC DefDepthDesc{ };
@@ -226,7 +198,7 @@ public:
 	D3D11_DEPTH_STENCIL_DESC DefDepthStencilDesc{ };
 	ID3D11DepthStencilState* pDefDepthStencilState{ nullptr };
 
-	/***
+	/**
 	* Disabled Depth Stencil
 	*/
 
