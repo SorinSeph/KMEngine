@@ -1522,7 +1522,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    m_HR = CompileShaderFromFile(L"GizmoArrowShader.fxh", "VS", "vs_5_0", &pVSBlob);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
@@ -1568,7 +1568,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
-    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    m_HR = CompileShaderFromFile(L"GizmoArrowShader.fxh", "PS", "ps_5_0", &pPSBlob);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
@@ -1650,20 +1650,36 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     // Create the constant buffer
-    ID3D11Buffer* pConstantBuffer{ nullptr };
+
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.ByteWidth = sizeof(SArrowConstantBuffer);
     BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &pConstantBuffer);
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &m_pArrowConstantBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
-    auto ConstantBufferLambda = [=]() {
-        m_pImmediateContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
-    };
-    GizmoComponent.m_DXResConfig.SetConstantBuffer(pConstantBuffer);
-    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    //auto ConstantBufferLambda = [=]() {
+    //    m_pImmediateContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+    //};
+    //GizmoComponent.m_DXResConfig.SetConstantBuffer(pConstantBuffer);
+    //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+    // OLD constant buffer code
+    //ID3D11Buffer* pConstantBuffer{ nullptr };
+    //BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    //BufferDescriptor.ByteWidth = sizeof(SArrowConstantBuffer);
+    //BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    //BufferDescriptor.CPUAccessFlags = 0;
+    //m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &pConstantBuffer);
+    //if (FAILED(m_HR))
+    //    return m_HR;
+
+    //auto ConstantBufferLambda = [=]() {
+    //    m_pImmediateContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
+    //};
+    //GizmoComponent.m_DXResConfig.SetConstantBuffer(pConstantBuffer);
+    //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
     //auto DisableDepthStencilLambda = [=]() {
@@ -1721,26 +1737,95 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
 void CDX11Device::SetGizmoTimer()
 {
-    CLogger& SLogger = CLogger::GetLogger();
+    CLogger& Logger = CLogger::GetLogger();
 
 	if (m_pRenderer)
 	{
 		CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pRenderer->m_pGraphicsModule->m_pMediator->m_ModuleArray[2]);
+		CUIModule* pUIModule = static_cast<CUIModule*>(m_pRenderer->m_pGraphicsModule->m_pMediator->m_ModuleArray[0]);
+
+        if (pUIModule)
+        {
+			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            auto MouseX = ViewportMessage.m_MouseX;
+            auto MouseY = ViewportMessage.m_MouseY;
+
+			Logger.Log("CDX11Device::SetGizmoTimer: g_RaycastX2 = ", MouseX, ", g_RaycastY2 = ", MouseY, "\n");
+
+            float fDist;
+
+			XMMATRIX QuatMatrix = XMMatrixRotationRollPitchYaw(0, 0, 0);
+            XMFLOAT4 Orientation;
+            XMStoreFloat4(&Orientation, QuatMatrix.r[0]);
+
+            XMVECTOR Origin = XMVector3Unproject(
+                XMVECTOR{ 0, 0, 0 },
+                0,
+                0,
+                ViewportWidth,
+                ViewportHeight,
+                0,
+                1,
+                CDX11Device::m_ProjectionMatrix,
+                CDX11Device::m_ViewMatrix,
+                CDX11Device::m_WorldMatrix);
+
+            XMVECTOR Destination = XMVector3Unproject(
+                XMVECTOR{ (float)MouseX, (float)MouseY, 1 },
+                0,
+                0,
+                ViewportWidth,
+                ViewportHeight,
+                0,
+                1,
+                CDX11Device::m_ProjectionMatrix,
+                CDX11Device::m_ViewMatrix,
+                CDX11Device::m_WorldMatrix);
+
+            XMFLOAT3 BoxCenter{ -5.f, 0, 0 };
+            XMFLOAT3 BoxExtents{ 1.f, 1.f, 1.f};
+			XMFLOAT4 BoxOrientation{ Orientation };
+
+            //        FXMVECTOR RayOrigin, FXMVECTOR RayDirection, XMFLOAT3 BoxCenter,
+                //XMFLOAT3 BoxExtents, XMFLOAT4 BoxOrientation, float& Dist)
+            if (pPhysicsModule->DoesRayIntersectOBB(
+                Origin,
+				Destination,
+                BoxCenter,
+                BoxExtents,
+				BoxOrientation,
+                fDist
+            ))
+
+            {
+				//bGizmoHovered = 1;
+				Logger.Log("CDX11Device::SetGizmoTimer: Ray intersects OBB");
+            }
+            else
+            {
+				//bGizmoHovered = 0;
+                Logger.Log("CDX11Device::SetGizmoTimer: Ray DOES NOT intersects OBB");
+            }
+		}
+		else
+		{
+			Logger.Log("CDX11Device::SetGizmoTimer: pUIModule NOT valid");
+        }
 
         if (pPhysicsModule)
         {
-            SLogger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule valid");
+            Logger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule valid");
         }
         else 
         {
-            SLogger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule NOT valid");
+            Logger.Log("CDX11Device::SetGizmoTimer: pPhysicsModule NOT valid");
         }
 
-        SLogger.Log("CDX11Device::SetGizmoTimer: m_pRenderer valid");
+        Logger.Log("CDX11Device::SetGizmoTimer: m_pRenderer valid");
 	}
     else
     {
-        SLogger.Log("CDX11Device::SetGizmoTimer: m_pRenderer NOT valid");
+        Logger.Log("CDX11Device::SetGizmoTimer: m_pRenderer NOT valid");
     }
 }
 
@@ -1891,7 +1976,7 @@ HRESULT CDX11Device::AddGizmo()
     // Create the constant buffer
     ID3D11Buffer* pConstantBuffer{ nullptr };
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
-    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.ByteWidth = sizeof(SArrowConstantBuffer);
     BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
     m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &pConstantBuffer);
@@ -2452,8 +2537,9 @@ void CDX11Device::InterpMoveEntity()
         CB.mDoesFrustumContain = false;
     else if (CollisionType == ContainmentType::INTERSECTS)
         CB.mDoesFrustumContain = true;
-	else if (CollisionType == ContainmentType::CONTAINS)
+    else if (CollisionType == ContainmentType::CONTAINS)
         CB.mDoesFrustumContain = true;
+    
 
 	Logger.Log("InterpMoveCube Function, ContainmentType = ", CollisionType);
 }

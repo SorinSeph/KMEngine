@@ -83,9 +83,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             int mouseX = mousePos.x;
             int mouseY = mousePos.y;
 
-            //KMEngine_Log << "MouseX on click is: " << mouseX << "\n";
-            //KMEngine_Log << "MouseY on click is: " << mouseY << "\n";
-
             float mouseXUnprojected = ((2 * mouseX) / m_ViewportWidth - 1);
             float mouseYUnprojected = 1 - ((2 * mouseY) / m_ViewportHeight);
 
@@ -161,6 +158,26 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
 
             //KMEngine_Log << "Viewport rect.left + rect.right / 2 is: " << (rect.left + rect.right) / 2 << "\n";
             //KMEngine_Log << "Viewport rect.bottom / 2 is: " << rect.bottom / 2 << "\n";
+
+            POINT mousePos;
+            GetCursorPos(&mousePos);
+            ScreenToClient(hwnd, &mousePos);
+
+            int mouseX = mousePos.x;
+            int mouseY = mousePos.y;
+
+            float mouseXUnprojected = ((2 * mouseX) / m_ViewportWidth - 1);
+            float mouseYUnprojected = 1 - ((2 * mouseY) / m_ViewportHeight);
+
+			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+
+			ViewportMessage.m_MouseX = mouseX;
+			ViewportMessage.m_MouseY = mouseY;
+
+            g_RaycastX2 = mouseX;
+            g_RaycastY2 = mouseY;
+
+            Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\g_RaycastX2 = ", g_RaycastX2, "\g_RaycastY2 =", g_RaycastY2, "\n\n");
 
             return 0;
         }

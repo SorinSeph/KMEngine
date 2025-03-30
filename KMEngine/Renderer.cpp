@@ -40,9 +40,12 @@ CDX11Device* CRenderer::GetDX11Device()
 void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
     CScene& Scene = CScene::GetScene();
+    CLogger& Logger = CLogger::GetLogger();
 
     XMFLOAT3 CameraPos(EyeX, EyeY, EyeZ);
     XMVECTOR CameraVec = XMLoadFloat3(&CameraPos);
+
+	Logger.Log("CRenderer::Render: EyeX = ", EyeY, "EyeY = ", EyeY, "EyeZ = ", EyeZ, "\n");
 
     // To modify according to every object
 
@@ -93,17 +96,13 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 	m_CubeLocZ = FInterpConstantTo(m_CubeLocZ, 10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 2.0f);
 
-	for (auto SceneEntityIt : SceneEntityList)
+    for (auto SceneEntityIt : SceneEntityList)
     {
         if (SceneEntityIt.m_GameEntityTag == "TexturedCube")
         {
-			SceneEntityIt.SetLocationF(0.0f, 0.0f, m_CubeLocZ);
+            SceneEntityIt.SetLocationF(0.0f, 0.0f, m_CubeLocZ);
         }
     }
-
-    CLogger& Logger = CLogger::GetLogger();  
-
-    Logger.Log();
 
     /**
     * WIP Collision checking section, to be refactored into its own function
@@ -149,6 +148,25 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
             }
+            else if (EntityComponent->m_TType.m_GameEntityTag == "GizmoComponent")
+            {
+                SArrowConstantBuffer CB;// = EntityComponent->m_TType.GetConstantBuffer();
+				ID3D11Buffer* CB2 = m_DX11Device.m_pArrowConstantBuffer;
+                //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
+                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
+
+                CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
+
+                CB.mWorld = XMMatrixTranspose(CB.mWorld);
+                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+				CB.mIsHovered = m_DX11Device.bGizmoHovered;
+                m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
+
+				Logger.Log("Renderer.cpp, Render() : bGizmoHovered: ", m_DX11Device.bGizmoHovered);
+            }
             else 
             {
                 SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
@@ -165,7 +183,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-				Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);
+                Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);
             }
 
 

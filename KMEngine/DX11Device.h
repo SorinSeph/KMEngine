@@ -142,7 +142,18 @@ public:
 
 	//CGameEntity3DComponent CubeEntityComponent{ };
 
+	/**
+	* !!
+	* Temporary variables, needs refactoring
+	* !!
+	*/
+
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
+
+	ID3D11Buffer* m_pArrowConstantBuffer{ nullptr };
+	SArrowConstantBuffer m_ArrowConstantBuffer{ };
+
+	int bGizmoHovered{ false };
 
 	float InterpMoveLoc{ 10.0f };
 

@@ -1,37 +1,3 @@
-﻿  DX11Device.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(107,10): warning C4101: 'rc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1266,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1607,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1633,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2116,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2117,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2128,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2464,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2781,31): warning C4101: 'GeometryFactory': unreferenced local variable
-  KMEngine.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(71,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(71,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(75,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(75,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(139,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(139,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'KMEngine.cpp')
-  
-  ViewportMessage.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  Generating Code...
+﻿  compilation object save succeeded; see C:\Users\sefce\source\KMEngine\x64\Debug\GizmoArrowShader_PS.cso
+  compilation object save succeeded; see C:\Users\sefce\source\KMEngine\x64\Debug\GizmoArrowShader_VS.cso
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.

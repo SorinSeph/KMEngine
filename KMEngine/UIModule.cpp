@@ -121,9 +121,9 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     }
 
     CViewportWindow::SetViewportParentHWND(hwnd);
-    m_pViewportWindow->CreateViewport();
+    m_ViewportWindow.CreateViewport();
 
-    ViewportHwnd = m_pViewportWindow->GetViewportHwnd();
+    ViewportHwnd = m_ViewportWindow.GetViewportHwnd();
 
     m_RightSubwindow.CreateRightSubwindow(hwnd);
 	RightSubwindowHwnd = m_RightSubwindow.GetRightSubwindowHwnd();
@@ -152,14 +152,14 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     Rid[0].usUsagePage = 0x01;
     Rid[0].usUsage = 0x02;
     Rid[0].dwFlags = RIDEV_INPUTSINK;
-    Rid[0].hwndTarget = m_pViewportWindow->GetViewportHwnd();
+    Rid[0].hwndTarget = m_ViewportWindow.GetViewportHwnd();
     RegisterRawInputDevices(Rid, 1, sizeof(Rid[0]));
 
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
     RECT RectViewport;
-    GetClientRect(m_pViewportWindow->GetViewportHwnd(), &RectViewport);
+    GetClientRect(m_ViewportWindow.GetViewportHwnd(), &RectViewport);
     ViewportWidth = RectViewport.left + RectViewport.right;
     ViewportHeight = RectViewport.bottom;
 

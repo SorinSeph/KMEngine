@@ -1,0 +1,6 @@
+CRenderer constructor fromc:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp
+KMEngine.cpp, engine started
+
+CDX11Device::InitDisabledDepthStencil()
+CDX11Device::InitDX11Device(): m_pRenderer->m_pGraphicsModule is not null
+CDX11Device::InitDX11Device(): Lambda working

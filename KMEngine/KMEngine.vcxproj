@@ -183,6 +183,7 @@
     <None Include="FrustumShader.fxh" />
     <None Include="FrustumShader.ps" />
     <None Include="FrustumShader.vs" />
+    <None Include="GizmoArrowShader.fxh" />
     <None Include="solid_color.ps" />
     <None Include="solid_color.vs" />
     <None Include="texture.ps" />
@@ -198,6 +199,14 @@
     <Image Include="UV_Color_Grid.dds" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="GizmoArrowShader_PS.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="GizmoArrowShader_VS.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="TextureShader_PS.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PS</EntryPointName>
       <DisableOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DisableOptimizations>

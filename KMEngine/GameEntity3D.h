@@ -36,6 +36,7 @@ struct SArrowConstantBuffer
 	XMMATRIX mView;
 	XMMATRIX mProjection;
 	int mIsHovered;
+	int mPadding[3];
 };
 
 struct SCollisionComponent

@@ -12,10 +12,6 @@ const wchar_t CLASS_NAME[] = L"KME Engine";
 const wchar_t TOOLBAR_NAME[] = L"Toolbar";
 const wchar_t SIDETOOLBAR_NAME[] = L"SideToolbar";
 
-/**
-* To refactor window handles and procedures in their own class
-*/
-
 // Main windows procedures
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -43,11 +39,7 @@ public:
 
     void TestLog(int X, int Y);
 
-    //HWND ViewportHwnd;
-    //HWND RightToolbarHwnd;
-    //HWND LeftToolbarHwnd;
-
-    CViewportWindow* m_pViewportWindow{ };
+    CViewportWindow m_ViewportWindow{ };
     CRightSubwindow m_RightSubwindow{ };
 
     void SetOutlinerText();
@@ -60,9 +52,3 @@ public:
 };
 
 #endif
-
-//template <typename ...Args>
-//void CViewportMessage::Send(auto&& Ptr, Args&&... args)
-//{
-//    m_pUIModule->Notify(Ptr, args...);
-//}

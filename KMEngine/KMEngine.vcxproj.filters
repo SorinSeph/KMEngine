@@ -176,6 +176,7 @@
     <None Include="FrustumShader.vs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="GizmoArrowShader.fxh" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">
@@ -200,5 +201,7 @@
     <FxCompile Include="TextureShader_VS.hlsl">
       <Filter>Source Files</Filter>
     </FxCompile>
+    <FxCompile Include="GizmoArrowShader_PS.hlsl" />
+    <FxCompile Include="GizmoArrowShader_VS.hlsl" />
   </ItemGroup>
 </Project>

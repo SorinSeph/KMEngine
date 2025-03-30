@@ -16,6 +16,9 @@ static bool g_CanRaycast;
 static float g_RaycastX;
 static float g_RaycastY;
 
+static float g_RaycastX2;
+static float g_RaycastY2;
+
 const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
 
 static LPDIRECTINPUT8 _DirectInput;

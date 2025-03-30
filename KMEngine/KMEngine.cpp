@@ -140,9 +140,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     CCoreEngine CoreEngine(hInstance, nCmdShow);
     CCoreClock CoreClock;
-    CLogger& SLogger = CLogger::GetLogger();
+    CLogger& Logger = CLogger::GetLogger();
 
-    SLogger.Log("KMEngine.cpp, engine started\n");
+    Logger.Log("KMEngine.cpp, engine started\n");
 
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
     TimerManager.m_pCoreClock = &CoreClock;
@@ -183,13 +183,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
             Renderer->Render(X, Y, eyeX, eyeY, eyeZ);
 
-            SLogger.Log("KMEngine.cpp, wWinMain() \nTotalTime: ", CoreClock.GetFTotalTime(), "\n");
-            SLogger.Log("KMEngine.cpp, wWinMain() \n", "RotX = ", X, "\nRotY = ", Y, "\nEyeX = ", EyeX, "\nEyeY = ", EyeY, "\nEyeZ = ", EyeZ, "\n");
+            Logger.Log("KMEngine.cpp, wWinMain() \nTotalTime: ", CoreClock.GetFTotalTime(), "\n");
+            Logger.Log("KMEngine.cpp, wWinMain() \n", "RotX = ", X, "\nRotY = ", Y, "\nEyeX = ", EyeX, "\nEyeY = ", EyeY, "\nEyeZ = ", EyeZ, "\n");
 
             float RayX = CoreEngine.GetRaycastX();
             float RayY = CoreEngine.GetRaycastY();
 
-            SLogger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
+            Logger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
             //CoreEngine.RayCast(RayX, RayY);
 
             if (RayX && RayY)
@@ -203,7 +203,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
             for (auto SceneListIt : CScene::GetScene().GetSceneList())
             {
                 std::string EntityTag = SceneListIt.m_GameEntityTag;
-                SLogger.Log("Entity Tag at ", SceneListIndex, " is: ", EntityTag);
+                Logger.Log("Entity Tag at ", SceneListIndex, " is: ", EntityTag);
                 SceneListIndex++;
             }
 
