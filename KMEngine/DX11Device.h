@@ -263,6 +263,8 @@ public:
 	IDXGISwapChain* m_SwapChain{ nullptr };
 	IDXGISwapChain1* m_SwapChain1{ nullptr };
 
+	int m_YKeyPressed{ 0 };	
+
 private:
 	ID3D11Buffer* m_IndexBufferArray[3]{ };
 

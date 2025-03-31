@@ -410,6 +410,15 @@ void CViewportWindow::DetectKeyboardInput()
     {
         m_SpeedScale = 0.0001;
     }
+
+    if (keyboardState[DIK_Y] & 0x80)
+    {
+        m_YKeyPressed = 1;
+    }
+    else
+    {
+        m_YKeyPressed = 0;
+    }
 }
 
 HWND CViewportWindow::m_ParentHwnd{ };

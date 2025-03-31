@@ -1,3 +1,7 @@
-﻿  compilation object save succeeded; see C:\Users\sefce\source\KMEngine\x64\Debug\GizmoArrowShader_PS.cso
-  compilation object save succeeded; see C:\Users\sefce\source\KMEngine\x64\Debug\GizmoArrowShader_VS.cso
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+﻿  Renderer.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(63,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(216,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(215,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(228,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(227,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

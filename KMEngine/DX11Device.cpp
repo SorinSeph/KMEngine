@@ -1651,19 +1651,30 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     // Create the constant buffer
 
+
+    //ID3D11Buffer* TempConstantBuffer{ nullptr };
+    //bd.Usage = D3D11_USAGE_DEFAULT;
+    //bd.ByteWidth = sizeof(SCollisionBuffer);
+    //bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    //bd.CPUAccessFlags = 0;
+    //m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
+    //if (FAILED(m_HR))
+    //    return m_HR;
+
+	ID3D11Buffer* ArrowConstantBuffer{ nullptr };
     BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
     BufferDescriptor.ByteWidth = sizeof(SArrowConstantBuffer);
     BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     BufferDescriptor.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &m_pArrowConstantBuffer);
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &ArrowConstantBuffer);
     if (FAILED(m_HR))
         return m_HR;
 
-    //auto ConstantBufferLambda = [=]() {
-    //    m_pImmediateContext->VSSetConstantBuffers(0, 1, &pConstantBuffer);
-    //};
-    //GizmoComponent.m_DXResConfig.SetConstantBuffer(pConstantBuffer);
-    //GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &ArrowConstantBuffer);
+    };
+    GizmoComponent.m_DXResConfig.SetConstantBuffer(ArrowConstantBuffer);
+    GizmoComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
     // OLD constant buffer code
     //ID3D11Buffer* pConstantBuffer{ nullptr };
@@ -1752,6 +1763,17 @@ void CDX11Device::SetGizmoTimer()
 
 			Logger.Log("CDX11Device::SetGizmoTimer: g_RaycastX2 = ", MouseX, ", g_RaycastY2 = ", MouseY, "\n");
 
+            if (pUIModule->m_ViewportWindow.m_YKeyPressed)
+            {
+				this->m_YKeyPressed = true;
+				Logger.Log("CDX11Device::SetGizmoTimer: Y key pressed");
+            }
+            else
+            {
+                this->m_YKeyPressed = false;
+				Logger.Log("CDX11Device::SetGizmoTimer: Y key NOT pressed");
+            }
+
             float fDist;
 
 			XMMATRIX QuatMatrix = XMMatrixRotationRollPitchYaw(0, 0, 0);
@@ -1798,12 +1820,12 @@ void CDX11Device::SetGizmoTimer()
             ))
 
             {
-				//bGizmoHovered = 1;
+				bGizmoHovered = 1;
 				Logger.Log("CDX11Device::SetGizmoTimer: Ray intersects OBB");
             }
             else
             {
-				//bGizmoHovered = 0;
+				bGizmoHovered = 0;
                 Logger.Log("CDX11Device::SetGizmoTimer: Ray DOES NOT intersects OBB");
             }
 		}

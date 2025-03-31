@@ -151,7 +151,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
             else if (EntityComponent->m_TType.m_GameEntityTag == "GizmoComponent")
             {
                 SArrowConstantBuffer CB;// = EntityComponent->m_TType.GetConstantBuffer();
-				ID3D11Buffer* CB2 = m_DX11Device.m_pArrowConstantBuffer;
+                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
                 auto LocationMatrix = EntityComponent->m_TType.GetLocation();
                 auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;

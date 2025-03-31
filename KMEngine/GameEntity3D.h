@@ -136,6 +136,7 @@ public:
 
 	XMMATRIX m_QuatRotationMatrix;
 	SCollisionBuffer m_CollisionBuffer;
+	SArrowConstantBuffer m_ArrowConstantBuffer;
 
 protected:
 	//SceneGraph<CGameEntity3DComponent*> m_SceneGraph;

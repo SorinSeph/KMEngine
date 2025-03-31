@@ -77,6 +77,8 @@ public:
 
 	static HWND m_ViewportHwnd;
 
+	int m_YKeyPressed;
+
 private:
 
 	float ConvertToRadians(float Degrees);
