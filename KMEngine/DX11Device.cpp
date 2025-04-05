@@ -48,18 +48,12 @@ HRESULT CDX11Device::InitDX11Device()
     InitDisabledDepthStencil();
     InitDefaultDepthStencil3();
     InitRasterizerState();
-    //InitBaseCube();
 
-    InitTexturedCube();
+
     InitFrustum();
     InitSolidColorCube();
-
-    //AddGizmo();
-    //InitRaycast(0, 0, 0, 100, 2, 3);
-    //InterpMoveCube();InitTexturedCube2
-    //AddTestLine2();
-    //GenerateTerrain();
-    //AddTestLine3();
+    InitSingleCubeOutline();
+    InitTexturedCube();
 
 
     if (m_pRenderer)
@@ -286,9 +280,6 @@ void CDX11Device::InitDefaultDepthStencil3()
         return;
     }
 
-
-
-
     // Bind the depth stencil view
     m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
         &m_pRenderTargetView,      // Render target view, created earlier
@@ -334,17 +325,105 @@ void CDX11Device::InitDisabledDepthStencil()
         return;
     }
 
-
-
-
     // Bind the depth stencil view
     m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
         &m_pRenderTargetView,      // Render target view, created earlier
         pDisabledDepthStencilView);     // Depth stencil view for the render target
 
 
-    m_pImmediateContext->OMSetDepthStencilState(pDisabledDepthStencilState, 0);
+    //m_pImmediateContext->OMSetDepthStencilState(pDisabledDepthStencilState, 0);
 }
+
+void CDX11Device::InitOutlineDepthStencil()
+{
+    CLogger& Logger = CLogger::GetLogger();
+
+    Logger.Log("CDX11Device::InitDisabledDepthStencil()");
+
+    // Configure the depth stencil state for outlining
+    OutlineDepthStencilDesc.DepthEnable = true;
+    OutlineDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    OutlineDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+
+    OutlineDepthStencilDesc.StencilEnable = true;
+    OutlineDepthStencilDesc.StencilReadMask = 0xFF;
+    OutlineDepthStencilDesc.StencilWriteMask = 0xFF;
+
+    // Front face stencil operations
+    OutlineDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+
+    // Back face stencil operations
+    OutlineDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    OutlineDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
+
+    // Create depth stencil state
+    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pOutlineDepthStencilState);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+        return;
+    }
+
+    // Bind the depth stencil view
+    m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
+        &m_pRenderTargetView,      // Render target view, created earlier
+        pOutlineDepthStencilView);     // Depth stencil view for the render target
+
+    m_pImmediateContext->OMSetDepthStencilState(pOutlineDepthStencilState, 0);
+}
+
+//void CDX11Device::InitDisabledDepthStencil()
+//{
+//    CLogger& Logger = CLogger::GetLogger();
+//
+//    Logger.Log("CDX11Device::InitDisabledDepthStencil()");
+//
+//    // Depth test parameters
+//    DisabledDepthDesc.DepthEnable = true;
+//    DisabledDepthDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+//    DisabledDepthDesc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+//
+//    // Stencil test parameters
+//    DisabledDepthDesc.StencilEnable = true;
+//    DisabledDepthDesc.StencilReadMask = 0xFF;
+//    DisabledDepthDesc.StencilWriteMask = 0xFF;
+//
+//    // Stencil operations if pixel is front-facing
+//    DisabledDepthDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+//    DisabledDepthDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+//    DisabledDepthDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+//    DisabledDepthDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+//
+//    // Stencil operations if pixel is back-facing
+//    DisabledDepthDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+//    DisabledDepthDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+//    DisabledDepthDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+//    DisabledDepthDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+//
+//    // Create depth stencil state
+//    m_pD3D11Device->CreateDepthStencilState(&DisabledDepthDesc, &pDisabledDepthStencilState);
+//    if (FAILED(m_HR))
+//    {
+//        MessageBox(nullptr, L"Failed to initialize depth stencil state", L"Error", MB_OK);
+//        return;
+//    }
+//
+//
+//
+//
+//    // Bind the depth stencil view
+//    m_pImmediateContext->OMSetRenderTargets(1,          // One rendertarget view
+//        &m_pRenderTargetView,      // Render target view, created earlier
+//        pDisabledDepthStencilView);     // Depth stencil view for the render target
+//
+//
+//    m_pImmediateContext->OMSetDepthStencilState(pDisabledDepthStencilState, 0);
+//}
 
 void CDX11Device::EnableDepthStencil()
 {
@@ -420,7 +499,7 @@ void CDX11Device::InitCubeOutline()
 
     //hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
 
-    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
+    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pOutlineDepthStencilState);
 
     // Compile the vertex shader
     ID3D11VertexShader* VertexShader{ nullptr };
@@ -715,7 +794,7 @@ void CDX11Device::InitCubeOutline2()
 
     //hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
 
-    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
+    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pOutlineDepthStencilState);
 
     // Compile the vertex shader
     ID3DBlob* pVSBlob = nullptr;
@@ -902,70 +981,82 @@ void CDX11Device::InitCubeOutline2()
 
 void CDX11Device::InitSingleCubeOutline()
 {
+    //CScene& SScene = CScene::GetScene();
+    //CPrimitiveGeometryFactory GeometryFactory;
+
+    //CGameEntity3D CubeOutlineEntity{ };
+    //CubeOutlineEntity.m_GameEntityTag = "TexturedCube";
+    //CubeOutlineEntity.m_GameEntityType = EGameEntityType::Cube;
+
+    //CGameEntity3DComponent CubeOutlineComponent;
+    //CubeOutlineComponent.m_GameEntityTag = "TexturedCubeComponent";
+    //CubeOutlineComponent.SetLocationF(-5.f, 0.0f, 0.0f);
+    //CubeOutlineComponent.SetScale(0.30f, 0.30f, 0.30f);
+    ////m_GameEntityList.push_back(m_CubeEntity);
+    ////SScene.AddEntityToScene(m_CubeOutlineEntity);
+
+    //// Create the depth stencil outline
+    //OutlineDepthStencilDesc.DepthEnable = true;
+    //OutlineDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+    //OutlineDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+
+    //OutlineDepthStencilDesc.StencilEnable = true;
+    //OutlineDepthStencilDesc.StencilReadMask = 0xFF;
+    //OutlineDepthStencilDesc.StencilWriteMask = 0xFF;
+
+    //// It does not matter what we write since we are not using the values after this step.
+    //// In other words, we are only using the values to mask pixels.
+    //OutlineDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    //OutlineDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    //OutlineDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    //// The stencil test passes if the passed parameter is equal to value in the buffer.
+    //OutlineDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
+
+    //// Again, we do not care about back-facing pixels.
+    //OutlineDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+    //OutlineDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+    //OutlineDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+    //OutlineDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
+
+	// Original Outline Depth Stencil ends here
+
+
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
-    CGameEntity3D m_CubeOutlineEntity{ };
 
-    m_CubeOutlineEntity = GeometryFactory.CreateEntity3D(EPrimitiveGeometryType::CubeTest);
-    m_CubeOutlineEntity.SetLocationF(3.0f, 0.0f, 0.0f);
-    m_CubeOutlineEntity.SetScale(1.02f, 1.02f, 1.02f);
-    m_CubeOutlineEntity.m_GameEntityTag = "Outline";
-    m_CubeOutlineEntity.PhysicalMesh.SetStride(sizeof(SSimpleColorVertex));
-    //m_GameEntityList.push_back(m_CubeEntity);
-    //SScene.AddEntityToScene(m_CubeOutlineEntity);
 
-    // Create the depth stencil outline
-    OutlineDepthStencilDesc.DepthEnable = true;
-    OutlineDepthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-    OutlineDepthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+    CGameEntity3DComponent OutlineCubeEntity;
+    OutlineCubeEntity.m_GameEntityTag = "OutlineCubeEntity";
+    OutlineCubeEntity.m_GameEntityType = EGameEntityType::Cube;
 
-    OutlineDepthStencilDesc.StencilEnable = true;
-    OutlineDepthStencilDesc.StencilReadMask = 0xFF;
-    OutlineDepthStencilDesc.StencilWriteMask = 0xFF;
+    CGameEntity3DComponent OutlineCubeComponent;
+    OutlineCubeComponent.m_GameEntityTag = "OutlineCubeComponent";
+    OutlineCubeComponent.SetLocationF(-5.f, 0.0f, 0.0f);
+    OutlineCubeComponent.SetScale(0.30f, 0.30f, 0.30f);
 
-    // It does not matter what we write since we are not using the values after this step.
-    // In other words, we are only using the values to mask pixels.
-    OutlineDepthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    OutlineDepthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    OutlineDepthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    // The stencil test passes if the passed parameter is equal to value in the buffer.
-    OutlineDepthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_EQUAL;
-
-    // Again, we do not care about back-facing pixels.
-    OutlineDepthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-    OutlineDepthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-    OutlineDepthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-    OutlineDepthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_NEVER;
-
-    //hr = g_pd3dDevice->CreateDepthStencilState(&g_DepthStencilDesc, &g_pDepthStencilOutlineState);
-
-    m_pD3D11Device->CreateDepthStencilState(&OutlineDepthStencilDesc, &pDepthStencilStateOutline);
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 
     // Compile the vertex shader
-    ID3D11VertexShader* VertexShader{ nullptr };
-
     ID3DBlob* pVSBlob = nullptr;
-    // hr = CompileShaderFromFile(L"Tutorial04.fxh", "VS", "vs_4_0", &pVSBlob);
-    m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.vs", "VS", "vs_5_0", &pVSBlob);
-
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
     if (FAILED(m_HR))
     {
-        MessageBox(nullptr,
-            L"The VS file cannot be compiled.", L"Error", MB_OK);
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
         return;
     }
 
     // Create the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
     m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
-
     if (FAILED(m_HR))
     {
         pVSBlob->Release();
         return;
     }
-
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexShader(VertexShader);
-    //SScene.SetVertexShader(SceneLoc, m_VertexShader2);
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+    };
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
 
     // Define the input layout
     D3D11_INPUT_ELEMENT_DESC layout[] =
@@ -976,134 +1067,230 @@ void CDX11Device::InitSingleCubeOutline()
     UINT numElements = ARRAYSIZE(layout);
 
     // Create the input layout
-    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &m_VertexLayout2);
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
     pVSBlob->Release();
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize input layout", L"Error", MB_OK);
         return;
-    }
-
-    m_CubeOutlineEntity.m_DXResConfig.SetInputLayout(m_VertexLayout2);
-    //SScene.SetInputLayout(SceneLoc, m_VertexLayout2);
 
     // Set the input layout
-    //m_ImmediateContext->IASetInputLayout(m_VertexLayout);
+    //m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
 
     // Compile the pixel shader
     ID3DBlob* pPSBlob = nullptr;
-    //hr = CompileShaderFromFile(L"Tutorial04.fxh", "PS", "ps_4_0", &pPSBlob);
-    m_HR = CompileShaderFromFile(L"C:/Users/sefce/source/repos/KMEngine/KMEngine/solid_color.ps", "PS", "ps_5_0", &pPSBlob);
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
     if (FAILED(m_HR))
     {
-
-        MessageBox(nullptr, L"The PS file cannot be compiled.", L"Error", MB_OK);
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
         return;
     }
 
     // Create the pixel shader
-    ID3D11PixelShader* m_PixelShader2{ nullptr };
-
-    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &m_PixelShader2);
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
     pPSBlob->Release();
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to create pixel shader", L"Error", MB_OK);
         return;
-    }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetPixelShader(m_PixelShader2);
-    //SScene.SetPixelShader(SceneLoc, m_PixelShader2);
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
 
-    D3D11_BUFFER_DESC bd{};
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SSimpleColorVertex) * 24;
-    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    bd.CPUAccessFlags = 0;
+    // Create vertex buffer
+    //Simple_Color_Vertex vertices[] =
+    //{
+    //    { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },
+    //    { XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+    //    { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) },
+    //};
 
+    SSimpleColorVertex vertices[] =
+    {
+        { XMFLOAT3(-1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },   // V0
+        { XMFLOAT3(1.f,  1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },    //V3
+        { XMFLOAT3(1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },    // V2
+        { XMFLOAT3(-1.f, -1.f,  1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },   // V1
+        { XMFLOAT3(-1.f,  1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },   //V4
+        { XMFLOAT3(1.f,  1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },   //V5
+        { XMFLOAT3(1.f,  -1.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },  //V7
+        { XMFLOAT3(-1.f,  -1.f, -1.f), XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },  //V6
+
+
+
+
+
+
+
+
+
+
+        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f),XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+        //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+
+        //{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },
+        //{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) }
+    };
+
+    D3D11_BUFFER_DESC BufferDescriptor{};
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 24;
+    BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
     D3D11_SUBRESOURCE_DATA InitData{};
-
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_VertexBuffer2);
+    InitData.pSysMem = vertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize vertex buffer", L"Error", MB_OK);
         return;
-    }
 
     // Set vertex buffer
     UINT stride = sizeof(SSimpleColorVertex);
     UINT offset = 0;
-    //m_ImmediateContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
 
-    m_CubeOutlineEntity.m_DXResConfig.SetVertexBuffer(m_VertexBuffer2);
-    //SScene.SetVertexbuffer(SceneLoc, m_VertexBuffer2);
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
 
-    // Pyramid indices,
-    WORD indices[] =
+
+    // Create index buffer
+    WORD Indices[] =
     {
-        3,1,0,
-        2,1,3,
+        0, 1, 2,
+        0, 2, 3,
 
-        6,4,5,
-        7,4,6,
+        4, 5, 6,
+        4, 6, 7,
 
-        11,9,8,
-        10,9,11,
+        0, 4, 5,
+        0, 5, 1,
 
-        14,12,13,
-        15,12,14,
+        1, 5, 6,
+        1, 6, 2,
 
-        19,17,16,
-        18,17,19,
+        2, 6, 7,
+        2, 7, 3,
 
-        22,20,21,
-        23,20,22
-
+        3, 7, 4,
+        3, 4, 0,
     };
 
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
-    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    bd.CPUAccessFlags = 0;
-    InitData.pSysMem = indices;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &m_IndexBuffer2);
+    ID3D11Buffer* IndexBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
+    BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    InitData.pSysMem = Indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &IndexBuffer);
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize index buffer", L"Error", MB_OK);
         return;
-    }
-
-    m_CubeOutlineEntity.m_DXResConfig.SetIndexBuffer(m_IndexBuffer2, DXGI_FORMAT_R16_UINT, 0);
-    //SScene.SetIndexbuffer(SceneLoc, m_IndexBuffer2, DXGI_FORMAT_R16_UINT, 0);
 
     // Set index buffer
-    //m_ImmediateContext->IASetIndexBuffer(m_IndexBufferArray[0], DXGI_FORMAT_R16_UINT, 0);
+    m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     // Create the constant buffer
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(SConstantBuffer);
-    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    bd.CPUAccessFlags = 0;
-    m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &m_ConstantBuffer2);
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize constant buffer", L"Error", MB_OK);
         return;
-    }
 
-    m_CubeOutlineEntity.m_DXResConfig.SetConstantBuffer(m_ConstantBuffer2);
-    //SScene.SetConstantBuffer(SceneLoc, m_ConstantBuffer2);
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    OutlineCubeComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
-    const wchar_t* TextureName = L"UV_Color_Grid.dds";
-    m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureRV2);
-    if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
-        return;
-    }
 
-    D3D11_SAMPLER_DESC sampDesc{};
-    ZeroMemory(&sampDesc, sizeof(sampDesc));
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+    //auto TextureLambda = [=]() {
+    //    m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
+    //};
+    //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+
+    auto RasterizerStateLambda = [=]() {
+        ID3D11RasterizerState* RasterizerState{ nullptr };
+        D3D11_RASTERIZER_DESC RasterDesc = {};
+        RasterDesc.FillMode = D3D11_FILL_SOLID;
+        RasterDesc.CullMode = D3D11_CULL_NONE;
+        RasterDesc.FrontCounterClockwise = false;
+        RasterDesc.DepthBias = 0;
+        RasterDesc.DepthBiasClamp = 0.0f;
+        RasterDesc.SlopeScaledDepthBias = 0.0f;
+        RasterDesc.DepthClipEnable = true;
+        RasterDesc.ScissorEnable = false;
+        RasterDesc.MultisampleEnable = false;
+        RasterDesc.AntialiasedLineEnable = false;
+
+        m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &RasterizerState);
+        if (FAILED(m_HR))
+        {
+            MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+            return;
+        }
+
+        m_pImmediateContext->RSSetState(RasterizerState);
+    };
+
+    OutlineCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
+
+
+    D3D11_SAMPLER_DESC sampDesc = {};
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
     sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -1113,17 +1300,40 @@ void CDX11Device::InitSingleCubeOutline()
     sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
     m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
     if (FAILED(m_HR))
-    {
-        MessageBox(nullptr, L"Failed to initialize sampler desc", L"Error", MB_OK);
         return;
-    }
 
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
-    m_WorldMatrix = XMMatrixIdentity();
+    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    CubeComponentNode->m_TType = OutlineCubeComponent;
 
-    //SceneLoc++;
+    OutlineCubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
-    m_UnrenderedList.push_back(m_CubeOutlineEntity);
+    TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 30.0f);
+
+
+
+    SScene.AddEntityToScene(OutlineCubeEntity);
+    //SScene.AddEntityToScene(CubeEntityComponent);
+
+    //D3D11_RASTERIZER_DESC RasterDesc = {};
+    //RasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+    //RasterDesc.CullMode = D3D11_CULL_NONE;
+    //RasterDesc.FrontCounterClockwise = false;
+    //RasterDesc.DepthBias = 0;
+    //RasterDesc.DepthBiasClamp = 0.0f;
+    //RasterDesc.SlopeScaledDepthBias = 0.0f;
+    //RasterDesc.DepthClipEnable = true;
+    //RasterDesc.ScissorEnable = false;
+    //RasterDesc.MultisampleEnable = false;
+    //RasterDesc.AntialiasedLineEnable = false;
+
+    //m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &m_RasterizerState);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+
+
 }
 
 
@@ -1497,7 +1707,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     // End of body of InitDisabledDepthStencil
 
-    m_PreRenderPtr[0] = &CDX11Device::DisableDepthStencil;
+    //m_PreRenderPtr[0] = &CDX11Device::DisableDepthStencil;
 
     CScene& SScene = CScene::GetScene();
     CPrimitiveGeometryFactory GeometryFactory;
@@ -1732,7 +1942,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
     SScene.AddEntityToScene(GizmoEntity);
 
-    m_PostRenderPtr[0] = &CDX11Device::EnableDepthStencil;
+    //m_PostRenderPtr[0] = &CDX11Device::EnableDepthStencil;
     //SScene.AddEntityToScene(GizmoComponent);
 
 	CTimerManager& TimerManager = CTimerManager::GetTimerManager();
@@ -2621,7 +2831,7 @@ HRESULT CDX11Device::InitSolidColorCube()
         return m_HR;
 
     // Set the input layout
-    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    //m_pImmediateContext->IASetInputLayout(TempVertexLayout);
 
     auto InputLayoutLambda = [=]() {
         m_pImmediateContext->IASetInputLayout(TempVertexLayout);

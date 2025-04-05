@@ -1,7 +1,23 @@
-﻿  Renderer.cpp
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(63,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(216,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(215,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(228,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(227,9): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
-  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+﻿  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(71,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(71,51): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(75,61): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(75,56): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(139,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\CoreEngine.h(139,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

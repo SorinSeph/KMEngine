@@ -87,6 +87,7 @@ public:
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
 	void InitDefaultDepthStencil3();
 	void InitDisabledDepthStencil();
+	void InitOutlineDepthStencil();
 	void EnableDepthStencil();
 	void DisableDepthStencil();
 	void InitRasterizerState();
@@ -217,13 +218,14 @@ public:
 	ID3D11DepthStencilState* pDisabledDepthStencilState{ nullptr };
 	ID3D11DepthStencilView* pDisabledDepthStencilView{ nullptr };
 
-
-
-
+	/**
+	* Outline Depth Stencil
+	*/
 
 	ID3D11Texture2D* pDefDepthStencil3{ nullptr };
-	ID3D11DepthStencilState* pDepthStencilStateOutline{ };
+	ID3D11DepthStencilState* pOutlineDepthStencilState{ };
 	D3D11_DEPTH_STENCIL_DESC OutlineDepthStencilDesc{ };
+	ID3D11DepthStencilView* pOutlineDepthStencilView{ nullptr };
 
 
 

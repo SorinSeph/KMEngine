@@ -116,13 +116,17 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
 		//EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
 
-        if (SceneEntityIt.m_GameEntityTag != "Gizmo")
-        {
-            m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState, 0);
-        }
-        else
+        if (SceneEntityIt.m_GameEntityTag == "Gizmo" || "OutlineCubeEntity")
         {
             m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDisabledDepthStencilState, 0);
+        }
+        //else if (SceneEntityIt.m_GameEntityTag == "OutlineCubeEntity")
+        //{
+        //    m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pOutlineDepthStencilState, 0);
+        //}
+        else
+        {
+            m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState, 0);
         }
 
         for (auto& EntityComponent : EntityComponentVector)

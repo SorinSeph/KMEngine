@@ -38,31 +38,7 @@ using namespace std;
 HWND                            g_hWnd = nullptr;
 LPDIRECTINPUT8                  g_DirectInput;
 IDirectInputDevice8*            g_DIKeyboard;
-XMMATRIX                        g_World;
-XMMATRIX                        g_View;
-XMMATRIX                        g_Projection;
-Cube                            g_Cube;
-Cube                            g_ObstacleCube;
-Cube                            g_PositionTestCube;
-CGameEntity3D                   g_CubeEntity;
-CGameEntity3D                   g_CubeEntity2;
-
-// Pointer inits
-//ID3D11Buffer* g_pIndexBuffer = nullptr;
-
-// Array inits
-ID3D11Buffer* g_aIndexBuffer[2] = {};
-
-
 HRESULT g_hr = S_OK;
-
-std::vector<CGameEntity3D> m_GameEntityList;
-
-//bool bClipCursor = false;
-
-//HWND ViewportHwnd;
-//HWND SideToolbarHwnd;
-//HWND ToolbarHwnd;
 
 float rot = 0.01f;
 float rotx = 0;
