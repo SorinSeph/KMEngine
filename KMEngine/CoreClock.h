@@ -101,6 +101,30 @@ public:
 	MemFnPtr m_FuncPtr;
 };
 
+template <typename TClass, typename TReturnType, typename... TArgs>
+class CTimer3 : public CBaseTimer
+{
+public:
+	using FnPtr = TReturnType(TClass::*)(TArgs...);
+
+	CTimer3(TClass* Class, FnPtr Ptr, TArgs... args)
+		: m_ClassType(Class), m_FnPtr(Ptr), m_Args(std::make_tuple(args...))
+	{
+	}
+
+	void Execute()
+	{
+		std::apply([this](TArgs... unpackedArgs) {
+			(m_ClassType->*m_FnPtr)(unpackedArgs...);
+		}, m_Args);
+	}
+
+private:
+	TClass* m_ClassType;
+	FnPtr m_FnPtr;
+	std::tuple<TArgs...> m_Args;
+};
+
 template <typename TClass, typename TReturnType, typename TArg, typename TReturnType(TClass::* TPtr)(TArg)>
 class CTimerParam : public CBaseTimer
 {

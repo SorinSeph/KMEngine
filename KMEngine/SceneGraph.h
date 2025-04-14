@@ -22,13 +22,13 @@ public:
 		: m_pRootNode{ InRoot }
 	{}
 
-	CSceneGraph(const CSceneGraph& SceneGraphCopy)
+	/*CSceneGraph(const CSceneGraph& SceneGraphCopy)
 	{
 		if (SceneGraphCopy.m_pRootNode)
 			m_pRootNode = new CSceneGraphNode<T>(*SceneGraphCopy.m_pRootNode);
 		else
 			m_pRootNode = nullptr;
-	}
+	}*/
 
 	void SetRoot(CSceneGraphNode<T>* InRoot)
 	{

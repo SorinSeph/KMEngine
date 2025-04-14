@@ -87,22 +87,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     //m_DX11Device.m_pImmediateContext->OMSetDepthStencilState(m_DX11Device.pDefDepthStencilState3, 0);
 
-    auto SceneEntityList = Scene.GetSceneList();
-
-    /**
-    * Render loop
-    */
-
-    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-	m_CubeLocZ = FInterpConstantTo(m_CubeLocZ, 10.0f, TimerManager.m_pCoreClock->GetFDeltaTime(), 2.0f);
-
-    for (auto SceneEntityIt : SceneEntityList)
-    {
-        if (SceneEntityIt.m_GameEntityTag == "TexturedCube")
-        {
-            SceneEntityIt.SetLocationF(0.0f, 0.0f, m_CubeLocZ);
-        }
-    }
+    auto& SceneEntityList = Scene.GetSceneList();
 
     /**
     * WIP Collision checking section, to be refactored into its own function

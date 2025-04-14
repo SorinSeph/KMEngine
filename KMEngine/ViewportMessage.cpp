@@ -99,48 +99,13 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                         {
                              Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
                         }
-
-       //                 try
-       //                 {
-							//CGraphicsModule* GraphicsModule = nullptr;
-
-       //                     for (auto ModuleIt : m_pUIModule->m_pMediator->m_ModuleVector)
-       //                     {
-       //                         if (ModuleIt.type() == typeid(CGraphicsModule*))
-       //                         {
-							//		GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
-							//		break;
-       //                         }
-       //                     }
-
-       //                     if (GraphicsModule)
-       //                     {
-							//	GraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(EntityComponent);
-							//	//GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
-       //                         //EntityComponent.SetScale(5.f, 5.f, 5.f);
-       //                         GraphicsModule->m_Renderer.TestGraphicsModuleLog();
-       //                         Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule succeeded");
-       //                     }
-       //                     else
-       //                     {
-       //                         Logger.Log("ViewportMessage.cpp, SendToUIModule(): Cast to GraphicsModule failed");
-       //                     }
-       //                 }
-       //                 catch (const std::bad_any_cast& e)
-       //                 {
-       //                     Logger.Log("ViewportMessage.cpp, SendToUIModule(): Bad any cast: ", e.what());
-       //                 }
                     }
                     else
                     {
 			            Logger.Log("ViewportMessage.cpp, SendToUIModule(): Pointer to Mediator in UI Module is null");
                     }
-					MessageBox(nullptr, L"Ray intersects OBB", L"Message", MB_OK);
 				}
-                else
-                {
-                    MessageBox(nullptr, L"Ray does not intersect OBB", L"Message", MB_OK);
-                }
+
 
 
                 //auto LocationMatrix = EntityComponent->m_TType.GetLocation();
