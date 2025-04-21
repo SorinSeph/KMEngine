@@ -152,7 +152,7 @@ public:
 	ID3D11Buffer* m_pArrowConstantBuffer{ nullptr };
 	SArrowConstantBuffer m_ArrowConstantBuffer{ };
 
-	int bGizmoHovered{ false };
+	int m_bGizmoHovered{ false };
 
 	float InterpMoveLoc{ 10.0f };
 

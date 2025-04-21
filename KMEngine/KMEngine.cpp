@@ -136,6 +136,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         return 0;
     }
 
+	CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+	float* pMouseX = &ViewportMessage.m_MouseX;
+	float& MouseX = ViewportMessage.m_MouseX;
+
     CoreClock.Reset();
 
     MSG Msg = { 0 };
@@ -148,6 +152,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         }
         else
         {
+            Logger.Log("KMEngine.cpp, wWinMain: mouse x is: ", MouseX);
             CoreClock.Tick();
             CoreClock.EngineTick();
             CoreEngine.DetectInput();

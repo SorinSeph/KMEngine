@@ -151,10 +151,10 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
-				CB.mIsHovered = m_DX11Device.bGizmoHovered;
+				CB.mIsHovered = m_DX11Device.m_bGizmoHovered;
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-				Logger.Log("Renderer.cpp, Render() : bGizmoHovered: ", m_DX11Device.bGizmoHovered);
+				Logger.Log("Renderer.cpp, Render() : bGizmoHovered: ", m_DX11Device.m_bGizmoHovered);
             }
             else 
             {

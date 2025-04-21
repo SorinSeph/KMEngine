@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include <vector>
+#include <string>
+#include <tuple>
 
 class CBaseTimer;
 
@@ -21,6 +23,8 @@ public:
 		m_SecondsPerCount = 1.0 / (double)countsPerSec;
 	}
 
+	std::vector<CBaseTimer*> m_TimersArray;
+	
 	void Start();
 
 	void EngineTick();
@@ -38,7 +42,7 @@ public:
 	void AddTimer(CBaseTimer* InTimer);
 
 private:
-	std::vector<CBaseTimer*> m_TimersArray;
+
 	double m_SecondsPerCount;
 	double m_DeltaTime;
 	__int64 m_BaseTime;
@@ -54,7 +58,9 @@ class CBaseTimer
 public:
 	virtual void Execute() = 0;
 
+	std::string m_TimerHandle;
 	bool bRunning;
+	bool bRunOnce;
 	double StartTime;
 	double EndTime;
 };
@@ -148,6 +154,46 @@ public:
 	TArg m_Arg;
 };
 
+template <typename TObject, typename...TArgs>
+class CTimerVariadicArgs : public CBaseTimer
+{
+public:
+	//using FnPtr = void (TObject::*)(TArgs...);
+	typedef void (TObject::* FnPtr)(TArgs...);
+
+	CTimerVariadicArgs(TObject Obj, FnPtr Fn, TArgs... Args)
+		: m_Object(Obj), m_FnPtr(Fn), m_Args(std::make_tuple(Args...)) {
+	}
+
+	void Execute() override
+	{
+		std::apply([this](auto&&... Args) {
+			(m_Object.*m_FnPtr)(Args...);
+		}, m_Args);
+	}
+
+	TObject m_Object;
+	FnPtr m_FnPtr;
+	std::tuple<TArgs...> m_Args;
+};
+
+template <typename TLambda, typename... TArgs>
+class CTimerVariadicArgsLambda : public CBaseTimer
+{
+public:
+	CTimerVariadicArgsLambda(TLambda Fn, TArgs... Args)
+		: m_FnPtr(Fn), m_Args(std::make_tuple(Args...)) {
+	}
+
+	void Execute() override
+	{
+		std::apply(m_FnPtr, m_Args);
+	}
+
+	TLambda m_FnPtr;
+	std::tuple<TArgs...> m_Args;
+};
+
 class CTimerManager
 {
 private:
@@ -192,6 +238,49 @@ public:
 		}
 	}
 
+	template<typename TObject, typename... TArgs>
+	static void SetTimer4(float InStartTime, float InEndTime, TObject Obj, void (TObject::* Fn)(TArgs...), TArgs... Args)
+	{
+		auto* Timer = new CTimerVariadicArgs<TObject, TArgs...>(Obj, Fn, Args...);
+		Timer->StartTime = InStartTime;
+		Timer->EndTime = InEndTime;
+		
+		m_pCoreClock->AddTimer(Timer);
+	}
+
+	template<typename TLambda, typename... TArgs>
+	void SetTimerVariadicArgsLambda(float InStartTime, float InEndTime, TLambda Fn, TArgs... Args)
+	{
+		auto* Timer = new CTimerVariadicArgsLambda<TLambda, TArgs...>(Fn, Args...);
+		Timer->StartTime = InStartTime;
+		Timer->EndTime = InEndTime;
+		
+		m_pCoreClock->AddTimer(Timer);
+	}
+
+	template<typename TObject, typename... TArgs>
+	static void SetSingleTimer4(float InStartTime, float InEndTime, TObject Obj, void (TObject::* Fn)(TArgs...), TArgs... Args)
+	{
+		auto* Timer = new CTimerVariadicArgs<TObject, TArgs...>(Obj, Fn, Args...);
+		Timer->StartTime = InStartTime;
+		Timer->EndTime = InEndTime;
+		Timer->bRunOnce = true;
+
+		m_pCoreClock->AddTimer(Timer);
+	}
+
+	template<typename TLambda, typename... TArgs>
+	void SetSingleTimerVariadicArgsLambda(float InStartTime, float InEndTime, TLambda Fn, TArgs... Args)
+	{
+		auto* Timer = new CTimerVariadicArgsLambda<TLambda, TArgs...>(Fn, Args...);
+		Timer->StartTime = InStartTime;
+		Timer->EndTime = InEndTime;
+		Timer->bRunOnce = true;
+
+		m_pCoreClock->AddTimer(Timer);
+	}
+
+
 	//template <typename TClass, typename TReturnType, typename TArg, typename TReturnType(TClass::* TPtr)(TArg)>
 	//void SetTimer(TClass TObject, TReturnType RetType, TArg Arg, TReturnType(TClass::* InPtr)(TArg))
 	//{
@@ -199,6 +288,18 @@ public:
 	//	if (CoreTimerRef)
 	//		CoreTimerRef->AddTimer(Timer);
 	//}
+
+	void RemoveTimer(std::string TimerHandle)
+	{
+		for (int i = 0; i < m_pCoreClock->m_TimersArray.size(); i++)
+		{
+			if (m_pCoreClock->m_TimersArray[i]->m_TimerHandle == TimerHandle)
+			{
+				m_pCoreClock->m_TimersArray.erase(m_pCoreClock->m_TimersArray.begin() + i);
+				break;
+			}
+		}
+	}
 
 	CCoreClock* m_pCoreClock{ nullptr };
 };

@@ -20,8 +20,14 @@ public:
 
 	void SendToUIModule(int MouseX, int MouseY);
 
+	bool m_bIsEntitySelected{ false };
+	bool m_bIsDraggingGizmo{ false };
+
 	float m_MouseX;
 	float m_MouseY;
+
+	float PreviousX{ 0.0f };
+	float PreviousY{ 0.0f };
 
 	int m_TestInt;
 };

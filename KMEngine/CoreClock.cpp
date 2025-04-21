@@ -27,15 +27,27 @@ void CCoreClock::EngineTick()
 	{
 		for (int i = 0; i < m_TimersArray.size(); i++)
 		{
-			if (m_TimersArray[i]->StartTime <= GetFTotalTime())
+			if (m_TimersArray[i]->EndTime == 0)
 			{
-				m_TimersArray[i]->bRunning = true;
-				m_TimersArray[i]->Execute();
-
-				if (m_TimersArray[i]->EndTime <= GetFTotalTime() && m_TimersArray[i]->bRunning)
+				continue;
+			}
+			else
+			{
+				if (m_TimersArray[i]->StartTime <= GetFTotalTime())
 				{
-					m_TimersArray.erase(m_TimersArray.begin() + i);
-					break;
+					m_TimersArray[i]->bRunning = true;
+					m_TimersArray[i]->Execute();
+
+					if (m_TimersArray[i]->bRunOnce)
+					{
+						m_TimersArray.erase(m_TimersArray.begin() + i);
+						break;
+					}
+					if (m_TimersArray[i]->EndTime <= GetFTotalTime() && m_TimersArray[i]->bRunning)
+					{
+						m_TimersArray.erase(m_TimersArray.begin() + i);
+						break;
+					}
 				}
 			}
 		}

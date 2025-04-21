@@ -1874,12 +1874,12 @@ void CDX11Device::SetGizmoTimer()
             ))
 
             {
-				bGizmoHovered = 1;
+				m_bGizmoHovered = 1;
 				Logger.Log("CDX11Device::SetGizmoTimer: Ray intersects OBB");
             }
             else
             {
-				bGizmoHovered = 0;
+				m_bGizmoHovered = 0;
                 Logger.Log("CDX11Device::SetGizmoTimer: Ray DOES NOT intersects OBB");
             }
 		}
