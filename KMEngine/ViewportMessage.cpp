@@ -116,65 +116,93 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
         {
             if (pGraphicsModule->m_Renderer.GetDX11Device()->m_bGizmoHovered)
             {
+                XMVECTOR CubeOriginProjected = XMVector3Project(
+                    XMVECTOR{ -5, 0, 0 },
+                    0,
+                    0,
+                    ViewportWidth,
+                    ViewportHeight,
+                    0,
+                    1,
+                    CDX11Device::m_ProjectionMatrix,
+                    CDX11Device::m_ViewMatrix,
+                    XMMatrixIdentity());
 
-               // float DeltaMouseX = static_cast<float>(MouseX - m_InitialMousePosX) / 1.0f;
-               // float DeltaMouseY = static_cast<float>(MouseY - m_InitialMousePosY) / 1.0f;
+                //XMFLOAT3 fCubeOriginProjected{ 0, 0, 0 };
+                //XMStoreFloat3(&fCubeOriginProjected, CubeOriginProjected);
 
-               //  //Update entity position based on delta
-               // pGameEntity3DComponent->SetLocationF(
-               //     pGameEntity3DComponent->GetLocationX() + DeltaMouseX,
-               //     pGameEntity3DComponent->GetLocationY(),
-               //     pGameEntity3DComponent->GetLocationZ());
+                XMVECTOR CubeNormalProjected = XMVector3Project(
+                    XMVECTOR{ -5, 0, 1 },
+                    0,
+                    0,
+                    ViewportWidth,
+                    ViewportHeight,
+                    0,
+                    1,
+                    CDX11Device::m_ProjectionMatrix,
+                    CDX11Device::m_ViewMatrix,
+                    XMMatrixIdentity());
 
-               // Logger.Log("Entity position updated:", "X:", pGameEntity3DComponent->GetLocationX() + DeltaMouseX);
-               // Logger.Log("Entity position updated:", "DeltaMouse is: ", DeltaMouseX);
+                //XMFLOAT3 fCubeNormalProjected{ 0, 0, 0 };
+                //XMStoreFloat3(&fCubeNormalProjected, CubeNormalProjected);
 
-               //  //Optionally, update initial positions for smooth continuous dragging
-               // m_InitialMousePosX = MouseX;
-               // m_InitialMousePosY = MouseY;
-               ////m_InitialEntityPos.x += DeltaMouseX;
-               // //m_InitialEntityPos.y += DeltaMouseY;
-
+				XMVECTOR ProjectedNormal = XMVectorSubtract(CubeOriginProjected, CubeNormalProjected);
 
 				PreviousX += MouseX;
 				PreviousY += MouseY;
 
                 Logger.Log("ViewportMessage.cpp, SendToUIModule(): pGameEntity3DComponent Z BEFORE lambda: ", pGameEntity3DComponent->GetFloatLocationZ());
 
+                const XMFLOAT3 HardcodedNormal{ 0,0,1 };
+
+                XMVECTOR cubeOriginWS = XMVectorSet(-5, 0, 0, 1);
+                XMVECTOR cubeNormalWS = cubeOriginWS + XMLoadFloat3(&HardcodedNormal);
+                
+                XMFLOAT2 o, n;
+                XMStoreFloat2(&o, CubeOriginProjected);
+                XMStoreFloat2(&n, CubeNormalProjected);
+                XMFLOAT2 ScreenProjection = { n.x - o.x, n.y - o.y };
+                
+
+                // capture this axis and your normal
+                auto worldNormalV = XMLoadFloat3(&HardcodedNormal);
+
+
                 CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 				CCoreClock* Clock = TimerManager.m_pCoreClock;
                 TimerManager.SetTimerVariadicArgsLambda(0.0f, 10000.0f,
-                    [pGameEntity3DComponent](float a, float b)
+                    [=](float a, float b)
                 {
-					CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
-                    float X = ViewportMessage.m_MouseX;
-                    float Y = ViewportMessage.m_MouseY;
+                    CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+                    // current & previous mouse
+                    XMFLOAT2 cur{ ViewportMessage.m_MouseX, ViewportMessage.m_MouseY };
+                    XMFLOAT2 prev{ ViewportMessage.PreviousX, ViewportMessage.PreviousY };
+                    XMFLOAT2 delta{ cur.x - prev.x, cur.y - prev.y };
 
-                    // Check if the mouse has moved since the last update
-                    //if (X != ViewportMessage.PreviousX || Y != ViewportMessage.PreviousY)
-                    //{
-                        float DeltaMouseX = (X - ViewportMessage.PreviousX) / 100.0f; // Adjust divisor as needed
-                        float DeltaMouseY = (Y - ViewportMessage.PreviousY) / 100.0f; // Adjust divisor as needed
+                    // how many world-units along normal?
+                    float denom = ScreenProjection.x * ScreenProjection.x + ScreenProjection.y * ScreenProjection.y;
+                    if (denom < 1e-6f) return;
+                    float numer = delta.x * ScreenProjection.x + delta.y * ScreenProjection.y;
+                    float worldOffset = (numer / denom);// *1.5;
 
-                        // Update the entity's position based on mouse movement
-                        pGameEntity3DComponent->SetLocationF(
-                            pGameEntity3DComponent->GetLocationX(),
-                            pGameEntity3DComponent->GetLocationY(),
-                            pGameEntity3DComponent->GetLocationZ() + DeltaMouseY
-                        );
+                    // fetch current 3D pos
+                    XMFLOAT3 curPos3D{
+                      pGameEntity3DComponent->GetFloatLocationX(),
+                      pGameEntity3DComponent->GetFloatLocationY(),
+                      pGameEntity3DComponent->GetFloatLocationZ()
+                    };
+                    XMVECTOR posV = XMLoadFloat3(&curPos3D);
 
-                        // Update PreviousX and PreviousY for the next comparison
-                        ViewportMessage.PreviousX = X;
-                        ViewportMessage.PreviousY = Y;
+                    // move along world-normal
+                    XMVECTOR newPosV = posV + worldNormalV * worldOffset;
+                    XMFLOAT3 newPosF; XMStoreFloat3(&newPosF, newPosV);
 
-                        // Logging for debugging
-                        CLogger& Logger = CLogger::GetLogger();
-                        Logger.Log("ViewportMessage.cpp, SendToUIModule(): pGameEntity3DComponent Z AFTER lambda: ", pGameEntity3DComponent->GetFloatLocationZ());
-                        Logger.Log("ViewportMessage.cpp, SendToUIModule(): DeltaMouseY is: ", DeltaMouseY);
-                        Logger.Log("ViewportMessage.cpp, SendToUIModule(): DeltaMouseY is: ", DeltaMouseY);
-                        Logger.Log("ViewportMessage.cpp, SendToUIModule(): X is: ", X);
-                        Logger.Log("ViewportMessage.cpp, SendToUIModule(): Y is: ", Y);
-                    //}
+                    pGameEntity3DComponent->SetLocationF(
+                        newPosF.x, newPosF.y, newPosF.z);
+
+                    // update for next frame
+                    ViewportMessage.PreviousX = cur.x;
+                    ViewportMessage.PreviousY = cur.y;
                 }, 0, 0);
                 //MessageBox(nullptr, L"Gizmo dragging", L"ViewportMessage", MB_OK);
             }

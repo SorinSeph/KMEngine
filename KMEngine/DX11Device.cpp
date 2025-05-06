@@ -17,8 +17,9 @@ using namespace Internal;
 using namespace std;
 
 XMMATRIX CDX11Device::m_WorldMatrix{ XMMatrixIdentity() };
-XMMATRIX CDX11Device::m_ViewMatrix;
+XMMATRIX CDX11Device::m_ViewMatrix{ XMMatrixIdentity() };
 XMMATRIX CDX11Device::m_ProjectionMatrix;
+XMMATRIX CDX11Device::m_MVPMatrix{ XMMatrixIdentity() };
 
 int SceneLoc = 0;
 
@@ -35,7 +36,7 @@ XMGLOBALCONST XMVECTORF32 _FltMax = { { { FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX } }
 HRESULT CDX11Device::InitDX11Device()
 {
 	CLogger& Logger = CLogger::GetLogger();
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+    CDX11Device::m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     InitDriveTypeAndFeatureLevelFinal();
     IDXGIFactory1* dxgiFactory = InitDXGIFactoryFinal();
@@ -50,6 +51,8 @@ HRESULT CDX11Device::InitDX11Device()
     InitSingleCubeOutline();
     InitTexturedCube();
 
+
+    //CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
 
     if (m_pRenderer)
     {
@@ -1802,6 +1805,36 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
 
 void CDX11Device::SetGizmoTimer()
 {
+    XMVECTOR CubeOriginProjected = XMVector3Project(
+        XMVECTOR{ -5, 0, 0 },
+        0,
+        0,
+        ViewportWidth,
+        ViewportHeight,
+        0,
+        1,
+        CDX11Device::m_ProjectionMatrix,
+        CDX11Device::m_ViewMatrix,
+        XMMatrixIdentity());
+
+	XMFLOAT3 fCubeOriginProjected{ 0, 0, 0 };
+	XMStoreFloat3(&fCubeOriginProjected, CubeOriginProjected);
+
+	XMVECTOR CubeNormalProjected = XMVector3Project(
+		XMVECTOR{ -5, 0, 10 },
+		0,
+		0,
+		ViewportWidth,
+		ViewportHeight,
+		0,
+		1,
+		CDX11Device::m_ProjectionMatrix,
+		CDX11Device::m_ViewMatrix,
+		XMMatrixIdentity());
+
+	XMFLOAT3 fCubeNormalProjected{ 0, 0, 0 };
+	XMStoreFloat3(&fCubeNormalProjected, CubeNormalProjected);
+
     CLogger& Logger = CLogger::GetLogger();
 
 	if (m_pRenderer)
@@ -3459,3 +3492,215 @@ void CDX11Device::OnPostRender()
     }
 }
 
+void CDX11Device::InitLinetrace(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ)
+{
+    CScene& SScene = CScene::GetScene();
+    CPrimitiveGeometryFactory GeometryFactory;
+    CGameEntity3D LinetraceEntity;
+    LinetraceEntity.m_GameEntityTag = "LinetraceEntity";
+    LinetraceEntity.m_GameEntityType = EGameEntityType::Frustum;
+
+    CGameEntity3DComponent LinetraceComponent;
+    LinetraceComponent.m_GameEntityTag = "LinetraceComponent";
+
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return;
+    }
+
+    // Create the vertex shader
+    ID3D11VertexShader* TempVertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &TempVertexShader);
+    if (FAILED(m_HR))
+    {
+        pVSBlob->Release();
+        return;
+    }
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(TempVertexShader, nullptr, 0);
+    };
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_HR))
+        return;
+
+    // Set the input layout
+    m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"FrustumShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return;
+    }
+
+    // Create the pixel shader
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_HR))
+        return;
+
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+
+    SSimpleColorVertex vertices[] =
+    {
+        { XMFLOAT3(OriginX, OriginY, OriginZ), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },   
+        { XMFLOAT3(DestinationX, DestinationY, DestinationZ), XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) }
+    };
+
+    D3D11_BUFFER_DESC bd{};
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(SSimpleColorVertex) * 2;
+    bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    D3D11_SUBRESOURCE_DATA InitData{};
+    InitData.pSysMem = vertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempVertexBuffer);
+    if (FAILED(m_HR))
+        return;
+
+    // Set vertex buffer
+    UINT stride = sizeof(SSimpleColorVertex);
+    UINT offset = 0;
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+
+
+    // Create index buffer
+    WORD indices[] =
+    {
+       0, 1
+    };
+
+    ID3D11Buffer* TempIndexBuffer{ nullptr };
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(WORD) * 2;        // 36 vertices needed for 12 triangles in a triangle list
+    bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    bd.CPUAccessFlags = 0;
+    InitData.pSysMem = indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, &InitData, &TempIndexBuffer);
+    if (FAILED(m_HR))
+        return;
+
+    // Set index buffer
+    m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(TempIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Create the constant buffer
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    bd.Usage = D3D11_USAGE_DEFAULT;
+    bd.ByteWidth = sizeof(SCollisionBuffer);
+    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    bd.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&bd, nullptr, &TempConstantBuffer);
+    if (FAILED(m_HR))
+        return;
+
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    LinetraceComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+    //FrustumComponent.m_CollisionBuffer = TempConstantBuffer;
+
+
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
+    //auto TextureLambda = [=]() {
+    //    m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
+    //};
+    //CubeEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(TextureLambda);
+
+    D3D11_SAMPLER_DESC sampDesc = {};
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    sampDesc.MinLOD = 0;
+    sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    if (FAILED(m_HR))
+        return;
+
+    auto RasterizerStateLambda = [=]() {
+        ID3D11RasterizerState* RasterizerState{ nullptr };
+        D3D11_RASTERIZER_DESC RasterDesc = {};
+        RasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+        RasterDesc.CullMode = D3D11_CULL_NONE;
+        RasterDesc.FrontCounterClockwise = false;
+        RasterDesc.DepthBias = 0;
+        RasterDesc.DepthBiasClamp = 0.0f;
+        RasterDesc.SlopeScaledDepthBias = 0.0f;
+        RasterDesc.DepthClipEnable = true;
+        RasterDesc.ScissorEnable = false;
+        RasterDesc.MultisampleEnable = false;
+        RasterDesc.AntialiasedLineEnable = false;
+
+        m_HR = m_pD3D11Device->CreateRasterizerState(&RasterDesc, &RasterizerState);
+        if (FAILED(m_HR))
+        {
+            MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
+            return;
+        }
+
+        m_pImmediateContext->RSSetState(RasterizerState);
+    };
+
+    LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
+
+    CSceneGraphNode<CGameEntity3DComponent>* pLinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    pLinetraceComponentNode->m_TType = LinetraceComponent;
+
+    LinetraceEntity.m_SceneGraph.m_pRootNode = pLinetraceComponentNode;
+
+    SScene.AddEntityToScene(LinetraceEntity);
+}

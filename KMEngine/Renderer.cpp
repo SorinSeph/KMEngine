@@ -63,7 +63,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     float worldSize = (std::tan(XM_PIDIV4 * 0.5) / ratio) * distance;
     float size = 0.004f * worldSize;
 
-    CDX11Device::m_ViewMatrix = XMMatrixIdentity();
+    //CDX11Device::m_ViewMatrix = XMMatrixIdentity();
     XMMATRIX RotationMatrixX
     (
         1.f, 0.f, 0.f, 0.f,
@@ -81,7 +81,8 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     );
 
     XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
-    CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
+    //CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
+    CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * (XMMatrixRotationY(XMConvertToRadians(-RotY)) * XMMatrixRotationX(XMConvertToRadians(-RotX)));
 
     m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
     m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -92,6 +93,8 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     /**
     * WIP Collision checking section, to be refactored into its own function
     */
+
+	//CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
 
     for (auto& SceneEntityIt : SceneEntityList)
     {

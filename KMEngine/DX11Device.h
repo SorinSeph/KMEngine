@@ -111,6 +111,8 @@ public:
 
 	void InitSingleCubeOutline();
 
+	void InitLinetrace(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+
 	void XM_CALLCONV CreateFrustumFromMatrix(_Out_ CFrustumComponent& Out, _In_ FXMMATRIX Projection, bool rhcoords = false) noexcept;
 
 	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
@@ -142,9 +144,7 @@ public:
 	//CGameEntity3DComponent CubeEntityComponent{ };
 
 	/**
-	* !!
 	* Temporary variables, needs refactoring
-	* !!
 	*/
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
@@ -259,6 +259,7 @@ public:
 	static XMMATRIX m_WorldMatrix;
 	static XMMATRIX m_ViewMatrix;
 	static XMMATRIX m_ProjectionMatrix;
+	static XMMATRIX m_MVPMatrix;
 
 	IDXGISwapChain* m_SwapChain{ nullptr };
 	IDXGISwapChain1* m_SwapChain1{ nullptr };
@@ -273,6 +274,12 @@ private:
 	//CGameEntity3D m_CubeOutlineEntity{ };
 	CGameEntity3D m_Linetrace{ };
 	CGameEntity3D m_CubeOutline{ };
+
+	/**
+	* !!
+	* These are incorrect values, need to see why
+	* !!
+	*/
 
 	UINT m_ViewportWidth{ };
 	UINT m_ViewportHeight{ };

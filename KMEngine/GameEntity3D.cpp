@@ -16,7 +16,7 @@ void CGameEntity3D::SetLocationF(float InX, float InY, float InZ)
 	m_LocationY = InY;
 	m_LocationZ = InZ;
 	m_LocationMatrix = XMMatrixTranslation(InX, InY, InZ);
-	m_ConstantBuffer.mWorld = TransformationMatrix();
+	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
 XMMATRIX CGameEntity3D::GetLocation()
