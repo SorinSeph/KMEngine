@@ -16,27 +16,8 @@
 #include "PhysicsModule.h"
 #include "TerrainGenerator.h"
 
-//const wchar_t CLASS_NAME[] = L"KME Engine";
-////const wchar_t VIEWPORT_NAME[] = L"Viewport";
-//const wchar_t TOOLBAR_NAME[] = L"Toolbar";
-//const wchar_t SIDETOOLBAR_NAME[] = L"SideToolbar";
-////const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
-//
-//LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-//LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-//LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-////LRESULT CALLBACK ViewportWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-//
-//HWND ViewportHwnd;
-//HWND RightToolbarHwnd;
-//HWND LeftToolbarHwnd;
-//
-//float ViewportWidth{ };
-//float ViewportHeight{ };
-
 bool bClipCursor = false;
-//float g_RotX{};
-//float g_RotY{};
+
 
 float RaycastOriginX = 0.0f;
 float RaycastOriginY = 0.0f;
@@ -60,69 +41,6 @@ public:
         //, m_RotY2{ m_ViewportWindow.GetYRotation3() }
         , m_Logger{ CLogger::GetLogger() }
     {
-    }
-
-    void RayCast(long InX, long InY)
-    {
-        if (CanRaycast())
-        {
-            // Test
-            //XMVECTOR OriginPoint = XMVectorSet(InX, InY, 0, 0);
-            XMFLOAT3 OriginPointFloat3 = XMFLOAT3(InX, InY, 0);
-            m_Logger.Log("CoreEngine.h, RayCast() : InX = ", InX, ", InY = ", InY, "\n");
-            XMVECTOR OriginPoint = XMLoadFloat3(&OriginPointFloat3);
-
-            XMFLOAT3 DestinationPointFloat3 = XMFLOAT3(InX, InY, 1);
-            XMVECTOR DestinationPoint = XMLoadFloat3(&DestinationPointFloat3);
-
-            XMMATRIX ProjectionMatrix = CDX11Device::m_ProjectionMatrix;
-            XMMATRIX ViewMatrix = CDX11Device::m_ViewMatrix;
-            XMMATRIX WorldMatrix = CDX11Device::m_WorldMatrix;
-
-            XMVECTOR OriginPointUnprojected = XMVector3Unproject(OriginPoint, 0, 0, ViewportWidth, ViewportHeight, 0, 1, ProjectionMatrix, ViewMatrix, WorldMatrix);
-            XMVECTOR DestinationPointUnprojected = XMVector3Unproject(DestinationPoint, 0, 0, ViewportWidth, ViewportHeight, 0, 1, ProjectionMatrix, ViewMatrix, WorldMatrix);
-
-            XMFLOAT3 OriginPointUnprojectedFloat3;
-            XMStoreFloat3(&OriginPointUnprojectedFloat3, OriginPointUnprojected);
-
-            XMVECTOR RayDirection = DestinationPointUnprojected - OriginPointUnprojected;
-            RayDirection = XMVector4Normalize(RayDirection);
-
-            XMFLOAT4 RayDirectionFloat4;
-            XMStoreFloat4(&RayDirectionFloat4, RayDirection);
-
-            XMFLOAT4 RayOriginFloat4;
-            XMStoreFloat4(&RayOriginFloat4, DestinationPointUnprojected);
-
-            //RaycastOriginX = OriginPointUnprojectedFloat3.x;
-            //RaycastOriginY = OriginPointUnprojectedFloat3.y;
-            //RaycastOriginZ = OriginPointUnprojectedFloat3.z;
-
-            RaycastOriginX = 0;
-            RaycastOriginY = 0;
-            RaycastOriginZ = 0;
-
-            RaycastDestinationX = RayDirectionFloat4.x * 100;
-            RaycastDestinationY = RayDirectionFloat4.y * 100;
-            RaycastDestinationZ = RayDirectionFloat4.z * 100;
-            //DX11Device* dx11Device = DX11Device::GetDX11Device();
-            //dx11Device->InitLine(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
-
-            //m_Renderer.Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
-            //m_Renderer.Raycast(RaycastOriginX, RaycastOriginY, RaycastOriginZ, RaycastDestinationX, RaycastDestinationY, RaycastDestinationZ);
-        }
-
-        SetCanRaycast(false);
-    }
-
-    bool CanRaycast()
-    {
-        return m_UIModule.m_ViewportWindow.CanRaycast();
-    }
-
-    void SetCanRaycast(bool Value)
-    {
-        CViewportWindow::SetCanRaycast(Value);
     }
 
     // UI Module

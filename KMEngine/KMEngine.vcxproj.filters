@@ -158,6 +158,9 @@
     <ClInclude Include="PhysicsModule.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImporterGLTF.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="solid_color.ps" />

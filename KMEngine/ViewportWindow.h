@@ -12,7 +12,6 @@ const float XM_PI = 3.141592654f;
 static float g_RotX;
 static float g_RotY;
 
-static bool g_CanRaycast;
 static float g_RaycastX;
 static float g_RaycastY;
 
@@ -69,8 +68,6 @@ public:
 
 	float GetRaycastX();
 	float GetRaycastY();
-	bool CanRaycast();
-	static void SetCanRaycast(bool Value);
 
 	bool InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd);
 	void DetectKeyboardInput();

@@ -1,24 +1,56 @@
-﻿  ViewportMessage.cpp
+﻿  DX11Device.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp(10,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp(11,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp(40,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp(41,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\type_traits(1741,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(344,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(764,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(790,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1410,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1411,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1422,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1759,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2076,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2598,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  DXResourcesConfig.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DXResourcesConfig.cpp(114,20): warning C4018: '<=': signed/unsigned mismatch
+  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(57,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreEngine.h(57,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  Renderer.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer.cpp(64,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  RightSubwindow.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(378,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(402,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(426,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  TerrainGenerator.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\cbt.h(617,27): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+  (compiling source file 'TerrainGenerator.cpp')
+  
+  ViewportMessage.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(10,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(11,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(40,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(41,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits(1705,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'ViewportMessage.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\type_traits(1741,98):
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits(1705,98):
       the template instantiation context (the oldest one first) is
-          C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp(173,29):
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\ViewportMessage.cpp(173,30):
           see reference to function template instantiation 'void CTimerManager::SetTimerVariadicArgsLambda<CViewportMessage::SendToUIModule::<lambda_1>,int,int>(float,float,TLambda,int,int)' being compiled
           with
           [
               TLambda=CViewportMessage::SendToUIModule::<lambda_1>
           ]
-          C:\Users\sefce\source\KMEngine\KMEngine\CoreClock.h(254,21):
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreClock.h(254,21):
           see reference to class template instantiation 'CTimerVariadicArgsLambda<CViewportMessage::SendToUIModule::<lambda_1>,int,int>' being compiled
-          C:\Users\sefce\source\KMEngine\KMEngine\CoreClock.h(188,7):
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreClock.h(188,7):
           while compiling class template member function 'void CTimerVariadicArgsLambda<CViewportMessage::SendToUIModule::<lambda_1>,int,int>::Execute(void)'
-          C:\Users\sefce\source\KMEngine\KMEngine\CoreClock.h(190,8):
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\CoreClock.h(190,8):
           see reference to function template instantiation 'void std::apply<TLambda&,std::tuple<int,int>&>(_Callable,_Tuple) noexcept(false)' being compiled
           with
           [
@@ -26,7 +58,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Callable=CViewportMessage::SendToUIModule::<lambda_1> &,
               _Tuple=std::tuple<int,int> &
           ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(1087,1):
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\tuple(1073,19):
           see reference to function template instantiation 'void std::_Apply_impl<TLambda&,std::tuple<int,int>&,0,1>(_Callable,_Tuple,std::integer_sequence<size_t,0,1>) noexcept(false)' being compiled
           with
           [
@@ -34,7 +66,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Callable=CViewportMessage::SendToUIModule::<lambda_1> &,
               _Tuple=std::tuple<int,int> &
           ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\tuple(1077,17):
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\tuple(1064,17):
           see reference to function template instantiation 'void std::invoke<TLambda&,int&,int&>(_Callable,_Ty1,int &) noexcept(false)' being compiled
           with
           [
@@ -43,9 +75,9 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Ty1=int &
           ]
   
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\type_traits(1741,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\type_traits(1705,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   (compiling source file 'ViewportMessage.cpp')
   
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+  World.cpp
+  Generating Code...
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

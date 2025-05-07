@@ -161,6 +161,7 @@
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
     <ClInclude Include="GraphicsModule.h" />
+    <ClInclude Include="ImporterGLTF.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />

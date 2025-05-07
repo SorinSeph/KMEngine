@@ -52,8 +52,6 @@ public:
         }
     }
 
-    void Raycast(float DestinationX, float DestinationY);
-
     void AddOutline();
 
     void AddGizmo();

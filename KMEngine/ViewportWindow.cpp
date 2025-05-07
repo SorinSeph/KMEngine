@@ -75,7 +75,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
 
         case WM_LBUTTONDOWN:
         {
-            g_CanRaycast = true;
             POINT mousePos;
             GetCursorPos(&mousePos);
             ScreenToClient(hwnd, &mousePos);
@@ -94,8 +93,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
 
             Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\nMouseX on click is: ", mouseX);
 		    Logger.Log("\nMouseY on click is: ", mouseY);
-            //RaycastX = mouseXUnprojected;
-            //RaycastY = mouseYUnprojected;
 
             return 0;
         }
@@ -302,16 +299,6 @@ float CViewportWindow::GetRaycastY()
 {
     float RaycastY{ g_RaycastY };
     return RaycastY;
-}
-
-bool CViewportWindow::CanRaycast()
-{
-    return g_CanRaycast;
-}
-
-void CViewportWindow::SetCanRaycast(bool Value)
-{
-    g_CanRaycast = Value;
 }
 
 bool CViewportWindow::InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd)

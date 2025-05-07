@@ -23,6 +23,7 @@ void CRenderer::SetViewportSize(int Width, int Height)
 {
 	m_ViewportWidth = Width;
 	m_ViewportHeight = Height;
+	m_DX11Device.SetViewportSize(Width, Height);
 }
 
 void CRenderer::InitRenderer()
@@ -193,45 +194,6 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     }
 
     m_DX11Device.m_SwapChain->Present(0, 0);
-
-}
-
-void CRenderer::Raycast(float DestinationX, float DestinationY)
-{
-    CLogger& Logger = CLogger::GetLogger();
-
-    XMVECTOR Origin = XMVector3Unproject(
-        XMVECTOR{0, 0, 0},
-        0,
-        0,
-        m_ViewportWidth,
-        m_ViewportHeight,
-        0,
-        1,
-        CDX11Device::m_ProjectionMatrix,
-        CDX11Device::m_ViewMatrix,
-        CDX11Device::m_WorldMatrix);
-
-	XMVECTOR Destination = XMVector3Unproject(
-		XMVECTOR{ DestinationX, DestinationY, 1 },
-		0,
-		0,
-        m_ViewportWidth,
-        m_ViewportHeight,
-		0,
-		1,
-		CDX11Device::m_ProjectionMatrix,
-		CDX11Device::m_ViewMatrix,
-		CDX11Device::m_WorldMatrix);
-
-	XMVECTOR Direction = XMVector3Normalize(Destination - Origin);
-    XMFLOAT3 OriginF;
-	XMStoreFloat3(&OriginF, Origin);
-	XMFLOAT3 DirectionF;
-	XMStoreFloat3(&DirectionF, Direction);
-
-    m_DX11Device.Raycast(0, 0, 0, DirectionF.x, DirectionF.y, DirectionF.z);
-    Logger.Log("Renderer.cpp, Raycast2()");
 
 }
 

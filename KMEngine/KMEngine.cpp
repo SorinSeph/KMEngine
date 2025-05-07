@@ -173,12 +173,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
             Logger.Log("KMEngine.cpp, wWinMain() \n", "RayX = ", RayX, "\nRayY = ", RayY, "\n");
             //CoreEngine.RayCast(RayX, RayY);
 
-            if (RayX && RayY)
-            {
-                //Renderer->Raycast(RayX, RayY);
-				g_CanRaycast = false;
-            }
-
             int SceneListIndex = 0;
 
             for (auto SceneListIt : CScene::GetScene().GetSceneList())

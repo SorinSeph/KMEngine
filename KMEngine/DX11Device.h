@@ -28,12 +28,6 @@ static float g_LeftSlope;
 static float g_TopSlope;
 static float g_BottomSlope;
 
-static WORD* GetIndices(std::vector<WORD> InVector)
-{
-	WORD* Vector = InVector.data();
-	return Vector;
-}
-
 class CRenderer;
 
 class CDX11Device
@@ -75,27 +69,64 @@ public:
 	}
 
 public:
+	/**
+	* Initialization functions
+	*/
+
 	HRESULT InitDX11Device();
 
 	void SetViewport(HWND InViewport);
-	//void SetViewportSize(UINT width, UINT height);
+
+	void SetViewportSize(int Width, int Height);
+
 	void InitDriveTypeAndFeatureLevelFinal();
+
 	IDXGIFactory1* InitDXGIFactoryFinal();
+
 	void InitSwapChainFinal(IDXGIFactory1* dxgiFactory);
+
 	void InitRenderTargetViewFinal();
+
 	D3D11_TEXTURE2D_DESC InitTexture2D();
+
 	void InitDepthStencilView(D3D11_TEXTURE2D_DESC descDepth);
+
 	void InitDefaultDepthStencil();
+
 	void InitDisabledDepthStencil();
+
 	void InitOutlineDepthStencil();
+
 	void InitRasterizerState();
-	//void InitOutlineDepthStencil();
-	void InitViewportFinal();
+
+	void InitViewport();
+
 	void CleanupDX11Device();
-	void Raycast(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	void OnPreRender();
+
 	void OnPostRender();
+
+	/**
+	* DirectX11 resources
+	*/
+	D3D_DRIVER_TYPE m_DriverType{ D3D_DRIVER_TYPE_NULL };
+
+	D3D_FEATURE_LEVEL m_FreatureLevel = D3D_FEATURE_LEVEL_11_0;
+
+	ID3D11Device* m_pD3D11Device{ nullptr };
+
+	ID3D11Device1* m_pD3D11Device1{ nullptr };
+
+	ID3D11DeviceContext* m_pImmediateContext{ nullptr };
+
+	ID3D11DeviceContext1* m_pImmediateContext1{ nullptr };
+
+	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
+
+	/**
+	* Entity creation, to be refactored into its own file
+	*/
 
 	ContainmentType CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube);
 
@@ -105,23 +136,15 @@ public:
 
 	HRESULT InitFrustum();
 
-	void InitCubeOutline();
-
-	void InitCubeOutline2();
-
 	void InitSingleCubeOutline();
 
-	void InitLinetrace(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
+	void RaycastLine(float OriginX, float OriginY, float OriginZ, float DestinationX, float DestinationY, float DestinationZ);
 
 	void XM_CALLCONV CreateFrustumFromMatrix(_Out_ CFrustumComponent& Out, _In_ FXMMATRIX Projection, bool rhcoords = false) noexcept;
 
 	void GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent& Out);
 
-	bool DoesIntersect(FXMVECTOR Origin, FXMVECTOR Direction, XMFLOAT3 Center, XMFLOAT3 Extents, float& Dist);
-
 	void CopyEntity(CGameEntity3D Entity);
-
-	void CheckCollision(float OriginX, float OriginY, float OriginZ, float DestX, float DestY, float DestZ);
 
 	HRESULT SpawnGizmo(const CGameEntity3D& SelectedEntity);
 
@@ -161,16 +184,12 @@ public:
 	void (CDX11Device::*m_PreRenderPtr[5])() { nullptr };
 	void (CDX11Device::*m_PostRenderPtr[5])() { nullptr };
 
+
+
 public:
 	HWND m_Viewport{ };
 	HRESULT m_HR{ };
-	D3D_DRIVER_TYPE m_DriverType{ D3D_DRIVER_TYPE_NULL };
-	D3D_FEATURE_LEVEL m_FreatureLevel = D3D_FEATURE_LEVEL_11_0;
-	ID3D11Device* m_pD3D11Device{ nullptr };
-	ID3D11Device1* m_pD3D11Device1{ nullptr };
-	ID3D11DeviceContext* m_pImmediateContext{ nullptr };
-	ID3D11DeviceContext1* m_pImmediateContext1{ nullptr };
-	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
+
 	ID3D11Texture2D* m_pDepthStencil{ nullptr };
 	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDesc{ };
 	D3D11_DEPTH_STENCIL_DESC m_DepthStencilDescOutlineMask{ };
