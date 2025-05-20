@@ -48,6 +48,7 @@ HRESULT CDX11Device::InitDX11Device()
     InitSingleCubeOutline();
     InitTexturedCube();
 
+    TempImportGLTF();
 
     //CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
 
@@ -2803,4 +2804,11 @@ void CDX11Device::RaycastLine(float OriginX, float OriginY, float OriginZ, float
     LinetraceEntity.m_SceneGraph.m_pRootNode = pLinetraceComponentNode;
 
     SScene.AddEntityToScene(LinetraceEntity);
+}
+
+void CDX11Device::TempImportGLTF()
+{
+	CImporterGLTF GLTFImporter;
+    
+    GLTFImporter.ImportGLTF();
 }

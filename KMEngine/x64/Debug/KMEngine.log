@@ -1,14 +1,14 @@
 ﻿  DX11Device.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(344,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(764,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(790,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1410,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1411,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1422,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1759,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2076,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2598,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(345,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(765,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(791,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1411,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1412,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1423,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1760,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2077,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2599,31): warning C4101: 'GeometryFactory': unreferenced local variable
   DXResourcesConfig.cpp
 C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DXResourcesConfig.cpp(114,20): warning C4018: '<=': signed/unsigned mismatch
   KMEngine.cpp

@@ -19,6 +19,11 @@
 #include "Logger.h"
 #include "Math.h"
 
+
+// Temporary headers
+
+#include "ImporterGLTF.h"
+
 static BOOL g_DoesFrustumContain = false;
 
 static float g_Near;
@@ -167,8 +172,11 @@ public:
 	//CGameEntity3DComponent CubeEntityComponent{ };
 
 	/**
-	* Temporary variables, needs refactoring
+	* Temporary variables and functions, needs refactoring
 	*/
+
+	// Temporary GLTF import
+	void TempImportGLTF();
 
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 
