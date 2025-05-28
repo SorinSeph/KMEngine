@@ -22,6 +22,7 @@ public:
 
 	bool m_bIsEntitySelected{ false };
 	bool m_bIsDraggingGizmo{ false };
+	bool m_bIsLeftMouseButtonDown{false};
 
 	float m_MouseX;
 	float m_MouseY;

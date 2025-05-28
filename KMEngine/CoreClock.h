@@ -249,11 +249,12 @@ public:
 	}
 
 	template<typename TLambda, typename... TArgs>
-	void SetTimerVariadicArgsLambda(float InStartTime, float InEndTime, TLambda Fn, TArgs... Args)
+	void SetTimerVariadicArgsLambda(std::string TimerHandle, float InStartTime, float InEndTime, TLambda Fn, TArgs... Args)
 	{
 		auto* Timer = new CTimerVariadicArgsLambda<TLambda, TArgs...>(Fn, Args...);
 		Timer->StartTime = InStartTime;
 		Timer->EndTime = InEndTime;
+		Timer->m_TimerHandle = TimerHandle;
 		
 		m_pCoreClock->AddTimer(Timer);
 	}

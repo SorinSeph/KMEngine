@@ -14,6 +14,9 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
     CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[2]);
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
 
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+	CCoreClock* Clock = TimerManager.m_pCoreClock;
+
     CScene& Scene = CScene::GetScene();
     auto& SceneEntityList = Scene.GetSceneList();
     CLogger& Logger = CLogger::GetLogger();
@@ -114,7 +117,7 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
         }
         else
         {
-            if (pGraphicsModule->m_Renderer.GetDX11Device()->m_bGizmoHovered)
+            if (pGraphicsModule->m_Renderer.GetDX11Device()->m_bGizmoHovered && m_bIsLeftMouseButtonDown)
             {
                 XMVECTOR CubeOriginProjected = XMVector3Project(
                     XMVECTOR{ -5, 0, 0 },
@@ -168,9 +171,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                 auto worldNormalV = XMLoadFloat3(&HardcodedNormal);
 
 
-                CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-				CCoreClock* Clock = TimerManager.m_pCoreClock;
-                TimerManager.SetTimerVariadicArgsLambda(0.0f, 10000.0f,
+
+                TimerManager.SetTimerVariadicArgsLambda("TranslationTimer", 0.0f, 10000.0f,
                     [=](float a, float b)
                 {
                     CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
@@ -206,9 +208,10 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                 }, 0, 0);
                 //MessageBox(nullptr, L"Gizmo dragging", L"ViewportMessage", MB_OK);
             }
-            else
+            else if (!m_bIsLeftMouseButtonDown)
             {
 			    m_bIsEntitySelected = false;
+				TimerManager.RemoveTimer("TranslationTimer");
                 MessageBox(nullptr, L"Deselected entity", L"ViewportMessage", MB_OK);
             }
         }

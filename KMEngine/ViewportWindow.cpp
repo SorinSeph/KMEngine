@@ -1,3 +1,4 @@
+#include "CoreClock.h"
 #include "ViewportWindow.h"
 
 void CViewportWindow::SetViewportParentHWND(HWND hwnd)
@@ -89,11 +90,21 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             g_RaycastY = mouseY;
 
 			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            ViewportMessage.m_bIsLeftMouseButtonDown = true;
             ViewportMessage.SendToUIModule(g_RaycastX, g_RaycastY);
 
             Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\nMouseX on click is: ", mouseX);
 		    Logger.Log("\nMouseY on click is: ", mouseY);
 
+            return 0;
+        }
+
+        case WM_LBUTTONUP:
+        {
+            //CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            //ViewportMessage.m_bIsLeftMouseButtonDown = false;
+			CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+			TimerManager.RemoveTimer("TranslationTimer");
             return 0;
         }
 
