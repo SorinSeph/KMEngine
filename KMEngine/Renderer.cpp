@@ -83,7 +83,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
     XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
     //CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
-    CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * (XMMatrixRotationY(XMConvertToRadians(-RotY)) * XMMatrixRotationX(XMConvertToRadians(-RotX)));
+    CCamera::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * (XMMatrixRotationY(XMConvertToRadians(-RotY)) * XMMatrixRotationX(XMConvertToRadians(-RotX)));
 
     m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
     m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -135,8 +135,8 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
-                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                CB.mView = XMMatrixTranspose(CCamera::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
                 //CB.mDoesFrustumContain = g_DoesFrustumContain;
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
@@ -153,8 +153,8 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
-                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                CB.mView = XMMatrixTranspose(CCamera::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
 				CB.mIsHovered = m_DX11Device.m_bGizmoHovered;
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
@@ -172,8 +172,8 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
-                CB.mView = XMMatrixTranspose(CDX11Device::m_ViewMatrix);
-                CB.mProjection = XMMatrixTranspose(CDX11Device::m_ProjectionMatrix);
+                CB.mView = XMMatrixTranspose(CCamera::m_ViewMatrix);
+                CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
                 Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);

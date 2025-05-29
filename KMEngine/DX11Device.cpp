@@ -16,10 +16,10 @@ int gClicked = 0;
 using namespace Internal;
 using namespace std;
 
-XMMATRIX CDX11Device::m_WorldMatrix{ XMMatrixIdentity() };
-XMMATRIX CDX11Device::m_ViewMatrix{ XMMatrixIdentity() };
-XMMATRIX CDX11Device::m_ProjectionMatrix;
-XMMATRIX CDX11Device::m_MVPMatrix{ XMMatrixIdentity() };
+XMMATRIX CCamera::m_WorldMatrix{ XMMatrixIdentity() };
+XMMATRIX CCamera::m_ViewMatrix{ XMMatrixIdentity() };
+XMMATRIX CCamera::m_ProjectionMatrix;
+XMMATRIX CCamera::m_MVPMatrix{ XMMatrixIdentity() };
 
 int SceneLoc = 0;
 
@@ -33,24 +33,23 @@ XMGLOBALCONST XMVECTORF32 _FltMax = { { { FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX } }
 HRESULT CDX11Device::InitDX11Device()
 {
 	CLogger& Logger = CLogger::GetLogger();
-    CDX11Device::m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+    CCamera::m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     InitDriveTypeAndFeatureLevelFinal();
     IDXGIFactory1* dxgiFactory = InitDXGIFactoryFinal();
     InitSwapChainFinal(dxgiFactory);
     InitRenderTargetViewFinal();
     InitViewport();
-    InitDisabledDepthStencil();
+    //InitDisabledDepthStencil();
     InitDefaultDepthStencil();
     InitRasterizerState();
     InitFrustum();
     InitSolidColorCube();
-    InitSingleCubeOutline();
+    //InitPlane();
+    //InitSingleCubeOutline();
     InitTexturedCube();
 
     TempImportGLTF();
-
-    //CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
 
     if (m_pRenderer)
     {
@@ -337,6 +336,35 @@ void CDX11Device::InitRasterizerState()
     }
 
     m_pImmediateContext->RSSetState(m_RasterizerState);
+}
+
+HRESULT CDX11Device::CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
+{
+    HRESULT hr = S_OK;
+
+    DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+#ifdef _DEBUG
+
+    dwShaderFlags |= D3DCOMPILE_DEBUG;
+
+    dwShaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
+#endif
+
+    ID3DBlob* pErrorBlob = nullptr;
+    hr = D3DCompileFromFile(szFileName, nullptr, nullptr, szEntryPoint, szShaderModel,
+        dwShaderFlags, 0, ppBlobOut, &pErrorBlob);
+    if (FAILED(hr))
+    {
+        if (pErrorBlob)
+        {
+            OutputDebugStringA(reinterpret_cast<const char*>(pErrorBlob->GetBufferPointer()));
+            pErrorBlob->Release();
+        }
+        return hr;
+    }
+    if (pErrorBlob) pErrorBlob->Release();
+
+    return S_OK;
 }
 
 void CDX11Device::InitSingleCubeOutline()
@@ -914,8 +942,8 @@ void CDX11Device::SetGizmoTimer()
         ViewportHeight,
         0,
         1,
-        CDX11Device::m_ProjectionMatrix,
-        CDX11Device::m_ViewMatrix,
+        CCamera::m_ProjectionMatrix,
+        CCamera::m_ViewMatrix,
         XMMatrixIdentity());
 
 	XMFLOAT3 fCubeOriginProjected{ 0, 0, 0 };
@@ -929,8 +957,8 @@ void CDX11Device::SetGizmoTimer()
 		ViewportHeight,
 		0,
 		1,
-		CDX11Device::m_ProjectionMatrix,
-		CDX11Device::m_ViewMatrix,
+        CCamera::m_ProjectionMatrix,
+        CCamera::m_ViewMatrix,
 		XMMatrixIdentity());
 
 	XMFLOAT3 fCubeNormalProjected{ 0, 0, 0 };
@@ -976,9 +1004,9 @@ void CDX11Device::SetGizmoTimer()
                 ViewportHeight,
                 0,
                 1,
-                CDX11Device::m_ProjectionMatrix,
-                CDX11Device::m_ViewMatrix,
-                CDX11Device::m_WorldMatrix);
+                CCamera::m_ProjectionMatrix,
+                CCamera::m_ViewMatrix,
+                CCamera::m_WorldMatrix);
 
             XMVECTOR Destination = XMVector3Unproject(
                 XMVECTOR{ (float)MouseX, (float)MouseY, 1 },
@@ -988,9 +1016,9 @@ void CDX11Device::SetGizmoTimer()
                 ViewportHeight,
                 0,
                 1,
-                CDX11Device::m_ProjectionMatrix,
-                CDX11Device::m_ViewMatrix,
-                CDX11Device::m_WorldMatrix);
+                CCamera::m_ProjectionMatrix,
+                CCamera::m_ViewMatrix,
+                CCamera::m_WorldMatrix);
 
             XMFLOAT3 BoxCenter{ -5.f, 0, 0 };
             XMFLOAT3 BoxExtents{ 1.f, 1.f, 1.f};
@@ -1237,30 +1265,24 @@ HRESULT CDX11Device::AddGizmo()
     return S_OK;
 }
 
+
+
 void CDX11Device::CleanupDX11Device()
 {
-    if (m_pImmediateContext) m_pImmediateContext->ClearState();
-
-    if (m_ConstantBuffer) m_ConstantBuffer->Release();
-    if (m_VertexBuffer) m_VertexBuffer->Release();
-    for (auto indexBuffer : m_IndexBufferArray)
-    {
-        if (indexBuffer)
-        {
-            indexBuffer->Release();
-        }
-    }
-    if (m_VertexLayout) m_VertexLayout->Release();
-    if (m_VertexShader) m_VertexShader->Release();
-    if (m_PixelShader) m_PixelShader->Release();
-    if (m_pRenderTargetView) m_pRenderTargetView->Release();
-    if (m_SwapChain1) m_SwapChain1->Release();
-    if (m_SwapChain) m_SwapChain->Release();
-    if (m_pImmediateContext1) m_pImmediateContext1->Release();
-    if (m_pImmediateContext) m_pImmediateContext->Release();
-    if (m_pD3D11Device1) m_pD3D11Device1->Release();
-    if (m_pD3D11Device) m_pD3D11Device->Release();
-    if (m_TextureRV) m_TextureRV->Release();
+    //if (m_pImmediateContext) m_pImmediateContext->ClearState();
+    //if (m_ConstantBuffer) m_ConstantBuffer->Release();
+    //if (m_VertexBuffer) m_VertexBuffer->Release();
+    //if (m_VertexLayout) m_VertexLayout->Release();
+    //if (m_VertexShader) m_VertexShader->Release();
+    //if (m_PixelShader) m_PixelShader->Release();
+    //if (m_pRenderTargetView) m_pRenderTargetView->Release();
+    //if (m_SwapChain1) m_SwapChain1->Release();
+    //if (m_SwapChain) m_SwapChain->Release();
+    //if (m_pImmediateContext1) m_pImmediateContext1->Release();
+    //if (m_pImmediateContext) m_pImmediateContext->Release();
+    //if (m_pD3D11Device1) m_pD3D11Device1->Release();
+    //if (m_pD3D11Device) m_pD3D11Device->Release();
+    //if (m_TextureRV) m_TextureRV->Release();
 }
 
 void CDX11Device::InitDriveTypeAndFeatureLevelFinal()
@@ -1692,7 +1714,7 @@ HRESULT CDX11Device::InitTexturedCube()
 	//TimerManager.SetTimer3<CDX11Device, void, &CDX11Device::InterpMoveEntity>(this, 2.0f, 10.0f);
 
     // Initialize the projection matrix
-    m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
+    CCamera::m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     CubeComponentNode->m_TType = TexturedCubeComponent;
@@ -2067,6 +2089,190 @@ HRESULT CDX11Device::InitSolidColorCube()
     //    MessageBox(nullptr, L"Failed to create rasterizer state", L"Error", MB_OK);
     //    return m_HR;
     //}
+
+    return S_OK;
+}
+
+HRESULT CDX11Device::InitPlane()
+{
+    CScene& SScene = CScene::GetScene();
+    CPrimitiveGeometryFactory GeometryFactory;
+
+
+    CGameEntity3DComponent PlaneEntity;
+    PlaneEntity.m_GameEntityTag = "PlaneEntity";
+    PlaneEntity.m_GameEntityType = EGameEntityType::Plane;
+
+    CGameEntity3DComponent PlaneEntityComponent;
+    PlaneEntityComponent.m_GameEntityTag = "PlaneEntityComponent";
+    PlaneEntityComponent.SetLocationF(2.f, 0.0f, 2.0f);
+    //PlaneEntityComponent.SetScale(15.25f, 15.25f, 15.25f);
+
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+
+    // Compile the vertex shader
+    ID3DBlob* pVSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "VS", "vs_5_0", &pVSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the vertex shader
+    ID3D11VertexShader* VertexShader{ nullptr };
+    m_HR = m_pD3D11Device->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &VertexShader);
+    if (FAILED(m_HR))
+    {
+        pVSBlob->Release();
+        return m_HR;
+    }
+    auto VertexShaderLambda = [=]() {
+        m_pImmediateContext->VSSetShader(VertexShader, nullptr, 0);
+    };
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexShaderLambda);
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT numElements = ARRAYSIZE(layout);
+
+    // Create the input layout
+    ID3D11InputLayout* TempVertexLayout{ nullptr };
+    m_HR = m_pD3D11Device->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &TempVertexLayout);
+    pVSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set the input layout
+    //m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+
+    auto InputLayoutLambda = [=]() {
+        m_pImmediateContext->IASetInputLayout(TempVertexLayout);
+    };
+
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(InputLayoutLambda);
+
+    // Compile the pixel shader
+    ID3DBlob* pPSBlob = nullptr;
+    m_HR = CompileShaderFromFile(L"SolidColorShader.fxh", "PS", "ps_5_0", &pPSBlob);
+    if (FAILED(m_HR))
+    {
+        MessageBox(nullptr, L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return m_HR;
+    }
+
+    // Create the pixel shader
+    ID3D11PixelShader* TempPixelShader{ nullptr };
+    m_HR = m_pD3D11Device->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &TempPixelShader);
+    pPSBlob->Release();
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto PixelShaderLambda = [=]() {
+        m_pImmediateContext->PSSetShader(TempPixelShader, nullptr, 0);
+    };
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(PixelShaderLambda);
+
+    SSimpleColorVertex vertices[] =
+    {
+        { XMFLOAT3(-1.f,  0.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   
+        { XMFLOAT3(-1.f,  0.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },   
+        { XMFLOAT3(1.f, 0.f,  -1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },    
+        { XMFLOAT3(1.f, 0.f,  1.f), XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f) },  
+    };
+
+    D3D11_BUFFER_DESC BufferDescriptor{};
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SSimpleColorVertex) * 4;
+    BufferDescriptor.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+
+    ID3D11Buffer* TempVertexBuffer{ nullptr };
+    D3D11_SUBRESOURCE_DATA InitData{};
+    InitData.pSysMem = vertices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &TempVertexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set vertex buffer
+    UINT stride = sizeof(SSimpleColorVertex);
+    UINT offset = 0;
+    m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+
+    auto VertexBufferLambda = [=]() {
+        m_pImmediateContext->IASetVertexBuffers(0, 1, &TempVertexBuffer, &stride, &offset);
+    };
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(VertexBufferLambda);
+
+
+    // Create index buffer
+    WORD Indices[] =
+    {
+        0, 1, 2,
+        2, 3, 0,
+    };
+
+    ID3D11Buffer* IndexBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(WORD) * 6;        
+    BufferDescriptor.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    InitData.pSysMem = Indices;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, &InitData, &IndexBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    // Set index buffer
+    m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+    auto IndexBufferLambda = [=]() {
+        m_pImmediateContext->IASetIndexBuffer(IndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+    };
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(IndexBufferLambda);
+
+    // Set primitive topology
+    m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Create the constant buffer
+    ID3D11Buffer* TempConstantBuffer{ nullptr };
+    BufferDescriptor.Usage = D3D11_USAGE_DEFAULT;
+    BufferDescriptor.ByteWidth = sizeof(SConstantBuffer);
+    BufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    BufferDescriptor.CPUAccessFlags = 0;
+    m_HR = m_pD3D11Device->CreateBuffer(&BufferDescriptor, nullptr, &TempConstantBuffer);
+    if (FAILED(m_HR))
+        return m_HR;
+
+    auto ConstantBufferLambda = [=]() {
+        m_pImmediateContext->VSSetConstantBuffers(0, 1, &TempConstantBuffer);
+    };
+    PlaneEntityComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
+    PlaneEntityComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
+
+
+    //D3D11_SAMPLER_DESC sampDesc = {};
+    //sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+    //sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+    //sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+    //sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+    //sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+    //sampDesc.MinLOD = 0;
+    //sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+    //m_HR = m_pD3D11Device->CreateSamplerState(&sampDesc, &m_SamplerLinear);
+    //if (FAILED(m_HR))
+    //    return m_HR;
+
+    CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+    CubeComponentNode->m_TType = PlaneEntityComponent;
+
+    PlaneEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
+
+    SScene.AddEntityToScene(PlaneEntity);
+
 
     return S_OK;
 }

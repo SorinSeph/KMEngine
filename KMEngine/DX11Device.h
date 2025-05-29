@@ -35,6 +35,17 @@ static float g_BottomSlope;
 
 class CRenderer;
 
+class CCamera
+{
+public:
+	CCamera() = default;
+
+	static XMMATRIX m_WorldMatrix;
+	static XMMATRIX m_ViewMatrix;
+	static XMMATRIX m_ProjectionMatrix;
+	static XMMATRIX m_MVPMatrix;
+};
+
 class CDX11Device
 {
 public:
@@ -44,34 +55,7 @@ public:
 		Logger.Log("CDX11Device constructor");// from ", initFile);
 	}
 
-	HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
-	{
-		HRESULT hr = S_OK;
-
-		DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
-#ifdef _DEBUG
-
-		dwShaderFlags |= D3DCOMPILE_DEBUG;
-
-		dwShaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
-#endif
-
-		ID3DBlob* pErrorBlob = nullptr;
-		hr = D3DCompileFromFile(szFileName, nullptr, nullptr, szEntryPoint, szShaderModel,
-			dwShaderFlags, 0, ppBlobOut, &pErrorBlob);
-		if (FAILED(hr))
-		{
-			if (pErrorBlob)
-			{
-				OutputDebugStringA(reinterpret_cast<const char*>(pErrorBlob->GetBufferPointer()));
-				pErrorBlob->Release();
-			}
-			return hr;
-		}
-		if (pErrorBlob) pErrorBlob->Release();
-
-		return S_OK;
-	}
+	HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 
 public:
 	/**
@@ -102,6 +86,9 @@ public:
 
 	void InitOutlineDepthStencil();
 
+	// Create a temporary plane for gizmo planar picking translation
+	HRESULT InitPlane();
+
 	void InitRasterizerState();
 
 	void InitViewport();
@@ -128,10 +115,6 @@ public:
 	ID3D11DeviceContext1* m_pImmediateContext1{ nullptr };
 
 	ID3D11RenderTargetView* m_pRenderTargetView{ nullptr };
-
-	/**
-	* Entity creation, to be refactored into its own file
-	*/
 
 	ContainmentType CollisionCheck(CGameEntity3DComponent* Frustum, CGameEntity3DComponent* Cube);
 
@@ -167,10 +150,6 @@ public:
 
 	void SetGizmoTimer();
 
-	//CGameEntity3D CubeEntity;
-
-	//CGameEntity3DComponent CubeEntityComponent{ };
-
 	/**
 	* Temporary variables and functions, needs refactoring
 	*/
@@ -192,8 +171,6 @@ public:
 	void (CDX11Device::*m_PreRenderPtr[5])() { nullptr };
 	void (CDX11Device::*m_PostRenderPtr[5])() { nullptr };
 
-
-
 public:
 	HWND m_Viewport{ };
 	HRESULT m_HR{ };
@@ -208,12 +185,12 @@ public:
 	ID3D11DepthStencilState* m_pDepthStencilStateOutlineMask{ };
 	ID3D11DepthStencilState* m_pDepthStencilStateOutline{ };
 	ID3D11DepthStencilView* m_DepthStencilView{ nullptr };
-	ID3D11VertexShader* m_VertexShader{ nullptr };
-	ID3D11PixelShader* m_PixelShader{ nullptr };
-	ID3D11InputLayout* m_VertexLayout{ nullptr };
-	ID3D11Buffer* m_VertexBuffer{ nullptr };
-	ID3D11Buffer* m_IndexBuffer{ nullptr };
-	ID3D11Buffer* m_ConstantBuffer{ nullptr };
+	//ID3D11VertexShader* m_VertexShader{ nullptr };
+	//ID3D11PixelShader* m_PixelShader{ nullptr };
+	//ID3D11InputLayout* m_VertexLayout{ nullptr };
+	//ID3D11Buffer* m_VertexBuffer{ nullptr };
+	//ID3D11Buffer* m_IndexBuffer{ nullptr };
+	//ID3D11Buffer* m_ConstantBuffer{ nullptr };
 	ID3D11ShaderResourceView* m_TextureRV{ nullptr };
 	ID3D11SamplerState* m_SamplerLinear{ nullptr };
 	ID3D11RasterizerState* m_RasterizerState{ nullptr };
@@ -283,29 +260,15 @@ public:
 	ID3D11Buffer* BaseConstantBuffer;
 
 public:
-	static XMMATRIX m_WorldMatrix;
-	static XMMATRIX m_ViewMatrix;
-	static XMMATRIX m_ProjectionMatrix;
-	static XMMATRIX m_MVPMatrix;
-
 	IDXGISwapChain* m_SwapChain{ nullptr };
 	IDXGISwapChain1* m_SwapChain1{ nullptr };
 
 	int m_YKeyPressed{ 0 };	
 
 private:
-	ID3D11Buffer* m_IndexBufferArray[3]{ };
-
-	CGameEntity3D m_CubeEntity = { };
-	CGameEntity3D m_CubeEntity2 = { };
-	//CGameEntity3D m_CubeOutlineEntity{ };
-	CGameEntity3D m_Linetrace{ };
-	CGameEntity3D m_CubeOutline{ };
 
 	/**
-	* !!
 	* These are incorrect values, need to see why
-	* !!
 	*/
 
 	UINT m_ViewportWidth{ };

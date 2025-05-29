@@ -1,26 +1,15 @@
-﻿  ViewportWindow.cpp
+﻿  DX11Device.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(22,22): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(55,49): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(56,44): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(89,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(90,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(94,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(94,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(182,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(183,31): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(185,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(186,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(188,80): warning C4129: 'g': unrecognized character escape sequence
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(188,112): warning C4129: 'g': unrecognized character escape sequence
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(204,36): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(205,36): warning C4244: 'initializing': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(39,17): warning C4101: 'hdc': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(40,17): warning C4101: 'ps': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(42,17): warning C4101: 'CursorPoint': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(120,19): warning C4101: 'CursorPoint': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(409,24): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp(341,18): warning C4101: 'mouseCurrState': unreferenced local variable
-  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(373,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(793,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(819,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1433,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1434,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1445,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1782,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2099,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2283,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2805,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  World.cpp
+  Generating Code...
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe

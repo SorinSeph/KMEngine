@@ -59,9 +59,9 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                         ViewportHeight,
                         0,
                         1,
-                        CDX11Device::m_ProjectionMatrix,
-                        CDX11Device::m_ViewMatrix,
-                        CDX11Device::m_WorldMatrix);
+                        CCamera::m_ProjectionMatrix,
+                        CCamera::m_ViewMatrix,
+                        CCamera::m_WorldMatrix);
 
                     XMVECTOR Destination = XMVector3Unproject(
                         XMVECTOR{ (float)MouseX, (float)MouseY, 1 },
@@ -71,9 +71,9 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                         ViewportHeight,
                         0,
                         1,
-                        CDX11Device::m_ProjectionMatrix,
-                        CDX11Device::m_ViewMatrix,
-                        CDX11Device::m_WorldMatrix);
+                        CCamera::m_ProjectionMatrix,
+                        CCamera::m_ViewMatrix,
+                        CCamera::m_WorldMatrix);
 
                     XMFLOAT3 BoxCenter{ X, Y, Z };
                     XMFLOAT3 BoxExtents{ 1.0f, 1.0f, 1.0f };
@@ -94,6 +94,7 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                             if (pGraphicsModule)
                             {
                                 pGraphicsModule->m_Renderer.GetDX11Device()->SpawnGizmo(*pGameEntity3DComponent);
+                                pGraphicsModule->m_Renderer.GetDX11Device()->InitPlane();
                                 //GraphicsModule->m_Renderer.m_DX11Device.CopyEntity(SceneEntity);
                                 //EntityComponent.SetScale(5.f, 5.f, 5.f);
                                 //GraphicsModule->m_Renderer.TestGraphicsModuleLog();
@@ -127,8 +128,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     ViewportHeight,
                     0,
                     1,
-                    CDX11Device::m_ProjectionMatrix,
-                    CDX11Device::m_ViewMatrix,
+                    CCamera::m_ProjectionMatrix,
+                    CCamera::m_ViewMatrix,
                     XMMatrixIdentity());
 
                 //XMFLOAT3 fCubeOriginProjected{ 0, 0, 0 };
@@ -142,8 +143,8 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                     ViewportHeight,
                     0,
                     1,
-                    CDX11Device::m_ProjectionMatrix,
-                    CDX11Device::m_ViewMatrix,
+                    CCamera::m_ProjectionMatrix,
+                    CCamera::m_ViewMatrix,
                     XMMatrixIdentity());
 
                 //XMFLOAT3 fCubeNormalProjected{ 0, 0, 0 };
