@@ -13,7 +13,8 @@
 
 int gClicked = 0;
 
-using namespace Internal;
+using namespace DirectX;
+using namespace MathInternal;
 using namespace std;
 
 XMMATRIX CCamera::m_WorldMatrix{ XMMatrixIdentity() };
@@ -1685,14 +1686,28 @@ HRESULT CDX11Device::InitTexturedCube()
     TexturedCubeComponent.m_DXResConfig.SetConstantBuffer(TempConstantBuffer);
     TexturedCubeComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
+    auto image = std::make_unique<ScratchImage>();
+    HRESULT hr = LoadFromTGAFile(L"grey_grid.tga", TGA_FLAGS_NONE, nullptr, *image);
+    if (FAILED(hr))
+    {
+		MessageBox(nullptr, L"Failed to load texture from TGA file", L"Error", MB_OK);
+		return hr;
+    }
 
-    const wchar_t* TextureName = L"tex_stickman.dds";
-    m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+	m_HR = CreateShaderResourceView(m_pD3D11Device, image->GetImages(), image->GetImageCount(), image->GetMetadata(), &m_TextureColorGridRV);
     if (FAILED(m_HR))
     {
         MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
         return m_HR;
     }
+
+    //const wchar_t* TextureName = L"tex_stickman.dds";
+    //m_HR = CreateDDSTextureFromFile(m_pD3D11Device, TextureName, nullptr, &m_TextureColorGridRV);
+    //if (FAILED(m_HR))
+    //{
+    //    MessageBox(nullptr, L"Failed to initialize texture from file", L"Error", MB_OK);
+    //    return m_HR;
+    //}
     auto TextureLambda = [=]() {
         m_pImmediateContext->PSSetShaderResources(0, 1, &m_TextureColorGridRV);
     };
@@ -2574,33 +2589,33 @@ ContainmentType CDX11Device::CollisionCheck(CGameEntity3DComponent* Frustum, CGa
 
     // Init frustum planes
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, g_Near);
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, FrustumOrientation, FrustumOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, FrustumOrientation, FrustumOrigin);
     NearPlane = XMPlaneNormalize(NearPlane);
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -g_Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, FrustumOrientation, FrustumOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, FrustumOrientation, FrustumOrigin);
     FarPlane = XMPlaneNormalize(FarPlane);
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -g_RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, FrustumOrientation, FrustumOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, FrustumOrientation, FrustumOrigin);
     RightPlane = XMPlaneNormalize(RightPlane);
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, g_LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, FrustumOrientation, FrustumOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, FrustumOrientation, FrustumOrigin);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -g_TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, FrustumOrientation, FrustumOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, FrustumOrientation, FrustumOrigin);
     TopPlane = XMPlaneNormalize(TopPlane);
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, g_BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, FrustumOrientation, FrustumOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, FrustumOrientation, FrustumOrigin);
     BottomPlane = XMPlaneNormalize(BottomPlane);
 
 
 
     // Actual collision check
-    assert(DirectX::Internal::XMQuaternionIsUnit(BoxOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(BoxOrientation));
 
     // Set w of the center to one so we can dot4 with a plane.
     BoxOrigin = XMVectorInsert<0, 0, 0, 0, 1>(BoxOrigin, XMVectorSplatOne());
@@ -2611,28 +2626,28 @@ ContainmentType CDX11Device::CollisionCheck(CGameEntity3DComponent* Frustum, CGa
     XMVECTOR Outside, Inside;
 
     // Test against each plane.
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], NearPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], NearPlane, Outside, Inside);
 
     XMVECTOR AnyOutside = Outside;
     XMVECTOR AllInside = Inside;
 
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], FarPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], FarPlane, Outside, Inside);
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], RightPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], RightPlane, Outside, Inside);
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], LeftPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], LeftPlane, Outside, Inside);
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], TopPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], TopPlane, Outside, Inside);
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], BottomPlane, Outside, Inside);
+    DirectX::MathInternal::FastIntersectOrientedBoxPlane(BoxOrigin, BoxExtents, R.r[0], R.r[1], R.r[2], BottomPlane, Outside, Inside);
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
@@ -2721,7 +2736,7 @@ inline void CDX11Device::GetFrustumCorners(XMFLOAT3* Corners, CFrustumComponent&
     XMVECTOR vOrigin = XMLoadFloat3(&Out.Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Out.Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Build the corners of the frustum.
     XMVECTOR vRightTop = XMVectorSet(Out.RightSlope, Out.TopSlope, 1.0f, 0.0f);

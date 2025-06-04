@@ -18,6 +18,8 @@
 #include "Scene.h"
 #include "Logger.h"
 #include "Math.h"
+#include <DirectXCollision.h>
+#include <DirectXTex.h>
 
 
 // Temporary headers

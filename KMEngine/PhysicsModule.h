@@ -21,7 +21,7 @@ public:
         XMVECTOR vExtents = XMLoadFloat3(&BoxExtents);
         XMVECTOR vOrientation = XMLoadFloat4(&BoxOrientation);
 
-        assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+        assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
         // Get the boxes normalized side directions.
         XMMATRIX R = XMMatrixRotationQuaternion(vOrientation);
@@ -68,7 +68,7 @@ public:
         XMVECTOR ParallelOverlap = XMVectorInBounds(AxisDotOrigin, vExtents);
         NoIntersection = XMVectorOrInt(NoIntersection, XMVectorAndCInt(IsParallel, ParallelOverlap));
 
-        if (!DirectX::Internal::XMVector3AnyTrue(NoIntersection))
+        if (!DirectX::MathInternal::XMVector3AnyTrue(NoIntersection))
         {
             // Store the x-component to *pDist
             XMStoreFloat(&Dist, t_min);
