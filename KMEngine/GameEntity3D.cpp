@@ -133,7 +133,7 @@ inline void XM_CALLCONV CFrustumComponent::Transform(CFrustumComponent& Out, FXM
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Composite the frustum rotation and the transform rotation
     XMMATRIX nM;
@@ -172,13 +172,13 @@ inline void XM_CALLCONV CFrustumComponent::Transform(CFrustumComponent& Out, FXM
 _Use_decl_annotations_
 inline void XM_CALLCONV CFrustumComponent::Transform(CFrustumComponent& Out, float Scale, FXMVECTOR Rotation, FXMVECTOR Translation) const noexcept
 {
-    assert(DirectX::Internal::XMQuaternionIsUnit(Rotation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(Rotation));
 
     // Load the frustum.
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Composite the frustum rotation and the transform rotation.
     vOrientation = XMQuaternionMultiply(vOrientation, Rotation);
@@ -213,7 +213,7 @@ inline void CFrustumComponent::GetFrustumCorners(XMFLOAT3* Corners)
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Build the corners of the frustum.
     XMVECTOR vRightTop = XMVectorSet(RightSlope, TopSlope, 1.0f, 0.0f);
@@ -267,7 +267,7 @@ inline ContainmentType XM_CALLCONV CFrustumComponent::Contains(FXMVECTOR Point) 
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Transform point into local space of frustum.
     XMVECTOR TPoint = XMVector3InverseRotate(XMVectorSubtract(Point, vOrigin), vOrientation);
@@ -301,27 +301,27 @@ inline ContainmentType XM_CALLCONV CFrustumComponent::Contains(FXMVECTOR V0, FXM
 
     // Create 6 planes (do it inline to encourage use of registers)
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
     NearPlane = XMPlaneNormalize(NearPlane);
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
     FarPlane = XMPlaneNormalize(FarPlane);
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
     RightPlane = XMPlaneNormalize(RightPlane);
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
     TopPlane = XMPlaneNormalize(TopPlane);
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
     BottomPlane = XMPlaneNormalize(BottomPlane);
 
     return TriangleTests::ContainedBy(V0, V1, V2, NearPlane, FarPlane, RightPlane, LeftPlane, TopPlane, BottomPlane);
@@ -338,27 +338,27 @@ inline ContainmentType CFrustumComponent::Contains(const BoundingSphere& sh) con
 
     // Create 6 planes (do it inline to encourage use of registers)
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
     NearPlane = XMPlaneNormalize(NearPlane);
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
     FarPlane = XMPlaneNormalize(FarPlane);
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
     RightPlane = XMPlaneNormalize(RightPlane);
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
     TopPlane = XMPlaneNormalize(TopPlane);
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
     BottomPlane = XMPlaneNormalize(BottomPlane);
 
     return sh.ContainedBy(NearPlane, FarPlane, RightPlane, LeftPlane, TopPlane, BottomPlane);
@@ -376,27 +376,27 @@ inline ContainmentType CFrustumComponent::Contains(const BoundingBox& box) const
     // Create 6 planes (do it inline to encourage use of registers)
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
     //std::cout << "DirectXCollision.inl: Near = " << Near << "\n";
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
     NearPlane = XMPlaneNormalize(NearPlane);
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
     FarPlane = XMPlaneNormalize(FarPlane);
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
     RightPlane = XMPlaneNormalize(RightPlane);
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
     TopPlane = XMPlaneNormalize(TopPlane);
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
     BottomPlane = XMPlaneNormalize(BottomPlane);
 
     return box.ContainedBy(NearPlane, FarPlane, RightPlane, LeftPlane, TopPlane, BottomPlane);
@@ -413,42 +413,42 @@ inline ContainmentType CFrustumComponent::Contains(const BoundingOrientedBox& bo
 
     // Create 6 planes (do it inline to encourage use of registers)
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
     XMFLOAT4 NearPlaneFloat;
     XMStoreFloat4(&NearPlaneFloat, NearPlane);
     NearPlane = XMPlaneNormalize(NearPlane);
 
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
     XMFLOAT4 FarPlaneFloat;
     XMStoreFloat4(&FarPlaneFloat, FarPlane);
     FarPlane = XMPlaneNormalize(FarPlane);
 
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
     XMFLOAT4 RightPlaneFloat;
     XMStoreFloat4(&RightPlaneFloat, RightPlane);
     RightPlane = XMPlaneNormalize(RightPlane);
 
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
     XMFLOAT4 LeftPlaneFloat;
     XMStoreFloat4(&NearPlaneFloat, LeftPlane);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
     XMFLOAT4 TopPlaneFloat;
     XMStoreFloat4(&TopPlaneFloat, TopPlane);
     TopPlane = XMPlaneNormalize(TopPlane);
 
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
     XMFLOAT4 BottomPlaneFloat;
     XMStoreFloat4(&BottomPlaneFloat, BottomPlane);
     BottomPlane = XMPlaneNormalize(BottomPlane);
@@ -468,27 +468,27 @@ inline ContainmentType CFrustumComponent::Contains(const CFrustumComponent& fr) 
 
     // Create 6 planes (do it inline to encourage use of registers)
     XMVECTOR NearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
-    NearPlane = DirectX::Internal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
+    NearPlane = DirectX::MathInternal::XMPlaneTransform(NearPlane, vOrientation, vOrigin);
     NearPlane = XMPlaneNormalize(NearPlane);
 
     XMVECTOR FarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-    FarPlane = DirectX::Internal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
+    FarPlane = DirectX::MathInternal::XMPlaneTransform(FarPlane, vOrientation, vOrigin);
     FarPlane = XMPlaneNormalize(FarPlane);
 
     XMVECTOR RightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-    RightPlane = DirectX::Internal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
+    RightPlane = DirectX::MathInternal::XMPlaneTransform(RightPlane, vOrientation, vOrigin);
     RightPlane = XMPlaneNormalize(RightPlane);
 
     XMVECTOR LeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-    LeftPlane = DirectX::Internal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
+    LeftPlane = DirectX::MathInternal::XMPlaneTransform(LeftPlane, vOrientation, vOrigin);
     LeftPlane = XMPlaneNormalize(LeftPlane);
 
     XMVECTOR TopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-    TopPlane = DirectX::Internal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
+    TopPlane = DirectX::MathInternal::XMPlaneTransform(TopPlane, vOrientation, vOrigin);
     TopPlane = XMPlaneNormalize(TopPlane);
 
     XMVECTOR BottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-    BottomPlane = DirectX::Internal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
+    BottomPlane = DirectX::MathInternal::XMPlaneTransform(BottomPlane, vOrientation, vOrigin);
     BottomPlane = XMPlaneNormalize(BottomPlane);
 
     return fr.ContainedBy(NearPlane, FarPlane, RightPlane, LeftPlane, TopPlane, BottomPlane);
@@ -526,7 +526,7 @@ inline bool CFrustumComponent::Intersects(const BoundingSphere& sh) const noexce
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Load the sphere.
     XMVECTOR vCenter = XMLoadFloat3(&sh.Center);
@@ -655,7 +655,7 @@ inline bool CFrustumComponent::Intersects(const BoundingSphere& sh) const noexce
 
         // Find the nearest point on the edge to the center of the sphere.
         // The corners of the frustum are included as the endpoints of the edges.
-        XMVECTOR Point = DirectX::Internal::PointOnLineSegmentNearestPoint(Corners[ei0], Corners[ei1], vCenter);
+        XMVECTOR Point = DirectX::MathInternal::PointOnLineSegmentNearestPoint(Corners[ei0], Corners[ei1], vCenter);
 
         XMVECTOR Delta = XMVectorSubtract(vCenter, Point);
 
@@ -711,14 +711,14 @@ inline bool CFrustumComponent::Intersects(const BoundingOrientedBox& box) const 
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR FrustumOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(FrustumOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(FrustumOrientation));
 
     // Load the box.
     XMVECTOR Center = XMLoadFloat3(&box.Center);
     XMVECTOR Extents = XMLoadFloat3(&box.Extents);
     XMVECTOR BoxOrientation = XMLoadFloat4(&box.Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(BoxOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(BoxOrientation));
 
     // Transform the oriented box into the space of the frustum in order to
     // minimize the number of transforms we have to do.
@@ -822,7 +822,7 @@ inline bool CFrustumComponent::Intersects(const BoundingOrientedBox& box) const 
         XMVECTOR Result = XMVectorOrInt(XMVectorGreater(FrustumMin, XMVectorAdd(BoxDist, Extents)),
             XMVectorLess(FrustumMax, XMVectorSubtract(BoxDist, Extents)));
 
-        if (DirectX::Internal::XMVector3AnyTrue(Result))
+        if (DirectX::MathInternal::XMVector3AnyTrue(Result))
             return false;
     }
 
@@ -888,7 +888,7 @@ inline bool CFrustumComponent::Intersects(const CFrustumComponent& fr) const noe
     XMVECTOR OriginB = XMLoadFloat3(&Origin);
     XMVECTOR OrientationB = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(OrientationB));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(OrientationB));
 
     // Build the planes of frustum B.
     XMVECTOR AxisB[6];
@@ -911,7 +911,7 @@ inline bool CFrustumComponent::Intersects(const CFrustumComponent& fr) const noe
     XMVECTOR OriginA = XMLoadFloat3(&fr.Origin);
     XMVECTOR OrientationA = XMLoadFloat4(&fr.Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(OrientationA));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(OrientationA));
 
     // Transform frustum A into the space of the frustum B in order to
     // minimize the number of transforms we have to do.
@@ -1115,7 +1115,7 @@ inline bool XM_CALLCONV CFrustumComponent::Intersects(FXMVECTOR V0, FXMVECTOR V1
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Transform triangle into the local space of frustum.
     XMVECTOR TV0 = XMVector3InverseRotate(XMVectorSubtract(V0, vOrigin), vOrientation);
@@ -1252,13 +1252,13 @@ inline bool XM_CALLCONV CFrustumComponent::Intersects(FXMVECTOR V0, FXMVECTOR V1
 _Use_decl_annotations_
 inline PlaneIntersectionType XM_CALLCONV CFrustumComponent::Intersects(FXMVECTOR Plane) const noexcept
 {
-    assert(DirectX::Internal::XMPlaneIsUnit(Plane));
+    assert(DirectX::MathInternal::XMPlaneIsUnit(Plane));
 
     // Load origin and orientation of the frustum.
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Set w of the origin to one so we can dot4 with a plane.
     vOrigin = XMVectorInsert<0, 0, 0, 0, 1>(vOrigin, XMVectorSplatOne());
@@ -1286,7 +1286,7 @@ inline PlaneIntersectionType XM_CALLCONV CFrustumComponent::Intersects(FXMVECTOR
     XMVECTOR Corners7 = XMVectorMultiplyAdd(LeftBottom, vFar, vOrigin);
 
     XMVECTOR Outside, Inside;
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane, Outside, Inside);
 
@@ -1335,7 +1335,7 @@ inline bool XM_CALLCONV CFrustumComponent::Intersects(FXMVECTOR rayOrigin, FXMVE
 
     for (size_t i = 0; i < 6; ++i)
     {
-        XMVECTOR Plane = DirectX::Internal::XMPlaneTransform(Planes[i], frOrientation, frOrigin);
+        XMVECTOR Plane = DirectX::MathInternal::XMPlaneTransform(Planes[i], frOrientation, frOrigin);
         Plane = XMPlaneNormalize(Plane);
 
         XMVECTOR AxisDotOrigin = XMPlaneDotCoord(Plane, rayOrigin);
@@ -1416,7 +1416,7 @@ inline ContainmentType XM_CALLCONV CFrustumComponent::ContainedBy(
     XMVECTOR vOrigin = XMLoadFloat3(&Origin);
     XMVECTOR vOrientation = XMLoadFloat4(&Orientation);
 
-    assert(DirectX::Internal::XMQuaternionIsUnit(vOrientation));
+    assert(DirectX::MathInternal::XMQuaternionIsUnit(vOrientation));
 
     // Set w of the origin to one so we can dot4 with a plane.
     vOrigin = XMVectorInsert<0, 0, 0, 0, 1>(vOrigin, XMVectorSplatOne());
@@ -1446,42 +1446,42 @@ inline ContainmentType XM_CALLCONV CFrustumComponent::ContainedBy(
     XMVECTOR Outside, Inside;
 
     // Test against each plane.
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane0, Outside, Inside);
 
     XMVECTOR AnyOutside = Outside;
     XMVECTOR AllInside = Inside;
 
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane1, Outside, Inside);
 
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane2, Outside, Inside);
 
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane3, Outside, Inside);
 
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane4, Outside, Inside);
 
     AnyOutside = XMVectorOrInt(AnyOutside, Outside);
     AllInside = XMVectorAndInt(AllInside, Inside);
 
-    DirectX::Internal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
+    DirectX::MathInternal::FastIntersectFrustumPlane(Corners0, Corners1, Corners2, Corners3,
         Corners4, Corners5, Corners6, Corners7,
         Plane5, Outside, Inside);
 
@@ -1522,42 +1522,42 @@ inline void CFrustumComponent::GetPlanes(XMVECTOR* NearPlane, XMVECTOR* FarPlane
     if (NearPlane)
     {
         XMVECTOR vNearPlane = XMVectorSet(0.0f, 0.0f, -1.0f, Near);
-        vNearPlane = DirectX::Internal::XMPlaneTransform(vNearPlane, vOrientation, vOrigin);
+        vNearPlane = DirectX::MathInternal::XMPlaneTransform(vNearPlane, vOrientation, vOrigin);
         *NearPlane = XMPlaneNormalize(vNearPlane);
     }
 
     if (FarPlane)
     {
         XMVECTOR vFarPlane = XMVectorSet(0.0f, 0.0f, 1.0f, -Far);
-        vFarPlane = DirectX::Internal::XMPlaneTransform(vFarPlane, vOrientation, vOrigin);
+        vFarPlane = DirectX::MathInternal::XMPlaneTransform(vFarPlane, vOrientation, vOrigin);
         *FarPlane = XMPlaneNormalize(vFarPlane);
     }
 
     if (RightPlane)
     {
         XMVECTOR vRightPlane = XMVectorSet(1.0f, 0.0f, -RightSlope, 0.0f);
-        vRightPlane = DirectX::Internal::XMPlaneTransform(vRightPlane, vOrientation, vOrigin);
+        vRightPlane = DirectX::MathInternal::XMPlaneTransform(vRightPlane, vOrientation, vOrigin);
         *RightPlane = XMPlaneNormalize(vRightPlane);
     }
 
     if (LeftPlane)
     {
         XMVECTOR vLeftPlane = XMVectorSet(-1.0f, 0.0f, LeftSlope, 0.0f);
-        vLeftPlane = DirectX::Internal::XMPlaneTransform(vLeftPlane, vOrientation, vOrigin);
+        vLeftPlane = DirectX::MathInternal::XMPlaneTransform(vLeftPlane, vOrientation, vOrigin);
         *LeftPlane = XMPlaneNormalize(vLeftPlane);
     }
 
     if (TopPlane)
     {
         XMVECTOR vTopPlane = XMVectorSet(0.0f, 1.0f, -TopSlope, 0.0f);
-        vTopPlane = DirectX::Internal::XMPlaneTransform(vTopPlane, vOrientation, vOrigin);
+        vTopPlane = DirectX::MathInternal::XMPlaneTransform(vTopPlane, vOrientation, vOrigin);
         *TopPlane = XMPlaneNormalize(vTopPlane);
     }
 
     if (BottomPlane)
     {
         XMVECTOR vBottomPlane = XMVectorSet(0.0f, -1.0f, BottomSlope, 0.0f);
-        vBottomPlane = DirectX::Internal::XMPlaneTransform(vBottomPlane, vOrientation, vOrigin);
+        vBottomPlane = DirectX::MathInternal::XMPlaneTransform(vBottomPlane, vOrientation, vOrigin);
         *BottomPlane = XMPlaneNormalize(vBottomPlane);
     }
 }
