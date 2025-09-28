@@ -2,12 +2,12 @@
 #include <locale>
 #include <codecvt>
 
-#include "CoreClock.h"
+#include "Core/CoreClock.h"
 #include "DX11Device.h"
 #include "Renderer.h"
-#include "GraphicsModule.h"
-#include "UIModule.h"
-#include "PhysicsModule.h"
+#include "Modules/GraphicsModule.h"
+#include "Modules/UIModule.h"
+#include "Modules/PhysicsModule.h"
 
 #define FLT_MAX          3.402823466e+38F
 

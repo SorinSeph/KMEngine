@@ -13,11 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{7ce6a2bd-9870-4c1e-ad2a-4c2666b670ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modules">
+      <UniqueIdentifier>{174ddac6-362a-462a-9248-517485ad93f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KMEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DDSTextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,9 +51,6 @@
     <ClCompile Include="ViewportWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoreClock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,20 +60,20 @@
     <ClCompile Include="ViewportMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIModule.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RightSubwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\CoreClock.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="KMEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modules\UIModule.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KMEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreWindowsApp.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -116,9 +116,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoreClock.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="EntityPhysicalMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -134,32 +131,38 @@
     <ClInclude Include="Math.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoreEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIModule.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseModule.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsModule.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInitializer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ViewportMessage.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="RightSubwindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsModule.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="ImporterGLTF.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CoreClock.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CoreEngine.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KMEngine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\BaseModule.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\GraphicsModule.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\ModuleInitializer.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\PhysicsModule.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Modules\UIModule.h">
+      <Filter>Source Files\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +183,7 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="GizmoArrowShader.fxh" />
+    <None Include="Engine.ini" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">

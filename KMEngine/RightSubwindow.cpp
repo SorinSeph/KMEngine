@@ -1,7 +1,7 @@
 #include "RightSubwindow.h"
 #include "ViewportMessage.h"
-#include "GraphicsModule.h"
-#include "UIModule.h"
+#include "Modules/GraphicsModule.h"
+#include "Modules/UIModule.h"
 #include "Scene.h"
 #include <string>
 

@@ -25,8 +25,8 @@
 #include "Logger.h"
 #include "Scene.h"
 
-#include "CoreClock.h"
-#include "CoreEngine.h"
+#include "Core/CoreClock.h"
+#include "Core/CoreEngine.h"
 
 using namespace DirectX;
 using namespace std;

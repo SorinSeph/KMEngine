@@ -8,12 +8,10 @@
 #include "Renderer.h"
 #include "Logger.h"
 #include "World.h"
-//#include "GameEntityBuilder.h"
-#include "BaseModule.h"
-#include "UIModule.h"
-//#include "ViewportWindow.h"
-#include "GraphicsModule.h"
-#include "PhysicsModule.h"
+#include "Modules/BaseModule.h"
+#include "Modules/UIModule.h"
+#include "Modules/GraphicsModule.h"
+#include "Modules/PhysicsModule.h"
 #include "TerrainGenerator.h"
 
 bool bClipCursor = false;

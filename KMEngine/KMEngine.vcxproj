@@ -129,29 +129,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CoreClock.cpp" />
+    <ClCompile Include="Core\CoreClock.cpp" />
     <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="DX11Device.cpp" />
     <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="GameEntity3D.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Modules\UIModule.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RightSubwindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
-    <ClCompile Include="UIModule.cpp" />
     <ClCompile Include="ViewportMessage.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseModule.h" />
-    <ClInclude Include="CoreClock.h" />
-    <ClInclude Include="CoreEngine.h" />
-    <ClInclude Include="CoreWindowsApp.h" />
+    <ClInclude Include="Core\CoreClock.h" />
+    <ClInclude Include="Core\CoreEngine.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeTerrainGenerator.h" />
     <ClInclude Include="DDSTextureLoader.h" />
@@ -160,14 +158,16 @@
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
-    <ClInclude Include="GraphicsModule.h" />
     <ClInclude Include="ImporterGLTF.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="ModuleInitializer.h" />
+    <ClInclude Include="Modules\BaseModule.h" />
+    <ClInclude Include="Modules\GraphicsModule.h" />
+    <ClInclude Include="Modules\ModuleInitializer.h" />
+    <ClInclude Include="Modules\PhysicsModule.h" />
+    <ClInclude Include="Modules\UIModule.h" />
     <ClInclude Include="PerlinNoise.h" />
-    <ClInclude Include="PhysicsModule.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
@@ -175,12 +175,12 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="TerrainGenerator.h" />
-    <ClInclude Include="UIModule.h" />
     <ClInclude Include="ViewportMessage.h" />
     <ClInclude Include="ViewportWindow.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Engine.ini" />
     <None Include="FrustumShader.fxh" />
     <None Include="FrustumShader.ps" />
     <None Include="FrustumShader.vs" />

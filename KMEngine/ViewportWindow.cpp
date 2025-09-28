@@ -1,4 +1,4 @@
-#include "CoreClock.h"
+#include "Core/CoreClock.h"
 #include "ViewportWindow.h"
 
 void CViewportWindow::SetViewportParentHWND(HWND hwnd)

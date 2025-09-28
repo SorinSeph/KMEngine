@@ -1,9 +1,9 @@
 #include "Renderer.h"
-#include "CoreClock.h"
+#include "Core/CoreClock.h"
 #include "Scene.h"
 #include "Logger.h"
 #include "Math.h"
-#include "GraphicsModule.h"
+#include "Modules/GraphicsModule.h"
 
 CRenderer::CRenderer() {}
 

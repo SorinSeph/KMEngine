@@ -1,9 +1,9 @@
 #include <any>
 #include "ViewportMessage.h"
-#include "UIModule.h"
-#include "GraphicsModule.h"
-#include "PhysicsModule.h"
-#include "CoreClock.h"
+#include "Modules/UIModule.h"
+#include "Modules/GraphicsModule.h"
+#include "Modules/PhysicsModule.h"
+#include "Core/CoreClock.h"
 
 void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
 {
