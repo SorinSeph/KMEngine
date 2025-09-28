@@ -1,5 +1,5 @@
 #include "UIModule.h"
-#include "Scene.h"
+#include "../Scene.h"
 
 HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 {

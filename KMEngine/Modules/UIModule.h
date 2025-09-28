@@ -3,10 +3,10 @@
 
 #include <sstream>
 #include "BaseModule.h"
-#include "resource.h"
+#include "../resource.h"
 #include <Windows.h>
-#include "ViewportWindow.h"
-#include "RightSubwindow.h"
+#include "../ViewportWindow.h"
+#include "../RightSubwindow.h"
 
 const wchar_t CLASS_NAME[] = L"KME Engine";
 const wchar_t TOOLBAR_NAME[] = L"Toolbar";
