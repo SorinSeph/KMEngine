@@ -15,10 +15,6 @@ public:
 		Ptr(args...);
 	}
 
-	std::vector<CBaseModule*> m_Modules;
-
-	std::vector<std::any> m_ModuleVector;
-
 	CBaseModule *m_ModuleArray[CORE_MODULE_COUNT];
 };
 
@@ -33,7 +29,6 @@ public:
 	template <typename... Args>
 	void Notify(auto&& Ptr, Args&&... args)
 	{
-		//std::cout << "Component 2 does Variadic C.\n";
 		m_pMediator->Notify(Ptr, args...);
 	}
 

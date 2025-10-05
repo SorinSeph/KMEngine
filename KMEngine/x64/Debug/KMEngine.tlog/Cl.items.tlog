@@ -8,7 +8,7 @@ C:\Users\sefce\source\KMEngine\KMEngine\Logger.cpp;C:\Users\sefce\source\KMEngin
 C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\UIModule.obj
 C:\Users\sefce\source\KMEngine\KMEngine\PerlinNoise.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\PerlinNoise.obj
 C:\Users\sefce\source\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\PrimitiveGeometryFactory.obj
-C:\Users\sefce\source\KMEngine\KMEngine\Renderer.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Renderer.obj
+C:\Users\sefce\source\KMEngine\KMEngine\Renderer\Renderer.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Renderer.obj
 C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\RightSubwindow.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Scene.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Scene.obj
 C:\Users\sefce\source\KMEngine\KMEngine\TerrainGenerator.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\TerrainGenerator.obj

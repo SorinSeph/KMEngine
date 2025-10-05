@@ -129,24 +129,8 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
         {
             CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
 
-            CGraphicsModule* GraphicsModule = nullptr;
+			CGraphicsModule* GraphicsModule = static_cast<CGraphicsModule*>(ViewportMessage.m_pUIModule->m_pMediator->m_ModuleArray[1]);
 
-            if (ViewportMessage.m_pUIModule)
-            {
-                for (auto ModuleIt : ViewportMessage.m_pUIModule->m_pMediator->m_ModuleVector)
-                {
-                    if (ModuleIt.type() == typeid(CGraphicsModule*))
-                    {
-                        GraphicsModule = std::any_cast<CGraphicsModule*>(ModuleIt);
-                        break;
-                    }
-                }
-            }
-
-            // Create Labels and Edit Controls for X, Y, Z inside Outliner
-            // Initial positions will be set in WM_SIZE
-
-            // X Label
             CRightSubwindow::m_PositionXLabel = CreateWindowEx(
                 0, L"STATIC", L"X:", WS_CHILD | WS_VISIBLE | SS_LEFT,
                 0, 0, 30, 20, hwnd, NULL,

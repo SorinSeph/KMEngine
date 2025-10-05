@@ -4,8 +4,9 @@
 
 #include "DX11Device.h"
 #include <Windows.h>
+#include <fstream>
 #include "resource.h"
-#include "Renderer.h"
+#include "Renderer/Renderer.h"
 #include "Logger.h"
 #include "World.h"
 #include "Modules/BaseModule.h"
@@ -32,11 +33,6 @@ public:
         : m_HInstance{ hInstance }
         , m_NCmdShow{ nCmdShow }
         , m_Renderer{ ViewportHwnd }
-        //, m_ViewportWindow{ }
-        //, m_RotX{ m_ViewportWindow.GetXRotation() }
-        //, m_RotY{ m_ViewportWindow.GetYRotation() }
-        //, m_RotX2{ m_ViewportWindow.GetXRotation3() }
-        //, m_RotY2{ m_ViewportWindow.GetYRotation3() }
         , m_Logger{ CLogger::GetLogger() }
     {
     }
@@ -46,16 +42,12 @@ public:
     {
         m_UIModule.SetMediator(Mediator);
         m_UIModule.Initialize(m_HInstance, m_NCmdShow);
-		Mediator.m_Modules.push_back(&m_UIModule);
-		Mediator.m_ModuleVector.push_back(&m_UIModule);
 		Mediator.m_ModuleArray[0] = &m_UIModule;
 
         m_GraphicsModule.SetMediator(Mediator);
         m_GraphicsModule.SetRenderer();
         m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
 		m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
-        Mediator.m_Modules.push_back(&m_GraphicsModule);
-        Mediator.m_ModuleVector.push_back(&m_GraphicsModule);
 		Mediator.m_ModuleArray[1] = &m_GraphicsModule;
 
         m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
@@ -213,7 +205,6 @@ private:
 
     CLogger& m_Logger;
 
-    //std::unique_ptr<CMediator> m_Mediator;
     CUIModule m_UIModule;
     CGraphicsModule m_GraphicsModule;
     CPhysicsModule m_PhysicsModule;

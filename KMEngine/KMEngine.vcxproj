@@ -139,7 +139,7 @@
     <ClCompile Include="Modules\UIModule.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="RightSubwindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
@@ -167,9 +167,11 @@
     <ClInclude Include="Modules\ModuleInitializer.h" />
     <ClInclude Include="Modules\PhysicsModule.h" />
     <ClInclude Include="Modules\UIModule.h" />
+    <ClInclude Include="OpenGLDevice.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererDirectX11.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RightSubwindow.h" />
     <ClInclude Include="Scene.h" />

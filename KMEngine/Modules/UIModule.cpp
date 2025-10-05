@@ -54,7 +54,6 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         }
     }
 
-
     WNDCLASS OutlinerWC = { };
     OutlinerWC.lpfnWndProc = CRightSubwindow::OutlinerProc;
     OutlinerWC.hInstance = hInstance;
@@ -70,8 +69,6 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     PropertiesWC.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 
     RegisterClass(&PropertiesWC);
-
-
 
     hwnd = CreateWindow(
         CLASS_NAME,
@@ -102,17 +99,17 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
     );
 
     HWND ButtonHwnd = CreateWindow(
-        L"BUTTON",  // Predefined class; Unicode assumed
-        L"Click Me",      // Button text
-        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles
-        10,         // x position
-        10,         // y position
-        100,        // Button width
-        30,        // Button height
-        LeftToolbarHwnd,       // Parent window
-        (HMENU)1,       // Button ID
+        L"BUTTON",  
+        L"Click Me",      
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  
+        10,        
+        10,         
+        100,        
+        30,        
+        LeftToolbarHwnd,       
+        (HMENU)1,       
         (HINSTANCE)GetWindowLongPtr(LeftToolbarHwnd, GWLP_HINSTANCE),
-        NULL);      // Pointer not needed
+        NULL);      
 
     if (ButtonHwnd == NULL)
     {
@@ -127,21 +124,6 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 
     m_RightSubwindow.CreateRightSubwindow(hwnd);
 	RightSubwindowHwnd = m_RightSubwindow.GetRightSubwindowHwnd();
-    //RightSubwindowHwnd = CreateWindow(
-    //    SIDETOOLBAR_NAME,
-    //    NULL,
-    //    WS_CHILDWINDOW | WS_VISIBLE | WS_CLIPSIBLINGS,
-    //    0,
-    //    0,
-    //    0,
-    //    0,
-    //    hwnd,
-    //    NULL,
-    //    (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE),
-    //    NULL
-    //);
-
-
 
     if (hwnd == NULL)
     {
@@ -302,107 +284,6 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
     }
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
-
-//LRESULT CALLBACK RightToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-//{
-//    HDC         hdc;
-//    PAINTSTRUCT ps;
-//    RECT        rect;
-//
-//    switch (message)
-//    {
-//        case WM_CREATE:
-//        {
-//            SetWindowLong(hwnd, 0, 0);
-//
-//            GetClientRect(hwnd, &rect);
-//
-//            int width = rect.right - rect.left;
-//            int height = rect.bottom - rect.top;
-//
-//            // Create the blue child window (top half)
-//            OutlinerHwnd = CreateWindowEx(
-//                0,                              // Optional window styles
-//                L"Outliner",           // Window class
-//                NULL,                           // No window text
-//                WS_CHILD | WS_VISIBLE,          // Window style
-//                0, 0,                           // Position
-//                width, height / 2,              // Size
-//                hwnd,                           // Parent window
-//                NULL,                           // No menu
-//                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-//                NULL                            // Additional application data
-//            );
-//
-//            if (OutlinerHwnd == NULL)
-//            {
-//                MessageBox(hwnd, L"Could not create outliner window.", L"Error", MB_OK | MB_ICONERROR);
-//            }
-//
-//            // Create the red child window (bottom half)
-//            PropertiesHwnd = CreateWindowEx(
-//                0,                              // Optional window styles
-//                L"Properties",            // Window class
-//                NULL,                           // No window text
-//                WS_CHILD | WS_VISIBLE,          // Window style
-//                0, height / 2,                  // Position
-//                width, height / 2,              // Size
-//                hwnd,                           // Parent window
-//                NULL,                           // No menu
-//                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-//                NULL                            // Additional application data
-//            );
-//
-//            if (PropertiesHwnd == NULL)
-//            {
-//                MessageBox(hwnd, L"Could not create properties window.", L"Error", MB_OK | MB_ICONERROR);
-//            }
-//
-//            return 0;
-//        }
-//
-//        case WM_PAINT:
-//        {
-//            hdc = BeginPaint(hwnd, &ps);
-//
-//            GetClientRect(hwnd, &rect);
-//            Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-//            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 40));
-//            FillRect(hdc, &rect, Brush);
-//
-//            EndPaint(hwnd, &ps);
-//            return 0;
-//        }
-//
-//        case WM_SIZE:
-//        {
-//            int width = LOWORD(lParam);
-//            int height = HIWORD(lParam);
-//
-//            // Resize the blue child window to top half
-//            if (OutlinerProc)
-//            {
-//                SetWindowPos(OutlinerHwnd, NULL, 0, 0, width, height / 4, SWP_NOZORDER);
-//            }
-//
-//            // Resize the red child window to bottom half
-//            if (PropertiesProc)
-//            {
-//                SetWindowPos(PropertiesHwnd, NULL, 0, height / 4, width, (height * 3) / 4, SWP_NOZORDER);
-//            }
-//
-//            return 0;
-//        }
-//
-//
-//        case WM_DESTROY:
-//        {
-//            PostQuitMessage(0);
-//            return 0;
-//        }
-//    }
-//    return DefWindowProc(hwnd, message, wParam, lParam);
-//}
 
 LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

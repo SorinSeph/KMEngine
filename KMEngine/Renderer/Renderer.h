@@ -1,10 +1,12 @@
 #pragma once
 #include <d3d11.h>
-#include "DX11Device.h"
+#include "../DX11Device.h"
 
 HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 
 class CGraphicsModule;
+
+class CRendererBase {};
 
 class CRenderer
 {
@@ -74,4 +76,6 @@ private:
     // Test variables / functions
 
 	float m_CubeLocZ{ 0.0f };
+
+	CRendererBase* m_pRendererBase{ nullptr };
 };

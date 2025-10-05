@@ -45,9 +45,6 @@ float rotx = 0;
 float rotz = 0;
 float roty = 0;
 
-//float g_RotX = 0;
-//float g_RotY = 0;
-
 float scaleX = 1.0f;
 float scaleY = 1.0f;
 
@@ -62,9 +59,6 @@ float EyeZ = 0.0f;
 
 float EyeXOffset = 0.0f;
 float EyeZOffset = 0.0f;
-
-//float ViewportWidth = 0;
-//float ViewportHeight = 0;
 
 XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
@@ -105,7 +99,6 @@ const wchar_t SIDETOOLBAR_NAME2[] = L"SideToolbar";
 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow);
-//HRESULT InitEngine(HINSTANCE hInstance, int nCmdShow);
 bool InitDirectInput(HINSTANCE hInstance);
 void DetectKeyboardInput();
 
@@ -181,17 +174,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
                 Logger.Log("Entity Tag at ", SceneListIndex, " is: ", EntityTag);
                 SceneListIndex++;
             }
-
-            // m_DX11Device.Render(g_RotX, g_RotY, EyeX, EyeY, EyeZ);
-            //if (CoreTimer.GetFTotalTime() >= 6.0f)
-            //{
-            //    Scene& SScene = Scene::GetScene();
-            //    continue;
-            //}
         }
     }
     Renderer->CleanupRenderer();
-    //CleanupDevice();
 
     return 0;
 }

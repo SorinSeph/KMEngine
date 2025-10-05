@@ -4,8 +4,8 @@
 #define GRAPHICSMODULE_H
 
 #include "BaseModule.h"
-#include "Logger.h"
-#include "Renderer.h"
+#include "../Logger.h"
+#include "../Renderer/Renderer.h"
 
 class CGraphicsModule : public CBaseModule
 {
