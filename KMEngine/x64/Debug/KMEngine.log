@@ -3,19 +3,13 @@
 C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(363,31): warning C4101: 'GeometryFactory': unreferenced local variable
 C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(783,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
 C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(809,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1423,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1424,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1435,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1786,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2103,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2287,31): warning C4101: 'GeometryFactory': unreferenced local variable
-C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2809,31): warning C4101: 'GeometryFactory': unreferenced local variable
-  RightSubwindow.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(362,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(386,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp(410,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1425,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1426,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1437,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1788,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2105,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2289,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2811,31): warning C4101: 'GeometryFactory': unreferenced local variable
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

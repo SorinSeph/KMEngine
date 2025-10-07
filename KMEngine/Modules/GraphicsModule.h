@@ -29,6 +29,8 @@ public:
 	{
 		m_Renderer.GetDX11Device()->SpawnGizmo(SelectedEntity);
 	}
+
+	CDX11Device m_DX11Device;
 };
 
 #endif

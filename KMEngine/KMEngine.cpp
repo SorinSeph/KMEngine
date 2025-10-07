@@ -155,7 +155,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
             float eyeY = CoreEngine.GetEyeY();
             float eyeZ = CoreEngine.GetEyeZ();
 
-            Renderer->Render(X, Y, eyeX, eyeY, eyeZ);
+            Renderer->Render2(X, Y, eyeX, eyeY, eyeZ);
 
             Logger.Log("KMEngine.cpp, wWinMain() \nTotalTime: ", CoreClock.GetFTotalTime(), "\n");
             Logger.Log("KMEngine.cpp, wWinMain() \n", "RotX = ", X, "\nRotY = ", Y, "\nEyeX = ", EyeX, "\nEyeY = ", EyeY, "\nEyeZ = ", EyeZ, "\n");

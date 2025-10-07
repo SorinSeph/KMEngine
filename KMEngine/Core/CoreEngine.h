@@ -32,7 +32,7 @@ public:
     CCoreEngine(HINSTANCE hInstance, int nCmdShow)
         : m_HInstance{ hInstance }
         , m_NCmdShow{ nCmdShow }
-        , m_Renderer{ ViewportHwnd }
+        , m_Renderer{ }
         , m_Logger{ CLogger::GetLogger() }
     {
     }
@@ -45,7 +45,7 @@ public:
 		Mediator.m_ModuleArray[0] = &m_UIModule;
 
         m_GraphicsModule.SetMediator(Mediator);
-        m_GraphicsModule.SetRenderer();
+        //m_GraphicsModule.SetRenderer();
         m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
 		m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
 		Mediator.m_ModuleArray[1] = &m_GraphicsModule;
@@ -53,6 +53,7 @@ public:
         m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
             GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
         }, m_GraphicsModule);
+        m_GraphicsModule.m_Renderer.InitDX11Renderer();
 
         m_PhysicsModule.SetMediator(Mediator);
         Mediator.m_ModuleArray[2] = &m_PhysicsModule;
@@ -60,14 +61,13 @@ public:
         //m_Renderer.SetViewport(m_ViewportWindow.GetViewportHwnd());
         //m_Renderer.InitRenderer();
 		//m_GraphicsModule.m_Renderer.SetViewport(viewportHwnd);
-        m_GraphicsModule.m_Renderer.InitRenderer();
 
         //m_World.Init();
         //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
         //EntityBuilder.InitDefaultEntities();
         //EntityBuilder.TestDevice();
-        CTerrainGenerator TerrainGenerator{ m_GraphicsModule.m_Renderer.GetDX11Device() };
-        TerrainGenerator.GenerateTestTerrain();
+        //CTerrainGenerator TerrainGenerator{ m_GraphicsModule.m_Renderer.GetDX11Device() };
+        //TerrainGenerator.GenerateTestTerrain();
 
         return S_OK;
     }

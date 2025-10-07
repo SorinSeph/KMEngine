@@ -75,6 +75,9 @@
     <ClCompile Include="Renderer\Renderer.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\RendererDirectX11.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -170,7 +173,10 @@
     <ClInclude Include="Renderer\Renderer.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="RendererDirectX11.h">
+    <ClInclude Include="Renderer\RendererDirectX11.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RendererOpenGL.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>

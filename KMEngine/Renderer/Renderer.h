@@ -6,14 +6,10 @@ HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LP
 
 class CGraphicsModule;
 
-class CRendererBase {};
-
 class CRenderer
 {
 public:
     CRenderer();
-
-    CRenderer(HWND Viewport);
 
     CGraphicsModule* m_pGraphicsModule{ nullptr };
 
@@ -29,6 +25,8 @@ public:
 	void SetViewportSize(int Width, int Height);
 
     void InitRenderer();
+
+    void InitDX11Renderer();
 
     CDX11Device* GetDX11Device();
 
@@ -58,6 +56,8 @@ public:
 
     void AddGizmo();
 
+    void Render2(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
+
     void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 
     void CleanupRenderer();
@@ -77,5 +77,5 @@ private:
 
 	float m_CubeLocZ{ 0.0f };
 
-	CRendererBase* m_pRendererBase{ nullptr };
+    class CRendererDirectX11* m_pDX11Renderer{ nullptr };
 };

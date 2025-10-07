@@ -140,6 +140,7 @@
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Renderer\RendererDirectX11.cpp" />
     <ClCompile Include="RightSubwindow.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
@@ -170,8 +171,9 @@
     <ClInclude Include="OpenGLDevice.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
-    <ClInclude Include="RendererDirectX11.h" />
     <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\RendererDirectX11.h" />
+    <ClInclude Include="Renderer\RendererOpenGL.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RightSubwindow.h" />
     <ClInclude Include="Scene.h" />

@@ -1,63 +1,48 @@
-#include "Renderer.h"
-#include "../Core/CoreClock.h"
-#include "../Scene.h"
-#include "../Logger.h"
-#include "Math.h"
-#include "../Modules/GraphicsModule.h"
 #include "RendererDirectX11.h"
+#include "../modules/GraphicsModule.h"
 
-CRenderer::CRenderer()
+void CRendererDirectX11::SetViewport(HWND InViewport)
 {
-    m_pDX11Renderer = new CRendererDirectX11;
+    m_DX11Device.SetViewport(InViewport);
 }
 
-void CRenderer::SetViewport(HWND InViewport)
+void CRendererDirectX11::SetViewportSize(int Width, int Height)
 {
-    m_pDX11Renderer->m_DX11Device.SetViewport(InViewport);
+    m_ViewportWidth = Width;
+    m_ViewportHeight = Height;
+    m_DX11Device.SetViewportSize(Width, Height);
 }
 
-void CRenderer::SetViewportSize(int Width, int Height)
-{
-	m_ViewportWidth = Width;
-	m_ViewportHeight = Height;
-    m_pDX11Renderer->m_DX11Device.SetViewportSize(Width, Height);
-    // Previously used to initialize the DX11 renderer context, which was the only one supported
-	//m_DX11Device.SetViewportSize(Width, Height);
-}
-
-void CRenderer::InitRenderer()
+void CRendererDirectX11::InitRenderer()
 {
     m_DX11Device.InitDX11Device();
 
     //m_DX11Device.AddTestLine();
 }
 
-void CRenderer::InitDX11Renderer()
+void CRendererDirectX11::SetCameraParams(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
-    m_pDX11Renderer->m_DX11Device.InitDX11Device();
+	m_RotX = RotX;
+	m_RotY = RotY;
+	m_EyeX = EyeX;
+	m_EyeY = EyeY;
+	m_EyeZ = EyeZ;
 }
 
-CDX11Device* CRenderer::GetDX11Device()
+CDX11Device* CRendererDirectX11::GetDX11Device()
 {
     return &m_DX11Device;
 }
 
-void CRenderer::Render2(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
-{
-	//m_pBaseRenderer = static_cast<CRendererDirectX11*>(this);
-    m_pDX11Renderer->SetCameraParams(RotX, RotY, EyeX, EyeY, EyeZ);
-    m_pDX11Renderer->Render();
-}
-
-void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
+void CRendererDirectX11::Render()
 {
     CScene& Scene = CScene::GetScene();
     CLogger& Logger = CLogger::GetLogger();
 
-    XMFLOAT3 CameraPos(EyeX, EyeY, EyeZ);
+    XMFLOAT3 CameraPos(m_EyeX, m_EyeY, m_EyeZ);
     XMVECTOR CameraVec = XMLoadFloat3(&CameraPos);
 
-	Logger.Log("CRenderer::Render: EyeX = ", EyeY, "EyeY = ", EyeY, "EyeZ = ", EyeZ, "\n");
+    Logger.Log("CRenderer::Render: EyeX = ", m_EyeX, "EyeY = ", m_EyeY, "EyeZ = ", m_EyeZ, "\n");
 
     // To modify according to every object
 
@@ -79,22 +64,22 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     XMMATRIX RotationMatrixX
     (
         1.f, 0.f, 0.f, 0.f,
-        0.f, std::cosf(XMConvertToRadians(RotX)), -std::sinf(XMConvertToRadians(RotX)), 0.f,
-        0.f, std::sinf(XMConvertToRadians(RotX)), std::cosf(XMConvertToRadians(RotX)), 0.f,
+        0.f, std::cosf(XMConvertToRadians(m_RotX)), -std::sinf(XMConvertToRadians(m_RotX)), 0.f,
+        0.f, std::sinf(XMConvertToRadians(m_RotX)), std::cosf(XMConvertToRadians(m_RotX)), 0.f,
         0.f, 0.f, 0.f, 1.f
     );
 
     XMMATRIX RotationMatrixY
     (
-        std::cosf(XMConvertToRadians(RotY)), 0.f, std::sinf(XMConvertToRadians(RotY)), 0.f,
+        std::cosf(XMConvertToRadians(m_RotY)), 0.f, std::sinf(XMConvertToRadians(m_RotY)), 0.f,
         0.f, 1.f, 0.f, 0.f,
-        -std::sinf(XMConvertToRadians(RotY)), 0.f, std::cosf(XMConvertToRadians(RotY)), 0.f,
+        -std::sinf(XMConvertToRadians(m_RotY)), 0.f, std::cosf(XMConvertToRadians(m_RotY)), 0.f,
         0.f, 0.f, 0.f, 1.f
     );
 
     XMMATRIX RotationMatrixXY = RotationMatrixY * RotationMatrixX;
     //CDX11Device::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * RotationMatrixXY;
-    CCamera::m_ViewMatrix = XMMatrixTranslation(-EyeX, -EyeY, -EyeZ) * (XMMatrixRotationY(XMConvertToRadians(-RotY)) * XMMatrixRotationX(XMConvertToRadians(-RotX)));
+    CCamera::m_ViewMatrix = XMMatrixTranslation(-m_EyeX, -m_EyeY, -m_EyeZ) * (XMMatrixRotationY(XMConvertToRadians(-m_RotY)) * XMMatrixRotationX(XMConvertToRadians(-m_RotX)));
 
     m_DX11Device.m_pImmediateContext->ClearRenderTargetView(m_DX11Device.m_pRenderTargetView, Colors::MidnightBlue);
     m_DX11Device.m_pImmediateContext->ClearDepthStencilView(m_DX11Device.pDefDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -106,15 +91,15 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
     * WIP Collision checking section, to be refactored into its own function
     */
 
-	//CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
+    //CDX11Device::m_ViewMatrix = XMMatrixRotationY(XMConvertToRadians(90)) * CDX11Device::m_ViewMatrix;
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
         //auto EntityComponent = SceneEntityIt.m_SceneGraph.m_pRootNode->Type;
         std::vector<CSceneGraphNode<CGameEntity3DComponent>*> EntityComponentVector;
-		//SceneEntityIt.m_SceneGraph.Traverse(SceneEntityIt.m_SceneGraph.m_pRootNode, EntityComponentVector);
-		EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
-		//EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
+        //SceneEntityIt.m_SceneGraph.Traverse(SceneEntityIt.m_SceneGraph.m_pRootNode, EntityComponentVector);
+        EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
+        //EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode->ChildNode[0]);
 
         if (SceneEntityIt.m_GameEntityTag == "Gizmo" || "OutlineCubeEntity")
         {
@@ -150,7 +135,7 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
                 //CB.mDoesFrustumContain = g_DoesFrustumContain;
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
-				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
+                Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
             }
             else if (EntityComponent->m_TType.m_GameEntityTag == "GizmoComponent")
             {
@@ -166,12 +151,12 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mWorld = XMMatrixTranspose(CB.mWorld);
                 CB.mView = XMMatrixTranspose(CCamera::m_ViewMatrix);
                 CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
-				CB.mIsHovered = m_DX11Device.m_bGizmoHovered;
+                CB.mIsHovered = m_DX11Device.m_bGizmoHovered;
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-				Logger.Log("Renderer.cpp, Render() : bGizmoHovered: ", m_DX11Device.m_bGizmoHovered);
+                Logger.Log("Renderer.cpp, Render() : bGizmoHovered: ", m_DX11Device.m_bGizmoHovered);
             }
-            else 
+            else
             {
                 SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
                 ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
@@ -191,16 +176,16 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
             }
 
 
-                EntityComponent->m_TType.m_DXResConfig.Execute();
-
-                
-
-                m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-                m_DX11Device.m_pImmediateContext->DrawIndexed(512, 0, 0);
+            EntityComponent->m_TType.m_DXResConfig.Execute();
 
 
-                //m_DX11Device.OnPostRender();
-            //}
+
+            m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+            m_DX11Device.m_pImmediateContext->DrawIndexed(512, 0, 0);
+
+
+            //m_DX11Device.OnPostRender();
+        //}
         }
     }
 
@@ -208,31 +193,31 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
 
 }
 
-void CRenderer::AddOutline()
+void CRendererDirectX11::AddOutline()
 {
     //m_DX11Device.CheckCollision();
 }
 
-void CRenderer::AddGizmo()
+void CRendererDirectX11::AddGizmo()
 {
     m_DX11Device.AddGizmo();
 }
 
-void CRenderer::CleanupRenderer()
+void CRendererDirectX11::CleanupRenderer()
 {
     m_DX11Device.CleanupDX11Device();
 }
 
-void CRenderer::TestGraphicsModuleLog()
+void CRendererDirectX11::TestGraphicsModuleLog()
 {
     CLogger& Logger = CLogger::GetLogger();
 
-	if (m_pGraphicsModule)
-	{
-		m_pGraphicsModule->TestLog();
-	}
-	else
-	{
-		Logger.Log("Renderer.cpp, Raycast2() : m_pGraphicsModule is nullptr");
-	}
+    if (m_pGraphicsModule)
+    {
+        m_pGraphicsModule->TestLog();
+    }
+    else
+    {
+        Logger.Log("Renderer.cpp, Raycast2() : m_pGraphicsModule is nullptr");
+    }
 }

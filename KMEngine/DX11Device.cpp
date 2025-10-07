@@ -1391,6 +1391,8 @@ void CDX11Device::InitSwapChainFinal(IDXGIFactory1* dxgiFactory)
         sd.Windowed = TRUE;
 
         m_HR = dxgiFactory->CreateSwapChain(m_pD3D11Device, &sd, &m_SwapChain);
+
+        auto breakpoint = 1;
     }
 
     // Note this tutorial doesn't handle full-screen swapchains so we block the ALT+ENTER shortcut
