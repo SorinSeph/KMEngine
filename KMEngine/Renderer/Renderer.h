@@ -22,6 +22,8 @@ public:
 
     void SetViewport(HWND InViewport);
 
+    void SetViewportOpenGL(HWND InViewport);
+
 	void SetViewportSize(int Width, int Height);
 
     void InitRenderer();
@@ -29,6 +31,8 @@ public:
     void InitDX11Renderer();
 
     CDX11Device* GetDX11Device();
+
+    void InitOpenGLRenderer();
 
     void CreatePixelShader(HRESULT hr, ID3D11Device* D3D11Device, ID3D11PixelShader* PixelShader)
     {
@@ -69,13 +73,14 @@ private:
     UINT m_ViewportHeight{ };
     HWND m_Viewport{ };
 
-    float   m_EyeX{ };
-    float   m_EyeY{ };
-    float   m_EyeZ{ };
+    float m_EyeX{ };
+    float m_EyeY{ };
+    float m_EyeZ{ };
 
     // Test variables / functions
 
 	float m_CubeLocZ{ 0.0f };
 
-    class CRendererDirectX11* m_pDX11Renderer{ nullptr };
+    class CRendererDirectX11* m_pRendererDirectX11{ nullptr };
+	class CRendererOpenGL* m_pRendererOpenGL{ nullptr };
 };

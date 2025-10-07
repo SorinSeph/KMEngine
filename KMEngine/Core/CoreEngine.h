@@ -45,15 +45,24 @@ public:
 		Mediator.m_ModuleArray[0] = &m_UIModule;
 
         m_GraphicsModule.SetMediator(Mediator);
-        //m_GraphicsModule.SetRenderer();
-        m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
-		m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
-		Mediator.m_ModuleArray[1] = &m_GraphicsModule;
+
+        // Code for initialising th directx renderer
+        //m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
+		//m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
+		//Mediator.m_ModuleArray[1] = &m_GraphicsModule;
+
+        //m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
+        //    GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
+        //}, m_GraphicsModule);
+        //m_GraphicsModule.m_Renderer.InitDX11Renderer();
+
+        m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
+        Mediator.m_ModuleArray[1] = &m_GraphicsModule;
 
         m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
-            GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
+        GraphicsModule.m_Renderer.SetViewportOpenGL(CViewportWindow::m_ViewportHwnd);
         }, m_GraphicsModule);
-        m_GraphicsModule.m_Renderer.InitDX11Renderer();
+        m_GraphicsModule.m_Renderer.InitOpenGLRenderer();
 
         m_PhysicsModule.SetMediator(Mediator);
         Mediator.m_ModuleArray[2] = &m_PhysicsModule;

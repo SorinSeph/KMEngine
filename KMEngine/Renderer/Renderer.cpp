@@ -5,22 +5,32 @@
 #include "Math.h"
 #include "../Modules/GraphicsModule.h"
 #include "RendererDirectX11.h"
+#include "RendererOpenGL.h"
 
 CRenderer::CRenderer()
 {
-    m_pDX11Renderer = new CRendererDirectX11;
+    m_pRendererDirectX11 = new CRendererDirectX11;
+    m_pRendererOpenGL = new CRendererOpenGL;
 }
 
 void CRenderer::SetViewport(HWND InViewport)
 {
-    m_pDX11Renderer->m_DX11Device.SetViewport(InViewport);
+    m_pRendererDirectX11->m_DX11Device.SetViewport(InViewport);
+}
+
+void CRenderer::SetViewportOpenGL(HWND InViewport)
+{
+    if (m_pRendererOpenGL)
+    {
+        m_pRendererOpenGL->SetWindowHandle(InViewport);
+    }
 }
 
 void CRenderer::SetViewportSize(int Width, int Height)
 {
 	m_ViewportWidth = Width;
 	m_ViewportHeight = Height;
-    m_pDX11Renderer->m_DX11Device.SetViewportSize(Width, Height);
+    m_pRendererDirectX11->m_DX11Device.SetViewportSize(Width, Height);
     // Previously used to initialize the DX11 renderer context, which was the only one supported
 	//m_DX11Device.SetViewportSize(Width, Height);
 }
@@ -34,7 +44,12 @@ void CRenderer::InitRenderer()
 
 void CRenderer::InitDX11Renderer()
 {
-    m_pDX11Renderer->m_DX11Device.InitDX11Device();
+    m_pRendererDirectX11->m_DX11Device.InitDX11Device();
+}
+
+void CRenderer::InitOpenGLRenderer()
+{
+    m_pRendererOpenGL->m_OpenGLDevice.InitOpenGLDevice();
 }
 
 CDX11Device* CRenderer::GetDX11Device()
@@ -44,9 +59,7 @@ CDX11Device* CRenderer::GetDX11Device()
 
 void CRenderer::Render2(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
-	//m_pBaseRenderer = static_cast<CRendererDirectX11*>(this);
-    m_pDX11Renderer->SetCameraParams(RotX, RotY, EyeX, EyeY, EyeZ);
-    m_pDX11Renderer->Render();
+    m_pRendererOpenGL->Render();
 }
 
 void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
