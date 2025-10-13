@@ -22,7 +22,7 @@ public:
 
     void SetViewport(HWND InViewport);
 
-    void SetViewportOpenGL(HWND InViewport);
+    void SetViewportOpenGL(HWND InViewport, int Width, int Height);
 
 	void SetViewportSize(int Width, int Height);
 

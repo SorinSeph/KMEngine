@@ -59,8 +59,9 @@ public:
         m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
         Mediator.m_ModuleArray[1] = &m_GraphicsModule;
 
-        m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
-        GraphicsModule.m_Renderer.SetViewportOpenGL(CViewportWindow::m_ViewportHwnd);
+        m_UIModule.Notify([=](CGraphicsModule& GraphicsModule) {
+            GraphicsModule.m_Renderer.SetViewportOpenGL(CViewportWindow::m_ViewportHwnd, m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
+            //GraphicsModule.m_Renderer.SetViewportOpenGL(CViewportWindow::m_ViewportHwnd);
         }, m_GraphicsModule);
         m_GraphicsModule.m_Renderer.InitOpenGLRenderer();
 

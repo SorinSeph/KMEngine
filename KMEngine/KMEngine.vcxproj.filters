@@ -199,6 +199,8 @@
     </None>
     <None Include="GizmoArrowShader.fxh" />
     <None Include="Engine.ini" />
+    <None Include="Solid_Color_GLSL.vs" />
+    <None Include="Solid_Color_GLSL.fs" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">

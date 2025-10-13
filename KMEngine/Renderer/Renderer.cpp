@@ -18,11 +18,12 @@ void CRenderer::SetViewport(HWND InViewport)
     m_pRendererDirectX11->m_DX11Device.SetViewport(InViewport);
 }
 
-void CRenderer::SetViewportOpenGL(HWND InViewport)
+void CRenderer::SetViewportOpenGL(HWND InViewport, int Width, int Height)
 {
     if (m_pRendererOpenGL)
     {
         m_pRendererOpenGL->SetWindowHandle(InViewport);
+		m_pRendererOpenGL->SetViewportWidthAndHeight(Width, Height);
     }
 }
 
@@ -59,7 +60,7 @@ CDX11Device* CRenderer::GetDX11Device()
 
 void CRenderer::Render2(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)
 {
-    m_pRendererOpenGL->Render();
+    m_pRendererOpenGL->Render(EyeX, EyeY, EyeZ, RotX, RotY);
 }
 
 void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ)

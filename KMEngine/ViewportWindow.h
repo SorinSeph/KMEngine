@@ -73,6 +73,8 @@ public:
 	void DetectKeyboardInput();
 
 	static HWND m_ViewportHwnd;
+	static float m_ViewportWidth;
+	static float m_ViewportHeight;
 
 	int m_YKeyPressed;
 
@@ -82,8 +84,7 @@ private:
 
 	static HWND m_ParentHwnd;
 
-	static float m_ViewportWidth;
-	static float m_ViewportHeight;
+
 	static bool bClipCursor;
 
 	HWND MainHWND{ };
