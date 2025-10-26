@@ -68,6 +68,9 @@ public:
 
     CDX11Device m_DX11Device{};
 
+    class CRendererDirectX11* m_pRendererDirectX11{ nullptr };
+	class CRendererOpenGL* m_pRendererOpenGL{ nullptr };
+
 private:
     UINT m_ViewportWidth{ };
     UINT m_ViewportHeight{ };
@@ -80,7 +83,4 @@ private:
     // Test variables / functions
 
 	float m_CubeLocZ{ 0.0f };
-
-    class CRendererDirectX11* m_pRendererDirectX11{ nullptr };
-	class CRendererOpenGL* m_pRendererOpenGL{ nullptr };
 };

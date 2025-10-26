@@ -78,6 +78,9 @@
     <ClCompile Include="Renderer\RendererDirectX11.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="STB_Image_Impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -179,6 +182,9 @@
     <ClInclude Include="Renderer\RendererOpenGL.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderGenerator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="solid_color.ps" />
@@ -227,5 +233,9 @@
     </FxCompile>
     <FxCompile Include="GizmoArrowShader_PS.hlsl" />
     <FxCompile Include="GizmoArrowShader_VS.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Indices.txt" />
+    <Text Include="Vertices.txt" />
   </ItemGroup>
 </Project>

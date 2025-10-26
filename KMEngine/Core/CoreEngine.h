@@ -3,10 +3,12 @@
 #define COREENGINE_H
 
 #include "DX11Device.h"
+#include "OpenGLDevice.h"
 #include <Windows.h>
 #include <fstream>
 #include "resource.h"
 #include "Renderer/Renderer.h"
+#include "Renderer/RendererOpenGL.h"
 #include "Logger.h"
 #include "World.h"
 #include "Modules/BaseModule.h"
@@ -50,7 +52,6 @@ public:
         //m_GraphicsModule.m_Renderer.SetViewportSize(m_UIModule.ViewportWidth, m_UIModule.ViewportHeight);
 		//m_GraphicsModule.m_Renderer.SetGraphicsModuleReference(&m_GraphicsModule);
 		//Mediator.m_ModuleArray[1] = &m_GraphicsModule;
-
         //m_UIModule.Notify([](CGraphicsModule& GraphicsModule) {
         //    GraphicsModule.m_Renderer.SetViewport(CViewportWindow::m_ViewportHwnd);
         //}, m_GraphicsModule);
@@ -68,16 +69,8 @@ public:
         m_PhysicsModule.SetMediator(Mediator);
         Mediator.m_ModuleArray[2] = &m_PhysicsModule;
 
-        //m_Renderer.SetViewport(m_ViewportWindow.GetViewportHwnd());
-        //m_Renderer.InitRenderer();
-		//m_GraphicsModule.m_Renderer.SetViewport(viewportHwnd);
-
-        //m_World.Init();
-        //GameEntityBuilder EntityBuilder{ m_Renderer.GetDX11Device() };
-        //EntityBuilder.InitDefaultEntities();
-        //EntityBuilder.TestDevice();
-        //CTerrainGenerator TerrainGenerator{ m_GraphicsModule.m_Renderer.GetDX11Device() };
-        //TerrainGenerator.GenerateTestTerrain();
+		m_World.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
+        m_World.Init();
 
         return S_OK;
     }
@@ -190,7 +183,7 @@ public:
     {
         return m_RotX;
     }
-
+    
     float GetRotY()
     {
         return m_RotY;

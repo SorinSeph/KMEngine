@@ -588,7 +588,7 @@ void CDX11Device::InitSingleCubeOutline()
         return;
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = OutlineCubeComponent;
+    CubeComponentNode->m_tType = OutlineCubeComponent;
 
     OutlineCubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -902,7 +902,7 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     //InterpMoveCubeRef = &GizmoComponent;
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = GizmoComponent;
+    CubeComponentNode->m_tType = GizmoComponent;
 
     GizmoEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -1245,7 +1245,7 @@ HRESULT CDX11Device::AddGizmo()
     //InterpMoveCubeRef = &GizmoComponent;
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = GizmoComponent;
+    CubeComponentNode->m_tType = GizmoComponent;
 
     GizmoEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -1723,7 +1723,7 @@ HRESULT CDX11Device::InitTexturedCube()
     CCamera::m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV2, m_ViewportWidth / (FLOAT)m_ViewportHeight, 0.01f, 100.0f);
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = TexturedCubeComponent;
+    CubeComponentNode->m_tType = TexturedCubeComponent;
 
     TexturedCubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -1749,14 +1749,14 @@ void CDX11Device::InterpMoveEntity()
     {
 		if (SceneIt.m_GameEntityTag == "SolidColorCubeEntity")
 		{
-            Cube = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+            Cube = &SceneIt.m_SceneGraph.m_pRootNode->m_tType;
 		}
 		else if (SceneIt.m_GameEntityTag == "FrustumEntity")
 		{
-			Frustum = &SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+			Frustum = &SceneIt.m_SceneGraph.m_pRootNode->m_tType;
 		}
     }	
-   // auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_TType;
+   // auto& EntityComponent = SceneIt.m_SceneGraph.m_pRootNode->m_tType;
     //auto& EntityComponent2 = SceneIt.m_SceneGraph.m_pRootNode->ChildNode.at(0)->Type;
     Logger.Log("InterpMoveCube Function, InterpMoveLoc = ", InterpMoveLoc);
     Cube->SetLocationF(InterpMoveLoc, 0.0f, 5.f);
@@ -2066,7 +2066,7 @@ HRESULT CDX11Device::InitSolidColorCube()
         return m_HR;
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = CubeEntityComponent;
+    CubeComponentNode->m_tType = CubeEntityComponent;
 
     CubeEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -2273,7 +2273,7 @@ HRESULT CDX11Device::InitPlane()
     //    return m_HR;
 
     CSceneGraphNode<CGameEntity3DComponent>* CubeComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    CubeComponentNode->m_TType = PlaneEntityComponent;
+    CubeComponentNode->m_tType = PlaneEntityComponent;
 
     PlaneEntity.m_SceneGraph.m_pRootNode = CubeComponentNode;
 
@@ -2556,7 +2556,7 @@ HRESULT CDX11Device::InitFrustum()
     FrustumComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
 
     CSceneGraphNode<CGameEntity3DComponent>* FrustumComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    FrustumComponentNode->m_TType = FrustumComponent;
+    FrustumComponentNode->m_tType = FrustumComponent;
 
     FrustumEntity.m_SceneGraph.m_pRootNode = FrustumComponentNode;
 
@@ -2767,13 +2767,13 @@ void CDX11Device::CopyEntity(CGameEntity3D Entity)
 
     CGameEntity3D NewEntity{ Entity };  
     CGameEntity3DComponent NewEntityComponent;
-    NewEntityComponent = Entity.m_SceneGraph.m_pRootNode->m_TType;
+    NewEntityComponent = Entity.m_SceneGraph.m_pRootNode->m_tType;
 	NewEntity.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
 
-    //NewEntityComponent = NewEntity.m_SceneGraph.m_pRootNode->m_TType;
+    //NewEntityComponent = NewEntity.m_SceneGraph.m_pRootNode->m_tType;
     NewEntityComponent.m_GameEntityTag = Entity.m_GameEntityTag + "_Copy";
 	NewEntityComponent.SetScale(5.5f, 5.5f, 5.5f);
-	NewEntity.m_SceneGraph.m_pRootNode->m_TType = NewEntityComponent;
+	NewEntity.m_SceneGraph.m_pRootNode->m_tType = NewEntityComponent;
 
 	Scene.AddEntityToScene(NewEntity);
 }
@@ -3011,7 +3011,7 @@ void CDX11Device::RaycastLine(float OriginX, float OriginY, float OriginZ, float
     LinetraceComponent.m_DXResConfig.m_pContextResourcePtr.push_back(RasterizerStateLambda);
 
     CSceneGraphNode<CGameEntity3DComponent>* pLinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-    pLinetraceComponentNode->m_TType = LinetraceComponent;
+    pLinetraceComponentNode->m_tType = LinetraceComponent;
 
     LinetraceEntity.m_SceneGraph.m_pRootNode = pLinetraceComponentNode;
 

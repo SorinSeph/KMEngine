@@ -7,7 +7,7 @@ class CSceneGraphNode
 {
 public:
 	std::vector<CSceneGraphNode*> ChildNode;
-	T m_TType;
+	T m_tType;
 };
 
 template <typename T>

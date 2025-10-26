@@ -6,11 +6,13 @@
 #include <directxcolors.h>
 #include "GameEntity.h"
 #include "DXResourcesConfig.h"
+#include "OpenGLResource.h"
 #include "EntityPhysicalMesh.h"
 #include <DirectXCollision.h>
 #include <DirectXCollision.inl>
 #include <vector>
 #include "SceneGraph.h"
+#include "ShaderGenerator.h"
 
 class CDXResourcesConfig;
 
@@ -126,6 +128,8 @@ public:
 
 	CDXResourcesConfig m_DXResConfig{ };
 
+	COpenGLResource m_OpenGLResource{ };
+
 	std::string m_UID;
 
 	CPhysicalMesh PhysicalMesh;
@@ -167,7 +171,6 @@ protected:
 class CGameEntity3DComponent : public CGameEntity3D
 {
 public:
-
 	uint16_t DXResourceHashKey;
 };
 

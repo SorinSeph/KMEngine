@@ -357,7 +357,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
 					Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationX);
 
-                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_tType;
                     EntityComponent.SetLocationF(
                         LocationX,
                         EntityComponent.GetLocationY(),
@@ -380,7 +380,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
                     Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationY);
 
-                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_tType;
                     EntityComponent.SetLocationF(
                         EntityComponent.GetLocationX(),
                         LocationY,
@@ -403,7 +403,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
                     Logger.Log("RightSubwindow, EditSubclassProc(): LocationX = ", LocationZ);
 
-                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_TType;
+                    auto& EntityComponent = EntityIt.m_SceneGraph.m_pRootNode->m_tType;
                     EntityComponent.SetLocationF(
                         EntityComponent.GetLocationX(),
                         EntityComponent.GetLocationY(),

@@ -143,6 +143,7 @@
     <ClCompile Include="Renderer\RendererDirectX11.cpp" />
     <ClCompile Include="RightSubwindow.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="STB_Image_Impl.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
     <ClCompile Include="ViewportMessage.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="RightSubwindow.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGraph.h" />
+    <ClInclude Include="ShaderGenerator.h" />
     <ClInclude Include="TerrainGenerator.h" />
     <ClInclude Include="ViewportMessage.h" />
     <ClInclude Include="ViewportWindow.h" />
@@ -223,6 +225,10 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Indices.txt" />
+    <Text Include="Vertices.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

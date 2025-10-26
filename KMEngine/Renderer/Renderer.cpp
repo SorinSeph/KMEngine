@@ -148,14 +148,14 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
             //m_DX11Device.OnPreRender();
             //if (EntityComponent->Type.m_GameEntityTag == "TexturedCubeComponent" || "TexturedCubeComponent2")
             //{
-            if (EntityComponent->m_TType.m_GameEntityTag == "FrustumComponent")
+            if (EntityComponent->m_tType.m_GameEntityTag == "FrustumComponent")
             {
-                SCollisionBuffer CB = EntityComponent->m_TType.m_CollisionBuffer;
-                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
+                SCollisionBuffer CB = EntityComponent->m_tType.m_CollisionBuffer;
+                ID3D11Buffer* CB2 = EntityComponent->m_tType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
-                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
-                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
+                auto LocationMatrix = EntityComponent->m_tType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_tType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_tType.GetScale();
 
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
@@ -166,14 +166,14 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 				Logger.Log("Renderer.cpp, Render() : g_DoesFrustumContain = ", g_DoesFrustumContain);
             }
-            else if (EntityComponent->m_TType.m_GameEntityTag == "GizmoComponent")
+            else if (EntityComponent->m_tType.m_GameEntityTag == "GizmoComponent")
             {
-                SArrowConstantBuffer CB;// = EntityComponent->m_TType.GetConstantBuffer();
-                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
+                SArrowConstantBuffer CB;// = EntityComponent->m_tType.GetConstantBuffer();
+                ID3D11Buffer* CB2 = EntityComponent->m_tType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
-                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
-                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
+                auto LocationMatrix = EntityComponent->m_tType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_tType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_tType.GetScale();
 
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
@@ -187,12 +187,12 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
             }
             else 
             {
-                SConstantBuffer CB = EntityComponent->m_TType.GetConstantBuffer();
-                ID3D11Buffer* CB2 = EntityComponent->m_TType.m_DXResConfig.GetConstantBuffer();
+                SConstantBuffer CB = EntityComponent->m_tType.GetConstantBuffer();
+                ID3D11Buffer* CB2 = EntityComponent->m_tType.m_DXResConfig.GetConstantBuffer();
                 //SceneEntityIt.SetLocationF(-6.0f, 0.0f, m_CubeLocZ);
-                auto LocationMatrix = EntityComponent->m_TType.GetLocation();
-                auto RotationMatrix = EntityComponent->m_TType.m_QuatRotationMatrix;
-                auto ScaleMatrix = EntityComponent->m_TType.GetScale();
+                auto LocationMatrix = EntityComponent->m_tType.GetLocation();
+                auto RotationMatrix = EntityComponent->m_tType.m_QuatRotationMatrix;
+                auto ScaleMatrix = EntityComponent->m_tType.GetScale();
 
                 CB.mWorld = ScaleMatrix * RotationMatrix * LocationMatrix;
 
@@ -201,11 +201,11 @@ void CRenderer::Render(float RotX, float RotY, float EyeX, float EyeY, float Eye
                 CB.mProjection = XMMatrixTranspose(CCamera::m_ProjectionMatrix);
                 m_DX11Device.m_pImmediateContext->UpdateSubresource(CB2, 0, nullptr, &CB, 0, 0);
 
-                Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_TType.m_GameEntityTag);
+                Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_tType.m_GameEntityTag);
             }
 
 
-                EntityComponent->m_TType.m_DXResConfig.Execute();
+                EntityComponent->m_tType.m_DXResConfig.Execute();
 
                 
 

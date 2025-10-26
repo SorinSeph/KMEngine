@@ -1,18 +1,22 @@
 #pragma once
 
-#include <unordered_map>
 #include "DX11Device.h"
+#include "OpenGLDevice.h"
 #include "DXResourcesConfig.h"
 
 class CWorld
 {
 public:
-	CWorld();
+	CWorld() = default;
 
 	void Init();
+
+	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
+
+	void AddTestEntity();
 
 	CScene& m_Scene{ CScene::GetScene() };
 
 private:
-	std::unordered_map<uint16_t, CDXResourcesConfig> DXResourceConfigMap;
+	COpenGLDevice* m_pOpenGLDevice{ nullptr };
 };

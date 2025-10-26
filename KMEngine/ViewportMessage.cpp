@@ -27,7 +27,7 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
     {
         if (SceneEntity.m_GameEntityTag == "TexturedCube")
 		{
-            pGameEntity3DComponent = &SceneEntity.m_SceneGraph.m_pRootNode->m_TType;
+            pGameEntity3DComponent = &SceneEntity.m_SceneGraph.m_pRootNode->m_tType;
 			break;
         }
     }
