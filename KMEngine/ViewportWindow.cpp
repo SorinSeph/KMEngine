@@ -40,7 +40,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
     PAINTSTRUCT ps;
     RECT        rect;
     POINT       CursorPoint;
-    //bool bClipCursor;
 
 	CLogger& Logger = CLogger::GetLogger();
 
@@ -56,17 +55,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             m_ViewportHeight = RectViewport.bottom;
             return 0;
         }
-
-    //case WM_PAINT:
-    //{
-    //    hdc = BeginPaint(hwnd, &ps);
-    //    GetClientRect(hwnd, &rect);
-    //    Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-    //    HBRUSH Brush = CreateSolidBrush(RGB(0, 0, 255));
-    //    FillRect(hdc, &rect, Brush);
-    //    EndPaint(hwnd, &ps);
-    //    return 0;
-    //}
 
         case WM_ACTIVATE:
         {
@@ -89,9 +77,9 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             g_RaycastX = mouseX;
             g_RaycastY = mouseY;
 
-			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+			CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
             ViewportMessage.m_bIsLeftMouseButtonDown = true;
-            ViewportMessage.SendToUIModule(g_RaycastX, g_RaycastY);
+            ViewportMessage.RayPicking(g_RaycastX, g_RaycastY);
 
             Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\nMouseX on click is: ", mouseX);
 		    Logger.Log("\nMouseY on click is: ", mouseY);
@@ -101,8 +89,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
 
         case WM_LBUTTONUP:
         {
-            //CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
-            //ViewportMessage.m_bIsLeftMouseButtonDown = false;
 			CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 			TimerManager.RemoveTimer("TranslationTimer");
             return 0;
@@ -120,11 +106,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             POINT CursorPoint;
             GetClientRect(hwnd, &rect);
 
-            //if (GetCursorPos(&CursorPoint))
-            //{
-            //    SetCursorPos(rect.right + 50, rect.bottom - 50); 
-            //}
-
             return 0;
         }
 
@@ -135,30 +116,16 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             ptClientUL.x = rect.left;
             ptClientUL.y = rect.top;
 
-            // Add one to the right and bottom sides, because the 
-            // coordinates retrieved by GetClientRect do not 
-            // include the far left and lowermost pixels. 
-
             ptClientLR.x = rect.right + 1;
             ptClientLR.y = rect.bottom + 1;
             ClientToScreen(m_ViewportHwnd, &ptClientUL);
             ClientToScreen(m_ViewportHwnd, &ptClientLR);
-
-            // Copy the client coordinates of the client area 
-            // to the rcClient structure. Confine the mouse cursor 
-            // to the client area by passing the rcClient structure 
-            // to the ClipCursor function. 
 
             SetRect(&rect, ptClientUL.x, ptClientUL.y, ptClientLR.x, ptClientLR.y);
 
             RECT rect2;
             GetClientRect(m_ViewportHwnd, &rect2);
 
-
-            // Copy the client coordinates of the client area 
-            // to the rcClient structure. Confine the mouse cursor 
-            // to the client area by passing the rcClient structure 
-            // to the ClipCursor function. 
             if (bClipCursor)
             {
                 SetCursorPos(3 * (rect2.right) / 2, rect2.bottom / 2);
@@ -177,7 +144,7 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             float mouseXUnprojected = ((2 * mouseX) / m_ViewportWidth - 1);
             float mouseYUnprojected = 1 - ((2 * mouseY) / m_ViewportHeight);
 
-			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+			CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
 
 			ViewportMessage.m_MouseX = mouseX;
 			ViewportMessage.m_MouseY = mouseY;

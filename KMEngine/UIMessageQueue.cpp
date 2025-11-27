@@ -1,11 +1,11 @@
 #include <any>
-#include "ViewportMessage.h"
+#include "UIMessageQueue.h"
 #include "Modules/UIModule.h"
 #include "Modules/GraphicsModule.h"
 #include "Modules/PhysicsModule.h"
 #include "Core/CoreClock.h"
 
-void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
+void CUIMessageQueue::RayPicking(int MouseX, int MouseY)
 {
     float m_InitialMousePosX = MouseX;
     float m_InitialMousePosY = MouseY;
@@ -176,7 +176,7 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
                 TimerManager.SetTimerVariadicArgsLambda("TranslationTimer", 0.0f, 10000.0f,
                     [=](float a, float b)
                 {
-                    CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+                    CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
                     // current & previous mouse
                     XMFLOAT2 cur{ ViewportMessage.m_MouseX, ViewportMessage.m_MouseY };
                     XMFLOAT2 prev{ ViewportMessage.PreviousX, ViewportMessage.PreviousY };
@@ -217,4 +217,14 @@ void CViewportMessage::SendToUIModule(int MouseX, int MouseY)
             }
         }
     }
+}
+
+void CUIMessageQueue::ImportGLTF(const std::string& FileContent)
+{
+    CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
+
+    if (pGraphicsModule)
+    {
+        pGraphicsModule->m_ImporterGLTF.Import(FileContent);
+	}
 }

@@ -145,7 +145,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="STB_Image_Impl.cpp" />
     <ClCompile Include="TerrainGenerator.cpp" />
-    <ClCompile Include="ViewportMessage.cpp" />
+    <ClCompile Include="UIMessageQueue.cpp" />
     <ClCompile Include="ViewportWindow.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -181,7 +181,7 @@
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="ShaderGenerator.h" />
     <ClInclude Include="TerrainGenerator.h" />
-    <ClInclude Include="ViewportMessage.h" />
+    <ClInclude Include="UIMessageQueue.h" />
     <ClInclude Include="ViewportWindow.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

@@ -963,7 +963,7 @@ void CDX11Device::SetGizmoTimer()
 
         if (pUIModule)
         {
-			CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+			CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
             auto MouseX = ViewportMessage.m_MouseX;
             auto MouseY = ViewportMessage.m_MouseY;
 

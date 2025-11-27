@@ -1,9 +1,10 @@
 #include "UIModule.h"
 #include "../Scene.h"
+#include "../resource.h"
 
 HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 {
-    CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+    CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
     ViewportMessage.m_pUIModule = this;
 	ViewportMessage.m_TestInt = 5;
 
@@ -191,6 +192,79 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             return 0;
         }
 
+        case WM_COMMAND:
+        {
+			CLogger& Logger = CLogger::GetLogger();
+
+            int WindowMenuId = LOWORD(wParam);
+            switch (WindowMenuId)
+            {
+                case ID_IMPORT_GLTF:
+                {
+                    WCHAR szFile[MAX_PATH] = { 0 };
+                    OPENFILENAMEW ofn = {};
+                    ofn.lStructSize = sizeof(ofn);
+                    ofn.hwndOwner = hwnd;
+                    ofn.lpstrFile = szFile;
+                    ofn.nMaxFile = MAX_PATH;
+                    ofn.lpstrFilter = L"GLTF Files\0*.gltf;*.glb\0All Files\0*.*\0\0";
+                    ofn.nFilterIndex = 1;
+                    ofn.lpstrTitle = L"Import GLTF File";
+                    ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_LONGNAMES;
+
+                    if (GetOpenFileNameW(&ofn))
+                    {
+                        HANDLE hFile = CreateFileW(szFile, GENERIC_READ, FILE_SHARE_READ, NULL,
+                            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+                        if (hFile == INVALID_HANDLE_VALUE)
+                        {
+                            MessageBox(hwnd, L"Could not open the selected file.", L"File Error", MB_OK | MB_ICONERROR);
+                            return 0;
+                        }
+
+                        wstring FilePathWString(szFile);
+                        string FilePathString(FilePathWString.begin(), FilePathWString.end());
+                        std::string OutputString1{ "CUIModule::WindowProc: File path is " };
+                        std::string OutputString{ OutputString1  + FilePathString };
+						Logger.Log(OutputString);
+
+                        LARGE_INTEGER fileSize = {};
+                        if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart < 0)
+                        {
+                            CloseHandle(hFile);
+                            MessageBox(hwnd, L"Could not determine file size.", L"File Error", MB_OK | MB_ICONERROR);
+                            return 0;
+                        }
+
+                        std::string FileContent;
+
+                        if (fileSize.QuadPart > 0)
+                        {
+                            size_t fileContentSize = static_cast<size_t>(fileSize.QuadPart);
+                            FileContent.resize(fileContentSize);
+
+                            DWORD bytesRead = 0;
+                            if (!ReadFile(hFile, &FileContent[0], static_cast<DWORD>(fileContentSize), &bytesRead, NULL)
+                                || bytesRead != fileContentSize)
+                            {
+                                CloseHandle(hFile);
+                                MessageBox(hwnd, L"Error reading file.", L"File Error", MB_OK | MB_ICONERROR);
+                                return 0;
+                            }
+                        }
+
+                        CloseHandle(hFile);
+
+					    CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
+					    UIMessageQueue.ImportGLTF(FileContent);
+                    }
+                    return 0;
+                }
+                default:
+                    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+            }
+        }
+
         case WM_SIZE:
         {
             cxBlock = LOWORD(lParam) / 3;
@@ -260,21 +334,6 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
             EndPaint(hwnd, &ps);
             return 0;
         }
-
-        case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // Parse the menu selections:
-            switch (wmId)
-            {
-                case 1: // Button ID
-                    MessageBox(hwnd, L"Button clicked!", L"Notification", MB_OK);
-                    break;
-                default:
-                    return DefWindowProc(hwnd, message, wParam, lParam);
-            }
-        }
-        break;
 
         case WM_DESTROY:
         {

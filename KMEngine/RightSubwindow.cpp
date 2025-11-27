@@ -1,5 +1,5 @@
 #include "RightSubwindow.h"
-#include "ViewportMessage.h"
+#include "UIMessageQueue.h"
 #include "Modules/GraphicsModule.h"
 #include "Modules/UIModule.h"
 #include "Scene.h"
@@ -127,7 +127,7 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
     {
         case WM_CREATE:
         {
-            CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+            CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
 
 			CGraphicsModule* GraphicsModule = static_cast<CGraphicsModule*>(ViewportMessage.m_pUIModule->m_pMediator->m_ModuleArray[1]);
 
@@ -332,7 +332,7 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
 // Subclass Procedure for Edit Controls
 LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+    CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
 	CLogger& Logger = CLogger::GetLogger();
     CScene& Scene = CScene::GetScene();
 

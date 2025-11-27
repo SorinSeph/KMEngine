@@ -5,7 +5,7 @@
 #include <dinput.h>
 #include <cmath>
 #include "Logger.h"
-#include "ViewportMessage.h"
+#include "UIMessageQueue.h"
 
 const float XM_PI = 3.141592654f;
 
@@ -24,7 +24,7 @@ static LPDIRECTINPUT8 _DirectInput;
 static IDirectInputDevice8* _DIKeyboard;
 
 class CUIModule;
-class CViewportMessage;
+class CUIMessageQueue;
 
 class CViewportWindow
 {

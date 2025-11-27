@@ -129,7 +129,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         return 0;
     }
 
-	CViewportMessage& ViewportMessage = CViewportMessage::GetViewportMessage();
+	CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
 	float* pMouseX = &ViewportMessage.m_MouseX;
 	float& MouseX = ViewportMessage.m_MouseX;
 

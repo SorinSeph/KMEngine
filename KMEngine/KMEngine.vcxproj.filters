@@ -57,7 +57,7 @@
     <ClCompile Include="TerrainGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ViewportMessage.cpp">
+    <ClCompile Include="UIMessageQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RightSubwindow.cpp">
@@ -137,7 +137,7 @@
     <ClInclude Include="Math.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ViewportMessage.h">
+    <ClInclude Include="UIMessageQueue.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="RightSubwindow.h">

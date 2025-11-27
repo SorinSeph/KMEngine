@@ -14,6 +14,6 @@ C:\Users\sefce\source\KMEngine\KMEngine\RightSubwindow.cpp;C:\Users\sefce\source
 C:\Users\sefce\source\KMEngine\KMEngine\Scene.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Scene.obj
 C:\Users\sefce\source\KMEngine\KMEngine\STB_Image_Impl.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\STB_Image_Impl.obj
 C:\Users\sefce\source\KMEngine\KMEngine\TerrainGenerator.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\TerrainGenerator.obj
-C:\Users\sefce\source\KMEngine\KMEngine\ViewportMessage.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\ViewportMessage.obj
+C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\UIMessageQueue.obj
 C:\Users\sefce\source\KMEngine\KMEngine\ViewportWindow.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\ViewportWindow.obj
 C:\Users\sefce\source\KMEngine\KMEngine\World.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\World.obj

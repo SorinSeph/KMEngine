@@ -1,24 +1,26 @@
-#ifndef VIEWPORTMESSAGE_H
-#define VIEWPORTMESSAGE_H
+#ifndef UIMESSAGEQUEUE_H
+#define UIMESSAGEQUEUE_H
 
-//#include "UIModule.h"
+#include <string>
 
 class CUIModule;
 
-class CViewportMessage
+class CUIMessageQueue
 {
 public:
-	static CViewportMessage& GetViewportMessage()
+	static CUIMessageQueue& GetUIMessageQueue()
 	{
-		static CViewportMessage ViewportMessage;
-		return ViewportMessage;
+		static CUIMessageQueue UIMessageQueue;
+		return UIMessageQueue;
 	}
 
 	CUIModule* m_pUIModule{};
 	////template <typename ...Args>
 	////void Send(auto&& Ptr, Args&&... args);
 
-	void SendToUIModule(int MouseX, int MouseY);
+	void RayPicking(int MouseX, int MouseY);
+
+	void ImportGLTF(const std::string& FileContent);
 
 	bool m_bIsEntitySelected{ false };
 	bool m_bIsDraggingGizmo{ false };

@@ -1,3 +1,8 @@
+// As of right now, modules are currently hardcoded as:
+// 0 - UI Module
+// 1 - Graphics Module
+// 2 - Physics Module
+
 #pragma once
 #include <vector>
 #include <any>
