@@ -224,9 +224,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
                         wstring FilePathWString(szFile);
                         string FilePathString(FilePathWString.begin(), FilePathWString.end());
-                        std::string OutputString1{ "CUIModule::WindowProc: File path is " };
-                        std::string OutputString{ OutputString1  + FilePathString };
-						Logger.Log(OutputString);
+      //                  std::string OutputString1{ "CUIModule::WindowProc: File path is " };
+      //                  std::string OutputString{ OutputString1  + FilePathString };
+						//Logger.Log(OutputString);
 
                         LARGE_INTEGER fileSize = {};
                         if (!GetFileSizeEx(hFile, &fileSize) || fileSize.QuadPart < 0)
@@ -256,7 +256,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         CloseHandle(hFile);
 
 					    CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
-					    UIMessageQueue.ImportGLTF(FileContent);
+					    UIMessageQueue.ImportGLTF(FilePathString, FileContent);
                     }
                     return 0;
                 }

@@ -3,6 +3,7 @@
 #include "DX11Device.h"
 #include "OpenGLDevice.h"
 #include "DXResourcesConfig.h"
+#include "ImporterGLTF.h"
 
 class CWorld
 {
@@ -15,8 +16,11 @@ public:
 
 	void AddTestEntity();
 
+	void LoadAttributes();
+
 	CScene& m_Scene{ CScene::GetScene() };
 
 private:
 	COpenGLDevice* m_pOpenGLDevice{ nullptr };
+	CImporterGLTF m_ImporterGLTF;
 };

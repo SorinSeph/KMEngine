@@ -6,12 +6,15 @@
 #include "BaseModule.h"
 #include "../Logger.h"
 #include "../Renderer/Renderer.h"
-#include "../ImporterGLTF.h"
+#include "../EntityBuilder.h"
 
 class CGraphicsModule : public CBaseModule
 {
 public:
-	CGraphicsModule() {};
+	CGraphicsModule() 
+	{
+		m_EntityBuilder.SetGraphicsModule(this);
+	};
 
 	CRenderer m_Renderer;
 
@@ -31,11 +34,9 @@ public:
 		m_Renderer.GetDX11Device()->SpawnGizmo(SelectedEntity);
 	}
 
-	void ImportGLTF(const std::string& FileContent);
-
-	CImporterGLTF m_ImporterGLTF;
-
 	CDX11Device m_DX11Device;
+
+	CEntityBuilder m_EntityBuilder;
 };
 
 #endif

@@ -20,7 +20,7 @@ public:
 
 	void RayPicking(int MouseX, int MouseY);
 
-	void ImportGLTF(const std::string& FileContent);
+	void ImportGLTF(std::string& FilePath, const std::string& FileContent);
 
 	bool m_bIsEntitySelected{ false };
 	bool m_bIsDraggingGizmo{ false };

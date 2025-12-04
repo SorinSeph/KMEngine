@@ -4,6 +4,7 @@
 #include <vector>
 
 std::vector<float> g_Vertices;
+std::vector<float> g_TexCoords;
 std::vector<uint32_t> g_Indices;
 
 void CWorld::Init()
@@ -11,6 +12,11 @@ void CWorld::Init()
 	CTerrainGenerator TerrainGenerator{m_pOpenGLDevice};
 	TerrainGenerator.GenerateTerrain();
     AddTestEntity();
+}
+
+void CWorld::LoadAttributes()
+{
+    //std::vector<CBufferViewBase*> BufferViews = m_ImporterGLTF.Import();
 }
 
 std::vector<float> LoadVerticesFromFile(const std::string& filePath)
@@ -59,16 +65,14 @@ void InitAttributes()
     std::string PosAndTexCoordFilePath = "Vertices.txt";
     g_Vertices = LoadVerticesFromFile(PosAndTexCoordFilePath);
     g_Indices = LoadIndicesFromFile(IndicesFilePath);
-
-    auto breakpoint = 1;
 }
 
 void CWorld::AddTestEntity()
 {
 	CGameEntity3D TestEntity;
-	TestEntity.m_GameEntityTag = "TestPlane";
+	TestEntity.m_GameEntityTag = "Knight";
 	CGameEntity3DComponent TestEntityComponent;
-	TestEntityComponent.m_GameEntityTag = "TestPlaneComponent";
+	TestEntityComponent.m_GameEntityTag = "KnightComponent";
 
     InitAttributes();
 	uint32_t& ShaderProgram{ TestEntityComponent.m_OpenGLResource.m_ShaderProgram };
@@ -100,16 +104,14 @@ void CWorld::AddTestEntity()
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, g_Vertices.size() * sizeof(float), g_Vertices.data(), GL_STATIC_DRAW);
 
-    // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // index attribute
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_Indices.size() * sizeof(float), g_Indices.data(), GL_STATIC_DRAW);
 
@@ -118,16 +120,14 @@ void CWorld::AddTestEntity()
 
     unsigned int texture;
     glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glBindTexture(GL_TEXTURE_2D, texture); 
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
     int width, height, nrChannels;
-    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
     unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {

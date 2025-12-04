@@ -219,12 +219,12 @@ void CUIMessageQueue::RayPicking(int MouseX, int MouseY)
     }
 }
 
-void CUIMessageQueue::ImportGLTF(const std::string& FileContent)
+void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileContent)
 {
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
 
     if (pGraphicsModule)
     {
-        pGraphicsModule->m_ImporterGLTF.Import(FileContent);
+        //pGraphicsModule->m_EntityBuilder.ImportGLTF(FilePath, FileContent);
 	}
 }

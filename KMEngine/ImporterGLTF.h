@@ -45,7 +45,7 @@ public:
 class CImporterGLTF
 {
 public:
-	std::vector<CBufferViewBase*> Import(const std::string& FileContent)
+	std::vector<CBufferViewBase*> Import(std::string& FilePath, const std::string& FileContent)
 	{
 		for (auto AttributeTypeIt : m_AttributeType)
 		{
@@ -164,7 +164,7 @@ public:
 			}
 		}
 
-
+		ReadBIN(FilePath);
 
 		return m_pBufferViews;
 	}
@@ -289,10 +289,82 @@ public:
 		return AttributeBufferIndex;
 	}
 
-	void ReadBIN()
+	void ReadBIN(std::string& FilePath)
 	{
+		FilePath.erase(FilePath.end() - 4, FilePath.end());
+		FilePath.append("bin");
 
+		std::ifstream File(FilePath, std::ios::in | std::ios::binary);
+		std::vector<uint8_t> Buffer((std::istreambuf_iterator<char>(File)), std::istreambuf_iterator<char>());
+
+		for (auto& BufferViewIt : m_pBufferViews)
+		{
+			switch (BufferViewIt->m_BufferViewType)
+			{
+				case EAttributeType::Position:
+				{
+					CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);
+					BufferView->m_Data.reserve(BufferView->m_Count * 3);
+
+					for (size_t i = BufferView->m_ByteOffset; i + 3 < BufferView->m_ByteLength + BufferView->m_ByteOffset; i += 4)
+					{
+						float Value;
+						std::memcpy(&Value, &Buffer[i], sizeof(float));
+						BufferView->m_Data.push_back(Value);
+					}
+
+					int breakpoint = 1;
+
+					break;
+				}
+
+				case EAttributeType::Indices:
+				{
+					CBufferView<uint16_t>* BufferView = static_cast<CBufferView<uint16_t>*>(BufferViewIt);
+					BufferView->m_Data.reserve(BufferView->m_Count);
+
+					for (size_t i = BufferView->m_ByteOffset; i + 1 < BufferView->m_ByteLength + BufferView->m_ByteOffset; i += 2)
+					{
+						uint16_t Value;
+						std::memcpy(&Value, &Buffer[i], sizeof(uint16_t));
+						BufferView->m_Data.push_back(Value);
+					}
+
+					int breakpoint = 1;
+
+					break;
+				}
+
+				case EAttributeType::TexCoords:
+				{		
+					CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);				
+					BufferView->m_Data.reserve(BufferView->m_Count * 2);
+
+					for (size_t i = BufferView->m_ByteOffset; i + 3 < BufferView->m_ByteLength + BufferView->m_ByteOffset; i += 4)
+					{
+						float Value;
+						std::memcpy(&Value, &Buffer[i], sizeof(float));				
+						BufferView->m_Data.push_back(Value);
+					}
+
+					int breakpoint = 1;
+
+					break;
+				}
+
+				case EAttributeType::Joints:
+				{
+					break;
+				}
+
+				case EAttributeType::Weights:
+				{
+					break;
+				}
+			}
+		}
 	}
+	
 
 	inline void ImportGLTF()
 	{
