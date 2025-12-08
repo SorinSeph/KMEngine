@@ -1,14 +1,14 @@
 CDX11Device constructor
 CDX11Device constructor
-CDX11Device constructor
-CDX11Device constructor
+CRenderer constructed at C:\Users\sefce\source\KMEngine\KMEngine\Modules\GraphicsModule.h:16
 CDX11Device constructor
 KMEngine.cpp, engine started
 
+World.cpp, Init(): Location: "C:\\Users\\sefce\\source\\KMEngine\\KMEngine"
 Terrain generator destroyed
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.0074742
+TotalTime: 0.0104064
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -26,10 +26,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.173243
+TotalTime: 0.167719
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -47,10 +46,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.174364
+TotalTime: 0.168841
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -68,10 +66,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.175915
+TotalTime: 0.170015
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -89,10 +86,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.180187
+TotalTime: 0.175848
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -110,10 +106,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.186202
+TotalTime: 0.181762
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -131,10 +126,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.192313
+TotalTime: 0.187751
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -152,10 +146,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.198311
+TotalTime: 0.193957
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -173,10 +166,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.204669
+TotalTime: 0.199821
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -194,10 +186,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.210465
+TotalTime: 0.205802
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -215,10 +206,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.21654
+TotalTime: 0.214009
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -236,10 +226,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.22521
+TotalTime: 0.217944
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -257,10 +246,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.2286
+TotalTime: 0.224145
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -278,10 +266,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.23498
+TotalTime: 0.230323
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -299,10 +286,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.241509
+TotalTime: 0.236251
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -320,10 +306,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.246996
+TotalTime: 0.242229
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -341,10 +326,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.253033
+TotalTime: 0.248453
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -362,10 +346,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.259103
+TotalTime: 0.255161
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -383,10 +366,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.26521
+TotalTime: 0.260993
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -404,10 +386,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.271182
+TotalTime: 0.267051
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -425,10 +406,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.277411
+TotalTime: 0.272916
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -446,10 +426,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.28383
+TotalTime: 0.278823
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -467,10 +446,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.289512
+TotalTime: 0.28566
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -488,10 +466,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.295878
+TotalTime: 0.291119
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -509,10 +486,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.301582
+TotalTime: 0.297129
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -530,10 +506,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.307496
+TotalTime: 0.303226
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -551,10 +526,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.314042
+TotalTime: 0.309186
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -572,10 +546,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.31988
+TotalTime: 0.317238
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -593,10 +566,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.325831
+TotalTime: 0.322064
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -614,10 +586,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.331997
+TotalTime: 0.327761
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -635,10 +606,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.337824
+TotalTime: 0.333602
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -656,10 +626,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.344444
+TotalTime: 0.339612
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -677,10 +646,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.350188
+TotalTime: 0.346209
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -698,10 +666,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.355963
+TotalTime: 0.351681
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -719,10 +686,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
 KMEngine.cpp, wWinMain: mouse x is: 0
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.362301
+TotalTime: 0.357746
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -740,1669 +706,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.368514
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.374465
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.380463
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.38645
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.392341
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.398349
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.404516
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.410582
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.416566
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.422843
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.428847
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.434775
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.441151
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.446927
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.453354
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.459067
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.465243
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.471485
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.477338
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.483255
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.4892
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.495641
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.501529
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.507479
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.51359
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.519772
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.526048
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.531677
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.53766
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.543855
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.550143
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.555826
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.562202
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.567935
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.573994
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.579979
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.586052
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.592063
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.598226
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.604278
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.610353
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.616403
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.622546
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.628456
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.634985
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.640701
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.646802
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.652707
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.658758
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.665105
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.671104
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.677449
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.683235
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.689114
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.695352
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.701212
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.707277
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.713324
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.719504
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.725527
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.731734
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.737664
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.743752
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.749751
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.755776
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.761757
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 34g_RaycastY2 =493
 
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.768023
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.77407
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.780128
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.786111
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.792075
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.798214
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.804412
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.810387
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.816592
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.822579
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.828641
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.834548
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.840651
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
-
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
-
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
-
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
-
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+
+KMEngine.cpp, wWinMain: mouse x is: 34
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.84669
+TotalTime: 0.364184
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2420,10 +729,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 64g_RaycastY2 =499
+
+
+KMEngine.cpp, wWinMain: mouse x is: 64
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.852786
+TotalTime: 0.369869
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2441,10 +752,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 94g_RaycastY2 =504
+
+
+KMEngine.cpp, wWinMain: mouse x is: 94
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.858794
+TotalTime: 0.375964
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2462,10 +775,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 123g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 123
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.864911
+TotalTime: 0.381919
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2483,10 +798,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 148g_RaycastY2 =513
+
+
+KMEngine.cpp, wWinMain: mouse x is: 148
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.87108
+TotalTime: 0.388295
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2504,10 +821,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 167g_RaycastY2 =516
+
+
+KMEngine.cpp, wWinMain: mouse x is: 167
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.877388
+TotalTime: 0.394321
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2525,10 +844,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 181g_RaycastY2 =518
+
+
+KMEngine.cpp, wWinMain: mouse x is: 181
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.883277
+TotalTime: 0.400189
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2546,31 +867,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
-KMEngine.cpp, wWinMain() 
-TotalTime: 0.889147
-
-KMEngine.cpp, wWinMain() 
-RotX = 0
-RotY = 0
-EyeX = 0
-EyeY = 0
-EyeZ = 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 194g_RaycastY2 =520
 
-EngineInitializer.h, GetRaycastX(): Raycast X =  0
 
-EngineInitializer.h, GetRaycastY(): Raycast Y =  0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 194g_RaycastY2 =520
 
-KMEngine.cpp, wWinMain() 
-RayX = 0
-RayY = 0
 
-Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 194
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.895159
+TotalTime: 0.406876
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2588,10 +893,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 201g_RaycastY2 =522
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 201g_RaycastY2 =522
+
+
+KMEngine.cpp, wWinMain: mouse x is: 201
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.901204
+TotalTime: 0.412736
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2609,10 +919,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 202g_RaycastY2 =522
+
+
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.907464
+TotalTime: 0.41833
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2630,10 +942,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.91341
+TotalTime: 0.424309
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2651,10 +962,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.919572
+TotalTime: 0.430336
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2672,10 +982,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.925594
+TotalTime: 0.436376
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2693,10 +1002,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.931553
+TotalTime: 0.442369
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2714,10 +1022,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.93782
+TotalTime: 0.448408
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2735,10 +1042,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.943766
+TotalTime: 0.454553
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2756,10 +1062,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.95006
+TotalTime: 0.460582
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2777,10 +1082,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.955789
+TotalTime: 0.466719
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2798,10 +1102,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.96182
+TotalTime: 0.472802
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2819,10 +1122,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.968248
+TotalTime: 0.478823
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2840,10 +1142,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.973966
+TotalTime: 0.484821
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2861,10 +1162,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.980335
+TotalTime: 0.490784
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2882,10 +1182,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.986267
+TotalTime: 0.496823
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2903,10 +1202,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.99224
+TotalTime: 0.502917
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2924,10 +1222,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 0.998298
+TotalTime: 0.508895
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2945,10 +1242,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.00429
+TotalTime: 0.515024
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2966,10 +1262,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.01035
+TotalTime: 0.521057
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -2987,10 +1282,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.0164
+TotalTime: 0.5272
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3008,10 +1302,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.02275
+TotalTime: 0.533198
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3029,10 +1322,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.02853
+TotalTime: 0.539111
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3050,10 +1342,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 202
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.03456
+TotalTime: 0.545253
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3071,10 +1362,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 198g_RaycastY2 =522
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 198g_RaycastY2 =522
+
+
+KMEngine.cpp, wWinMain: mouse x is: 198
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.04061
+TotalTime: 0.552032
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3092,10 +1388,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 186g_RaycastY2 =522
+
+
+KMEngine.cpp, wWinMain: mouse x is: 186
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.04675
+TotalTime: 0.557709
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3113,10 +1411,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 177g_RaycastY2 =519
+
+
+KMEngine.cpp, wWinMain: mouse x is: 177
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.05269
+TotalTime: 0.563814
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3134,10 +1434,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 174g_RaycastY2 =514
+
+
+KMEngine.cpp, wWinMain: mouse x is: 174
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.05914
+TotalTime: 0.569814
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3155,10 +1457,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 173g_RaycastY2 =511
+
+
+KMEngine.cpp, wWinMain: mouse x is: 173
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.06505
+TotalTime: 0.576036
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3176,10 +1480,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 176g_RaycastY2 =511
+
+
+KMEngine.cpp, wWinMain: mouse x is: 176
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.07093
+TotalTime: 0.581833
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3197,10 +1503,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 180g_RaycastY2 =510
+
+
+KMEngine.cpp, wWinMain: mouse x is: 180
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.07712
+TotalTime: 0.58797
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3218,10 +1526,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 184g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 184
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.08307
+TotalTime: 0.594029
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3239,10 +1549,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 188g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 188
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.0892
+TotalTime: 0.60002
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3260,10 +1572,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 194g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 194
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.09542
+TotalTime: 0.606219
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3281,10 +1595,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 203g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 203
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.10123
+TotalTime: 0.612278
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3302,10 +1618,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 216g_RaycastY2 =509
+
+
+KMEngine.cpp, wWinMain: mouse x is: 216
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.10731
+TotalTime: 0.618196
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3323,10 +1641,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 235g_RaycastY2 =506
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 235g_RaycastY2 =506
+
+
+KMEngine.cpp, wWinMain: mouse x is: 235
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.11336
+TotalTime: 0.624665
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3344,10 +1667,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 254g_RaycastY2 =502
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 257g_RaycastY2 =501
+
+
+KMEngine.cpp, wWinMain: mouse x is: 257
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.11968
+TotalTime: 0.630558
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3365,10 +1693,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 290g_RaycastY2 =492
+
+
+KMEngine.cpp, wWinMain: mouse x is: 290
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.12553
+TotalTime: 0.63685
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3386,10 +1716,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 330g_RaycastY2 =479
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 330g_RaycastY2 =479
+
+
+KMEngine.cpp, wWinMain: mouse x is: 330
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.13159
+TotalTime: 0.642673
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3407,10 +1742,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 373g_RaycastY2 =462
+
+
+KMEngine.cpp, wWinMain: mouse x is: 373
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.13754
+TotalTime: 0.648632
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3428,10 +1765,15 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 424g_RaycastY2 =438
+
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 424g_RaycastY2 =438
+
+
+KMEngine.cpp, wWinMain: mouse x is: 424
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.14402
+TotalTime: 0.654556
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3449,10 +1791,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 469g_RaycastY2 =417
+
+
+KMEngine.cpp, wWinMain: mouse x is: 469
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.15001
+TotalTime: 0.660609
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3470,10 +1814,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 531g_RaycastY2 =385
+
+
+KMEngine.cpp, wWinMain: mouse x is: 531
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.15595
+TotalTime: 0.667246
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3491,10 +1837,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 586g_RaycastY2 =356
+
+
+KMEngine.cpp, wWinMain: mouse x is: 586
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.16184
+TotalTime: 0.672814
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3512,10 +1860,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 656g_RaycastY2 =318
+
+
+KMEngine.cpp, wWinMain: mouse x is: 656
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.16794
+TotalTime: 0.679344
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3533,10 +1883,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 715g_RaycastY2 =289
+
+
+KMEngine.cpp, wWinMain: mouse x is: 715
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.17404
+TotalTime: 0.685427
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3554,10 +1906,12 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc:g_RaycastX2 = 796g_RaycastY2 =248
+
+
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.18021
+TotalTime: 0.691028
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3575,10 +1929,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.18638
+TotalTime: 0.69724
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3596,10 +1949,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.20672
+TotalTime: 0.703192
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3617,10 +1969,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.20737
+TotalTime: 0.70917
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3638,10 +1989,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.20831
+TotalTime: 0.715274
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3659,10 +2009,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.21035
+TotalTime: 0.721714
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3680,10 +2029,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.21639
+TotalTime: 0.727696
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3701,10 +2049,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.22285
+TotalTime: 0.733619
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3722,10 +2069,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.22847
+TotalTime: 0.739892
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3743,10 +2089,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.23453
+TotalTime: 0.745792
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3764,10 +2109,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.2407
+TotalTime: 0.751581
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3785,10 +2129,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.24671
+TotalTime: 0.763696
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3806,10 +2149,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.25292
+TotalTime: 0.764017
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3827,10 +2169,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.2588
+TotalTime: 0.76995
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3848,10 +2189,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.26481
+TotalTime: 0.776015
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3869,10 +2209,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.27123
+TotalTime: 0.781827
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3890,10 +2229,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.27765
+TotalTime: 0.788069
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3911,10 +2249,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.2837
+TotalTime: 0.794113
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3932,10 +2269,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.28916
+TotalTime: 0.800085
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3953,10 +2289,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.29519
+TotalTime: 0.806031
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3974,10 +2309,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.30136
+TotalTime: 0.812066
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -3995,10 +2329,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.30739
+TotalTime: 0.818064
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4016,10 +2349,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.31349
+TotalTime: 0.824043
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4037,10 +2369,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.31967
+TotalTime: 0.830426
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4058,10 +2389,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.32559
+TotalTime: 0.8367
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4079,10 +2409,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.33183
+TotalTime: 0.842603
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4100,10 +2429,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.33764
+TotalTime: 0.849014
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4121,10 +2449,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.34373
+TotalTime: 0.854672
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4142,10 +2469,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.34984
+TotalTime: 0.860767
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4163,10 +2489,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.35581
+TotalTime: 0.866783
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4184,10 +2509,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.36189
+TotalTime: 0.872869
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4205,10 +2529,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.36804
+TotalTime: 0.878946
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4226,10 +2549,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.37398
+TotalTime: 0.885068
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4247,10 +2569,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.38002
+TotalTime: 0.89103
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4268,10 +2589,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.38604
+TotalTime: 0.897169
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4289,10 +2609,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.39286
+TotalTime: 0.903036
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4310,10 +2629,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.39825
+TotalTime: 0.909212
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4331,10 +2649,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.40448
+TotalTime: 0.915284
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4352,10 +2669,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.41059
+TotalTime: 0.921557
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4373,10 +2689,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.41647
+TotalTime: 0.92745
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4394,10 +2709,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.42286
+TotalTime: 0.933972
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4415,10 +2729,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.42852
+TotalTime: 0.939533
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4436,10 +2749,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.43468
+TotalTime: 0.945635
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4457,10 +2769,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.44083
+TotalTime: 0.951644
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4478,10 +2789,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.44677
+TotalTime: 0.957786
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4499,10 +2809,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.45284
+TotalTime: 0.963738
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4520,10 +2829,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.45921
+TotalTime: 0.969517
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4541,10 +2849,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.465
+TotalTime: 0.975528
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4562,10 +2869,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.47112
+TotalTime: 0.98163
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4583,10 +2889,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.47726
+TotalTime: 0.987642
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4604,10 +2909,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.48357
+TotalTime: 0.993869
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4625,10 +2929,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.48937
+TotalTime: 0.999924
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4646,10 +2949,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.49562
+TotalTime: 1.0061
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4667,10 +2969,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.50134
+TotalTime: 1.01235
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4688,10 +2989,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.5073
+TotalTime: 1.01825
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4709,10 +3009,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.51354
+TotalTime: 1.0242
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4730,10 +3029,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.51948
+TotalTime: 1.03024
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4751,10 +3049,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.52551
+TotalTime: 1.03621
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4772,10 +3069,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.5316
+TotalTime: 1.04237
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4793,10 +3089,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.53759
+TotalTime: 1.04883
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4814,10 +3109,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.54413
+TotalTime: 1.0548
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4835,10 +3129,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.54977
+TotalTime: 1.06089
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4856,10 +3149,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.55603
+TotalTime: 1.06691
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4877,10 +3169,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.56186
+TotalTime: 1.07315
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4898,10 +3189,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.56803
+TotalTime: 1.07912
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4919,10 +3209,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.57405
+TotalTime: 1.08493
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4940,10 +3229,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.58028
+TotalTime: 1.09172
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4961,10 +3249,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.58619
+TotalTime: 1.09714
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -4982,10 +3269,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.59224
+TotalTime: 1.10323
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5003,10 +3289,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.59831
+TotalTime: 1.1092
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5024,10 +3309,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.60487
+TotalTime: 1.11515
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5045,10 +3329,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.61041
+TotalTime: 1.12198
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5066,10 +3349,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.6167
+TotalTime: 1.12764
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5087,10 +3369,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.62277
+TotalTime: 1.13362
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5108,10 +3389,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.62889
+TotalTime: 1.13961
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5129,10 +3409,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.63513
+TotalTime: 1.14592
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5150,10 +3429,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.6413
+TotalTime: 1.15169
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5171,10 +3449,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.64709
+TotalTime: 1.15766
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5192,10 +3469,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.65293
+TotalTime: 1.16463
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5213,10 +3489,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.65909
+TotalTime: 1.16988
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5234,10 +3509,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.66519
+TotalTime: 1.17584
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5255,10 +3529,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.67121
+TotalTime: 1.18192
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5276,10 +3549,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.67737
+TotalTime: 1.18788
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5297,10 +3569,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.68333
+TotalTime: 1.19436
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5318,10 +3589,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.68929
+TotalTime: 1.19991
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5339,10 +3609,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.69534
+TotalTime: 1.20615
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5360,10 +3629,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.70127
+TotalTime: 1.21195
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5381,10 +3649,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.70735
+TotalTime: 1.21798
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5402,10 +3669,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.71347
+TotalTime: 1.22406
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5423,10 +3689,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.71949
+TotalTime: 1.23009
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5444,10 +3709,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.7256
+TotalTime: 1.23617
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5465,10 +3729,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.73167
+TotalTime: 1.24238
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5486,10 +3749,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.73784
+TotalTime: 1.24834
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5507,10 +3769,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.74384
+TotalTime: 1.25444
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5528,10 +3789,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.74987
+TotalTime: 1.26037
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5549,10 +3809,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.75607
+TotalTime: 1.26651
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5570,10 +3829,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.76196
+TotalTime: 1.2726
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5591,10 +3849,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.76818
+TotalTime: 1.27867
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5612,10 +3869,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.77393
+TotalTime: 1.28489
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5633,10 +3889,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.77999
+TotalTime: 1.2911
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5654,10 +3909,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.78616
+TotalTime: 1.29683
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5675,10 +3929,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.7921
+TotalTime: 1.30287
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5696,10 +3949,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.7983
+TotalTime: 1.30889
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5717,10 +3969,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.80429
+TotalTime: 1.31492
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5738,10 +3989,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.81029
+TotalTime: 1.32101
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5759,10 +4009,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.81644
+TotalTime: 1.32712
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5780,10 +4029,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.82252
+TotalTime: 1.33379
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5801,10 +4049,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.82886
+TotalTime: 1.33923
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5822,10 +4069,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.83479
+TotalTime: 1.34538
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5843,10 +4089,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.84079
+TotalTime: 1.35163
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5864,10 +4109,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.84679
+TotalTime: 1.35738
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5885,10 +4129,9 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight
-KMEngine.cpp, wWinMain: mouse x is: 0
+KMEngine.cpp, wWinMain: mouse x is: 796
 KMEngine.cpp, wWinMain() 
-TotalTime: 1.85279
+TotalTime: 1.36347
 
 KMEngine.cpp, wWinMain() 
 RotX = 0
@@ -5906,4 +4149,3 @@ RayX = 0
 RayY = 0
 
 Entity Tag at 0 is: Terrain
-Entity Tag at 1 is: Knight

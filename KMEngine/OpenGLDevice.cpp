@@ -2,7 +2,7 @@
 
 void COpenGLDevice::SetViewportHandle(HWND hwnd)
 {
-	m_Hwnd = hwnd;
+    m_Hwnd = hwnd;
 }
 
 void COpenGLDevice::SetViewportWidthAndHeight(int Width, int Height)
@@ -13,26 +13,27 @@ void COpenGLDevice::SetViewportWidthAndHeight(int Width, int Height)
 
 void COpenGLDevice::SetShader(const char* VertexPath, const char* FragmentPath)
 {
-
+    // 1. retrieve the vertex/fragment source code from filePath
     std::string VertexCodeString;
     std::string FragmentCodeString;
     std::ifstream VertexShaderFile;
     std::ifstream FragmentShaderFile;
-
+    // ensure ifstream objects can throw exceptions:
     VertexShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     FragmentShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     try
     {
+        // open files
         VertexShaderFile.open(VertexPath);
         FragmentShaderFile.open(FragmentPath);
         std::stringstream VertexShaderStream, FragmentShaderStream;
-
+        // read file's buffer contents into streams
         VertexShaderStream << VertexShaderFile.rdbuf();
         FragmentShaderStream << FragmentShaderFile.rdbuf();
-
+        // close file handlers
         VertexShaderFile.close();
         FragmentShaderFile.close();
-
+        // convert stream into string
         VertexCodeString = VertexShaderStream.str();
         FragmentCodeString = FragmentShaderStream.str();
     }
@@ -42,25 +43,25 @@ void COpenGLDevice::SetShader(const char* VertexPath, const char* FragmentPath)
     }
     const char* VertexShaderCode = VertexCodeString.c_str();
     const char* FragmentShaderCode = FragmentCodeString.c_str();
-
+    // 2. compile shaders
     unsigned int VertexShader, FragmentShader;
-
+    // vertex shader
     VertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(VertexShader, 1, &VertexShaderCode, NULL);
     glCompileShader(VertexShader);
     CheckCompileErrors(VertexShader, "VERTEX");
-
+    // fragment Shader
     FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(FragmentShader, 1, &FragmentShaderCode, NULL);
     glCompileShader(FragmentShader);
     CheckCompileErrors(FragmentShader, "FRAGMENT");
-
+    // shader Program
     m_ShaderProgram = glCreateProgram();
     glAttachShader(m_ShaderProgram, VertexShader);
     glAttachShader(m_ShaderProgram, FragmentShader);
     glLinkProgram(m_ShaderProgram);
     CheckCompileErrors(m_ShaderProgram, "PROGRAM");
-
+    // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(VertexShader);
     glDeleteShader(FragmentShader);
 }
@@ -95,6 +96,7 @@ void COpenGLDevice::InitOpenGLDevice()
     m_HGLRC = wglCreateContext(m_HDC);
     wglMakeCurrent(m_HDC, m_HGLRC);
 
+    // Initialize glad after context is current!
     if (!gladLoadGL()) {
         MessageBoxA(0, "Failed to initialize GLAD", "Error", 0);
         exit(-1);
@@ -102,53 +104,57 @@ void COpenGLDevice::InitOpenGLDevice()
 
     glEnable(GL_DEPTH_TEST);
 
+    //SetBaseShaders();
     SetShader("Solid_Color_GLSL.vs", "Solid_Color_GLSL.fs");
 
     float Vertices[] = {
-        // positions          // colors                 // texture coords
-         0.5f,  0.5f, 0.0f,   /*1.0f, 0.0f, 0.0f,*/     1.0f, 1.0f, // top right
-         0.5f, -0.5f, 0.0f,   /*0.0f, 1.0f, 0.0f,*/     1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f,   /*0.0f, 0.0f, 1.0f,*/     0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f,   /*1.0f, 1.0f, 0.0f,*/     0.0f, 1.0f  // top left 
+        // positions          // colors           // texture coords
+         0.5f,  0.5f, 0.0f,   /*1.0f, 0.0f, 0.0f,*/   1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f,   /*0.0f, 1.0f, 0.0f,*/   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,   /*0.0f, 0.0f, 1.0f,*/   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,   /*1.0f, 1.0f, 0.0f,*/   0.0f, 1.0f  // top left 
     };
 
     unsigned int Indices[] =
     {
-        0, 1, 3, 
-        1, 2, 3  
+        0, 1, 3, // first triangle
+        1, 2, 3  // second triangle
     };
 
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
     glGenBuffers(1, &m_EBO);
-
+    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
-
+    // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-
+    // index attribute
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
-
+    // color attribute
+    //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    //glEnableVertexAttribArray(1);
+    // texture coord attribute
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
     unsigned int texture;
     glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
+    // set the texture wrapping parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
+    // set texture filtering parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+    // load image, create texture and generate mipmaps
     int width, height, nrChannels;
-
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
     unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {
@@ -190,10 +196,5 @@ void COpenGLDevice::CheckCompileErrors(unsigned int Shader, std::string Type)
     }
 }
 
-void COpenGLDevice::CreateVertexBufferResource(COpenGLResource* Resource)
-{
-	Resource->m_ShaderProgram = m_ShaderProgram;
-	Resource->m_VBO = m_VBO;
-	Resource->m_VAO = m_VAO;
-	Resource->m_EBO = m_EBO;
-}
+unsigned int COpenGLDevice::m_ViewportWidth;
+unsigned int COpenGLDevice::m_ViewportHeight;

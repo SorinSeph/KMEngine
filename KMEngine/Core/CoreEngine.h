@@ -34,7 +34,6 @@ public:
     CCoreEngine(HINSTANCE hInstance, int nCmdShow)
         : m_HInstance{ hInstance }
         , m_NCmdShow{ nCmdShow }
-        , m_Renderer{ }
         , m_Logger{ CLogger::GetLogger() }
     {
     }
@@ -188,7 +187,7 @@ private:
     HINSTANCE m_HInstance{ };
     int m_NCmdShow{ };
     CWorld m_World{ };
-    CRenderer m_Renderer;
+    //CRenderer m_Renderer;
 
     float m_RotX;
     float m_RotY;

@@ -1,7 +1,9 @@
 #include "World.h"
 #include "Scene.h"
 #include "TerrainGenerator.h"
+#include "Core/CoreClock.h"
 #include <vector>
+#include <filesystem>
 
 std::vector<float> g_Vertices;
 std::vector<float> g_TexCoords;
@@ -11,7 +13,12 @@ void CWorld::Init()
 {
 	CTerrainGenerator TerrainGenerator{m_pOpenGLDevice};
 	TerrainGenerator.GenerateTerrain();
-    AddTestEntity();
+	CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("World.cpp, Init(): Location: ", std::filesystem::current_path());
+
+    //CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+    //TimerManager.SetSingleTimer3<CWorld, void, &CWorld::AddTestEntity>(this, 10.0f);
+    //AddTestEntity();
 }
 
 void CWorld::LoadAttributes()
@@ -69,6 +76,9 @@ void InitAttributes()
 
 void CWorld::AddTestEntity()
 {
+	CLogger& Logger = CLogger::GetLogger();
+	Logger.Log("World.cpp, AddTestEntity(): Adding entity");
+
 	CGameEntity3D TestEntity;
 	TestEntity.m_GameEntityTag = "Knight";
 	CGameEntity3DComponent TestEntityComponent;

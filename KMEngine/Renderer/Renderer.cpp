@@ -7,10 +7,13 @@
 #include "RendererDirectX11.h"
 #include "RendererOpenGL.h"
 
-CRenderer::CRenderer()
+CRenderer::CRenderer(const std::source_location& loc)
 {
     m_pRendererDirectX11 = new CRendererDirectX11;
     m_pRendererOpenGL = new CRendererOpenGL;
+
+    CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("CRenderer constructed at ", loc.file_name(), ":", (int)loc.line());
 }
 
 void CRenderer::SetViewport(HWND InViewport)
@@ -39,8 +42,6 @@ void CRenderer::SetViewportSize(int Width, int Height)
 void CRenderer::InitRenderer()
 {
     m_DX11Device.InitDX11Device();
-
-    //m_DX11Device.AddTestLine();
 }
 
 void CRenderer::InitDX11Renderer()

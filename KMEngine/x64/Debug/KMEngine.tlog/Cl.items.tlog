@@ -7,6 +7,7 @@ C:\Users\sefce\source\KMEngine\KMEngine\GameEntity3D.cpp;C:\Users\sefce\source\K
 C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\KMEngine.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Logger.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Logger.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\UIModule.obj
+C:\Users\sefce\source\KMEngine\KMEngine\OpenGLDevice.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\OpenGLDevice.obj
 C:\Users\sefce\source\KMEngine\KMEngine\PerlinNoise.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\PerlinNoise.obj
 C:\Users\sefce\source\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\PrimitiveGeometryFactory.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Renderer\Renderer.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Renderer.obj

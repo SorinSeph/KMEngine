@@ -6,6 +6,7 @@
 #include "BaseModule.h"
 #include "../Logger.h"
 #include "../Renderer/Renderer.h"
+//#include "../Renderer/RendererOpenGL.h"
 #include "../EntityBuilder.h"
 
 class CGraphicsModule : public CBaseModule
@@ -36,7 +37,7 @@ public:
 
 	CDX11Device m_DX11Device;
 
-	CEntityBuilder m_EntityBuilder;
+	CEntityBuilder m_EntityBuilder{};
 };
 
 #endif

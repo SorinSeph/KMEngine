@@ -225,6 +225,6 @@ void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileC
 
     if (pGraphicsModule)
     {
-        //pGraphicsModule->m_EntityBuilder.ImportGLTF(FilePath, FileContent);
+        pGraphicsModule->m_EntityBuilder.ImportGLTF(FilePath, FileContent);
 	}
 }

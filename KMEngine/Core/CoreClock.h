@@ -238,6 +238,19 @@ public:
 		}
 	}
 
+	template <typename TClass, typename TReturnType, typename TReturnType(TClass::* TPtr)()>
+	void SetSingleTimer3(TClass* TObject, float InStartTime)
+	{
+		if (m_pCoreClock)
+		{
+			CTimer2<TClass, TReturnType, TPtr>* Timer{ new CTimer2<TClass, TReturnType, TPtr>(TObject) };
+			Timer->StartTime = InStartTime;
+			Timer->EndTime = 0;
+			Timer->bRunOnce = true;
+			m_pCoreClock->AddTimer(Timer);
+		}
+	}
+
 	template<typename TObject, typename... TArgs>
 	static void SetTimer4(float InStartTime, float InEndTime, TObject Obj, void (TObject::* Fn)(TArgs...), TArgs... Args)
 	{

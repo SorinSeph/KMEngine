@@ -1,6 +1,7 @@
 #pragma once
 #include <d3d11.h>
 #include "../DX11Device.h"
+#include <source_location>
 
 HRESULT CompileShaderFromFile(const wchar_t* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 
@@ -9,7 +10,7 @@ class CGraphicsModule;
 class CRenderer
 {
 public:
-    CRenderer();
+    explicit CRenderer(const std::source_location& loc = std::source_location::current());
 
     CGraphicsModule* m_pGraphicsModule{ nullptr };
 

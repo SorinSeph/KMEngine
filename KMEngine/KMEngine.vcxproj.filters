@@ -84,6 +84,9 @@
     <ClCompile Include="EntityBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">

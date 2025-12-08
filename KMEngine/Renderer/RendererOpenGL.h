@@ -2,23 +2,33 @@
 #include "Renderer.h"  
 #include "../OpenGLDevice.h"
 #include "../Scene.h"
+#include <source_location>
 
-// Temporary, to be moved in the camera class
-static glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-static glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-static glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+static glm::mat4 g_ViewMatrix;// = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
-static glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+class COpenGLCamera
+{
+public:
+	glm::vec3 cameraPos{ 0.0f, 0.0f, 3.0f };
+	glm::vec3 cameraFront = { 0.0f, 0.0f, -1.0f };
+	glm::vec3 cameraUp = {0.0f, 1.0f, 0.0f};
+};
 
 class CRendererOpenGL
 {
 public:
 	CRendererOpenGL() = default;
 
+	//explicit CRendererOpenGL(const std::source_location& loc = std::source_location::current())
+	//{
+	//	CLogger& Logger = CLogger::GetLogger();
+	//	Logger.Log("CRendererOpenGL constructed at ", loc.file_name(), ":", (int)loc.line());
+	//}
+
 	void SetWindowHandle(HWND hwnd)
 	{
 		m_OpenGLDevice.SetViewportHandle(hwnd);
-	}
+	} 
 
 	void SetViewportWidthAndHeight(int Width, int Height)
 	{
@@ -48,7 +58,7 @@ public:
 				glUseProgram(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram);
 				glBindVertexArray(EntityComponent->m_tType.m_OpenGLResource.m_VAO);
 
-				cameraPos = glm::vec3(EyeX, EyeY, -EyeZ);
+				m_ViewportCamera.cameraPos = glm::vec3(EyeX, EyeY, -EyeZ);
 				// Create rotation matrices
 				glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-RotX), glm::vec3(1.0f, 0.0f, 0.0f));
 				glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(-RotY), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -58,9 +68,9 @@ public:
 
 				// Apply rotation to the default forward vector
 				glm::vec4 front4 = rotation * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
-				cameraFront = glm::normalize(glm::vec3(front4));
-				glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &view[0][0]);
+				m_ViewportCamera.cameraFront = glm::normalize(glm::vec3(front4));
+				g_ViewMatrix = glm::lookAt(m_ViewportCamera.cameraPos, m_ViewportCamera.cameraPos + m_ViewportCamera.cameraFront, m_ViewportCamera.cameraUp);
+				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &g_ViewMatrix[0][0]);
 
 				glm::mat4 model = glm::mat4(1.0f);
 				model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
@@ -82,4 +92,5 @@ public:
 	}
 
 	COpenGLDevice m_OpenGLDevice;
+	COpenGLCamera m_ViewportCamera;
 };

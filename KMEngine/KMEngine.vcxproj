@@ -138,6 +138,7 @@
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Modules\UIModule.cpp" />
+    <ClCompile Include="OpenGLDevice.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
