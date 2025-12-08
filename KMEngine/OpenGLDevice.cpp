@@ -105,7 +105,7 @@ void COpenGLDevice::InitOpenGLDevice()
     glEnable(GL_DEPTH_TEST);
 
     //SetBaseShaders();
-    SetShader("Solid_Color_GLSL.vs", "Solid_Color_GLSL.fs");
+    SetShader("Texture_GLSL.vs", "Texture_GLSL.fs");
 
     float Vertices[] = {
         // positions          // colors           // texture coords

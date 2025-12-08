@@ -72,18 +72,21 @@ public:
 				g_ViewMatrix = glm::lookAt(m_ViewportCamera.cameraPos, m_ViewportCamera.cameraPos + m_ViewportCamera.cameraFront, m_ViewportCamera.cameraUp);
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &g_ViewMatrix[0][0]);
 
-				glm::mat4 model = glm::mat4(1.0f);
-				model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
-				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &model[0][0]);
+				glm::mat4 modelMatrix = glm::mat4(1.0f);
+				modelMatrix = glm::translate(modelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(),
+																	EntityComponent->m_tType.GetLocationY(),
+																	EntityComponent->m_tType.GetLocationZ()));
 
-				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
-				{
-					glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-				}
-				else
-				{
-					glDrawElements(GL_TRIANGLES, 111408, GL_UNSIGNED_INT, nullptr);
-				}
+				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
+
+				//if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+				//{
+					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+				//}
+				//else
+				//{
+				//	glDrawElements(GL_TRIANGLES, 111408, GL_UNSIGNED_INT, nullptr);
+				//}
 
 				auto breakpoint = 1;
 			}

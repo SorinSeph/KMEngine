@@ -35,6 +35,11 @@ public:
 		m_Renderer.GetDX11Device()->SpawnGizmo(SelectedEntity);
 	}
 
+	void GenerateTestPlane()
+	{
+
+	}
+
 	CDX11Device m_DX11Device;
 
 	CEntityBuilder m_EntityBuilder{};

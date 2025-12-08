@@ -21,6 +21,8 @@ public:
 
 	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
 
+	void AddLinetrace();
+
 	void AddTestEntity();
 
 	CImporterGLTF m_ImporterGLTF;

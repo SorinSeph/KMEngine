@@ -345,6 +345,8 @@ void CTerrainGenerator::GenerateTerrain()
         1, 2, 3  // second triangle
     };
 
+    TerrainComponent.SetLocationF(0.f, 0.f, -5.f);
+
     //glGenVertexArrays(1, &VAO);
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -395,7 +397,8 @@ void CTerrainGenerator::GenerateTerrain()
         glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)m_pOpenGLDevice->m_ViewportWidth / (float)m_pOpenGLDevice->m_ViewportHeight, 0.1f, 100.0f);
         glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
     }
-    
+
+	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
 
     CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     TerrainComponentNode->m_tType = TerrainComponent;
