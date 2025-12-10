@@ -34,6 +34,8 @@ public:
 
     static unsigned int m_ViewportWidth;
     static unsigned int m_ViewportHeight;
+    static glm::mat4 g_ProjectionMatrix;
+    static glm::mat4 g_ViewMatrix;
     unsigned int m_VBO, m_VAO, m_EBO;
     unsigned int m_VertexShader;
     unsigned int m_FragmentShader;

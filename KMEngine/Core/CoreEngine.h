@@ -60,6 +60,7 @@ public:
 
 		m_World.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
         m_World.Init();
+        m_GraphicsModule.m_EntityBuilder.AddLinetrace(glm::vec3{0.5f, 0.5f, 0.0f}, glm::vec3{ 0.5f, 0.5f, -50.0f });
 
         return S_OK;
     }

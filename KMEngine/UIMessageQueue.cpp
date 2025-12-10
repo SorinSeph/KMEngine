@@ -219,6 +219,58 @@ void CUIMessageQueue::RayPicking(int MouseX, int MouseY)
     }
 }
 
+void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
+{
+    // 1) Convert mouse to Normalized Device Coordinates [-1,1]
+    float ndcX = (2.0f * MouseX) / static_cast<float>(COpenGLDevice::m_ViewportWidth) - 1.0f;
+    float ndcY = 1.0f - (2.0f * MouseY) / static_cast<float>(COpenGLDevice::m_ViewportHeight); // flip Y
+
+    glm::vec4 rayStartNDC{ ndcX, ndcY, -1.0f, 1.0f }; // near plane
+    glm::vec4 rayEndNDC{ ndcX, ndcY,  1.0f, 1.0f }; // far plane
+
+    // 2) Unproject to world space
+    glm::mat4 invVP = glm::inverse(COpenGLDevice::g_ProjectionMatrix * COpenGLDevice::g_ViewMatrix);
+
+    glm::vec4 rayStartWorld4 = invVP * rayStartNDC;
+    glm::vec4 rayEndWorld4 = invVP * rayEndNDC;
+
+    // perspective divide
+    rayStartWorld4 /= rayStartWorld4.w;
+    rayEndWorld4 /= rayEndWorld4.w;
+
+    glm::vec3 rayOrigin = glm::vec3(rayStartWorld4);
+    glm::vec3 rayDirection = glm::normalize(glm::vec3(rayEndWorld4) - rayOrigin);
+
+    // 3) Raycast destination along forward by 50 units from the origin
+    glm::vec3 rayDest = rayOrigin + rayDirection * 50.0f;
+
+
+
+ //   // convert to clip space
+ //   glm::vec4 ClipCoords{ MouseX, MouseY, -1, 1 };
+
+ //   // convert to eye space
+ //   
+ //   glm::mat4 InvertedProjectionMatrix{ glm::inverse(COpenGLDevice::g_ProjectionMatrix) };
+	//glm::vec4 EyeCoordsTemp = InvertedProjectionMatrix * ClipCoords;
+ //   glm::vec4 EyeCoords{ EyeCoordsTemp.x, EyeCoordsTemp.y, -1, 1 };
+
+	//// convert to world space
+	//glm::mat4 InvertedViewMatrix{ COpenGLDevice::g_ViewMatrix };
+	//glm::vec4 RaycastWorld = InvertedProjectionMatrix * EyeCoords;
+	//glm::vec3 RayDirection{ RaycastWorld.x, RaycastWorld.y, RaycastWorld.z };
+ //   RayDirection = glm::normalize(RayDirection);
+	//glm::vec3 RayDestination = RayDirection * 100.f;
+ //   glm::vec3 RayOrigin{ 0.f, 0.f, 0.f };
+
+    CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
+
+    if (pGraphicsModule)
+    {
+        pGraphicsModule->m_EntityBuilder.AddLinetrace(rayOrigin, rayDest);
+	}
+}
+
 void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileContent)
 {
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);

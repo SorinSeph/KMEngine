@@ -394,8 +394,7 @@ void CTerrainGenerator::GenerateTerrain()
     glUseProgram(ShaderProgram);
     if (m_pOpenGLDevice)
     {
-        glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)m_pOpenGLDevice->m_ViewportWidth / (float)m_pOpenGLDevice->m_ViewportHeight, 0.1f, 100.0f);
-        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
     }
 
 	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;

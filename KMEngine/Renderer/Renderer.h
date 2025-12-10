@@ -25,6 +25,8 @@ public:
 
     void SetViewportOpenGL(HWND InViewport, int Width, int Height);
 
+    void SetProjectionMatrix(int Width, int Height);
+
 	void SetViewportSize(int Width, int Height);
 
     void InitRenderer();

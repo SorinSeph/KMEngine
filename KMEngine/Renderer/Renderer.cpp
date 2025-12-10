@@ -27,7 +27,13 @@ void CRenderer::SetViewportOpenGL(HWND InViewport, int Width, int Height)
     {
         m_pRendererOpenGL->SetWindowHandle(InViewport);
 		m_pRendererOpenGL->SetViewportWidthAndHeight(Width, Height);
+        SetProjectionMatrix(Width, Height);
     }
+}
+
+void CRenderer::SetProjectionMatrix(int Width, int Height)
+{
+    COpenGLDevice::g_ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)Width / (float)Height, 0.1f, 100.0f);
 }
 
 void CRenderer::SetViewportSize(int Width, int Height)

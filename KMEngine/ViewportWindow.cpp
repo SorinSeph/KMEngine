@@ -77,12 +77,17 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             g_RaycastX = mouseX;
             g_RaycastY = mouseY;
 
+            float NormalizedMouseX = (2.f * mouseX) / (float)m_ViewportWidth - 1.f;
+			//float NormalizedMouseY = (2.f * mouseY) / (float)m_ViewportHeight - 1.f;
+            float NormalizedMouseY = 1.f - ((2.f * mouseY) / (float)m_ViewportHeight);
+
 			CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
             ViewportMessage.m_bIsLeftMouseButtonDown = true;
-            ViewportMessage.RayPicking(g_RaycastX, g_RaycastY);
+            //ViewportMessage.RayPicking(g_RaycastX, g_RaycastY);
+			ViewportMessage.RaycastOpenGL(mouseX, mouseY);
 
-            Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\nMouseX on click is: ", mouseX);
-		    Logger.Log("\nMouseY on click is: ", mouseY);
+            Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc: MouseX on click is: ", mouseX);
+		    Logger.Log("MouseY on click is: ", mouseY, "\n");
 
             return 0;
         }
@@ -152,8 +157,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             g_RaycastX2 = mouseX;
             g_RaycastY2 = mouseY;
 
-            Logger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\g_RaycastX2 = ", g_RaycastX2, "\g_RaycastY2 =", g_RaycastY2, "\n\n");
-
             return 0;
         }
 
@@ -175,7 +178,7 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
                 g_RotY += xPosRelative * 0.15f;
 
                 CLogger& SLogger = CLogger::GetLogger();
-                SLogger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc:", "\ng_RotX = ", g_RotX, "\ng_RotY =", g_RotY, "\n");
+                SLogger.Log("ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:", "\ng_RotX = ", g_RotX, "\ng_RotY =", g_RotY, "\n");
             }
             break;
         }

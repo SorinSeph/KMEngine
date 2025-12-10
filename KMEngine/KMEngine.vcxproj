@@ -196,6 +196,8 @@
     <None Include="GizmoArrowShader.fxh" />
     <None Include="solid_color.ps" />
     <None Include="solid_color.vs" />
+    <None Include="Solid_GLSL.fs" />
+    <None Include="Solid_GLSL.vs" />
     <None Include="Texture_GLSL.fs" />
     <None Include="Texture_GLSL.vs" />
     <None Include="texture.ps" />

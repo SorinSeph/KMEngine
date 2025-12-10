@@ -168,8 +168,8 @@ void COpenGLDevice::InitOpenGLDevice()
     stbi_image_free(data);
 
     glUseProgram(m_ShaderProgram);
-    glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)m_ViewportWidth / (float)m_ViewportHeight, 0.1f, 100.0f);
-    glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
+    //glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)m_ViewportWidth / (float)m_ViewportHeight, 0.1f, 100.0f);
+    glUniformMatrix4fv(glGetUniformLocation(m_ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &g_ProjectionMatrix[0][0]);
 }
 
 void COpenGLDevice::CheckCompileErrors(unsigned int Shader, std::string Type)
@@ -198,3 +198,6 @@ void COpenGLDevice::CheckCompileErrors(unsigned int Shader, std::string Type)
 
 unsigned int COpenGLDevice::m_ViewportWidth;
 unsigned int COpenGLDevice::m_ViewportHeight;
+
+glm::mat4 COpenGLDevice::g_ProjectionMatrix;
+glm::mat4 COpenGLDevice::g_ViewMatrix;

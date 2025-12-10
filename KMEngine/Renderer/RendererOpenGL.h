@@ -4,14 +4,19 @@
 #include "../Scene.h"
 #include <source_location>
 
-static glm::mat4 g_ViewMatrix;// = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+//static glm::mat4 g_ViewMatrix;// = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
 class COpenGLCamera
 {
 public:
-	glm::vec3 cameraPos{ 0.0f, 0.0f, 3.0f };
-	glm::vec3 cameraFront = { 0.0f, 0.0f, -1.0f };
-	glm::vec3 cameraUp = {0.0f, 1.0f, 0.0f};
+	COpenGLCamera()
+	{
+		COpenGLDevice::g_ViewMatrix = glm::lookAt(m_CameraLocation, m_CameraLocation + m_CameraFront, m_CameraUp);
+	}
+
+	glm::vec3 m_CameraLocation{ 0.0f, 0.0f, 3.0f };
+	glm::vec3 m_CameraFront = { 0.0f, 0.0f, -1.0f };
+	glm::vec3 m_CameraUp = {0.0f, 1.0f, 0.0f};
 };
 
 class CRendererOpenGL
@@ -45,7 +50,7 @@ public:
 
 		glViewport(0, 0, m_OpenGLDevice.m_ViewportWidth, m_OpenGLDevice.m_ViewportHeight);
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.12f, 0.f, 0.35f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		auto& SceneEntityList = Scene.GetSceneList();
@@ -58,7 +63,7 @@ public:
 				glUseProgram(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram);
 				glBindVertexArray(EntityComponent->m_tType.m_OpenGLResource.m_VAO);
 
-				m_ViewportCamera.cameraPos = glm::vec3(EyeX, EyeY, -EyeZ);
+				m_ViewportCamera.m_CameraLocation = glm::vec3(EyeX, EyeY, -EyeZ);
 				// Create rotation matrices
 				glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-RotX), glm::vec3(1.0f, 0.0f, 0.0f));
 				glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(-RotY), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -68,9 +73,9 @@ public:
 
 				// Apply rotation to the default forward vector
 				glm::vec4 front4 = rotation * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
-				m_ViewportCamera.cameraFront = glm::normalize(glm::vec3(front4));
-				g_ViewMatrix = glm::lookAt(m_ViewportCamera.cameraPos, m_ViewportCamera.cameraPos + m_ViewportCamera.cameraFront, m_ViewportCamera.cameraUp);
-				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &g_ViewMatrix[0][0]);
+				m_ViewportCamera.m_CameraFront = glm::normalize(glm::vec3(front4));
+				COpenGLDevice::g_ViewMatrix = glm::lookAt(m_ViewportCamera.m_CameraLocation, m_ViewportCamera.m_CameraLocation + m_ViewportCamera.m_CameraFront, m_ViewportCamera.m_CameraUp);
+				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ViewMatrix[0][0]);
 
 				glm::mat4 modelMatrix = glm::mat4(1.0f);
 				modelMatrix = glm::translate(modelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(),
@@ -79,14 +84,24 @@ public:
 
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
 
-				//if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
-				//{
+				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+				{
 					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
-				//}
-				//else
-				//{
-				//	glDrawElements(GL_TRIANGLES, 111408, GL_UNSIGNED_INT, nullptr);
-				//}
+				}
+				else if (EntityComponent->m_tType.m_GameEntityTag == "LinetraceComponent")
+				{
+					auto prog = EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram;
+					GLint locPos = glGetAttribLocation(prog, "aPos");
+					GLint locCol = glGetAttribLocation(prog, "aColor");
+
+					// Temporarily disable depth to rule out occlusion
+					glDisable(GL_DEPTH_TEST);
+					glLineWidth(2.0f);
+
+					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 2, GL_UNSIGNED_INT, nullptr);
+
+					glEnable(GL_DEPTH_TEST);
+				}
 
 				auto breakpoint = 1;
 			}

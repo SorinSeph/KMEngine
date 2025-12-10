@@ -20,6 +20,8 @@ public:
 
 	void RayPicking(int MouseX, int MouseY);
 
+	void RaycastOpenGL(int MouseX, int MouseY);
+
 	void ImportGLTF(std::string& FilePath, const std::string& FileContent);
 
 	bool m_bIsEntitySelected{ false };

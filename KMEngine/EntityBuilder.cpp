@@ -64,34 +64,105 @@ void InitEntityAttributes()
 void CEntityBuilder::AddLinetrace()
 {
 	CScene& Scene = CScene::GetScene();
-	CGameEntity3D Terrain{};
-	Terrain.m_GameEntityTag = "PlaneEntity";
-	CGameEntity3DComponent TerrainComponent;
-	TerrainComponent.m_GameEntityTag = "PlaneComponent";
+	CGameEntity3D LinetraceEntity{};
+	LinetraceEntity.m_GameEntityTag = "LinetraceEntity";
+	CGameEntity3DComponent LinetraceComponent;
+	LinetraceComponent.m_GameEntityTag = "LinetraceComponent";
 
-	uint32_t& ShaderProgram{ TerrainComponent.m_OpenGLResource.m_ShaderProgram };
-	uint32_t& VAO{ TerrainComponent.m_OpenGLResource.m_VAO };
-	uint32_t& VBO{ TerrainComponent.m_OpenGLResource.m_VBO };
-	uint32_t& EBO{ TerrainComponent.m_OpenGLResource.m_EBO };
+	uint32_t& ShaderProgram{ LinetraceComponent.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO{ LinetraceComponent.m_OpenGLResource.m_VAO };
+	uint32_t& VBO{ LinetraceComponent.m_OpenGLResource.m_VBO };
+	uint32_t& EBO{ LinetraceComponent.m_OpenGLResource.m_EBO };
+
+	LinetraceComponent.m_OpenGLResource.m_Indices = { 0, 1 };
 
 	CShaderGenerator ShaderGenerator;
-	ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
+	ShaderGenerator.GenerateBaseSolidShaders(&LinetraceComponent.m_OpenGLResource);
+	glUseProgram(ShaderProgram);
 
 	float Vertices[] = {
-		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 2.0f,   /*1.0f, 0.0f, 0.0f,*/   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 2.0f,   /*0.0f, 1.0f, 0.0f,*/   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 2.0f,   /*0.0f, 0.0f, 1.0f,*/   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 2.0f,   /*1.0f, 1.0f, 0.0f,*/   0.0f, 1.0f  // top left 
+		// positions          // colors			
+		 0.f,  0.f, .0f,	1.0f, 0.0f, 0.0f,		
+		 0.f, 0.f, -15.0f,  1.0f, 0.0f, 0.0f,	
 	};
 
 	uint32_t Indices[] =
 	{
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
+		0, 1,
 	};
 
+	LinetraceComponent.SetLocationF(1.0f, 0.2f, 0.f);
+
 	
+	//glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// index attribute
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glUseProgram(ShaderProgram);
+
+	glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)COpenGLDevice::m_ViewportWidth / COpenGLDevice::m_ViewportHeight, 0.1f, 100.0f);
+	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
+	
+	LinetraceComponent.m_OpenGLResource.m_DrawMode = GL_LINES;
+
+	CSceneGraphNode<CGameEntity3DComponent>* LinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+	LinetraceComponentNode->m_tType = LinetraceComponent;
+	LinetraceEntity.m_SceneGraph.m_pRootNode = LinetraceComponentNode;
+	std::vector<uint32_t> TempIndices{ 0, 1, 3, 1, 2, 3 };
+	//LinetraceComponent.m_OpenGLResource.m_Indices.insert(LinetraceComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
+
+	Scene.AddEntityToScene(LinetraceEntity);
+}
+
+void CEntityBuilder::AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation)
+{
+	CScene& Scene = CScene::GetScene();
+	CGameEntity3D LinetraceEntity{};
+	LinetraceEntity.m_GameEntityTag = "LinetraceEntity";
+	CGameEntity3DComponent LinetraceComponent;
+	LinetraceComponent.m_GameEntityTag = "LinetraceComponent";
+
+	uint32_t& ShaderProgram{ LinetraceComponent.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO{ LinetraceComponent.m_OpenGLResource.m_VAO };
+	uint32_t& VBO{ LinetraceComponent.m_OpenGLResource.m_VBO };
+	uint32_t& EBO{ LinetraceComponent.m_OpenGLResource.m_EBO };
+
+	LinetraceComponent.m_OpenGLResource.m_Indices = { 0, 1 };
+
+	CShaderGenerator ShaderGenerator;
+	ShaderGenerator.GenerateBaseSolidShaders(&LinetraceComponent.m_OpenGLResource);
+	glUseProgram(ShaderProgram);
+
+	float Vertices[] = {
+		// positions          // colors			
+		 StartLocation.x, StartLocation.y, StartLocation.z,		1.0f, 0.0f, 0.0f,
+		 EndLocation.x, EndLocation.y, EndLocation.z,			1.0f, 0.0f, 0.0f,
+	};
+
+	uint32_t Indices[] =
+	{
+		0, 1,
+	};
+
+	LinetraceComponent.SetLocationF(1.0f, 0.2f, 0.f);
+
 
 	//glGenVertexArrays(1, &VAO);
 	glGenVertexArrays(1, &VAO);
@@ -104,55 +175,30 @@ void CEntityBuilder::AddLinetrace()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
 	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
 	// index attribute
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture and generate mipmaps
-	int width, height, nrChannels;
-	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-	unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-
 	glUseProgram(ShaderProgram);
-	if (m_pOpenGLDevice)
-	{
-		glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)m_pOpenGLDevice->m_ViewportWidth / (float)m_pOpenGLDevice->m_ViewportHeight, 0.1f, 100.0f);
-		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
-	}
 
-	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+	glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)COpenGLDevice::m_ViewportWidth / COpenGLDevice::m_ViewportHeight, 0.1f, 100.0f);
+	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
 
-	CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-	TerrainComponentNode->m_tType = TerrainComponent;
-	Terrain.m_SceneGraph.m_pRootNode = TerrainComponentNode;
+	LinetraceComponent.m_OpenGLResource.m_DrawMode = GL_LINES;
+
+	CSceneGraphNode<CGameEntity3DComponent>* LinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+	LinetraceComponentNode->m_tType = LinetraceComponent;
+	LinetraceEntity.m_SceneGraph.m_pRootNode = LinetraceComponentNode;
 	std::vector<uint32_t> TempIndices{ 0, 1, 3, 1, 2, 3 };
-	TerrainComponent.m_OpenGLResource.m_Indices.insert(TerrainComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
+	//LinetraceComponent.m_OpenGLResource.m_Indices.insert(LinetraceComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
 
-	Scene.AddEntityToScene(Terrain);
+	Scene.AddEntityToScene(LinetraceEntity);
 }
 
 void CEntityBuilder::AddTestEntity()

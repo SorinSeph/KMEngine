@@ -23,6 +23,8 @@ public:
 
 	void AddLinetrace();
 
+	void AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation);
+
 	void AddTestEntity();
 
 	CImporterGLTF m_ImporterGLTF;
