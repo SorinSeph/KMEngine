@@ -1,1 +1,99 @@
-﻿  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+﻿  DX11Device.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(176,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'DX11Device.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'DX11Device.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(280,44): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'DX11Device.cpp')
+  
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(363,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(783,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(809,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1425,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1426,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1437,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1788,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2105,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2289,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2811,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(176,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(280,44): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreEngine.h(54,126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreEngine.h(54,100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  UIMessageQueue.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(176,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(280,44): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp(10,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp(11,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp(43,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp(44,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98):
+      the template instantiation context (the oldest one first) is
+          C:\Users\sefce\source\KMEngine\KMEngine\UIMessageQueue.cpp(176,30):
+          see reference to function template instantiation 'void CTimerManager::SetTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>(std::string,float,float,TLambda,int,int)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>
+          ]
+          C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreClock.h(267,21):
+          see reference to class template instantiation 'CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>' being compiled
+          C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreClock.h(188,7):
+          while compiling class template member function 'void CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>::Execute(void)'
+          C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreClock.h(190,8):
+          see reference to function template instantiation 'void std::apply<TLambda&,std::tuple<int,int>&>(_Callable,_Tuple) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Tuple=std::tuple<int,int> &
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1067,28):
+          see reference to function template instantiation 'void std::_Apply_impl<TLambda&,std::tuple<int,int>&,0,1>(_Callable,_Tuple,std::integer_sequence<size_t,0,1>) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Tuple=std::tuple<int,int> &
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1058,17):
+          see reference to function template instantiation 'void std::invoke<TLambda&,int&,int&>(_Callable,_Ty1,int &) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Ty1=int &
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+  
+  Generating Code...
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

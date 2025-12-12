@@ -264,11 +264,36 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
  //   glm::vec3 RayOrigin{ 0.f, 0.f, 0.f };
 
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
+    CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[2]);
 
     if (pGraphicsModule)
     {
-        pGraphicsModule->m_EntityBuilder.AddLinetrace(rayOrigin, rayDest);
+        //pGraphicsModule->m_EntityBuilder.AddLinetrace(rayOrigin, rayDest);
+        if (pGraphicsModule->m_Renderer.m_pRendererOpenGL)
+        {
+            pGraphicsModule->m_EntityBuilder.AddLinetrace(glm::vec3{ 0.f, 0.f, 0.f }, rayDest);
+        }
 	}
+
+	glm::vec3 BoxCenter{ 0.f, 0.f, -5.f };
+	glm::vec3 BoxExtents{ 0.5f, 0.5f, 0.5f };
+    glm::quat OrientationQuat{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };  // (w, x, y, z)
+    float Dist{};
+
+    if (pPhysicsModule->DoesRayIntersectOBBOpenGL(
+        rayOrigin,
+        rayDirection,
+        BoxCenter,
+        BoxExtents,
+        OrientationQuat,
+        Dist))
+    {
+		MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
+    }
+    else
+    {
+        MessageBox(nullptr, L"Raycast NOT hit!", L"ViewportMessage", MB_OK);
+    }
 }
 
 void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileContent)

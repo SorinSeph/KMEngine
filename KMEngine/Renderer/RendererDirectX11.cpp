@@ -175,10 +175,7 @@ void CRendererDirectX11::Render()
                 Logger.Log("Renderer.cpp, Render() : GameEntity3DComponent Tag is:  ", EntityComponent->m_tType.m_GameEntityTag);
             }
 
-
             EntityComponent->m_tType.m_DXResConfig.Execute();
-
-
 
             m_DX11Device.m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
             m_DX11Device.m_pImmediateContext->DrawIndexed(512, 0, 0);

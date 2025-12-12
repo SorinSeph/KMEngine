@@ -14,7 +14,7 @@ public:
 		COpenGLDevice::g_ViewMatrix = glm::lookAt(m_CameraLocation, m_CameraLocation + m_CameraFront, m_CameraUp);
 	}
 
-	glm::vec3 m_CameraLocation{ 0.0f, 0.0f, 3.0f };
+	glm::vec3 m_CameraLocation{ 0.0f, 0.0f, 0.0f };
 	glm::vec3 m_CameraFront = { 0.0f, 0.0f, -1.0f };
 	glm::vec3 m_CameraUp = {0.0f, 1.0f, 0.0f};
 };

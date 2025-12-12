@@ -22,7 +22,7 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
 
     CGameEntity3DComponent TerrainComponent;
     TerrainComponent.m_GameEntityTag = "TerrainComponent";
-    TerrainComponent.SetLocationF(0.0f, -4.0f, 0.0f);
+    TerrainComponent.SetLocationF(0.0f, 0.0f, 0.0f);
     TerrainComponent.SetScale(2.5f, 2.5f, 2.5f);
 
     TerrainComponent.m_DXResConfig.m_pDX11Device = this->m_pDX11Device;
@@ -333,10 +333,10 @@ void CTerrainGenerator::GenerateTerrain()
 
     float Vertices[] = {
         // positions          // colors           // texture coords
-         0.5f,  0.5f, 2.0f,   /*1.0f, 0.0f, 0.0f,*/   1.0f, 1.0f, // top right
-         0.5f, -0.5f, 2.0f,   /*0.0f, 1.0f, 0.0f,*/   1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 2.0f,   /*0.0f, 0.0f, 1.0f,*/   0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 2.0f,   /*1.0f, 1.0f, 0.0f,*/   0.0f, 1.0f  // top left 
+         0.5f,  0.5f, 0.0f,   /*1.0f, 0.0f, 0.0f,*/   1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f,   /*0.0f, 1.0f, 0.0f,*/   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,   /*0.0f, 0.0f, 1.0f,*/   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,   /*1.0f, 1.0f, 0.0f,*/   0.0f, 1.0f  // top left 
     };
 
     uint32_t Indices[] =
@@ -345,7 +345,7 @@ void CTerrainGenerator::GenerateTerrain()
         1, 2, 3  // second triangle
     };
 
-    TerrainComponent.SetLocationF(0.f, 0.f, -5.f);
+    TerrainComponent.SetLocationF(0.f, 0.f, -4.5f);
 
     //glGenVertexArrays(1, &VAO);
     glGenVertexArrays(1, &VAO);

@@ -17,7 +17,7 @@ public:
 		m_EntityBuilder.SetGraphicsModule(this);
 	};
 
-	CRenderer m_Renderer;
+
 
 	void SetRenderer()
 	{
@@ -40,8 +40,8 @@ public:
 
 	}
 
+	CRenderer m_Renderer;
 	CDX11Device m_DX11Device;
-
 	CEntityBuilder m_EntityBuilder{};
 };
 

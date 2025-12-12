@@ -161,7 +161,7 @@ void CEntityBuilder::AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation
 		0, 1,
 	};
 
-	LinetraceComponent.SetLocationF(1.0f, 0.2f, 0.f);
+	LinetraceComponent.SetLocationF(0.0f, 0.0f, 0.f);
 
 
 	//glGenVertexArrays(1, &VAO);

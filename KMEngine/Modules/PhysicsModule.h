@@ -78,4 +78,54 @@ public:
         Dist = 0.f;
         return false;
     }
+
+    bool DoesRayIntersectOBBOpenGL(
+    glm::vec3 RayOrigin,
+    glm::vec3 RayDirection,
+    glm::vec3 BoxCenter,
+    glm::vec3 BoxExtents,
+    glm::quat BoxOrientation,
+    float& Dist)
+    {
+        constexpr float EPSILON = 1e-6f;
+
+        // Build rotation matrix from quaternion
+        glm::mat3 R = glm::mat3_cast(BoxOrientation);
+
+        // Ray origin relative to box center
+        glm::vec3 Delta = BoxCenter - RayOrigin;
+
+        float TMin = -FLT_MAX;
+        float TMax = FLT_MAX;
+
+        // Test each axis (local X, Y, Z of the OBB)
+        for (int i = 0; i < 3; ++i)
+        {
+            glm::vec3 Axis = R[i]; // i-th column = i-th local axis
+            float E = glm::dot(Axis, Delta);
+            float F = glm::dot(Axis, RayDirection);
+
+            if (std::abs(F) > EPSILON)
+            {
+                float T1 = (E - BoxExtents[i]) / F;
+                float T2 = (E + BoxExtents[i]) / F;
+
+                if (T1 > T2) std::swap(T1, T2);
+                TMin = std::max(TMin, T1);
+                TMax = std::min(TMax, T2);
+
+                if (TMin > TMax) return false;
+                if (TMax < 0.0f) return false;
+            }
+            else
+            {
+                // Ray parallel to slab; check if origin is within slab
+                if (-E - BoxExtents[i] > 0.0f || -E + BoxExtents[i] < 0.0f)
+                    return false;
+            }
+        }
+
+        Dist = (TMin > 0.0f) ? TMin : TMax;
+        return true;
+    }
 };
