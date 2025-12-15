@@ -9,14 +9,8 @@
 
 const float XM_PI = 3.141592654f;
 
-static float g_RotX;
-static float g_RotY;
-
-static float g_RaycastX;
-static float g_RaycastY;
-
-static float g_RaycastX2;
-static float g_RaycastY2;
+static float g_RotX{ 10.f };
+static float g_RotY{ 0.f };
 
 const wchar_t VIEWPORT_NAME[]{ L"Viewport" };
 
@@ -32,10 +26,13 @@ public:
 	CViewportWindow()
 		: m_RotX{ &g_RotX }
 		, m_RotY{ &g_RotY }
-		, m_RotX2{ g_RotX }
-		, m_RotY2{ g_RotY }
+		, m_EyeX{ 0.f }
+		, m_EyeY{ 0.f }
+		, m_EyeZ{ 0.f }
 		, m_SpeedScale{}
-	{}
+	{
+		g_RotX = 10.f;
+	}
 
 	static void SetViewportParentHWND(HWND hwnd);
 
@@ -66,9 +63,6 @@ public:
 	float GetEyeY();
 	float GetEyeZ();
 
-	float GetRaycastX();
-	float GetRaycastY();
-
 	bool InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd);
 	void DetectKeyboardInput();
 
@@ -95,13 +89,9 @@ private:
 	float* m_RotX;
 	float* m_RotY;
 
-	float m_RotX2;
-	float m_RotY2;
-
-	float vpEyeX;
-	float vpEyeY;
-	float vpEyeZ;
-	float vpEyeXOffset;
+	float m_EyeX;
+	float m_EyeY;
+	float m_EyeZ;
 
 	CUIModule* m_pUIModule{ nullptr };
 };

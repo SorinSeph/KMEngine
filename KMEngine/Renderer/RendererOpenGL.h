@@ -11,12 +11,23 @@ class COpenGLCamera
 public:
 	COpenGLCamera()
 	{
+		// Set initial pitch (negative = looking down)
+		float pitchDegrees = -30.0f;
+		float pitchRadians = glm::radians(pitchDegrees);
+		
+		m_CameraFront = glm::vec3(
+			0.0f,                        // no yaw, so x = 0
+			glm::sin(pitchRadians),      // y component from pitch
+			-glm::cos(pitchRadians)      // z component (forward is -Z in OpenGL)
+		);
+		m_CameraFront = glm::normalize(m_CameraFront);
+		
 		COpenGLDevice::g_ViewMatrix = glm::lookAt(m_CameraLocation, m_CameraLocation + m_CameraFront, m_CameraUp);
 	}
 
 	glm::vec3 m_CameraLocation{ 0.0f, 0.0f, 0.0f };
-	glm::vec3 m_CameraFront = { 0.0f, 0.0f, -1.0f };
-	glm::vec3 m_CameraUp = {0.0f, 1.0f, 0.0f};
+	glm::vec3 m_CameraFront{ 0.0f, 0.0f, -1.0f };
+	glm::vec3 m_CameraUp{ 0.0f, 1.0f, 0.0f };
 };
 
 class CRendererOpenGL
@@ -84,7 +95,7 @@ public:
 
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
 
-				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+				if (EntityComponent->m_tType.m_GameEntityTag != "LinetraceComponent")
 				{
 					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
 				}

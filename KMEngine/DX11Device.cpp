@@ -3021,6 +3021,4 @@ void CDX11Device::RaycastLine(float OriginX, float OriginY, float OriginZ, float
 void CDX11Device::TempImportGLTF()
 {
 	CImporterGLTF GLTFImporter;
-    
-    GLTFImporter.ImportGLTF();
 }

@@ -74,9 +74,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
             float mouseXUnprojected = ((2 * mouseX) / m_ViewportWidth - 1);
             float mouseYUnprojected = 1 - ((2 * mouseY) / m_ViewportHeight);
 
-            g_RaycastX = mouseX;
-            g_RaycastY = mouseY;
-
             float NormalizedMouseX = (2.f * mouseX) / (float)m_ViewportWidth - 1.f;
 			//float NormalizedMouseY = (2.f * mouseY) / (float)m_ViewportHeight - 1.f;
             float NormalizedMouseY = 1.f - ((2.f * mouseY) / (float)m_ViewportHeight);
@@ -153,9 +150,6 @@ LRESULT CALLBACK CViewportWindow::ViewportWndProc(HWND hwnd, UINT message, WPARA
 
 			ViewportMessage.m_MouseX = mouseX;
 			ViewportMessage.m_MouseY = mouseY;
-
-            g_RaycastX2 = mouseX;
-            g_RaycastY2 = mouseY;
 
             return 0;
         }
@@ -245,41 +239,19 @@ float CViewportWindow::GetYRotation4()
     return *m_RotY;
 }
 
-float CViewportWindow::GetXMemberRotation()
-{
-    return m_RotX2;
-}
-
-float CViewportWindow::GetYMemberRotation()
-{
-    return m_RotY2;
-}
-
 float CViewportWindow::GetEyeX()
 {
-    return vpEyeX;
+    return m_EyeX;
 }
 
 float CViewportWindow::GetEyeY()
 {
-    return vpEyeY;
+    return m_EyeY;
 }
 
 float CViewportWindow::GetEyeZ()
 {
-    return vpEyeZ;
-}
-
-float CViewportWindow::GetRaycastX()
-{
-    float RaycastX{ g_RaycastX };
-    return RaycastX;
-}
-
-float CViewportWindow::GetRaycastY()
-{
-    float RaycastY{ g_RaycastY };
-    return RaycastY;
+    return m_EyeZ;
 }
 
 bool CViewportWindow::InitViewportDirectInput(HINSTANCE hInstance, HWND hwnd)
@@ -323,51 +295,47 @@ void CViewportWindow::DetectKeyboardInput()
         CLogger& SLogger = CLogger::GetLogger();
         SLogger.Log("ViewportWindow.cpp, ViewportWindow::DetectKeyboardInput:", "\nA Pressed\n");
 
-        vpEyeX += std::sinf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
-        vpEyeZ += std::cosf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
+        m_EyeX += std::sinf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
+        m_EyeZ += std::cosf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
     }
 
     if (keyboardState[DIK_D] & 0x80)
     {
-        vpEyeX -= std::sinf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
-        vpEyeZ -= std::cosf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
-    }
-    else
-    {
-        vpEyeXOffset = 0;
+        m_EyeX -= std::sinf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
+        m_EyeZ -= std::cosf(ConvertToRadians(g_RotY - 90)) * m_SpeedScale;
     }
 
     if (keyboardState[DIK_W] & 0x80)
     {
-        vpEyeX += std::sinf(ConvertToRadians(g_RotY)) * m_SpeedScale;
-        vpEyeZ += std::cosf(ConvertToRadians(g_RotY)) * m_SpeedScale;
-        vpEyeY -= std::sinf(ConvertToRadians(g_RotX)) * m_SpeedScale;
+        m_EyeX += std::sinf(ConvertToRadians(g_RotY)) * m_SpeedScale;
+        m_EyeZ += std::cosf(ConvertToRadians(g_RotY)) * m_SpeedScale;
+        m_EyeY -= std::sinf(ConvertToRadians(g_RotX)) * m_SpeedScale;
     }
 
     if (keyboardState[DIK_S] & 0x80)
     {
-        vpEyeX -= std::sinf(ConvertToRadians(g_RotY)) * m_SpeedScale;
-        vpEyeZ -= std::cosf(ConvertToRadians(g_RotY)) * m_SpeedScale;
-        vpEyeY += std::sinf(ConvertToRadians(g_RotX)) * m_SpeedScale;
+        m_EyeX -= std::sinf(ConvertToRadians(g_RotY)) * m_SpeedScale;
+        m_EyeZ -= std::cosf(ConvertToRadians(g_RotY)) * m_SpeedScale;
+        m_EyeY += std::sinf(ConvertToRadians(g_RotX)) * m_SpeedScale;
     }
 
     if (keyboardState[DIK_Z] & 0x80)
     {
-        vpEyeY += 1.f * m_SpeedScale;
+        m_EyeY += 1.f * m_SpeedScale;
     }
 
     if (keyboardState[DIK_X] & 0x80)
     {
-        vpEyeY -= 1.f * m_SpeedScale;
+        m_EyeY -= 1.f * m_SpeedScale;
     }
 
     if (keyboardState[DIK_LEFT] & 0x80)
     {
-        g_RotY -= 0.02f;
+        g_RotY -= 0.5f;
     }
     if (keyboardState[DIK_RIGHT] & 0x80)
     {
-        g_RotY += 0.02f;
+        g_RotY += 0.5f;
     }
 
     if (keyboardState[DIK_LSHIFT] & 0x80)

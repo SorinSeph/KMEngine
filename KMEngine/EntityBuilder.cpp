@@ -53,82 +53,70 @@ std::vector<uint32_t> LoadEntityIndicesFromFile(const std::string& filePath)
 
 void InitEntityAttributes()
 {
-	g_EntityVertices.reserve(104440);
-	g_EntityIndices.reserve(111408);
+	//g_EntityVertices.reserve(104440);
+	//g_EntityIndices.reserve(111408);
 	std::string IndicesFilePath = "C:\\Users\\sefce\\source\\KMEngine\\KMEngine\\Indices.txt";
 	std::string PosAndTexCoordFilePath = "C:\\Users\\sefce\\source\\KMEngine\\KMEngine\\Vertices.txt";
 	g_EntityVertices = LoadEntityVerticesFromFile(PosAndTexCoordFilePath);
 	g_EntityIndices = LoadEntityIndicesFromFile(IndicesFilePath);
 }
 
-void CEntityBuilder::AddLinetrace()
+// Currently hardcoded for Anim_Cartoon_Knight_Wave
+void CEntityBuilder::InitEntityAttributes2()
 {
-	CScene& Scene = CScene::GetScene();
-	CGameEntity3D LinetraceEntity{};
-	LinetraceEntity.m_GameEntityTag = "LinetraceEntity";
-	CGameEntity3DComponent LinetraceComponent;
-	LinetraceComponent.m_GameEntityTag = "LinetraceComponent";
+	std::vector<CBufferViewBase*> BufferViewVector = m_ImporterGLTF.Import(m_FilePath, m_FileContent);
+	CBufferView<float>* VerticesBuffer{ nullptr };
+	CBufferView<float>* TexCoordsBuffer{ nullptr };
+	CBufferView<uint32_t>* IndicesBuffer{ nullptr };
 
-	uint32_t& ShaderProgram{ LinetraceComponent.m_OpenGLResource.m_ShaderProgram };
-	uint32_t& VAO{ LinetraceComponent.m_OpenGLResource.m_VAO };
-	uint32_t& VBO{ LinetraceComponent.m_OpenGLResource.m_VBO };
-	uint32_t& EBO{ LinetraceComponent.m_OpenGLResource.m_EBO };
+	std::vector<float> Vertices;
+	std::vector<uint32_t> Indices;
 
-	LinetraceComponent.m_OpenGLResource.m_Indices = { 0, 1 };
-
-	CShaderGenerator ShaderGenerator;
-	ShaderGenerator.GenerateBaseSolidShaders(&LinetraceComponent.m_OpenGLResource);
-	glUseProgram(ShaderProgram);
-
-	float Vertices[] = {
-		// positions          // colors			
-		 0.f,  0.f, .0f,	1.0f, 0.0f, 0.0f,		
-		 0.f, 0.f, -15.0f,  1.0f, 0.0f, 0.0f,	
-	};
-
-	uint32_t Indices[] =
+	for (auto& BufferViewIt : BufferViewVector)
 	{
-		0, 1,
-	};
+		switch (BufferViewIt->m_BufferViewType)
+		{
+			case EAttributeType::Position:
+			{
+				VerticesBuffer = static_cast<CBufferView<float>*>(BufferViewIt);
+				break;
+			}
 
-	LinetraceComponent.SetLocationF(1.0f, 0.2f, 0.f);
+			case EAttributeType::TexCoords:
+			{
+				TexCoordsBuffer = static_cast<CBufferView<float>*>(BufferViewIt);
+				break;
+			}
 
-	
-	//glGenVertexArrays(1, &VAO);
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
+			case EAttributeType::Indices:
+			{
+				IndicesBuffer = static_cast<CBufferView<uint32_t>*>(BufferViewIt);
+				Indices = IndicesBuffer->m_Data;
+				break;
+			}
+		}
+	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+	int i{ 0 }, j{ 0 };
 
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	if (VerticesBuffer != nullptr && TexCoordsBuffer != nullptr)
+	{
+		while (i < VerticesBuffer->m_Data.size() && j < TexCoordsBuffer->m_Data.size())
+		{
+			Vertices.push_back(VerticesBuffer->m_Data[i]);
+			Vertices.push_back(VerticesBuffer->m_Data[i + 1]);
+			Vertices.push_back(VerticesBuffer->m_Data[i + 2]);
 
-	// index attribute
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+			Vertices.push_back(TexCoordsBuffer->m_Data[j]);
+			Vertices.push_back(TexCoordsBuffer->m_Data[j + 1]);
 
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
+			i += 3;
+			j += 2;
+		}
+	}
 
-	glUseProgram(ShaderProgram);
-
-	glm::mat4 ProjectionMatrix = glm::perspective(glm::radians(FOV), (float)COpenGLDevice::m_ViewportWidth / COpenGLDevice::m_ViewportHeight, 0.1f, 100.0f);
-	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
-	
-	LinetraceComponent.m_OpenGLResource.m_DrawMode = GL_LINES;
-
-	CSceneGraphNode<CGameEntity3DComponent>* LinetraceComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-	LinetraceComponentNode->m_tType = LinetraceComponent;
-	LinetraceEntity.m_SceneGraph.m_pRootNode = LinetraceComponentNode;
-	std::vector<uint32_t> TempIndices{ 0, 1, 3, 1, 2, 3 };
-	//LinetraceComponent.m_OpenGLResource.m_Indices.insert(LinetraceComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
-
-	Scene.AddEntityToScene(LinetraceEntity);
+	g_EntityVertices = Vertices;
+	g_EntityIndices = Indices;
 }
 
 void CEntityBuilder::AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation)
@@ -211,8 +199,12 @@ void CEntityBuilder::AddTestEntity()
 	TestEntity.m_GameEntityTag = "Knight";
 	CGameEntity3DComponent TestEntityComponent;
 	TestEntityComponent.m_GameEntityTag = "KnightComponent";
+	
+	// Working version of importing vertices + indices
+	//InitEntityAttributes();
 
-	InitEntityAttributes();
+	InitEntityAttributes2();
+
 	uint32_t& ShaderProgram{ TestEntityComponent.m_OpenGLResource.m_ShaderProgram };
 	uint32_t& VAO{ TestEntityComponent.m_OpenGLResource.m_VAO };
 	uint32_t& VBO{ TestEntityComponent.m_OpenGLResource.m_VBO };
@@ -284,6 +276,7 @@ void CEntityBuilder::AddTestEntity()
 	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
 
 	TestEntityComponent.m_OpenGLResource.m_Indices = g_EntityIndices;
+	TestEntityComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
 
 	//auto TempOpenGLDevice = this->m_pGraphicsModule->m_Renderer.m_pRendererOpenGL->m_OpenGLDevice;
 	Logger.Log("EntityBuilder.cpp, AddTestEntity(): Checking order of logs");
@@ -295,11 +288,14 @@ void CEntityBuilder::AddTestEntity()
 	CScene& Scene = CScene::GetScene();
 	Scene.AddEntityToScene(TestEntity);
 }
+
 void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileContent)
 {
 	AddTestEntity();
 
-	/*std::vector<CBufferViewBase*> BufferViewVector = m_ImporterGLTF.Import(FilePath, FileContent);
+	/*InitEntityAttributes();
+
+	std::vector<CBufferViewBase*> BufferViewVector = m_ImporterGLTF.Import(FilePath, FileContent);
 	CBufferView<float>* VerticesBuffer{ nullptr };
 	CBufferView<float>* TexCoordsBuffer{ nullptr };
 	CBufferView<uint32_t>* IndicesBuffer{ nullptr };
@@ -336,18 +332,15 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 
 	if (VerticesBuffer != nullptr && TexCoordsBuffer != nullptr)
 	{
-		while (i < VerticesBuffer->m_Data.size())
+		while (i < VerticesBuffer->m_Data.size() && j < TexCoordsBuffer->m_Data.size())
 		{
 			Vertices.push_back(VerticesBuffer->m_Data[i]);
 			Vertices.push_back(VerticesBuffer->m_Data[i + 1]);
 			Vertices.push_back(VerticesBuffer->m_Data[i + 2]);
 
-			while (j < TexCoordsBuffer->m_Data.size())
-			{
-				Vertices.push_back(TexCoordsBuffer->m_Data[j]);
-				Vertices.push_back(TexCoordsBuffer->m_Data[j + 1]);
-				break;
-			}
+			Vertices.push_back(TexCoordsBuffer->m_Data[j]);
+			Vertices.push_back(TexCoordsBuffer->m_Data[j + 1]);
+
 
 			i += 3;
 			j += 2;
@@ -402,7 +395,7 @@ void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("C:/Users/sefce/source/KMEngine/KMEngine/grey_grid.dds", &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -424,7 +417,6 @@ void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::
 			glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &ProjectionMatrix[0][0]);
 		}
 	}
-
 
 	TestEntityComponent.m_OpenGLResource.m_Indices = Indices;
 

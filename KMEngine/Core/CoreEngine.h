@@ -60,7 +60,6 @@ public:
 
 		m_World.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
         m_World.Init();
-        m_GraphicsModule.m_EntityBuilder.AddLinetrace(glm::vec3{0.5f, 0.5f, 0.0f}, glm::vec3{ 0.5f, 0.5f, -50.0f });
 
         return S_OK;
     }
@@ -155,18 +154,6 @@ public:
     float GetEyeZ()
     {
         return m_UIModule.m_ViewportWindow.GetEyeZ();
-    }
-
-    float GetRaycastX()
-    {
-        m_Logger.Log("EngineInitializer.h, GetRaycastX(): Raycast X =  ", m_UIModule.m_ViewportWindow.GetRaycastX(), "\n");
-        return m_UIModule.m_ViewportWindow.GetRaycastX();
-    }
-
-    float GetRaycastY()
-    {
-        m_Logger.Log("EngineInitializer.h, GetRaycastY(): Raycast Y =  ", m_UIModule.m_ViewportWindow.GetRaycastY(), "\n");
-        return m_UIModule.m_ViewportWindow.GetRaycastY();
     }
 
     float GetRotX()

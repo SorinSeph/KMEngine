@@ -21,13 +21,17 @@ public:
 
 	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
 
-	void AddLinetrace();
-
 	void AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation);
+
+	void InitEntityAttributes2();
 
 	void AddTestEntity();
 
 	CImporterGLTF m_ImporterGLTF;
 	CGraphicsModule* m_pGraphicsModule{ nullptr };
 	COpenGLDevice* m_pOpenGLDevice{ nullptr };
+
+	// Temporary, to delete 
+	std::string m_FilePath;
+	std::string m_FileContent;
 };
