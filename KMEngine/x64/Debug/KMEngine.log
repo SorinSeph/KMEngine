@@ -1,18 +1,32 @@
-﻿  EntityBuilder.cpp
+﻿  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(176,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'EntityBuilder.cpp')
+  (compiling source file 'KMEngine.cpp')
   
 C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'EntityBuilder.cpp')
+  (compiling source file 'KMEngine.cpp')
   
 C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(280,44): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'EntityBuilder.cpp')
+  (compiling source file 'KMEngine.cpp')
   
-C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp(48,31): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp(48,31): warning C4244:         with
-C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp(48,31): warning C4244:         [
-C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp(48,31): warning C4244:             _Ty=uint32_t
-C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp(48,31): warning C4244:         ]
+C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreEngine.h(54,126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\Core\CoreEngine.h(54,100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  Renderer.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(176,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Renderer/Renderer.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(277,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Renderer/Renderer.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\ImporterGLTF.h(280,44): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Renderer/Renderer.cpp')
+  
+C:\Users\sefce\source\KMEngine\KMEngine\Renderer\Renderer.cpp(96,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

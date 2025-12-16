@@ -216,6 +216,12 @@
     <None Include="Engine.ini" />
     <None Include="Texture_GLSL.vs" />
     <None Include="Texture_GLSL.fs" />
+    <None Include="Solid_GLSL.fs" />
+    <None Include="Solid_GLSL.vs" />
+    <None Include="Basic_Light.fs" />
+    <None Include="Basic_Light_Emitter.vs" />
+    <None Include="Basic_Light_Emitter.fs" />
+    <None Include="Basic_Light.vs" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KMEngine.rc">

@@ -75,37 +75,46 @@ public:
 				glBindVertexArray(EntityComponent->m_tType.m_OpenGLResource.m_VAO);
 
 				m_ViewportCamera.m_CameraLocation = glm::vec3(EyeX, EyeY, -EyeZ);
-				// Create rotation matrices
 				glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-RotX), glm::vec3(1.0f, 0.0f, 0.0f));
 				glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(-RotY), glm::vec3(0.0f, 1.0f, 0.0f));
-
-				// Combine rotations (note: order matters - Y then X to match DirectX)
 				glm::mat4 rotation = rotationY * rotationX;
-
-				// Apply rotation to the default forward vector
 				glm::vec4 front4 = rotation * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 				m_ViewportCamera.m_CameraFront = glm::normalize(glm::vec3(front4));
+
 				COpenGLDevice::g_ViewMatrix = glm::lookAt(m_ViewportCamera.m_CameraLocation, m_ViewportCamera.m_CameraLocation + m_ViewportCamera.m_CameraFront, m_ViewportCamera.m_CameraUp);
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ViewMatrix[0][0]);
 
 				glm::mat4 modelMatrix = glm::mat4(1.0f);
-				modelMatrix = glm::translate(modelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(),
-																	EntityComponent->m_tType.GetLocationY(),
-																	EntityComponent->m_tType.GetLocationZ()));
+				modelMatrix = glm::translate(modelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
 
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
 
-				if (EntityComponent->m_tType.m_GameEntityTag != "LinetraceComponent")
+				// new section of setting terrain material shader properties
+				glm::vec3 LightPos = glm::vec3(0.0f, 1.0f, -3.0f);
+				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.position"), 1, &LightPos[0]);
+				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "viewPos"), 1, &m_ViewportCamera.m_CameraLocation[0]);
+
+				glm::vec3 lightColor;
+				lightColor.x = 1.0f;
+				lightColor.y = 1.0f;
+				lightColor.z = 1.0f;
+				glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); 
+				glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); 
+				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.diffuse"), 1, &diffuseColor[0]);
+				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.ambient"), 1, &ambientColor[0]);
+				glUniform3f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.specular"), 1.0f, 1.0f, 1.0f);
+
+				glUniform3f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "material.specular"), 0.5f, 0.5f, 0.5f);
+				glUniform1f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "material.shininess"), 32.0f);
+
+				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+
 				{
-					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+					//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+					glDrawArrays(GL_TRIANGLES, 0, 36);
 				}
 				else if (EntityComponent->m_tType.m_GameEntityTag == "LinetraceComponent")
 				{
-					auto prog = EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram;
-					GLint locPos = glGetAttribLocation(prog, "aPos");
-					GLint locCol = glGetAttribLocation(prog, "aColor");
-
-					// Temporarily disable depth to rule out occlusion
 					glDisable(GL_DEPTH_TEST);
 					glLineWidth(2.0f);
 

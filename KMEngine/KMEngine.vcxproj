@@ -190,6 +190,10 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Basic_Light.fs" />
+    <None Include="Basic_Light.vs" />
+    <None Include="Basic_Light_Emitter.fs" />
+    <None Include="Basic_Light_Emitter.vs" />
     <None Include="Engine.ini" />
     <None Include="FrustumShader.fxh" />
     <None Include="FrustumShader.ps" />

@@ -17,6 +17,8 @@ public:
 
 	void CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
 
+	void CreateLight();
+
 	void SetGraphicsModule(CGraphicsModule* GraphicsModule);
 
 	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
