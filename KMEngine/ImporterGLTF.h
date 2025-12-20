@@ -96,7 +96,7 @@ public:
 				}
 				else if (AttributeTypeIt == "\"indices\":")
 				{
-					CBufferView<uint16_t>* pBufferView = new CBufferView<uint16_t>();
+					CBufferView<uint32_t>* pBufferView = new CBufferView<uint32_t>();
 					pBufferView->m_BufferIndex = Index;
 					pBufferView->m_BufferViewType = EAttributeType::Indices;
 					m_pBufferViews.push_back(pBufferView);
@@ -320,14 +320,14 @@ public:
 
 				case EAttributeType::Indices:
 				{
-					CBufferView<uint16_t>* BufferView = static_cast<CBufferView<uint16_t>*>(BufferViewIt);
+					CBufferView<uint32_t>* BufferView = static_cast<CBufferView<uint32_t>*>(BufferViewIt);
 					BufferView->m_Data.reserve(BufferView->m_Count);
 
 					for (size_t i = BufferView->m_ByteOffset; i + 1 < BufferView->m_ByteLength + BufferView->m_ByteOffset; i += 2)
 					{
 						uint16_t Value;
 						std::memcpy(&Value, &Buffer[i], sizeof(uint16_t));
-						BufferView->m_Data.push_back(Value);
+						BufferView->m_Data.push_back(static_cast<uint32_t>(Value));
 					}
 
 					int breakpoint = 1;

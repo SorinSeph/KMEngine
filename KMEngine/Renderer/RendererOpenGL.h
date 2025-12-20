@@ -122,6 +122,11 @@ public:
 
 					glEnable(GL_DEPTH_TEST);
 				}
+				else
+				{
+					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+					auto breakpoint = 1;
+				}
 
 				auto breakpoint = 1;
 			}
