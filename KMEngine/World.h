@@ -14,10 +14,6 @@ public:
 
 	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
 
-	void AddTestEntity();
-
-	void LoadAttributes();
-
 	CScene& m_Scene{ CScene::GetScene() };
 
 private:

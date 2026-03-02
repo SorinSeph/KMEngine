@@ -50,8 +50,6 @@ HRESULT CDX11Device::InitDX11Device()
     //InitSingleCubeOutline();
     InitTexturedCube();
 
-    TempImportGLTF();
-
     if (m_pRenderer)
     {
         if (m_pRenderer->m_pGraphicsModule)
@@ -3016,9 +3014,4 @@ void CDX11Device::RaycastLine(float OriginX, float OriginY, float OriginZ, float
     LinetraceEntity.m_SceneGraph.m_pRootNode = pLinetraceComponentNode;
 
     SScene.AddEntityToScene(LinetraceEntity);
-}
-
-void CDX11Device::TempImportGLTF()
-{
-	CImporterGLTF GLTFImporter;
 }

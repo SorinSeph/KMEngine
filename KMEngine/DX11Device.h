@@ -156,9 +156,6 @@ public:
 	* Temporary variables and functions, needs refactoring
 	*/
 
-	// Temporary GLTF import
-	void TempImportGLTF();
-
 	CGameEntity3D* InterpMoveCubeRef{ nullptr };
 
 	ID3D11Buffer* m_pArrowConstantBuffer{ nullptr };

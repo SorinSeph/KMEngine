@@ -15,7 +15,8 @@ public:
     uint32_t m_EBO{ 0 };
     uint32_t m_DrawMode{ 0 };
     std::vector<uint32_t> m_Indices;
-    std::vector<std::function<void()>> m_pContextResourcePtr;
+    uint32_t m_Texture{0};
 
+    std::vector<std::function<void()>> m_pContextResourcePtr;
     void Execute();
 };

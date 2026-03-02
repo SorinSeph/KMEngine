@@ -140,6 +140,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Modules\UIModule.cpp" />
     <ClCompile Include="OpenGLDevice.cpp" />
+    <ClCompile Include="OpenGLResource.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PrimitiveGeometryFactory.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Modules\PhysicsModule.h" />
     <ClInclude Include="Modules\UIModule.h" />
     <ClInclude Include="OpenGLDevice.h" />
+    <ClInclude Include="OpenGLResource.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PrimitiveGeometryFactory.h" />
     <ClInclude Include="Renderer\Renderer.h" />

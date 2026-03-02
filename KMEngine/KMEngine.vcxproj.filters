@@ -87,6 +87,9 @@
     <ClCompile Include="OpenGLDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -192,6 +195,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityBuilder.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLResource.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

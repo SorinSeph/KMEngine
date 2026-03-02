@@ -2,5 +2,8 @@
 
 void COpenGLResource::Execute()
 {
-    
+	for (auto It : m_pContextResourcePtr)
+	{
+		It();
+	}
 }

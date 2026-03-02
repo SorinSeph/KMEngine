@@ -4,6 +4,8 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Logger.h"
 
 enum class EAttributeType
@@ -28,6 +30,8 @@ enum class EValueType
 class CBufferViewBase
 {
 public:
+	CBufferViewBase() = default;
+
 	EAttributeType m_BufferViewType{};
 	std::string m_BufferIndex{};
 	size_t m_Count{};
@@ -42,67 +46,30 @@ public:
 	std::vector<T> m_Data{};
 };
 
+class CJointGTLF
+{
+public:
+	CJointGTLF() = default;
+
+	std::string m_Name{};
+	uint16_t m_MeshIndex{};
+	glm::vec3 m_Translation{};
+	glm::quat m_Rotation{ 1.f, 0.f, 0.f, 0.f };
+	glm::vec3 m_Scale;
+};
+
+class CAnimData
+{
+public: 
+	CAnimData() = default;
+};
+
 class CImporterGLTF
 {
 public:
 	std::vector<CBufferViewBase*> Import(std::string& FilePath, const std::string& FileContent)
 	{
-		for (auto AttributeTypeIt : m_AttributeType)
-		{
-			std::string Index = GetBufferViewStringIndex(FileContent, AttributeTypeIt);
-			if (!Index.empty())
-			{
-				if (AttributeTypeIt == "\"POSITION\":")
-				{
-					CBufferView<float>* pBufferView = new CBufferView<float>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Position;
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"NORMAL\":")
-				{
-					CBufferView<float>* pBufferView = new CBufferView<float>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Normal;
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"TEXCOORD_0\":")
-				{
-					CBufferView<float>* pBufferView = new CBufferView<float>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::TexCoords;
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"COLOR_0\":")
-				{
-					CBufferView<uint8_t>* pBufferView = new CBufferView<uint8_t>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Color;
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"JOINTS_0\":")
-				{
-					CBufferView<uint8_t>* pBufferView = new CBufferView<uint8_t>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Joints; 
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"WEIGHTS_0\":")
-				{
-					CBufferView<float>* pBufferView = new CBufferView<float>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Weights;
-					m_pBufferViews.push_back(pBufferView);
-				}
-				else if (AttributeTypeIt == "\"indices\":")
-				{
-					CBufferView<uint32_t>* pBufferView = new CBufferView<uint32_t>();
-					pBufferView->m_BufferIndex = Index;
-					pBufferView->m_BufferViewType = EAttributeType::Indices;
-					m_pBufferViews.push_back(pBufferView);
-				}
-			}
-		}
+		ImportAttributes(FileContent);
 
 		std::string BufferViewsData;
 		std::string BufferViewSection = "\"accessors\":[";
@@ -362,6 +329,79 @@ public:
 					break;
 				}
 			}
+		}
+	}
+
+	void ImportAttributes(const std::string& FileContent)
+	{
+		// Creates a buffer view object for storing the GLTF attribute indices and types
+		for (auto AttributeTypeIt : m_AttributeType)
+		{
+			std::string Index = GetBufferViewStringIndex(FileContent, AttributeTypeIt);
+			if (!Index.empty())
+			{
+				if (AttributeTypeIt == "\"POSITION\":")
+				{
+					CBufferView<float>* pBufferView = new CBufferView<float>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Position;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"NORMAL\":")
+				{
+					CBufferView<float>* pBufferView = new CBufferView<float>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Normal;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"TEXCOORD_0\":")
+				{
+					CBufferView<float>* pBufferView = new CBufferView<float>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::TexCoords;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"COLOR_0\":")
+				{
+					CBufferView<uint8_t>* pBufferView = new CBufferView<uint8_t>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Color;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"JOINTS_0\":")
+				{
+					CBufferView<uint8_t>* pBufferView = new CBufferView<uint8_t>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Joints;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"WEIGHTS_0\":")
+				{
+					CBufferView<float>* pBufferView = new CBufferView<float>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Weights;
+					m_pBufferViews.push_back(pBufferView);
+				}
+				else if (AttributeTypeIt == "\"indices\":")
+				{
+					CBufferView<uint32_t>* pBufferView = new CBufferView<uint32_t>();
+					pBufferView->m_BufferIndex = Index;
+					pBufferView->m_BufferViewType = EAttributeType::Indices;
+					m_pBufferViews.push_back(pBufferView);
+				}
+			}
+		}
+	}
+
+	void ImportBoneHierarchy(const std::string& FileContent)
+	{
+		// counts opening curly brackets
+		uint16_t BoneCounter{ 0 };
+
+		size_t NodeSectionIndex = FileContent.find("\"nodes\":[");
+		if (NodeSectionIndex != std::string::npos)
+		{
+
 		}
 	}
 

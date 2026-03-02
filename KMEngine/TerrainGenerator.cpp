@@ -327,6 +327,7 @@ void CTerrainGenerator::GenerateTerrain()
     uint32_t& VAO{ TerrainComponent.m_OpenGLResource.m_VAO };
     uint32_t& VBO{ TerrainComponent.m_OpenGLResource.m_VBO };
     uint32_t& EBO{ TerrainComponent.m_OpenGLResource.m_EBO };
+    uint32_t& Texture{ TerrainComponent.m_OpenGLResource.m_Texture };
 
     CShaderGenerator ShaderGenerator;
 	//ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
@@ -352,7 +353,7 @@ void CTerrainGenerator::GenerateTerrain()
         1, 2, 3  // second triangle
     };
 
-    TerrainComponent.SetLocationF(0.f, 0.f, -4.5f);
+    TerrainComponent.SetLocationF(0.f, 0.f, -10.5f);
 
 	// Previous OpenGL setup code
     
@@ -394,9 +395,8 @@ void CTerrainGenerator::GenerateTerrain()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
+    glGenTextures(1, &Texture);
+    glBindTexture(GL_TEXTURE_2D, Texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
     // set the texture wrapping parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -418,10 +418,6 @@ void CTerrainGenerator::GenerateTerrain()
     }
     stbi_image_free(data);
 
-
-
-
-    // material shader, new line
     glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
     glUseProgram(ShaderProgram);
     
@@ -431,6 +427,11 @@ void CTerrainGenerator::GenerateTerrain()
     }
 
 	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+
+    auto DrawLambda = []() {
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    };
+	TerrainComponent.m_OpenGLResource.m_pContextResourcePtr.push_back(DrawLambda);
 
     CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     TerrainComponentNode->m_tType = TerrainComponent;

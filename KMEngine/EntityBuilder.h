@@ -25,9 +25,14 @@ public:
 
 	void AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation);
 
-	void InitEntityAttributes2();
-
+	// Temporary, to be deleted
+	// Adds the Cartoon Knight entity
 	void AddTestEntity();
+
+	// Temporary, to be deleted
+	// Adds the terrain entity from the TerrainGenerator
+	// Currently not working, why?
+	void TestReplicateEntity();
 
 	CImporterGLTF m_ImporterGLTF;
 	CGraphicsModule* m_pGraphicsModule{ nullptr };
@@ -36,4 +41,8 @@ public:
 	// Temporary, to delete 
 	std::string m_FilePath;
 	std::string m_FileContent;
+	CGameEntity3D* m_pEntity;
+
+	void InterpMoveTestEntity();
+	float m_InterpMoveLoc{ 0 };
 };

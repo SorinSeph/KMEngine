@@ -302,9 +302,6 @@ void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileC
 
     if (pGraphicsModule)
     {
-        // Temporary, to delete
-        pGraphicsModule->m_EntityBuilder.m_FilePath = FilePath;
-        pGraphicsModule->m_EntityBuilder.m_FileContent = FileContent;
         pGraphicsModule->m_EntityBuilder.ImportGLTF(FilePath, FileContent);
 	}
 }

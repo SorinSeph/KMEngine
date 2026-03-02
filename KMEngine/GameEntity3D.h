@@ -142,6 +142,11 @@ public:
 	SCollisionBuffer m_CollisionBuffer;
 	SArrowConstantBuffer m_ArrowConstantBuffer;
 
+	XMMATRIX m_LocationMatrix;
+	float m_LocationX;
+	float m_LocationY;
+	float m_LocationZ;
+
 protected:
 	//SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
 
@@ -149,10 +154,7 @@ protected:
 
 	XMVECTOR m_LocationVector;
 
-	XMMATRIX m_LocationMatrix;
-	float m_LocationX;
-	float m_LocationY;
-	float m_LocationZ;
+
 
 	XMMATRIX m_RotationMatrix;
 	float m_RotationX;

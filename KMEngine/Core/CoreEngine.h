@@ -61,6 +61,9 @@ public:
 		m_World.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
         m_World.Init();
 
+		m_GraphicsModule.m_EntityBuilder.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
+        //m_GraphicsModule.m_EntityBuilder.AddTestEntity();
+
         return S_OK;
     }
 

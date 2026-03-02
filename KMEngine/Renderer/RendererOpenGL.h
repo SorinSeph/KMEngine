@@ -55,6 +55,7 @@ public:
 	{
 		CTimerManager& TimerManager = CTimerManager::GetTimerManager();
 		CScene& Scene = CScene::GetScene();
+		CLogger& Logger = CLogger::GetLogger();
 
 		if (!m_OpenGLDevice.m_HDC || !m_OpenGLDevice.m_HGLRC)
 			return;
@@ -71,8 +72,11 @@ public:
 			EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
 			for (auto& EntityComponent : EntityComponentVector)
 			{
-				glUseProgram(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram);
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, EntityComponent->m_tType.m_OpenGLResource.m_Texture);
 				glBindVertexArray(EntityComponent->m_tType.m_OpenGLResource.m_VAO);
+
+				glUseProgram(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram);
 
 				m_ViewportCamera.m_CameraLocation = glm::vec3(EyeX, EyeY, -EyeZ);
 				glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-RotX), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -84,12 +88,15 @@ public:
 				COpenGLDevice::g_ViewMatrix = glm::lookAt(m_ViewportCamera.m_CameraLocation, m_ViewportCamera.m_CameraLocation + m_ViewportCamera.m_CameraFront, m_ViewportCamera.m_CameraUp);
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ViewMatrix[0][0]);
 
-				glm::mat4 modelMatrix = glm::mat4(1.0f);
-				modelMatrix = glm::translate(modelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
+				//glm::mat4 modelMatrix = glm::mat4(1.0f);
+				//modelMatrix = glm::translate(modelMatrix, glm::vec3(m_TestLocationX, 0.0f, -4.0f));
+				//m_TestLocationX -= 0.001f;
+
+				glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
+				//modelMatrix = glm::translate(modelMatrix, glm::vec3 (EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
 
 				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
 
-				// new section of setting terrain material shader properties
 				glm::vec3 LightPos = glm::vec3(0.0f, 1.0f, -3.0f);
 				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.position"), 1, &LightPos[0]);
 				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "viewPos"), 1, &m_ViewportCamera.m_CameraLocation[0]);
@@ -107,26 +114,35 @@ public:
 				glUniform3f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "material.specular"), 0.5f, 0.5f, 0.5f);
 				glUniform1f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "material.shininess"), 32.0f);
 
-				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
-
+				if (SceneEntityList.size() > 1)
 				{
-					//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
-					glDrawArrays(GL_TRIANGLES, 0, 36);
-				}
-				else if (EntityComponent->m_tType.m_GameEntityTag == "LinetraceComponent")
-				{
-					glDisable(GL_DEPTH_TEST);
-					glLineWidth(2.0f);
-
-					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 2, GL_UNSIGNED_INT, nullptr);
-
-					glEnable(GL_DEPTH_TEST);
-				}
-				else
-				{
-					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
 					auto breakpoint = 1;
 				}
+
+				EntityComponent->m_tType.m_OpenGLResource.Execute();
+
+				//if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+
+				//{
+				//	//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+				//	glDrawArrays(GL_TRIANGLES, 0, 36);
+				//}
+				//else if (EntityComponent->m_tType.m_GameEntityTag == "LinetraceComponent")
+				//{
+				//	glDisable(GL_DEPTH_TEST);
+				//	glLineWidth(2.0f);
+
+				//	glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 2, GL_UNSIGNED_INT, nullptr);
+
+				//	glEnable(GL_DEPTH_TEST);
+				//}
+				//else if (EntityComponent->m_tType.m_GameEntityTag == "KnightComponent")
+				//{
+				//	Logger.Log("RendererOpenGL.h, void Render(): Entity Component tag is \"KnightComponent\"");
+				//	Logger.Log("RendererOpenGL.h, void Render(): Entity Location X: ", EntityComponent->m_tType.GetLocationX(), " Y: ", EntityComponent->m_tType.GetLocationY(), " Z: ", EntityComponent->m_tType.GetLocationZ(), "\n");
+				//	glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+				//	auto breakpoint = 1;
+				//}
 
 				auto breakpoint = 1;
 			}
@@ -136,4 +152,7 @@ public:
 
 	COpenGLDevice m_OpenGLDevice;
 	COpenGLCamera m_ViewportCamera;
+
+	// Temporary 
+	float m_TestLocationX{ 0.0f };
 };
