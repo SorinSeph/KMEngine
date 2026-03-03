@@ -1,8 +1,10 @@
+
 #pragma once
 
 #include <d3d11_1.h>
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <glm/glm.hpp>
 #include <directxcolors.h>
 #include "GameEntity.h"
 #include "DXResourcesConfig.h"
@@ -41,10 +43,16 @@ struct SArrowConstantBuffer
 	int mPadding[3];
 };
 
-struct SCollisionComponent
+struct SCollisionComponentDirectX
 {
 	BoundingBox AABox;
 	ContainmentType CollisionType;
+};
+
+struct SCollisionComponent
+{
+	glm::vec3 m_Center;
+	glm::vec3 m_Extents;
 };
 
 struct SColorVertex
@@ -76,7 +84,7 @@ public:
 		, m_RotationMatrix{ XMMatrixIdentity() }
 		, m_QuatRotationMatrix{ XMMatrixIdentity() }
 		, m_ScaleMatrix{ XMMatrixIdentity() }
-		, m_Collision{ }
+		, m_CollisionComponent{ }
 		, m_DXResConfig{ }
 		, m_LocationX{ 0.0f }
 		, m_SceneGraph{ }
@@ -124,7 +132,7 @@ public:
 
 	std::string GetUID();
 
-	SCollisionComponent GetCollisionComponent();
+	SCollisionComponentDirectX GetCollisionComponent();
 
 	CDXResourcesConfig m_DXResConfig{ };
 
@@ -140,6 +148,7 @@ public:
 
 	XMMATRIX m_QuatRotationMatrix;
 	SCollisionBuffer m_CollisionBuffer;
+	SCollisionComponent m_CollisionComponent;
 	SArrowConstantBuffer m_ArrowConstantBuffer;
 
 	XMMATRIX m_LocationMatrix;
@@ -148,20 +157,14 @@ public:
 	float m_LocationZ;
 
 protected:
-	//SceneGraph<CGameEntity3DComponent*> m_SceneGraph;
-
-	SCollisionComponent m_Collision;
-
 	XMVECTOR m_LocationVector;
-
-
-
 	XMMATRIX m_RotationMatrix;
+	XMMATRIX m_ScaleMatrix;
+
 	float m_RotationX;
 	float m_RotationY;
 	float m_RotationZ;
 
-	XMMATRIX m_ScaleMatrix;
 	float m_ScaleX;
 	float m_ScaleY;
 	float m_ScaleZ;

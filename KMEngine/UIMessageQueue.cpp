@@ -280,20 +280,29 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
     glm::quat OrientationQuat{ glm::quat(1.0f, 0.0f, 0.0f, 0.0f) };  // (w, x, y, z)
     float Dist{};
 
-    if (pPhysicsModule->DoesRayIntersectOBBOpenGL(
-        rayOrigin,
-        rayDirection,
-        BoxCenter,
-        BoxExtents,
-        OrientationQuat,
-        Dist))
+    // Currently iterate through all objects in the scene. In the future, get the entities from the current world partition
+    CScene& Scene = CScene::GetScene();
+    auto& SceneEntityList = Scene.GetSceneList();
+    for (auto& SceneEntityIt : SceneEntityList)
     {
-		MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
+        std::vector<CSceneGraphNode<CGameEntity3DComponent>*> EntityComponentVector;
+        EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
+        for (auto& EntityComponent : EntityComponentVector)
+        {
+            if (pPhysicsModule->DoesRayIntersectOBBOpenGL(
+                rayOrigin,
+                rayDirection,
+                EntityComponent->m_tType.m_CollisionComponent.m_Center,
+                EntityComponent->m_tType.m_CollisionComponent.m_Extents,
+                OrientationQuat,
+                Dist))
+            {
+		        MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
+            }
+        }
     }
-    else
-    {
-        MessageBox(nullptr, L"Raycast NOT hit!", L"ViewportMessage", MB_OK);
-    }
+
+
 }
 
 void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileContent)

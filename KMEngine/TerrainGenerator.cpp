@@ -317,11 +317,11 @@ CDX11Device* CTerrainGenerator::GetDX11Device()
 
 void CTerrainGenerator::GenerateTerrain()
 {
-	CScene& Scene = CScene::GetScene();
+    CScene& Scene = CScene::GetScene();
     CGameEntity3D Terrain{};
-	Terrain.m_GameEntityTag = "Terrain";
+    Terrain.m_GameEntityTag = "Terrain";
     CGameEntity3DComponent TerrainComponent;
-	TerrainComponent.m_GameEntityTag = "TerrainComponent";
+    TerrainComponent.m_GameEntityTag = "TerrainComponent";
 
     uint32_t& ShaderProgram{ TerrainComponent.m_OpenGLResource.m_ShaderProgram };
     uint32_t& VAO{ TerrainComponent.m_OpenGLResource.m_VAO };
@@ -330,21 +330,17 @@ void CTerrainGenerator::GenerateTerrain()
     uint32_t& Texture{ TerrainComponent.m_OpenGLResource.m_Texture };
 
     CShaderGenerator ShaderGenerator;
-	//ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
-	ShaderGenerator.GenerateLightShaders(&TerrainComponent.m_OpenGLResource);   
+    //ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
+    ShaderGenerator.GenerateLightShaders(&TerrainComponent.m_OpenGLResource);
 
     float Vertices[] = {
-        //// positions          // normals           // texture coords
-        // 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 1.0f, // top right
-        // 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 0.0f, // bottom right
-        //-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-        //-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f  // top left 
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+        // positions       // normals           // texture coords
+        -0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+         0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+        -0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
     };
 
     uint32_t Indices[] =
@@ -354,6 +350,8 @@ void CTerrainGenerator::GenerateTerrain()
     };
 
     TerrainComponent.SetLocationF(0.f, 0.f, -10.5f);
+    TerrainComponent.m_CollisionComponent.m_Center = glm::vec3{ 0.f, 0.f, -10.5f };
+    TerrainComponent.m_CollisionComponent.m_Extents = glm::vec3{ 0.5f, 0.5f, 0.5f };
 
 	// Previous OpenGL setup code
     

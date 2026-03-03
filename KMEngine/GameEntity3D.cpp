@@ -106,7 +106,7 @@ std::string CGameEntity3D::GetUID()
 	return m_UID;
 }
 
-SCollisionComponent CGameEntity3D::GetCollisionComponent()
+SCollisionComponentDirectX CGameEntity3D::GetCollisionComponent()
 {
 	return m_Collision;
 }
