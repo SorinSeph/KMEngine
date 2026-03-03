@@ -121,12 +121,13 @@ public:
 
 				EntityComponent->m_tType.m_OpenGLResource.Execute();
 
-				//if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
+				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
 
-				//{
-				//	//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
-				//	glDrawArrays(GL_TRIANGLES, 0, 36);
-				//}
+				{
+					Logger.Log("RendererOpenGL.h, Render(): rendering terrain component");
+					//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
+					glDrawArrays(GL_TRIANGLES, 0, 36);
+				}
 				//else if (EntityComponent->m_tType.m_GameEntityTag == "LinetraceComponent")
 				//{
 				//	glDisable(GL_DEPTH_TEST);

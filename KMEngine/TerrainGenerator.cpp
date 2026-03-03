@@ -232,7 +232,7 @@ HRESULT CTerrainGenerator::GenerateTestTerrain()
     TerrainComponent.m_DXResConfig.m_pContextResourcePtr.push_back(ConstantBufferLambda);
 
 
-    const wchar_t* TextureName = L"grey_grid.dds";
+    const wchar_t* TextureName = L"grey_grid.jpg";
     m_HR = CreateDDSTextureFromFile(m_pDX11Device->m_pD3D11Device, TextureName, nullptr, &m_pDX11Device->m_TextureRV);
     if (FAILED(m_HR))
     {

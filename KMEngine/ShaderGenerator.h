@@ -42,8 +42,8 @@ public:
         std::string FragmentCodeString;
         std::ifstream VertexShaderFile;
         std::ifstream FragmentShaderFile;
-        const char* VertexPath = "C:/Users/sefce/source/KMEngine/KMEngine/Texture_GLSL.vs";
-        const char* FragmentPath = "C:/Users/sefce/source/KMEngine/KMEngine/Texture_GLSL.fs";
+        const char* VertexPath = "Texture_GLSL.vs";
+        const char* FragmentPath = "Texture_GLSL.fs";
         // ensure ifstream objects can throw exceptions:
         VertexShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         FragmentShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -154,8 +154,8 @@ public:
         std::string FragmentCodeString;
         std::ifstream VertexShaderFile;
         std::ifstream FragmentShaderFile;
-        const char* VertexPath = "C:/Users/sefce/source/KMEngine/KMEngine/Basic_Light.vs";
-        const char* FragmentPath = "C:/Users/sefce/source/KMEngine/KMEngine/Basic_Light.fs";
+        const char* VertexPath = "Basic_Light.vs";
+        const char* FragmentPath = "Basic_Light.fs";
         // ensure ifstream objects can throw exceptions:
         VertexShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         FragmentShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
