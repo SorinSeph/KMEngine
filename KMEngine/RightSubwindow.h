@@ -1,10 +1,9 @@
 #pragma once
 
 #include <Windows.h>
+#include <string>
 
 LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-
 
 class CRightSubwindow
 {
@@ -20,15 +19,20 @@ public:
 
     HWND GetRightSubwindowHwnd() const { return m_RightSubwindowHwnd; }
 
+    void UpdateSelectedEntityString(std::string SelectedEntityString);
+
     HWND m_RightSubwindowHwnd{ };
 
     static HWND m_OutlinerHwnd;
 
-    // Separate HWNDs for labels and edit controls
+    static std::wstring m_SelectedEntityString;
+
+    static HWND m_SelectedEntityLabel;
     static HWND m_PositionXLabel;
     static HWND m_PositionXEditControl;
     static HWND m_PositionYLabel;
     static HWND m_PositionYEditControl;
     static HWND m_PositionZLabel;
+
     static HWND m_PositionZEditControl;
 };

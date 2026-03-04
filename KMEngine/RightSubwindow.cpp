@@ -5,8 +5,9 @@
 #include "Scene.h"
 #include <string>
 
-// Initialize static members
+std::wstring CRightSubwindow::m_SelectedEntityString{};
 HWND CRightSubwindow::m_OutlinerHwnd = nullptr;
+HWND CRightSubwindow::m_SelectedEntityLabel = nullptr;
 HWND CRightSubwindow::m_PositionXLabel = nullptr;
 HWND CRightSubwindow::m_PositionXEditControl = nullptr;
 HWND CRightSubwindow::m_PositionYLabel = nullptr;
@@ -130,6 +131,14 @@ LRESULT CALLBACK CRightSubwindow::OutlinerProc(HWND hwnd, UINT message, WPARAM w
             CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
 
 			CGraphicsModule* GraphicsModule = static_cast<CGraphicsModule*>(ViewportMessage.m_pUIModule->m_pMediator->m_ModuleArray[1]);
+
+            CRightSubwindow::m_SelectedEntityString = L"Selected object: ";
+            const wchar_t* pSelectedEntityString = CRightSubwindow::m_SelectedEntityString.c_str();
+            CRightSubwindow::m_SelectedEntityLabel = CreateWindowEx(
+                0, L"STATIC", pSelectedEntityString, WS_CHILD | WS_VISIBLE | SS_LEFT,
+                10, 10, 350, 20, hwnd, NULL,
+                (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE), NULL
+            );
 
             CRightSubwindow::m_PositionXLabel = CreateWindowEx(
                 0, L"STATIC", L"X:", WS_CHILD | WS_VISIBLE | SS_LEFT,
@@ -340,12 +349,11 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
 
     if (msg == WM_KEYDOWN && wParam == VK_RETURN)
     {
-        // Determine the title based on which edit control is sending the message
-        const wchar_t* title = nullptr;
+        const wchar_t* EditControlTitle = nullptr;
 
         if (hwnd == CRightSubwindow::m_PositionXEditControl)
         {
-            title = L"X";
+            EditControlTitle = L"X";
             GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
 
             for (auto& EntityIt : Scene.GetSceneList())
@@ -368,7 +376,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
         }
         else if (hwnd == CRightSubwindow::m_PositionYEditControl)
         {
-            title = L"Y";
+            EditControlTitle = L"Y";
             GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
 
             for (auto& EntityIt : Scene.GetSceneList())
@@ -391,7 +399,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
         }
         else if (hwnd == CRightSubwindow::m_PositionZEditControl)
         {
-            title = L"Z";
+            EditControlTitle = L"Z";
             GetWindowText(hwnd, buffer, sizeof(buffer) / sizeof(wchar_t));
 
             for (auto& EntityIt : Scene.GetSceneList())
@@ -414,7 +422,7 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
         }
         else
         {
-            title = L"Unknown";
+            EditControlTitle = L"Unknown";
         }
 
         // Construct the message
@@ -445,3 +453,13 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
+void CRightSubwindow::UpdateSelectedEntityString(std::string SelectedEntityString)
+{
+    m_SelectedEntityString = std::wstring{L"Selected object: "} + std::wstring(SelectedEntityString.begin(), SelectedEntityString.end());
+
+    // Update the label control to display the new string
+    if (m_SelectedEntityLabel != nullptr)
+    {
+        SetWindowText(m_SelectedEntityLabel, m_SelectedEntityString.c_str());
+    }
+}

@@ -44,6 +44,8 @@ public:
 
     void SetOutlinerText();
 
+    void UpdateSelectedEntityString(std::string SelectedEntityString);
+
     float ViewportWidth{ };
     float ViewportHeight{ };
 

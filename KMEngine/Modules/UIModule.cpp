@@ -158,6 +158,11 @@ void CUIModule::SetOutlinerText()
     UpdateWindow(CRightSubwindow::m_OutlinerHwnd);
 }
 
+void CUIModule::UpdateSelectedEntityString(std::string SelectedEntityString)
+{
+    m_RightSubwindow.UpdateSelectedEntityString(SelectedEntityString);
+}
+
 void CUIModule::TestLog(int X, int Y)
 {
     // Create a stringstream object

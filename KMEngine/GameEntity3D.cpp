@@ -106,11 +106,6 @@ std::string CGameEntity3D::GetUID()
 	return m_UID;
 }
 
-SCollisionComponentDirectX CGameEntity3D::GetCollisionComponent()
-{
-	return m_Collision;
-}
-
 SConstantBuffer CGameEntity3D::GetConstantBuffer()
 {
     return m_ConstantBuffer;

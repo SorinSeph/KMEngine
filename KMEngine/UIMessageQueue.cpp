@@ -263,6 +263,7 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
 	//glm::vec3 RayDestination = RayDirection * 100.f;
  //   glm::vec3 RayOrigin{ 0.f, 0.f, 0.f };
 
+    CUIModule* pUIModule = static_cast<CUIModule*>(m_pUIModule->m_pMediator->m_ModuleArray[0]);
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
     CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[2]);
 
@@ -297,7 +298,12 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
                 OrientationQuat,
                 Dist))
             {
-		        MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
+                if (pUIModule)
+                {
+                    pUIModule->UpdateSelectedEntityString(EntityComponent->m_tType.m_GameEntityTag);
+                }
+		        //MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
+                break;
             }
         }
     }
