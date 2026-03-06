@@ -4,6 +4,7 @@ C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp;C:\Users\sefce\source\KME
 C:\Users\sefce\source\KMEngine\KMEngine\DXResourcesConfig.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\DXResourcesConfig.obj
 C:\Users\sefce\source\KMEngine\KMEngine\EntityBuilder.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\EntityBuilder.obj
 C:\Users\sefce\source\KMEngine\KMEngine\GameEntity3D.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\GameEntity3D.obj
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\GLTFImporter.obj
 C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\KMEngine.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Logger.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Logger.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\UIModule.obj

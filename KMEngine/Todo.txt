@@ -1,0 +1,4 @@
+* The WINAPI file explorer in the menu bar does not properly add and render the imported OpenGL entity (improper context switching?). 
+Right now we use absolute filepaths
+
+* Remove the button(s) such as ImportButtonHWND and its/their functionality from case WM_COMMAND in LeftToolbarHwndProc

@@ -2,7 +2,7 @@
 
 #include "EntityBuilder.h"
 #include "Modules/GraphicsModule.h"
-#include "ImporterGLTF.h"
+#include "GLTFImporter.h"
 #include "ShaderGenerator.h"
 #include "Scene.h"
 #include <glad/glad.h>
@@ -276,7 +276,9 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 
 	//InitEntityAttributes();
 
-	std::vector<CBufferViewBase*> BufferViewVector = m_ImporterGLTF.Import(FilePath, FileContent);
+	std::vector<CBufferViewBase*> BufferViewVector = m_GLTFImporter.Import(FilePath, FileContent);
+	CGLTFAnimation Animation = m_GLTFImporter.ImportAnimation(FilePath, FileContent);
+
 	CBufferView<float>* VerticesBuffer{ nullptr };
 	CBufferView<float>* TexCoordsBuffer{ nullptr };
 	CBufferView<uint32_t>* IndicesBuffer{ nullptr };

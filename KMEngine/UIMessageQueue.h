@@ -15,14 +15,14 @@ public:
 	}
 
 	CUIModule* m_pUIModule{};
-	////template <typename ...Args>
-	////void Send(auto&& Ptr, Args&&... args);
 
 	void RayPicking(int MouseX, int MouseY);
 
 	void RaycastOpenGL(int MouseX, int MouseY);
 
 	void ImportGLTF(std::string& FilePath, const std::string& FileContent);
+
+	void PlayGLTFAnimation();
 
 	bool m_bIsEntitySelected{ false };
 	bool m_bIsDraggingGizmo{ false };

@@ -307,8 +307,6 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
             }
         }
     }
-
-
 }
 
 void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileContent)
@@ -319,4 +317,9 @@ void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileC
     {
         pGraphicsModule->m_EntityBuilder.ImportGLTF(FilePath, FileContent);
 	}
+}
+
+void CUIMessageQueue::PlayGLTFAnimation()
+{
+    MessageBox(NULL, L"Playing GLTF animation from message queue", L"GLTF Anim", NULL);
 }

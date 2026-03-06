@@ -24,7 +24,7 @@
 
 // Temporary headers
 
-#include "ImporterGLTF.h"
+#include "GLTFImporter.h"
 
 static BOOL g_DoesFrustumContain = false;
 

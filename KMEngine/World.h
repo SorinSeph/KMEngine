@@ -3,7 +3,7 @@
 #include "DX11Device.h"
 #include "OpenGLDevice.h"
 #include "DXResourcesConfig.h"
-#include "ImporterGLTF.h"
+#include "GLTFImporter.h"
 
 class CWorld
 {
@@ -18,5 +18,5 @@ public:
 
 private:
 	COpenGLDevice* m_pOpenGLDevice{ nullptr };
-	CImporterGLTF m_ImporterGLTF;
+	CGLTFImporter m_GLTFImporter;
 };

@@ -90,6 +90,9 @@
     <ClCompile Include="OpenGLResource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GLTFImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube.h">
@@ -128,9 +131,6 @@
     <ClInclude Include="ViewportWindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EntityPhysicalMesh.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -152,7 +152,7 @@
     <ClInclude Include="RightSubwindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImporterGLTF.h">
+    <ClInclude Include="GLTFImporter.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\CoreClock.h">
@@ -198,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGLResource.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -258,5 +264,6 @@
   <ItemGroup>
     <Text Include="Indices.txt" />
     <Text Include="Vertices.txt" />
+    <Text Include="Todo.txt" />
   </ItemGroup>
 </Project>

@@ -136,6 +136,7 @@
     <ClCompile Include="DXResourcesConfig.cpp" />
     <ClCompile Include="EntityBuilder.cpp" />
     <ClCompile Include="GameEntity3D.cpp" />
+    <ClCompile Include="GLTFImporter.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Modules\UIModule.cpp" />
@@ -165,7 +166,7 @@
     <ClInclude Include="EntityPhysicalMesh.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEntity3D.h" />
-    <ClInclude Include="ImporterGLTF.h" />
+    <ClInclude Include="GLTFImporter.h" />
     <ClInclude Include="KMEngine.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="SceneGraph.h" />
     <ClInclude Include="ShaderGenerator.h" />
     <ClInclude Include="TerrainGenerator.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="UIMessageQueue.h" />
     <ClInclude Include="ViewportWindow.h" />
     <ClInclude Include="World.h" />
@@ -240,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Indices.txt" />
+    <Text Include="Todo.txt" />
     <Text Include="Vertices.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

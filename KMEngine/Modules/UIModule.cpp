@@ -4,9 +4,9 @@
 
 HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 {
-    CUIMessageQueue& ViewportMessage = CUIMessageQueue::GetUIMessageQueue();
-    ViewportMessage.m_pUIModule = this;
-	ViewportMessage.m_TestInt = 5;
+    CUIMessageQueue& MessageQueue = CUIMessageQueue::GetUIMessageQueue();
+    MessageQueue.m_pUIModule = this;
+	MessageQueue.m_TestInt = 5;
 
     WNDCLASS wc[4]{ };
 
@@ -99,20 +99,40 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         NULL
     );
 
-    HWND ButtonHwnd = CreateWindow(
+    // @Temporary use this button to import the GLTF file
+    HWND ImportButtonHWND = CreateWindow(
         L"BUTTON",  
-        L"Click Me",      
+        L"Import GLTF",      
         WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  
         10,        
-        10,         
-        100,        
+        10,          
+        120,        
         30,        
         LeftToolbarHwnd,       
         (HMENU)1,       
         (HINSTANCE)GetWindowLongPtr(LeftToolbarHwnd, GWLP_HINSTANCE),
         NULL);      
 
-    if (ButtonHwnd == NULL)
+    if (ImportButtonHWND == NULL)
+    {
+        MessageBox(NULL, L"Button creation failed!", L"Error", MB_ICONERROR);
+        return 0;
+    }
+
+    HWND PlayAnimationButtonHWND = CreateWindow(
+        L"BUTTON",
+        L"Play animation",
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+        10,
+        50,
+        120,
+        30,
+        LeftToolbarHwnd,
+        (HMENU)2,
+        (HINSTANCE)GetWindowLongPtr(LeftToolbarHwnd, GWLP_HINSTANCE),
+        NULL);
+
+    if (PlayAnimationButtonHWND == NULL)
     {
         MessageBox(NULL, L"Button creation failed!", L"Error", MB_ICONERROR);
         return 0;
@@ -326,6 +346,40 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         case WM_CREATE:
         {
             SetWindowLong(hwnd, 0, 0);
+            return 0;
+        }
+
+        case WM_COMMAND:
+        {
+            CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
+
+            // @Temporary code to import and play a GLTF animation
+            int ButtonId = LOWORD(wParam);
+            if (ButtonId == 1)
+            {
+                std::string FilePathString{ "E:/Work/Blender/GLTF/Animation_and_skinning/rectangle_skeletal_anim/rectangle_textured_skeletal_anim2.gltf" };
+
+                std::ifstream file(FilePathString, std::ios::binary);
+                if (!file)
+                {
+                    MessageBox(hwnd, L"Could not open file.", L"File Error", MB_OK | MB_ICONERROR);
+                    return 0;
+                }
+
+                std::string FileContent((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+                if (!file.good() && !file.eof())
+                {
+                    MessageBox(hwnd, L"Error reading file.", L"File Error", MB_OK | MB_ICONERROR);
+                    return 0;
+                }
+
+                UIMessageQueue.ImportGLTF(FilePathString, FileContent);
+            }
+            else if (ButtonId == 2)
+            {
+                UIMessageQueue.PlayGLTFAnimation();
+            }
             return 0;
         }
 

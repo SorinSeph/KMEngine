@@ -3,7 +3,7 @@
 #include "GameEntity3D.h"
 #include "Scene.h"
 #include "stb_image.h"
-#include "ImporterGLTF.h"
+#include "GLTFImporter.h"
 #include "OpenGLDevice.h"
 
 class CGraphicsModule;
@@ -34,7 +34,7 @@ public:
 	// Currently not working, why?
 	void TestReplicateEntity();
 
-	CImporterGLTF m_ImporterGLTF;
+	CGLTFImporter m_GLTFImporter;
 	CGraphicsModule* m_pGraphicsModule{ nullptr };
 	COpenGLDevice* m_pOpenGLDevice{ nullptr };
 
