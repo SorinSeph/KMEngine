@@ -353,11 +353,14 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         {
             CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
 
+            std::string FilePathString{ "Resources/Assets/3D_Objects/GLTF/rectangle_textured_skeletal_anim2.gltf" };
+            std::string FileContent{};
+
             // @Temporary code to import and play a GLTF animation
             int ButtonId = LOWORD(wParam);
             if (ButtonId == 1)
             {
-                std::string FilePathString{ "E:/Work/Blender/GLTF/Animation_and_skinning/rectangle_skeletal_anim/rectangle_textured_skeletal_anim2.gltf" };
+
 
                 std::ifstream file(FilePathString, std::ios::binary);
                 if (!file)
@@ -366,7 +369,8 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
                     return 0;
                 }
 
-                std::string FileContent((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                std::string File((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+                FileContent = File;
 
                 if (!file.good() && !file.eof())
                 {
@@ -378,7 +382,7 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
             }
             else if (ButtonId == 2)
             {
-                UIMessageQueue.PlayGLTFAnimation();
+                UIMessageQueue.PlayGLTFAnimation(FilePathString, FileContent);
             }
             return 0;
         }

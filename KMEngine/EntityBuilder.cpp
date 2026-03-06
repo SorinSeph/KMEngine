@@ -272,12 +272,14 @@ void CEntityBuilder::InterpMoveTestEntity()
 
 void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileContent)
 {
+
+	m_FileContent = FileContent;
+	m_FilePath = FilePath;
 	//AddTestEntity();
 
 	//InitEntityAttributes();
 
 	std::vector<CBufferViewBase*> BufferViewVector = m_GLTFImporter.Import(FilePath, FileContent);
-	CGLTFAnimation Animation = m_GLTFImporter.ImportAnimation(FilePath, FileContent);
 
 	CBufferView<float>* VerticesBuffer{ nullptr };
 	CBufferView<float>* TexCoordsBuffer{ nullptr };
@@ -335,6 +337,13 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 	auto Breakpoint = 1;
 }
 
+void CEntityBuilder::ImportGLTFAnimation()
+{
+	CGLTFAnimation Animation = m_GLTFImporter.ImportAnimation(m_FilePath, m_FileContent);
+
+	auto breakpoint = 1;
+}
+
 void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices)
 {
 	CLogger& Logger = CLogger::GetLogger();
@@ -350,8 +359,9 @@ void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::
 	uint32_t& Texture{ TestEntityComponent.m_OpenGLResource.m_Texture };
 
 	CShaderGenerator ShaderGenerator;
-	ShaderGenerator.GenerateBaseShaders(&TestEntityComponent.m_OpenGLResource);
+	ShaderGenerator.GenerateSkeletalMeshShaders(&TestEntityComponent.m_OpenGLResource);
 
+	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);

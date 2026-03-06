@@ -194,6 +194,8 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\3D_Objects\GLTF\rectangle_textured_skeletal_anim2.bin" />
+    <None Include="Assets\3D_Objects\GLTF\rectangle_textured_skeletal_anim2.gltf" />
     <None Include="Basic_Light.fs" />
     <None Include="Basic_Light.vs" />
     <None Include="Basic_Light_Emitter.fs" />

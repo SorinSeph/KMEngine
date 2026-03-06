@@ -1,1 +1,149 @@
-﻿  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+﻿  DX11Device.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(361,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(781,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(807,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1423,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1424,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1435,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(1786,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2103,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2287,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DX11Device.cpp(2809,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  DXResourcesConfig.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\DXResourcesConfig.cpp(114,20): warning C4018: '<=': signed/unsigned mismatch
+  EntityBuilder.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         with
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         [
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:             _Ty=uint32_t
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         ]
+  GameEntity3D.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\GameEntity3D.cpp(433,14): warning C4101: 'LeftPlaneFloat': unreferenced local variable
+  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreEngine.h(54,126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreEngine.h(54,100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  UIModule.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(88,23): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(166,39): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(167,34): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(307,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(308,46): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(207,30): warning C4101: 'y': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(213,26): warning C4101: 'hSubMenu': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(412,17): warning C4101: 'hdc': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(413,17): warning C4101: 'ps': unreferenced local variable
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(414,17): warning C4101: 'rect': unreferenced local variable
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(4813,18): warning C4244: '=': conversion from 'wchar_t' to 'char', possible loss of data
+  (compiling source file 'Modules/UIModule.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(4813,18):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(251,46):
+          see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+              C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\UIModule.cpp(251,46):
+              see the first reference to 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'WindowProc'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xstring(812,17):
+          see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' being compiled
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xstring(968,18):
+          see reference to function template instantiation '_OutIt *std::_Copy_n_unchecked4<wchar_t*,_Size,char*>(_InIt,_SizeTy,_OutIt)' being compiled
+          with
+          [
+              _OutIt=char *,
+              _Size=unsigned __int64,
+              _InIt=wchar_t *,
+              _SizeTy=unsigned __int64
+          ]
+  
+  PrimitiveGeometryFactory.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(474,55): warning C4244: 'argument': conversion from 'float' to 'unsigned __int64', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(557,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Renderer.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer\Renderer.cpp(96,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  RendererDirectX11.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer\RendererDirectX11.cpp(60,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  RightSubwindow.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(370,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(394,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\RightSubwindow.cpp(418,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Scene.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Scene.cpp(22,62): warning C4390: ';': empty controlled statement found; is this the intent?
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Scene.cpp(69,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TerrainGenerator.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\cbt.h(617,27): warning C4244: 'initializing': conversion from 'int64_t' to 'int', possible loss of data
+  (compiling source file 'TerrainGenerator.cpp')
+  
+  UIMessageQueue.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(10,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(11,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(43,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(44,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(176,30):
+          see reference to function template instantiation 'void CTimerManager::SetTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>(std::string,float,float,TLambda,int,int)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>
+          ]
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(267,21):
+          see reference to class template instantiation 'CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>' being compiled
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(188,7):
+          while compiling class template member function 'void CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>::Execute(void)'
+          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(190,8):
+          see reference to function template instantiation 'void std::apply<TLambda&,std::tuple<int,int>&>(_Callable,_Tuple) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Tuple=std::tuple<int,int> &
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1067,28):
+          see reference to function template instantiation 'void std::_Apply_impl<TLambda&,std::tuple<int,int>&,0,1>(_Callable,_Tuple,std::integer_sequence<size_t,0,1>) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Tuple=std::tuple<int,int> &
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1058,17):
+          see reference to function template instantiation 'void std::invoke<TLambda&,int&,int&>(_Callable,_Ty1,int &) noexcept(false)' being compiled
+          with
+          [
+              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
+              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
+              _Ty1=int &
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'UIMessageQueue.cpp')
+  
+  World.cpp
+  Generating Code...
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(754,1): warning C4715: 'CPrimitiveGeometryFactory::CreateEntity3DComponent': not all control paths return a value
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\PrimitiveGeometryFactory.cpp(424,1): warning C4715: 'CPrimitiveGeometryFactory::CreateEntity3D': not all control paths return a value
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

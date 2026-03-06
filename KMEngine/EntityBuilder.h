@@ -15,6 +15,8 @@ public:
 
 	void ImportGLTF(std::string& FilePath, const std::string& FileContent);
 
+	void ImportGLTFAnimation();
+
 	void CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
 
 	void CreateLight();

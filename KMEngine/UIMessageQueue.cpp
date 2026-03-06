@@ -319,7 +319,14 @@ void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileC
 	}
 }
 
-void CUIMessageQueue::PlayGLTFAnimation()
+void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string& FileContent)
 {
+    CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
+
+    if (pGraphicsModule)
+    {
+        pGraphicsModule->m_EntityBuilder.ImportGLTFAnimation();
+    }
+
     MessageBox(NULL, L"Playing GLTF animation from message queue", L"GLTF Anim", NULL);
 }

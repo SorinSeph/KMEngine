@@ -22,7 +22,7 @@ public:
 
 	void ImportGLTF(std::string& FilePath, const std::string& FileContent);
 
-	void PlayGLTFAnimation();
+	void PlayGLTFAnimation(std::string& FilePath, const std::string& FileContent);
 
 	bool m_bIsEntitySelected{ false };
 	bool m_bIsDraggingGizmo{ false };
