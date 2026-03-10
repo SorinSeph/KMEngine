@@ -276,8 +276,11 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 	m_FileContent = FileContent;
 	m_FilePath = FilePath;
 	//AddTestEntity();
-
+		
 	//InitEntityAttributes();
+
+	std::vector<float> Vertices;
+	std::vector<uint32_t> Indices;
 
 	std::vector<CBufferViewBase*> BufferViewVector = m_GLTFImporter.Import(FilePath, FileContent);
 
@@ -285,54 +288,69 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 	CBufferView<float>* TexCoordsBuffer{ nullptr };
 	CBufferView<uint32_t>* IndicesBuffer{ nullptr };
 
-	std::vector<float> Vertices;
-	std::vector<uint32_t> Indices;
+	CBufferView<float>* VerticesBuffer = static_cast<CBufferView<float>*>(m_GLTFImporter.GetBufferViewByType(EAttributeType::Position));
+	CBufferView<float>* TexCoordsBuffer = static_cast<CBufferView<float>*>(m_GLTFImporter.GetBufferViewByType(EAttributeType::TexCoords));
+	CBufferView<uint8_t>* JointsBuffer = static_cast<CBufferView<uint8_t>*>(m_GLTFImporter.GetBufferViewByType(EAttributeType::Joints));
+	CBufferView<float>* WeightsBuffer = static_cast<CBufferView<float>*>(m_GLTFImporter.GetBufferViewByType(EAttributeType::Weights));
+	CBufferView<uint32_t>* IndicesBuffer = static_cast<CBufferView<uint32_t>*>(m_GLTFImporter.GetBufferViewByType(EAttributeType::Indices));
 
-	for (auto& BufferViewIt : BufferViewVector)
-	{
-		switch (BufferViewIt->m_BufferViewType)
-		{
-			case EAttributeType::Position:
-			{
-				VerticesBuffer = static_cast<CBufferView<float>*>(BufferViewIt);
-				break;
-			}
+	uint64_t VerticesBufferSize = VerticesBuffer->m_Data.size();
+	uint64_t TexCoordsBufferSize = TexCoordsBuffer->m_Data.size();
+	uint64_t JointsBufferSize = JointsBuffer->m_Data.size();
+	uint64_t WeightsBufferSize = WeightsBuffer->m_Data.size();
+	uint64_t IndicesBufferSize = IndicesBuffer->m_Data.size();
 
-			case EAttributeType::TexCoords:
-			{
-				TexCoordsBuffer = static_cast<CBufferView<float>*>(BufferViewIt);
-				break;
-			}
-
-			case EAttributeType::Indices:
-			{
-				IndicesBuffer = static_cast<CBufferView<uint32_t>*>(BufferViewIt);
-				Indices = IndicesBuffer->m_Data;
-				break;
-			}
-		}
-	}
-
-	int i{ 0 }, j{ 0 };
+	uint32_t i{ 0 }, j{ 0 };
 
 	if (VerticesBuffer != nullptr && TexCoordsBuffer != nullptr)
 	{
-		while (i < VerticesBuffer->m_Data.size() && j < TexCoordsBuffer->m_Data.size())
+		Vertices.resize(VerticesBufferSize / 3);
+		for (int i = 0; i < VerticesBufferSize / 3; ++i)
 		{
-			Vertices.push_back(VerticesBuffer->m_Data[i]);
-			Vertices.push_back(VerticesBuffer->m_Data[i + 1]);
-			Vertices.push_back(VerticesBuffer->m_Data[i + 2]);
+			Vertices.at(i) = glm::vec3(VerticesBuffer->m_Data.at(i * 3),
+				VerticesBuffer->m_Data.at(i * 3 + 1),
+				VerticesBuffer->m_Data.at(i * 3 + 2));
+		}
 
-			Vertices.push_back(TexCoordsBuffer->m_Data[j]);
-			Vertices.push_back(TexCoordsBuffer->m_Data[j + 1]);
+		// Currently commented out for later test with vertices supporting skeletal animation
+		
+		//Vertices.resize(VerticesBufferSize / 3);
+		//for (int i = 0; i < VerticesBufferSize / 3; ++i)
+		//{
+		//	Vertices.at(i).m_Position = glm::vec3(VerticesBuffer->m_Data.at(i * 3),
+		//		VerticesBuffer->m_Data.at(i * 3 + 1),
+		//		VerticesBuffer->m_Data.at(i * 3 + 2));
+		//}
 
+		//for (int i = 0; i < VerticesBufferSize / 3; ++i)
+		//{
+		//	Vertices.at(i).m_TexCoords = glm::vec2(TexCoordsBuffer->m_Data.at(i * 2),
+		//		TexCoordsBuffer->m_Data.at(i * 2 + 1));
+		//}
 
-			i += 3;
-			j += 2;
+		//for (int i = 0; i < JointsBufferSize / 4; ++i)
+		//{
+		//	Vertices.at(i).Joint = glm::vec4(JointsBuffer->m_Data.at(i * 4),
+		//		JointsBuffer->m_Data.at(i * 4 + 1),
+		//		JointsBuffer->m_Data.at(i * 4 + 2),
+		//		JointsBuffer->m_Data.at(i * 4 + 3));
+		//}
+
+		//for (int i = 0; i < WeightsBufferSize / 4; ++i)
+		//{
+		//	Vertices.at(i).Weight = glm::vec4(WeightsBuffer->m_Data.at(i * 4),
+		//		WeightsBuffer->m_Data.at(i * 4 + 1),
+		//		WeightsBuffer->m_Data.at(i * 4 + 2),
+		//		WeightsBuffer->m_Data.at(i * 4 + 3));
+		//}
+
+		for (int i = 0; i < IndicesBufferSize; ++i)
+		{
+			Indices = IndicesBuffer->m_Data;
 		}
 	}
 
-	CreateModel(Vertices, Indices);
+	CreateModel2(Vertices, Indices);
 
 	auto Breakpoint = 1;
 }
@@ -344,6 +362,7 @@ void CEntityBuilder::ImportGLTFAnimation()
 	auto breakpoint = 1;
 }
 
+// Currently not working as intended, object has light shader instead of plain shader
 void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices)
 {
 	CLogger& Logger = CLogger::GetLogger();
@@ -361,7 +380,6 @@ void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::
 	CShaderGenerator ShaderGenerator;
 	ShaderGenerator.GenerateSkeletalMeshShaders(&TestEntityComponent.m_OpenGLResource);
 
-	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -428,6 +446,90 @@ void CEntityBuilder::CreateModel(const std::vector<float>& Vertices, const std::
 	Scene.AddEntityToScene(TestEntity);
 
 	auto breakpoint = 1;
+}
+
+void CEntityBuilder::CreateModel2(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices)
+{
+	CScene& Scene = CScene::GetScene();
+	CGameEntity3D Terrain{};
+	Terrain.m_GameEntityTag = "Knight";
+	CGameEntity3DComponent TerrainComponent;
+	TerrainComponent.m_GameEntityTag = "KnightComponent";
+
+	uint32_t& ShaderProgram{ TerrainComponent.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO{ TerrainComponent.m_OpenGLResource.m_VAO };
+	uint32_t& VBO{ TerrainComponent.m_OpenGLResource.m_VBO };
+	uint32_t& EBO{ TerrainComponent.m_OpenGLResource.m_EBO };
+	uint32_t& Texture{ TerrainComponent.m_OpenGLResource.m_Texture };
+
+	CShaderGenerator ShaderGenerator;
+	//ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
+	ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
+
+	TerrainComponent.SetLocationF(0.f, 0.f, -5.5f);
+	TerrainComponent.m_CollisionComponent.m_Center = glm::vec3{ 0.f, 0.f, -10.5f };
+	TerrainComponent.m_CollisionComponent.m_Extents = glm::vec3{ 0.5f, 0.5f, 0.5f };
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(float), Vertices.data(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Indices.size() * sizeof(float), Indices.data(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glGenTextures(1, &Texture);
+	glBindTexture(GL_TEXTURE_2D, Texture); 
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
+	glUseProgram(ShaderProgram);
+
+	if (m_pOpenGLDevice)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
+	}
+
+	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+
+	auto DrawLambda = []() {
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		};
+	TerrainComponent.m_OpenGLResource.m_pContextResourcePtr.push_back(DrawLambda);
+
+	CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+	TerrainComponentNode->m_tType = TerrainComponent;
+	Terrain.m_SceneGraph.m_pRootNode = TerrainComponentNode;
+	std::vector<uint32_t> TempIndices{ 0, 1, 3, 1, 2, 3 };
+	TerrainComponent.m_OpenGLResource.m_Indices.insert(TerrainComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
+
+	Scene.AddEntityToScene(Terrain);
 }
 
 void CEntityBuilder::SetGraphicsModule(CGraphicsModule* GraphicsModule)
@@ -533,6 +635,7 @@ void CEntityBuilder::CreateLight()
 	Scene.AddEntityToScene(Terrain);
 }
 
+// This function reuses the code from the TerrainGenerator::GenerateTerrain() function
 void CEntityBuilder::TestReplicateEntity()
 {
 	CScene& Scene = CScene::GetScene();
@@ -549,20 +652,16 @@ void CEntityBuilder::TestReplicateEntity()
 
 	CShaderGenerator ShaderGenerator;
 	//ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
-	ShaderGenerator.GenerateLightShaders(&TerrainComponent.m_OpenGLResource);
+	ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
 
 	float Vertices[] = {
-		//// positions          // normals           // texture coords
-		// 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 1.0f, // top right
-		// 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   1.0f, 0.0f, // bottom right
-		//-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		//-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f  // top left 
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+		// positions       // normals           // texture coords
+		-0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		 0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+		-0.5f,  0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 	};
 
 	uint32_t Indices[] =
@@ -571,7 +670,9 @@ void CEntityBuilder::TestReplicateEntity()
 		1, 2, 3  // second triangle
 	};
 
-	TerrainComponent.SetLocationF(0.f, 0.f, -10.5f);
+	TerrainComponent.SetLocationF(0.f, 0.f, -5.5f);
+	TerrainComponent.m_CollisionComponent.m_Center = glm::vec3{ 0.f, 0.f, -10.5f };
+	TerrainComponent.m_CollisionComponent.m_Extents = glm::vec3{ 0.5f, 0.5f, 0.5f };
 
 	// Previous OpenGL setup code
 
@@ -603,15 +704,25 @@ void CEntityBuilder::TestReplicateEntity()
 
 	glBindVertexArray(VAO);
 
+	// Buffer binding for light shaders
+	//// position attribute
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
+	//// normal attribute
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glEnableVertexAttribArray(1);
+	//// texture coord attribute
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	//glEnableVertexAttribArray(2);
+
+	// Buffer binding for base shaders
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// normal attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
 	// texture coord attribute
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
 
 	glGenTextures(1, &Texture);
 	glBindTexture(GL_TEXTURE_2D, Texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object

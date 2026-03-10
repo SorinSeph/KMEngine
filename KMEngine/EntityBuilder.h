@@ -19,6 +19,8 @@ public:
 
 	void CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
 
+	void CreateModel2(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
+
 	void CreateLight();
 
 	void SetGraphicsModule(CGraphicsModule* GraphicsModule);

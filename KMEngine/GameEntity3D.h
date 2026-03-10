@@ -61,6 +61,12 @@ struct SColorVertex
 	XMFLOAT4 Color;
 };
 
+struct STexureVertex
+{
+	glm::vec3 m_Position;
+	glm::vec2 m_TexCoords;
+};
+
 enum class EGameEntityType
 {
 	Default,

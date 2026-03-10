@@ -353,15 +353,13 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         {
             CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
 
-            std::string FilePathString{ "Resources/Assets/3D_Objects/GLTF/rectangle_textured_skeletal_anim2.gltf" };
+            std::string FilePathString{ "E:/Work/2/Anim_Cartoon_Knight_Wave.gltf" };
             std::string FileContent{};
 
             // @Temporary code to import and play a GLTF animation
             int ButtonId = LOWORD(wParam);
             if (ButtonId == 1)
             {
-
-
                 std::ifstream file(FilePathString, std::ios::binary);
                 if (!file)
                 {
