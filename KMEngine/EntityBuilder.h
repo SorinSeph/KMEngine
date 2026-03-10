@@ -17,9 +17,7 @@ public:
 
 	void ImportGLTFAnimation();
 
-	void CreateModel(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
-
-	void CreateModel2(const std::vector<float>& Vertices, const std::vector<uint32_t>& Indices);
+	void CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices);
 
 	void CreateLight();
 
@@ -28,15 +26,6 @@ public:
 	void SetOpenGLDevice(COpenGLDevice* pOpenGLDevice);
 
 	void AddLinetrace(glm::vec3 StartLocation, glm::vec3 EndLocation);
-
-	// Temporary, to be deleted
-	// Adds the Cartoon Knight entity
-	void AddTestEntity();
-
-	// Temporary, to be deleted
-	// Adds the terrain entity from the TerrainGenerator
-	// Currently not working, why?
-	void TestReplicateEntity();
 
 	CGLTFImporter m_GLTFImporter;
 	CGraphicsModule* m_pGraphicsModule{ nullptr };

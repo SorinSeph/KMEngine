@@ -7,17 +7,20 @@
         {
           "ruleId": "C6385",
           "message": {
-            "text": "Reading invalid data from 'pstrName'."
+            "text": "Reading invalid data from 'pstrName':  the readable size is '260' bytes, but '4294967295' bytes may be read."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/ddstextureloader.cpp"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                 },
                 "region": {
-                  "startLine": 1804,
-                  "startColumn": 47
+                  "startLine": 1812,
+                  "startColumn": 51
                 }
               },
               "logicalLocations": [
@@ -38,7 +41,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1736,
@@ -52,7 +55,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1738,
@@ -66,7 +69,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1740,
@@ -80,7 +83,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1742,
@@ -94,7 +97,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1744,
@@ -108,7 +111,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1746,
@@ -122,7 +125,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1749,
@@ -136,7 +139,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1754,
@@ -150,7 +153,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1755,
@@ -164,7 +167,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1756,
@@ -178,7 +181,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1758,
@@ -192,7 +195,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1759,
@@ -206,7 +209,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1765,
@@ -220,7 +223,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1770,
@@ -234,7 +237,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1775,
@@ -248,7 +251,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1778,
@@ -262,7 +265,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1780,
@@ -276,7 +279,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1781,
@@ -290,7 +293,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1790,
@@ -304,7 +307,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1792,
@@ -318,7 +321,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1793,
@@ -337,7 +340,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1795,
@@ -351,7 +354,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1802,
@@ -370,7 +373,7 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
                             "startLine": 1804,
@@ -378,7 +381,7 @@
                           }
                         },
                         "message": {
-                          "text": "'pstrName' is an Input to 'strnlen_s' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\string.h:367)"
+                          "text": "'pstrName' is an Input to 'strnlen_s' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\string.h:367)"
                         }
                       },
                       "kinds": [
@@ -389,15 +392,53 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
-                            "startLine": 1804,
-                            "startColumn": 47
+                            "startLine": 1810,
+                            "startColumn": 38
                           }
                         },
                         "message": {
-                          "text": "'<symbol>' may equal 260"
+                          "text": "Enter this branch, (assume '<branch condition>')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 1812,
+                            "startColumn": 51
+                          }
+                        },
+                        "message": {
+                          "text": "'pstrName' is an Input to 'strnlen_s' (declared at c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\ucrt\\string.h:367)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 1812,
+                            "startColumn": 51
+                          }
+                        },
+                        "message": {
+                          "text": "'<symbol>' may equal -1"
                         }
                       },
                       "kinds": [
@@ -409,11 +450,11 @@
                       "location": {
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+                            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/DDSTextureLoader.cpp"
                           },
                           "region": {
-                            "startLine": 1804,
-                            "startColumn": 47
+                            "startLine": 1812,
+                            "startColumn": 51
                           }
                         },
                         "message": {
@@ -435,8 +476,8 @@
       "tool": {
         "driver": {
           "name": "PREfast",
-          "fullName": "PREfast Code Analysis",
-          "version": "14.38.33144.0",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35223.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -448,7 +489,7 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/DDSTextureLoader.cpp"
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/ddstextureloader.cpp"
           },
           "roles": [
             "analysisTarget",
@@ -460,7 +501,7 @@
         },
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/ddstextureloader.h"
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/ddstextureloader.h"
           },
           "hashes": {
             "sha-256": "7a34ee5315086cb4efc10ff955cb9a5ce36198fded61ae01a39d4f75c781e723"

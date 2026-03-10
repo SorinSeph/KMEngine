@@ -61,9 +61,17 @@ struct SColorVertex
 	XMFLOAT4 Color;
 };
 
-struct STexureVertex
+struct STextureVertex
 {
 	glm::vec3 m_Position;
+	glm::vec2 m_TexCoords;
+};
+
+struct SSkeletalVertex
+{
+	glm::vec3 m_Position;
+	glm::vec4 m_Joint;
+	glm::vec4 m_Weight;
 	glm::vec2 m_TexCoords;
 };
 

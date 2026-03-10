@@ -9,14 +9,17 @@
           "message": {
             "text": "Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6)."
           },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/core/coreclock.cpp"
+          },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/CoreClock.h"
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/Core/CoreClock.h"
                 },
                 "region": {
-                  "startLine": 9,
+                  "startLine": 11,
                   "startColumn": 2
                 }
               },
@@ -37,8 +40,8 @@
       "tool": {
         "driver": {
           "name": "PREfast",
-          "fullName": "PREfast Code Analysis",
-          "version": "14.38.33144.0",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35223.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -50,24 +53,24 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///C:/Users/sefce/source/KMEngine/KMEngine/CoreClock.h"
-          },
-          "roles": [
-            "resultFile"
-          ],
-          "hashes": {
-            "sha-256": "ac77c0115c53318c96a42ba104ce18a7f84300f974984b31c3e2c20b38334cf0"
-          }
-        },
-        {
-          "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/coreclock.cpp"
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/core/coreclock.cpp"
           },
           "roles": [
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "6fbe44583c3c219b2d56e9b6344540a2c5008d331caa0e3d509bd5907d7fa00e"
+            "sha-256": "c10ae6f4b69d724af3ac687586a4a780314e1ef3c97ae4b48cf44fa83cd7714f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/Core/CoreClock.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c3d838558cd578e78e35179f06e1dc1bae4b290fd83064ea99e287caf5284114"
           }
         }
       ]

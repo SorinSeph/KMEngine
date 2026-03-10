@@ -7,8 +7,8 @@
       "tool": {
         "driver": {
           "name": "PREfast",
-          "fullName": "PREfast Code Analysis",
-          "version": "14.38.33144.0",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35223.0",
           "informationUri": "https://aka.ms/cpp/ca"
         }
       },
@@ -20,7 +20,7 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/logger.cpp"
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/logger.cpp"
           },
           "roles": [
             "analysisTarget"
@@ -31,7 +31,7 @@
         },
         {
           "location": {
-            "uri": "file:///c:/users/sefce/source/kmengine/kmengine/logger.h"
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/logger.h"
           },
           "hashes": {
             "sha-256": "71872e4e825c7d4da36042c4e1b4e8ed4e35c76b59c1d5caf745cc9bec0b5191"
