@@ -155,7 +155,7 @@ public:
         std::ifstream VertexShaderFile;
         std::ifstream FragmentShaderFile;
         const char* VertexPath = "Resources/Shaders/anim.vs";
-        const char* FragmentPath = "Resources/Shaders/anim.fs";
+        const char* FragmentPath = "Resources/Shaders/anim.ps";
         // ensure ifstream objects can throw exceptions:
         VertexShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         FragmentShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);

@@ -353,7 +353,7 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         {
             CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
 
-            std::string FilePathString{ "C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/Resources/Assets/3D_Objects/GLTF/Anim_Cartoon_Knight_Wave.gltf" };
+            std::string FilePathString{ "Resources/Assets/3D_Objects/GLTF/rectangle_textured_skeletal_anim2.gltf" };
             std::string FileContent{};
 
             // @Temporary code to import and play a GLTF animation

@@ -246,7 +246,13 @@ void CEntityBuilder::ImportGLTFAnimation()
 	auto breakpoint = 1;
 }
 
-// Currently not working as intended, object has light shader instead of plain shader
+CGLTFAnimation CEntityBuilder::GetGLTFAnimation()
+{
+	CGLTFAnimation Animation = m_GLTFImporter.ImportAnimation(m_FilePath, m_FileContent);
+
+	return Animation;
+}
+
 void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices)
 {
 	CScene& Scene = CScene::GetScene();
@@ -262,29 +268,34 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	uint32_t& Texture{ EntityComponent.m_OpenGLResource.m_Texture };
 
 	CShaderGenerator ShaderGenerator;
-	//ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
-	ShaderGenerator.GenerateBaseShaders(&EntityComponent.m_OpenGLResource);
-
-	EntityComponent.SetLocationF(0.f, 0.f, -5.5f);
-	EntityComponent.m_CollisionComponent.m_Center = glm::vec3{ 0.f, 0.f, -10.5f };
-	EntityComponent.m_CollisionComponent.m_Extents = glm::vec3{ 0.5f, 0.5f, 0.5f };
+	ShaderGenerator.GenerateSkeletalMeshShaders(&EntityComponent.m_OpenGLResource);
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 	glBindVertexArray(VAO);
 
+	EntityComponent.SetLocationF(0.f, 0.f, -5.5f);
+	EntityComponent.m_CollisionComponent.m_Center = glm::vec3{ 0.f, 0.f, -10.5f };
+	EntityComponent.m_CollisionComponent.m_Extents = glm::vec3{ 0.5f, 0.5f, 0.5f };
+
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(SSkeletalVertex), Vertices.data(), GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Position));
-	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Indices.size() * sizeof(uint32_t), Indices.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_TexCoords));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Position));
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribIPointer(1, 4, GL_INT, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Joint));
 	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Weight));
+	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_TexCoords));
+	glEnableVertexAttribArray(3);
 
 	glGenTextures(1, &Texture);
 	glBindTexture(GL_TEXTURE_2D, Texture);
@@ -307,8 +318,15 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	}
 	stbi_image_free(data);
 
-	glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
+	// Activate the shader program BEFORE setting any uniforms
 	glUseProgram(ShaderProgram);
+
+	glm::mat4 IdentityMatrix{ 1.f };
+
+	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[0]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[1]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
+
+	glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
 
 	if (m_pOpenGLDevice)
 	{
@@ -316,11 +334,6 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	}
 
 	EntityComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
-
-	//auto DrawLambda = []() {
-	//	glDrawArrays(GL_TRIANGLES, 0, 36);
-	//	};
-	//TerrainComponent.m_OpenGLResource.m_pContextResourcePtr.push_back(DrawLambda);
 
 	CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
 	TerrainComponentNode->m_tType = EntityComponent;

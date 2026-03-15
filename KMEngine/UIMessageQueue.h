@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef UIMESSAGEQUEUE_H
 #define UIMESSAGEQUEUE_H
 
@@ -35,6 +37,13 @@ public:
 	float PreviousY{ 0.0f };
 
 	int m_TestInt;
+
+	// @Temporary function used by the time manager in PlayGLTFAnimation, to check if the function is ticking during lifespan properly
+	void TestPlayGLTFAnimation(); 
+	float m_QuatX{ 0.0f };
+	float m_QuatY{ 0.0f };
+	float m_QuatZ{ 0.0f };
+	float m_QuatW{ 0.0f };
 };
 
 #endif

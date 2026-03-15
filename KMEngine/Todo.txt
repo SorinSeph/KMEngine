@@ -3,4 +3,6 @@ Right now we use absolute filepaths
 
 * Remove the button(s) such as ImportButtonHWND and its/their functionality from case WM_COMMAND in LeftToolbarHwndProc, UIModule.cpp
 
-* To continue to properly set up the skeletal mesh shader buffers and uniforms 
+* Timer bRunOnce wrong?
+
+* Rectangle animation running too fast

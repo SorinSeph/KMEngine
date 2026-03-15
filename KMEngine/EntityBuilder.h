@@ -17,6 +17,9 @@ public:
 
 	void ImportGLTFAnimation();
 
+	// @Temporary for testing a single animation imported on button press
+	CGLTFAnimation GetGLTFAnimation();
+
 	void CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices);
 
 	void CreateLight();

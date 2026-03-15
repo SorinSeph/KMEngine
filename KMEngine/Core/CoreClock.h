@@ -41,8 +41,6 @@ public:
 
 	void AddTimer(CBaseTimer* InTimer);
 
-private:
-
 	double m_SecondsPerCount;
 	double m_DeltaTime;
 	__int64 m_BaseTime;
@@ -264,11 +262,12 @@ public:
 	template<typename TLambda, typename... TArgs>
 	void SetTimerVariadicArgsLambda(std::string TimerHandle, float InStartTime, float InEndTime, TLambda Fn, TArgs... Args)
 	{
-		auto* Timer = new CTimerVariadicArgsLambda<TLambda, TArgs...>(Fn, Args...);
+		CTimerVariadicArgsLambda<TLambda, TArgs...>* Timer = new CTimerVariadicArgsLambda<TLambda, TArgs...>(Fn, Args...);
 		Timer->StartTime = InStartTime;
 		Timer->EndTime = InEndTime;
 		Timer->m_TimerHandle = TimerHandle;
-		
+		Timer->bRunOnce = false;
+
 		m_pCoreClock->AddTimer(Timer);
 	}
 

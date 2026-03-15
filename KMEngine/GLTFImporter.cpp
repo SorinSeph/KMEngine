@@ -397,6 +397,12 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
 
 void CGLTFImporter::ImportBoneData(const std::string& FileContent)
 {
+    // Output log testing to see the exact contents of the file
+    CLogger& Logger = CLogger::GetLogger();
+    int FileContentIt = 0;
+    Logger.Log("GLTFImporter.cpp, ImportBoneData(): \n");
+    Logger.Log(FileContent);  
+
     uint64_t ByteOffset{ 0 };
     std::string SearchString = "\n\t\"nodes\":[";
     uint64_t NodesPosition = FileContent.find(SearchString) + 14;
@@ -413,18 +419,12 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
         if (FileContent[NodesPosition] == '\n'
             && FileContent[NodesPosition + 1] == '\t'
             && FileContent[NodesPosition + 2] == ']'
-            && FileContent[NodesPosition + 3] == ','
-            && FileContent[NodesPosition + 4] == '\n')
+            && FileContent[NodesPosition + 3] == ',')
         {
             break;
         }
         else if (FileContent[NodesPosition] == '{')
         {
-            if (m_Animation.m_Nodes.size() == 2)
-            {
-                auto breakpoint = 1;
-            }
-
             OpenBracketCount++;
             NodesPosition++;
 
@@ -951,8 +951,6 @@ void CGLTFImporter::ReadAnimationBIN(std::string FilePath)
                 std::memcpy(&W, &FileBuffer[i + 12], sizeof(float));
                 m_Animation.m_Samplers.at(SamplerIt - SamplerItOffset).m_Rotation.push_back(glm::quat(W, X, Y, Z));
             }
-
-            auto breakpoint = 1;
         }
         else if (m_Animation.m_Samplers.at(SamplerIt - SamplerItOffset).m_TransformType == EChannelTransformType::Scale)
         {

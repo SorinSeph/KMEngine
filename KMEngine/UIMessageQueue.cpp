@@ -320,14 +320,100 @@ void CUIMessageQueue::ImportGLTF(std::string& FilePath, const std::string& FileC
 	}
 }
 
+// @Temporary this one and the following function below are used by the time manager 
+// in PlayGLTFAnimation, to check if the function is ticking during lifespan properly
+// Currently hardcoded for rectangle GLTF animation
+void CUIMessageQueue::TestPlayGLTFAnimation()
+{
+    CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("Test lambda from UIMessageQueue.cpp, PlayGLTFAnimation()\n");
+    Logger.Log("Quat X = ", m_QuatX, ", Quat Y = ", m_QuatY, "Quat Z = ", m_QuatZ, ", Quat W = ", m_QuatW, "\n\n");
+}
+
+
 void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string& FileContent)
 {
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
+    CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+    CScene& Scene = CScene::GetScene();
+    auto& SceneEntityList = Scene.GetSceneList();
+    CGameEntity3D* pGameEntity{ nullptr };
+
+    for (auto& SceneEntityIt : SceneEntityList)
+    {
+        if (SceneEntityIt.m_GameEntityTag == "Knight")
+        {
+            pGameEntity = &SceneEntityIt;
+        }
+    }
+
+    auto ShaderProgram = pGameEntity->m_SceneGraph.m_pRootNode->m_tType.m_OpenGLResource.m_ShaderProgram;
 
     if (pGraphicsModule)
     {
-        pGraphicsModule->m_EntityBuilder.ImportGLTFAnimation();
-    }
+        auto Anim = pGraphicsModule->m_EntityBuilder.GetGLTFAnimation();
+        int KeyframeIt{ 0 };
 
-    MessageBox(NULL, L"Playing GLTF animation from message queue", L"GLTF Anim", NULL);
+        auto PrintLambda = [=]() mutable {
+            CLogger& Logger = CLogger::GetLogger();
+            Logger.Log("Test lambda from UIMessageQueue.cpp\n");
+
+            if (KeyframeIt < Anim.m_Samplers.at(4).m_Rotation.size())
+            {
+                Logger.Log("Quat X = ", 
+                    Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).x,
+                    ", Quat Y = ", 
+                    Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).y,
+                    "Quat Z = ", 
+                    Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).z,
+                    ", Quat W = ", 
+                    Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).w,
+                    "\n\n");
+
+                glm::quat BoneTopQuat{ Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).w,
+                Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).x,
+                Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).y,
+                Anim.m_Samplers.at(4).m_Rotation.at(KeyframeIt).z,
+                };
+
+                // Local transforms
+                glm::mat4 BoneTopTranslation = glm::translate(glm::mat4(1.0f), glm::vec3(0, 3, 0));
+                glm::mat4 BoneTopRotation = glm::mat4_cast(BoneTopQuat);
+                glm::mat4 LocalTransformBoneTop = BoneTopTranslation * BoneTopRotation;
+                glm::mat4 LocalTransformBoneRoot = glm::mat4(1.0f);
+
+                // Global transforms
+                glm::mat4 globalTransformBoneRoot = LocalTransformBoneRoot;
+                glm::mat4 globalTransformBoneTop = globalTransformBoneRoot * LocalTransformBoneTop;
+
+                glm::mat4 Anim2InverseBindMatriceBoneTop{
+                    1, -0, 0, -0,
+                    -0, 1, -0, 0,
+                    0, -0, 1, -0,
+                    -0, 0, -0, 1
+                };
+
+                glm::mat4 Anim2InverseBindMatriceBoneRoot{
+                    1, -0, 0, -0,
+                    -0, 1, -0, 0,
+                    0, -0, 1, -0,
+                    -0, -3, -0, 1
+                };
+
+                glm::mat4 IdentityMatrix{ 1.f };
+
+                glm::mat4 BoneMatrixRoot = globalTransformBoneRoot * Anim2InverseBindMatriceBoneTop;
+                glm::mat4 BoneMatrixTop = globalTransformBoneTop * Anim2InverseBindMatriceBoneRoot;
+
+                KeyframeIt++;
+                //ourShader.setMat4("bones[0]", BoneMatrixRoot);
+                //ourShader.setMat4("bones[1]", BoneMatrixTop);
+                glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[0]"), 1, GL_FALSE, &BoneMatrixRoot[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[1]"), 1, GL_FALSE, &BoneMatrixTop[0][0]);
+            }
+        };
+
+        //TimerManager.SetTimer3<CUIMessageQueue, void, &CUIMessageQueue::TestPlayGLTFAnimation>(this, 5.0f, 30.0f);
+        TimerManager.SetTimerVariadicArgsLambda("AnimationTimer", 5.0f, 30.0f, PrintLambda);
+    }
 }
