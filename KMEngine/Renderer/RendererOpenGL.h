@@ -119,10 +119,9 @@ public:
 					auto breakpoint = 1;
 				}
 
-				EntityComponent->m_tType.m_OpenGLResource.Execute();
+				//EntityComponent->m_tType.m_OpenGLResource.Execute();
 
 				if (EntityComponent->m_tType.m_GameEntityTag == "TerrainComponent")
-
 				{
 					Logger.Log("RendererOpenGL.h, Render(): rendering terrain component");
 					//glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
@@ -144,7 +143,13 @@ public:
 					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
 					auto breakpoint = 1;
 				}
-
+				else
+				{
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glDisable(GL_BLEND);
+				}
 				auto breakpoint = 1;
 			}
 		}

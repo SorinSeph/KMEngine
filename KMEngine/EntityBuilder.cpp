@@ -355,40 +355,33 @@ void CEntityBuilder::SetOpenGLDevice(COpenGLDevice* pOpenGLDevice)
 void CEntityBuilder::CreateLight()
 {
 	CScene& Scene = CScene::GetScene();
-	CGameEntity3D Terrain{};
-	Terrain.m_GameEntityTag = "Terrain";
-	CGameEntity3DComponent TerrainComponent;
-	TerrainComponent.m_GameEntityTag = "TerrainComponent";
+	CGameEntity3D Light{};
+	Light.m_GameEntityTag = "Light";
+	CGameEntity3DComponent LightComponent;
+	LightComponent.m_GameEntityTag = "LightComponent";
 
-	uint32_t& ShaderProgram{ TerrainComponent.m_OpenGLResource.m_ShaderProgram };
-	uint32_t& VAO{ TerrainComponent.m_OpenGLResource.m_VAO };
-	uint32_t& VBO{ TerrainComponent.m_OpenGLResource.m_VBO };
-	uint32_t& EBO{ TerrainComponent.m_OpenGLResource.m_EBO };
+	uint32_t& ShaderProgram{ LightComponent.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO{ LightComponent.m_OpenGLResource.m_VAO };
+	uint32_t& VBO{ LightComponent.m_OpenGLResource.m_VBO };
+	uint32_t& Texture{ LightComponent.m_OpenGLResource.m_Texture };
 
 	CShaderGenerator ShaderGenerator;
-	ShaderGenerator.GenerateBaseShaders(&TerrainComponent.m_OpenGLResource);
+	ShaderGenerator.GenerateBaseShaders(&LightComponent.m_OpenGLResource);
 
 	float Vertices[] = {
-		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   /*1.0f, 0.0f, 0.0f,*/   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   /*0.0f, 1.0f, 0.0f,*/   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   /*0.0f, 0.0f, 1.0f,*/   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   /*1.0f, 1.0f, 0.0f,*/   0.0f, 1.0f  // top left 
+		// positions			// texture coords
+		-0.5f, -0.5f,  0.f,		0.0f,  0.0f,
+		 0.5f, -0.5f,  0.f,		1.0f,  0.0f,
+		 0.5f,  0.5f,  0.f,		1.0f,  1.0f,
+		 0.5f,  0.5f,  0.f,		1.0f,  1.0f,
+		-0.5f,  0.5f,  0.f,		0.0f,  1.0f,
+		-0.5f, -0.5f,  0.f,		0.0f,  0.0f,
 	};
 
-	uint32_t Indices[] =
-	{
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
-	};
+	LightComponent.SetLocationF(1.f, 0.f, -4.5f);
 
-	TerrainComponent.SetLocationF(0.f, 0.f, -4.5f);
-
-	//glGenVertexArrays(1, &VAO);
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -397,29 +390,24 @@ void CEntityBuilder::CreateLight()
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// index attribute
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 
+	// texture coord attribute
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// set texture filtering parameters
+	glGenTextures(1, &Texture);
+	glBindTexture(GL_TEXTURE_2D, Texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
-	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-	unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char* data = stbi_load("Resources/Assets/Icons/Bulb4.png", &width, &height, &nrChannels, 0);
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -434,13 +422,11 @@ void CEntityBuilder::CreateLight()
 		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
 	}
 
-	TerrainComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+	LightComponent.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
 
 	CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
-	TerrainComponentNode->m_tType = TerrainComponent;
-	Terrain.m_SceneGraph.m_pRootNode = TerrainComponentNode;
-	std::vector<uint32_t> TempIndices{ 0, 1, 3, 1, 2, 3 };
-	TerrainComponent.m_OpenGLResource.m_Indices.insert(TerrainComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
+	TerrainComponentNode->m_tType = LightComponent;
+	Light.m_SceneGraph.m_pRootNode = TerrainComponentNode;
 
-	Scene.AddEntityToScene(Terrain);
+	Scene.AddEntityToScene(Light);
 }

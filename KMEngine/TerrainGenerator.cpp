@@ -434,8 +434,6 @@ void CTerrainGenerator::GenerateTerrain()
     CSceneGraphNode<CGameEntity3DComponent>* TerrainComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
     TerrainComponentNode->m_tType = TerrainComponent;
     Terrain.m_SceneGraph.m_pRootNode = TerrainComponentNode;
-    std::vector<uint32_t> TempIndices{0, 1, 3, 1, 2, 3};
-    TerrainComponent.m_OpenGLResource.m_Indices.insert(TerrainComponent.m_OpenGLResource.m_Indices.end(), TempIndices.begin(), TempIndices.end());
 
     Scene.AddEntityToScene(Terrain);
 }

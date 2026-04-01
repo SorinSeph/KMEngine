@@ -225,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="grey_grid.dds" />
+    <Image Include="Resources\Assets\Icons\Bulb4.png" />
     <Image Include="tex_stickman.dds" />
     <Image Include="UV_Color_Grid.dds" />
   </ItemGroup>

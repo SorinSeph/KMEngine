@@ -265,6 +265,9 @@
     <Image Include="tex_stickman.dds">
       <Filter>Source Files</Filter>
     </Image>
+    <Image Include="Resources\Assets\Icons\Bulb4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="TextureShader_PS.hlsl">

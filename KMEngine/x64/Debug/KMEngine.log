@@ -1,1 +1,9 @@
-﻿  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+﻿  EntityBuilder.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         with
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         [
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:             _Ty=uint32_t
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         ]
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
