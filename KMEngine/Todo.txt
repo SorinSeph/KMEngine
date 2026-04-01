@@ -5,4 +5,4 @@ Right now we use absolute filepaths
 
 * Timer bRunOnce wrong?
 
-* Rectangle animation running too fast
+* We need to implement game speed independent to framerate
