@@ -66,18 +66,17 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
             int width = rect.right - rect.left;
             int height = rect.bottom - rect.top;
 
-            // Create the Outliner window
             CRightSubwindow::m_OutlinerHwnd = CreateWindowEx(
-                0,                              // Optional window styles
-                L"Outliner",                    // Window class
-                NULL,                           // No window text
-                WS_CHILD | WS_VISIBLE,          // Window style
-                0, 0,                           // Position
-                width, height / 2,              // Size
-                hwnd,                           // Parent window
-                NULL,                           // No menu
+                0,                              
+                L"Outliner",                    
+                NULL,                           
+                WS_CHILD | WS_VISIBLE,          
+                0, 0,                           
+                width, height / 2,              
+                hwnd,                           
+                NULL,                           
                 (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
-                NULL                            // Additional application data
+                NULL                            
             );
 
             if (CRightSubwindow::m_OutlinerHwnd == NULL)
@@ -94,7 +93,7 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
 
             GetClientRect(hwnd, &rect);
             Rectangle(hdc, 0, 0, rect.right, rect.bottom);
-            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 140)); // Example color
+            HBRUSH Brush = CreateSolidBrush(RGB(40, 40, 140)); 
             FillRect(hdc, &rect, Brush);
             DeleteObject(Brush);
 
@@ -107,7 +106,6 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
             int width = LOWORD(lParam);
             int height = HIWORD(lParam);
 
-            // Resize the Outliner window
             if (CRightSubwindow::m_OutlinerHwnd)
             {
                 SetWindowPos(CRightSubwindow::m_OutlinerHwnd, NULL, 0, 0, width, height / 2, SWP_NOZORDER);
@@ -115,10 +113,8 @@ LRESULT CALLBACK CRightSubwindow::RightSubwindowProc(HWND hwnd, UINT message, WP
 
             return 0;
         }
-
-        // Removed WM_DESTROY handler to prevent premature application termination
-
     }
+
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
@@ -425,14 +421,6 @@ LRESULT CALLBACK EditSubclassProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPa
             EditControlTitle = L"Unknown";
         }
 
-        // Construct the message
-        //std::wstring message = L"Input number = ";
-        //message += buffer;
-
-        // Optionally, display the input received
-        // MessageBox(hwnd, message.c_str(), L"Input Received", MB_OK | MB_ICONINFORMATION);
-
-        // Prevent the beep sound by returning 0
         return 0;
     }
 

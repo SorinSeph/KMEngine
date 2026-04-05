@@ -1,22 +1,11 @@
 #include "GameEntity3D.h"
 
-XMMATRIX CGameEntity3D::TransformationMatrix()
-{
-	return m_ScaleMatrix * m_RotationMatrix * m_LocationMatrix;
-}
-
-void CGameEntity3D::SetLocation(XMMATRIX Location)
-{
-	m_ConstantBuffer.mWorld = Location;
-}
-
 void CGameEntity3D::SetLocationF(float InX, float InY, float InZ)
 {
 	m_LocationX = InX;
 	m_LocationY = InY;
 	m_LocationZ = InZ;
 	m_LocationMatrix = XMMatrixTranslation(InX, InY, InZ);
-	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
 XMMATRIX CGameEntity3D::GetLocation()
@@ -87,13 +76,13 @@ XMMATRIX CGameEntity3D::GetScale()
 void CGameEntity3D::SetRotation(float InPitch, float InYaw, float InRoll)
 {
 	m_RotationMatrix = XMMatrixRotationRollPitchYaw(InPitch, InYaw, InRoll);
-	m_ConstantBuffer.mWorld = TransformationMatrix();
+	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
 void CGameEntity3D::SetScale(float InX, float InY, float InZ)
 {
 	m_ScaleMatrix = XMMatrixScaling(InX, InY, InZ);
-	m_ConstantBuffer.mWorld = TransformationMatrix();
+	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
 void CGameEntity3D::SetUID(std::string uid)

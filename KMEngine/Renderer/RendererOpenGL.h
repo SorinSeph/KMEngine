@@ -1,4 +1,5 @@
 #pragma once
+#include "../Core/CoreClock.h"
 #include "Renderer.h"  
 #include "../OpenGLDevice.h"
 #include "../Scene.h"

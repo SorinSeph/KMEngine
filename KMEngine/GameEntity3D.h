@@ -106,10 +106,6 @@ public:
 
 	EGameEntityType m_GameEntityType;
 
-	XMMATRIX TransformationMatrix();
-
-	void SetLocation(XMMATRIX Location);
-
 	void SetLocationF(float InX, float InY, float InZ);
 
 	XMMATRIX GetLocation();

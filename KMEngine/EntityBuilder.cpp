@@ -368,17 +368,26 @@ void CEntityBuilder::CreateLight()
 	CShaderGenerator ShaderGenerator;
 	ShaderGenerator.GenerateBaseShaders(&LightComponent.m_OpenGLResource);
 
+	float HalfWidth = 0.5f;
+	float HalfHeight = 0.5f;
+	float HalfLength = 0.2f;
+	glm::vec3 LocalOrigin{ 1.f, 0.f, -4.5f };
+
+
 	float Vertices[] = {
-		// positions			// texture coords
-		-0.5f, -0.5f,  0.f,		0.0f,  0.0f,
-		 0.5f, -0.5f,  0.f,		1.0f,  0.0f,
-		 0.5f,  0.5f,  0.f,		1.0f,  1.0f,
-		 0.5f,  0.5f,  0.f,		1.0f,  1.0f,
-		-0.5f,  0.5f,  0.f,		0.0f,  1.0f,
-		-0.5f, -0.5f,  0.f,		0.0f,  0.0f,
+		// positions						// texture coords
+		-HalfHeight, -HalfHeight,  0.f,		0.0f,  0.0f,
+		 HalfHeight, -HalfHeight,  0.f,		1.0f,  0.0f,
+		 HalfHeight,  HalfHeight,  0.f,		1.0f,  1.0f,
+		 HalfHeight,  HalfHeight,  0.f,		1.0f,  1.0f,
+		-HalfHeight,  HalfHeight,  0.f,		0.0f,  1.0f,
+		-HalfHeight, -HalfHeight,  0.f,		0.0f,  0.0f,
 	};
 
-	LightComponent.SetLocationF(1.f, 0.f, -4.5f);
+	LightComponent.m_CollisionComponent.m_Center = LocalOrigin;
+	LightComponent.m_CollisionComponent.m_Extents = glm::vec3{ HalfWidth, HalfHeight, HalfLength};
+
+	LightComponent.SetLocationF(LocalOrigin.x, LocalOrigin.y, LocalOrigin.z);
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);

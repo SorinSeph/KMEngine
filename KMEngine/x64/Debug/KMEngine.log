@@ -1,9 +1,17 @@
-﻿  EntityBuilder.cpp
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         with
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         [
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:             _Ty=uint32_t
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\EntityBuilder.cpp(51,31): warning C4244:         ]
-  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+﻿  DX11Device.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(361,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(781,61): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(807,47): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1423,16): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1424,17): warning C4244: '=': conversion from 'UINT' to 'FLOAT', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1435,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(1786,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2103,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2287,31): warning C4101: 'GeometryFactory': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\DX11Device.cpp(2809,31): warning C4101: 'GeometryFactory': unreferenced local variable
+  World.cpp
+  Generating Code...
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

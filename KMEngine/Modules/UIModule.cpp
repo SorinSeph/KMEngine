@@ -424,34 +424,21 @@ LRESULT CALLBACK OutlinerProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
 
-            // Fill the child window with blue color
             HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255)); // Blue
             FillRect(hdc, &ps.rcPaint, hBrush);
+            SetTextColor(hdc, RGB(255, 255, 255)); 
+            SetBkMode(hdc, TRANSPARENT);
             DeleteObject(hBrush);
 
-            // Set text color to white and background mode to transparent
-            SetTextColor(hdc, RGB(255, 255, 255)); // White text
-            SetBkMode(hdc, TRANSPARENT);
-
-            //CScene& Scene = CScene::GetScene();
-            //auto& SceneEntityList = Scene.GetSceneList();
-            //std::string EntityName = SceneEntityList.at(0).m_GameEntityTag;
-
-            // Define the text to display
             const wchar_t* szText = L"Test text";
 
-            // Get the client rectangle for text positioning
             RECT rect;
             GetClientRect(hwnd, &rect);
-
             const int Padding = 10;
-
 			rect.left += Padding;
-
-            // Draw the text aligned to top-left within the child window
             DrawText(hdc, szText, -1, &rect, DT_SINGLELINE | DT_LEFT | DT_TOP | DT_NOPREFIX);
-
             EndPaint(hwnd, &ps);
+
             return 0;
         }
         case WM_DESTROY:

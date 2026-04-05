@@ -687,9 +687,9 @@ HRESULT CDX11Device::SpawnGizmo(const CGameEntity3D& SelectedEntity)
     GizmoComponent.m_GameEntityTag = "GizmoComponent";
     GeometryFactory.CreatePhysicalMesh(GizmoComponent.PhysicalMesh, EPrimitiveGeometryType::Arrow);
 
-    auto SelectedEntityLocationX = SelectedEntity.GetFloatLocationX();
-    auto SelectedEntityLocationY = SelectedEntity.GetFloatLocationY();
-    auto SelectedEntityLocationZ = SelectedEntity.GetFloatLocationZ();
+    float SelectedEntityLocationX = SelectedEntity.GetFloatLocationX();
+    float SelectedEntityLocationY = SelectedEntity.GetFloatLocationY();
+    float SelectedEntityLocationZ = SelectedEntity.GetFloatLocationZ();
     GizmoComponent.SetLocationF(SelectedEntityLocationX, SelectedEntityLocationY, SelectedEntityLocationZ);
 
     GizmoComponent.SetScale(0.25f, 0.25f, 0.25f);

@@ -15,10 +15,6 @@ void CWorld::Init()
 	TerrainGenerator.GenerateTerrain();
 	CLogger& Logger = CLogger::GetLogger();
     Logger.Log("World.cpp, Init(): Location: ", std::filesystem::current_path());
-
-    //CTimerManager& TimerManager = CTimerManager::GetTimerManager();
-    //TimerManager.SetSingleTimer3<CWorld, void, &CWorld::AddTestEntity>(this, 10.0f);
-    //AddTestEntity();
 }
 
 void CWorld::SetOpenGLDevice(COpenGLDevice* pOpenGLDevice)

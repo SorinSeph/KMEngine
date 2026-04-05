@@ -82,6 +82,11 @@ public:
         return &(m_GraphicsModule.m_Renderer);
     }
 
+    CCoreClock* GetCoreClock()
+    {
+        return &m_CoreClock;
+    }
+
     float GetXRotation()
     {
 		return m_UIModule.m_ViewportWindow.GetXRotation();
@@ -90,58 +95,6 @@ public:
     float GetYRotation()
     {
         return m_UIModule.m_ViewportWindow.GetYRotation();
-    }
-
-    float GetXRotation2()
-    {
-        float XRot{ m_UIModule.m_ViewportWindow.GetXRotation2() };
-        return XRot;
-    }
-
-    float GetYRotation2()
-    {
-        float YRot{ m_UIModule.m_ViewportWindow.GetYRotation2() };
-        return YRot;
-    }
-
-    float* GetXRotation3()
-    {
-        return m_UIModule.m_ViewportWindow.GetXRotation3();
-    }
-
-    float* GetYRotation3()
-    {
-        return m_UIModule.m_ViewportWindow.GetYRotation3();
-    }
-
-    float GetXRotation4()
-    {
-        return m_UIModule.m_ViewportWindow.GetXRotation4();
-    }
-
-    float GetYRotation4()
-    {
-        return m_UIModule.m_ViewportWindow.GetYRotation4();
-    }
-
-    float GetXRotation5()
-    {
-        return *m_RotX2;
-    }
-
-    float GetYRotation5()
-    {
-        return *m_RotY2;
-    }
-
-    float GetXMemberRotation()
-    {
-        return m_UIModule.m_ViewportWindow.GetXMemberRotation();
-    }
-
-    float GetYMemberRotation()
-    {
-        return m_UIModule.m_ViewportWindow.GetYMemberRotation();
     }
 
     float GetEyeX()
@@ -159,16 +112,6 @@ public:
         return m_UIModule.m_ViewportWindow.GetEyeZ();
     }
 
-    float GetRotX()
-    {
-        return m_RotX;
-    }
-    
-    float GetRotY()
-    {
-        return m_RotY;
-    }
-
     void DetectInput()
     {
         m_UIModule.m_ViewportWindow.DetectKeyboardInput();
@@ -178,7 +121,6 @@ private:
     HINSTANCE m_HInstance{ };
     int m_NCmdShow{ };
     CWorld m_World{ };
-    //CRenderer m_Renderer;
 
     float m_RotX;
     float m_RotY;
@@ -188,6 +130,7 @@ private:
 
     CLogger& m_Logger;
 
+    CCoreClock m_CoreClock;
     CUIModule m_UIModule;
     CGraphicsModule m_GraphicsModule;
     CPhysicsModule m_PhysicsModule;

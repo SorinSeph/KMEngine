@@ -158,7 +158,7 @@ void CUIMessageQueue::RayPicking(int MouseX, int MouseY)
 				PreviousX += MouseX;
 				PreviousY += MouseY;
 
-                Logger.Log("ViewportMessage.cpp, SendToUIModule(): pGameEntity3DComponent Z BEFORE lambda: ", pGameEntity3DComponent->GetFloatLocationZ());
+                Logger.Log("ViewportMessage.cpp, SendToUIModule(): pGameEntity3DComponent Z BEFORE lambda: ", pGameEntity3DComponent->GetLocationZ());
 
                 const XMFLOAT3 HardcodedNormal{ 0,0,1 };
 
@@ -193,9 +193,9 @@ void CUIMessageQueue::RayPicking(int MouseX, int MouseY)
 
                     // fetch current 3D pos
                     XMFLOAT3 curPos3D{
-                      pGameEntity3DComponent->GetFloatLocationX(),
-                      pGameEntity3DComponent->GetFloatLocationY(),
-                      pGameEntity3DComponent->GetFloatLocationZ()
+                      pGameEntity3DComponent->GetLocationX(),
+                      pGameEntity3DComponent->GetLocationY(),
+                      pGameEntity3DComponent->GetLocationZ()
                     };
                     XMVECTOR posV = XMLoadFloat3(&curPos3D);
 
