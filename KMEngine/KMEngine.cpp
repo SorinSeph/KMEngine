@@ -77,6 +77,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     pCoreClock->Reset();
 
+    // @Temporary very basic 60 FPS cap
+    const int FRAMES_PER_SECOND = 60;
+    const int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
+    DWORD NextGameTick = GetTickCount();
+    int SleepTime = 0;
+
     MSG Msg = { 0 };
     while (WM_QUIT != Msg.message)
     {
@@ -87,6 +93,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         }
         else
         {
+            // @Temporary very basic 60 FPS cap 
+            NextGameTick += SKIP_TICKS;
+            SleepTime = NextGameTick - GetTickCount();
+            if (SleepTime >= 0) {
+                Sleep(SleepTime);
+            }
+
             KMEngineLoop.Update();
             KMEngineLoop.Render();
         }
