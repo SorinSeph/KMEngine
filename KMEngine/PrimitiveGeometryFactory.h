@@ -12,7 +12,8 @@ enum class EPrimitiveGeometryType
     Pyramid,
     CubeTest,
     Cylinder,
-    Arrow
+    Arrow,
+    ArrowOpenGL
 };
 
 class CPrimitiveGeometryFactory
@@ -33,4 +34,9 @@ public:
     CGameEntity3D CreateLinetrace(float X_Origin, float Y_Origin, float Z_Origin, float X_Destination, float Y_Destination, float Z_Destination);
 
     std::vector<WORD> GetIndicesList();
+
+    // @Temporary, just for testing creation of OpenGL objects
+    std::vector<glm::vec3> GetArrowVertices();
+
+    std::vector<uint32_t> GetArrowIndices();
 };

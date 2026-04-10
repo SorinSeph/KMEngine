@@ -352,6 +352,195 @@ void CEntityBuilder::SetOpenGLDevice(COpenGLDevice* pOpenGLDevice)
 	m_pOpenGLDevice = pOpenGLDevice;
 }
 
+// ATM test by creating a simple square
+// ATM test by creating a simple square
+void CEntityBuilder::CreateGizmo()
+{
+	CPrimitiveGeometryFactory PrimitiveGeometryFactory;
+	std::vector<glm::vec3> ArrowVertices = PrimitiveGeometryFactory.GetArrowVertices(); // 50 elements
+	std::vector<uint32_t> ArrowIndices = PrimitiveGeometryFactory.GetArrowIndices();
+
+	CScene& Scene = CScene::GetScene();
+	CGameEntity3D Gizmo{};
+	Gizmo.m_GameEntityTag = "Gizmo";
+	CGameEntity3DComponent GizmoComponentX;
+	CGameEntity3DComponent GizmoComponentY;
+	CGameEntity3DComponent GizmoComponentZ;
+
+	GizmoComponentX.m_GameEntityTag = "GizmoComponentX";
+	GizmoComponentY.m_GameEntityTag = "GizmoComponentY";
+	GizmoComponentZ.m_GameEntityTag = "GizmoComponentZ";
+
+	uint32_t& ShaderProgram{ GizmoComponentX.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO_X{ GizmoComponentX.m_OpenGLResource.m_VAO };
+	uint32_t& VBO_X{ GizmoComponentX.m_OpenGLResource.m_VBO };
+	uint32_t& EBO_X{ GizmoComponentX.m_OpenGLResource.m_EBO };
+
+	uint32_t& ShaderProgramY{ GizmoComponentY.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO_Y{ GizmoComponentY.m_OpenGLResource.m_VAO };
+	uint32_t& VBO_Y{ GizmoComponentY.m_OpenGLResource.m_VBO };
+	uint32_t& EBO_Y{ GizmoComponentY.m_OpenGLResource.m_EBO };
+
+	uint32_t& ShaderProgramZ{ GizmoComponentZ.m_OpenGLResource.m_ShaderProgram };
+	uint32_t& VAO_Z{ GizmoComponentZ.m_OpenGLResource.m_VAO };
+	uint32_t& VBO_Z{ GizmoComponentZ.m_OpenGLResource.m_VBO };
+	uint32_t& EBO_Z{ GizmoComponentZ.m_OpenGLResource.m_EBO };
+
+	CShaderGenerator ShaderGenerator;
+	ShaderGenerator.GenerateHoverableSolidColorShaders(&GizmoComponentX.m_OpenGLResource);
+	ShaderGenerator.GenerateHoverableSolidColorShaders(&GizmoComponentY.m_OpenGLResource);
+	ShaderGenerator.GenerateHoverableSolidColorShaders(&GizmoComponentZ.m_OpenGLResource);
+
+	float HalfWidth = 0.5f;
+	float HalfHeight = 0.5f;
+	float HalfLength = 0.2f;
+	glm::vec3 LocalOriginX{ -1.f, 0.f, -4.5f };
+	glm::vec3 LocalOriginY{ -2.f, 0.f, -4.5f };
+	glm::vec3 LocalOriginZ{ -1.5f, 1.f, -4.5f };
+
+	// Build interleaved vertex data: position (vec3) + color (vec3)
+	std::vector<float> Vertices;
+	Vertices.reserve(ArrowVertices.size() * 6);
+	glm::vec3 ColorVector{1.0f, 0.0f, 0.0f};
+	auto& ColorVectorRef = ColorVector;
+
+	for (size_t i = 0; i < ArrowVertices.size(); i++)
+	{
+		Vertices.push_back(ArrowVertices[i].x);
+		Vertices.push_back(ArrowVertices[i].y);
+		Vertices.push_back(ArrowVertices[i].z);
+
+		Vertices.push_back(ColorVectorRef.x);
+		Vertices.push_back(ColorVectorRef.y);
+		Vertices.push_back(ColorVectorRef.z);
+	}
+
+	GizmoComponentX.m_CollisionComponent.m_Center = LocalOriginX;
+	GizmoComponentX.m_CollisionComponent.m_Extents = glm::vec3{ HalfWidth, HalfHeight, HalfLength };
+
+	GizmoComponentX.SetLocationF(LocalOriginX.x, LocalOriginX.y, LocalOriginX.z);
+	GizmoComponentX.SetScale(0.005f, 0.005f, 0.005f);
+	GizmoComponentY.SetLocationF(LocalOriginY.x, LocalOriginY.y, LocalOriginY.z);
+	GizmoComponentZ.SetLocationF(LocalOriginZ.x, LocalOriginZ.y, LocalOriginZ.z);
+
+	glm::quat RotationZ{ 1.0f, 0.0f, 0.0f, 0.0f };
+	RotationZ = glm::rotate(RotationZ, XMConvertToRadians(90), glm::vec3(0, 1, 0));
+	GizmoComponentZ.SetRotationQuat(RotationZ);
+	GizmoComponentZ.SetRotation(GizmoComponentZ.GetRotationX(), GizmoComponentZ.GetRotationY(), 90);
+
+	glGenVertexArrays(1, &VAO_X);
+	glGenBuffers(1, &VBO_X);
+	glGenBuffers(1, &EBO_X);
+	glBindVertexArray(VAO_X);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_X);
+	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(float), Vertices.data(), GL_STATIC_DRAW);
+
+	// position attribute (location 0, vec3)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// color attribute (location 1, vec3)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_X);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ArrowIndices.size() * sizeof(uint32_t), ArrowIndices.data(), GL_STATIC_DRAW);
+
+	glUseProgram(ShaderProgram);
+	if (m_pOpenGLDevice)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
+	}
+
+	// Y arrow
+
+	for (int It = 3; It + 1 < Vertices.size(); It += 6)
+	{
+		Vertices.at(It) = 0.0f;
+		Vertices.at(It + 1) = 1.0f;
+	}
+
+	glGenVertexArrays(1, &VAO_Y);
+	glGenBuffers(1, &VBO_Y);
+	glGenBuffers(1, &EBO_Y);
+	glBindVertexArray(VAO_Y);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_Y);
+	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(float), Vertices.data(), GL_STATIC_DRAW);
+
+	// position attribute (location 0, vec3)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// color attribute (location 1, vec3)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_Y);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ArrowIndices.size() * sizeof(uint32_t), ArrowIndices.data(), GL_STATIC_DRAW);
+
+	glUseProgram(ShaderProgramY);
+	if (m_pOpenGLDevice)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(ShaderProgramY, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
+	}
+
+	// Z Arrow buffers
+
+	for (int It = 4; It + 1 < Vertices.size(); It += 6)
+	{
+		Vertices.at(It) = 0.0f;
+		Vertices.at(It + 1) = 1.0f;
+	}
+
+	glGenVertexArrays(1, &VAO_Z);
+	glGenBuffers(1, &VBO_Z);
+	glGenBuffers(1, &EBO_Z);
+	glBindVertexArray(VAO_Z);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_Z);
+	glBufferData(GL_ARRAY_BUFFER, Vertices.size() * sizeof(float), Vertices.data(), GL_STATIC_DRAW);
+
+	// position attribute (location 0, vec3)
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// color attribute (location 1, vec3)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_Z);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ArrowIndices.size() * sizeof(uint32_t), ArrowIndices.data(), GL_STATIC_DRAW);
+
+	glUseProgram(ShaderProgramZ);
+	if (m_pOpenGLDevice)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(ShaderProgramY, std::string{ "projection" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ProjectionMatrix[0][0]);
+	}
+
+	GizmoComponentX.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+	GizmoComponentY.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+	GizmoComponentZ.m_OpenGLResource.m_DrawMode = GL_TRIANGLES;
+
+	GizmoComponentX.m_OpenGLResource.m_Indices = ArrowIndices;
+	GizmoComponentY.m_OpenGLResource.m_Indices = ArrowIndices;
+	GizmoComponentZ.m_OpenGLResource.m_Indices = ArrowIndices;
+
+	CSceneGraphNode<CGameEntity3DComponent>* GizmoComponentNode = new CSceneGraphNode<CGameEntity3DComponent>();
+	CSceneGraphNode<CGameEntity3DComponent>* GizmoComponentNodeY = new CSceneGraphNode<CGameEntity3DComponent>();
+	CSceneGraphNode<CGameEntity3DComponent>* GizmoComponentNodeZ = new CSceneGraphNode<CGameEntity3DComponent>();
+
+	GizmoComponentNode->m_tType = GizmoComponentX;
+	GizmoComponentNodeY->m_tType = GizmoComponentY;
+	GizmoComponentNodeZ->m_tType = GizmoComponentZ;
+	Gizmo.m_SceneGraph.m_pRootNode = GizmoComponentNode;
+	Gizmo.m_SceneGraph.AddChild(Gizmo.m_SceneGraph.m_pRootNode, GizmoComponentNodeY);
+	Gizmo.m_SceneGraph.AddChild(Gizmo.m_SceneGraph.m_pRootNode, GizmoComponentNodeZ);
+
+	Scene.AddEntityToScene(Gizmo);
+}
+
 void CEntityBuilder::CreateLight()
 {
 	CScene& Scene = CScene::GetScene();
@@ -372,7 +561,6 @@ void CEntityBuilder::CreateLight()
 	float HalfHeight = 0.5f;
 	float HalfLength = 0.2f;
 	glm::vec3 LocalOrigin{ 1.f, 0.f, -4.5f };
-
 
 	float Vertices[] = {
 		// positions						// texture coords

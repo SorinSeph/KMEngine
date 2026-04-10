@@ -211,6 +211,8 @@
     <None Include="Resources\Assets\3D_Objects\GLTF\rectangle_textured_skeletal_anim2.gltf" />
     <None Include="Resources\Shaders\anim.ps" />
     <None Include="Resources\Shaders\anim.vs" />
+    <None Include="Resources\Shaders\HoverableSolidColorGLSL.fs" />
+    <None Include="Resources\Shaders\HoverableSolidColorGLSL.vs" />
     <None Include="solid_color.ps" />
     <None Include="solid_color.vs" />
     <None Include="Solid_GLSL.fs" />

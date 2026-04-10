@@ -22,6 +22,8 @@ public:
 
 	void CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices);
 
+	void CreateGizmo();
+	
 	void CreateLight();
 
 	void SetGraphicsModule(CGraphicsModule* GraphicsModule);

@@ -1,11 +1,21 @@
 #include "GameEntity3D.h"
 
-void CGameEntity3D::SetLocationF(float InX, float InY, float InZ)
+void CGameEntity3D::SetLocationF(float X, float Y, float Z)
 {
-	m_LocationX = InX;
-	m_LocationY = InY;
-	m_LocationZ = InZ;
-	m_LocationMatrix = XMMatrixTranslation(InX, InY, InZ);
+	m_LocationX = X;
+	m_LocationY = Y;
+	m_LocationZ = Z;
+	m_LocationMatrix = XMMatrixTranslation(X, Y, Z);
+}
+
+void CGameEntity3D::SetRotationQuat(glm::quat Quat)
+{
+    m_RotationQuat = Quat;
+}
+
+void CGameEntity3D::SetRotationQuat(float Pitch, float Yaw, float Roll, float W)
+{
+    m_RotationQuat = glm::quat{W, Pitch, Roll, Yaw};
 }
 
 XMMATRIX CGameEntity3D::GetLocation()
@@ -68,20 +78,46 @@ XMMATRIX CGameEntity3D::GetRotation()
 	return m_RotationMatrix;
 }
 
+float CGameEntity3D::GetScaleX()
+{
+    return m_ScaleX;
+}
+
+float CGameEntity3D::GetScaleY()
+{
+    return m_ScaleY;
+}
+
+float CGameEntity3D::GetScaleZ()
+{
+    return m_ScaleZ;
+}
+
+glm::quat CGameEntity3D::GetRotationQuat()
+{
+    return m_RotationQuat;
+}
+
 XMMATRIX CGameEntity3D::GetScale()
 {
 	return m_ScaleMatrix;
 }
 
-void CGameEntity3D::SetRotation(float InPitch, float InYaw, float InRoll)
+void CGameEntity3D::SetRotation(float Pitch, float Yaw, float Roll)
 {
-	m_RotationMatrix = XMMatrixRotationRollPitchYaw(InPitch, InYaw, InRoll);
+    m_RotationX = Pitch;
+    m_RotationY = Yaw;
+    m_RotationZ = Roll;
+	m_RotationMatrix = XMMatrixRotationRollPitchYaw(Pitch, Yaw, Roll);
 	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 
-void CGameEntity3D::SetScale(float InX, float InY, float InZ)
+void CGameEntity3D::SetScale(float X, float Y, float Z)
 {
-	m_ScaleMatrix = XMMatrixScaling(InX, InY, InZ);
+	m_ScaleMatrix = XMMatrixScaling(X, Y, Z);
+    m_ScaleX = X;
+    m_ScaleY = Y;
+    m_ScaleZ = Z;
 	//m_ConstantBuffer.mWorld = TransformationMatrix();
 }
 

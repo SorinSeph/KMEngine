@@ -5,6 +5,7 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <directxcolors.h>
 #include "GameEntity.h"
 #include "DXResourcesConfig.h"
@@ -102,11 +103,17 @@ public:
 		, m_DXResConfig{ }
 		, m_LocationX{ 0.0f }
 		, m_SceneGraph{ }
-	{ }
+	{
+		m_ScaleX = 1.f;
+		m_ScaleY = 1.f;
+		m_ScaleZ = 1.f;
+
+		m_RotationQuat = glm::quat{ 1.0f, 1.0f, 1.0f, 1.0f };
+	}
 
 	EGameEntityType m_GameEntityType;
 
-	void SetLocationF(float InX, float InY, float InZ);
+	void SetLocationF(float X, float Y, float Z);
 
 	XMMATRIX GetLocation();
 
@@ -126,6 +133,8 @@ public:
 
 	XMMATRIX GetRotation();
 
+	glm::quat GetRotationQuat();
+
 	float GetRotationX();
 
 	float GetRotationY();
@@ -134,9 +143,19 @@ public:
 
 	XMMATRIX GetScale();
 
-	void SetRotation(float InPitch, float InYaw, float InRoll);
+	float GetScaleX();
 
-	void SetScale(float InX, float InY, float InZ);
+	float GetScaleY();
+
+	float GetScaleZ();
+
+	void SetRotation(float Pitch, float Yaw, float Roll);
+
+	void SetRotationQuat(float Pitch, float Yaw, float Roll, float W);
+
+	void SetRotationQuat(glm::quat Quat);
+
+	void SetScale(float X, float Y, float Z);
 
 	void SetUID(std::string uid);
 
@@ -169,6 +188,7 @@ public:
 protected:
 	XMVECTOR m_LocationVector;
 	XMMATRIX m_RotationMatrix;
+	glm::quat m_RotationQuat{};
 	XMMATRIX m_ScaleMatrix;
 
 	float m_RotationX;

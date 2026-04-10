@@ -41,6 +41,11 @@ public:
 		Node->ChildNode.push_back(NewNode);
 	}
 
+	void AddChild(CSceneGraphNode<T>* ParentNode, CSceneGraphNode<T>* NewNode)
+	{
+		ParentNode->ChildNode.push_back(NewNode);
+	}
+
 	void Loop(CSceneGraphNode<T>* StartNode, std::vector<CSceneGraphNode<T>*> TempNodeVector)
 	{
 		for (auto NodeIt : StartNode->ChildNode)

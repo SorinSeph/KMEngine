@@ -71,6 +71,7 @@ public:
 		{
 			std::vector<CSceneGraphNode<CGameEntity3DComponent>*> EntityComponentVector;
 			EntityComponentVector.push_back(SceneEntityIt.m_SceneGraph.m_pRootNode);
+			SceneEntityIt.m_SceneGraph.Traverse(SceneEntityIt.m_SceneGraph.m_pRootNode, EntityComponentVector);
 			for (auto& EntityComponent : EntityComponentVector)
 			{
 				glActiveTexture(GL_TEXTURE0);
@@ -87,16 +88,19 @@ public:
 				m_ViewportCamera.m_CameraFront = glm::normalize(glm::vec3(front4));
 
 				COpenGLDevice::g_ViewMatrix = glm::lookAt(m_ViewportCamera.m_CameraLocation, m_ViewportCamera.m_CameraLocation + m_ViewportCamera.m_CameraFront, m_ViewportCamera.m_CameraUp);
-				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{"view"}.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ViewMatrix[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "view" }.c_str()), 1, GL_FALSE, &COpenGLDevice::g_ViewMatrix[0][0]);
 
 				//glm::mat4 modelMatrix = glm::mat4(1.0f);
 				//modelMatrix = glm::translate(modelMatrix, glm::vec3(m_TestLocationX, 0.0f, -4.0f));
 				//m_TestLocationX -= 0.001f;
 
-				glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
+				glm::mat4 ModelMatrix{ 1.f };
+				ModelMatrix = glm::translate(ModelMatrix, glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
+				ModelMatrix = glm::rotate(ModelMatrix, EntityComponent->m_tType.GetRotationZ(), glm::vec3(0, 1, 0));
+				ModelMatrix = glm::scale(ModelMatrix, glm::vec3(EntityComponent->m_tType.GetScaleX(), EntityComponent->m_tType.GetScaleY(), EntityComponent->m_tType.GetScaleZ()));
 				//modelMatrix = glm::translate(modelMatrix, glm::vec3 (EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ()));
 
-				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &modelMatrix[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &ModelMatrix[0][0]);
 
 				glm::vec3 LightPos = glm::vec3(0.0f, 1.0f, -3.0f);
 				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.position"), 1, &LightPos[0]);
@@ -106,8 +110,8 @@ public:
 				lightColor.x = 1.0f;
 				lightColor.y = 1.0f;
 				lightColor.z = 1.0f;
-				glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); 
-				glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); 
+				glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+				glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
 				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.diffuse"), 1, &diffuseColor[0]);
 				glUniform3fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.ambient"), 1, &ambientColor[0]);
 				glUniform3f(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, "light.specular"), 1.0f, 1.0f, 1.0f);
@@ -144,11 +148,29 @@ public:
 					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
 					auto breakpoint = 1;
 				}
+				else if (EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentX" || EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentY" || EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentZ")
+				{
+					// Compute distance from camera to gizmo
+					glm::vec3 GizmoPos = glm::vec3(EntityComponent->m_tType.GetLocationX(), EntityComponent->m_tType.GetLocationY(), EntityComponent->m_tType.GetLocationZ());
+					float Distance = glm::length(m_ViewportCamera.m_CameraLocation - GizmoPos);
+
+					// Base scale factor — adjust this to control the desired screen size
+					float BaseScale = 0.005f;
+					float ConstantScale = BaseScale * Distance;
+
+					glm::mat4 GizmoModelMatrix{ 1.f };
+					GizmoModelMatrix = glm::translate(GizmoModelMatrix, GizmoPos);
+					GizmoModelMatrix = glm::rotate(GizmoModelMatrix, glm::radians(EntityComponent->m_tType.GetRotationZ()), glm::vec3(0.0f, 1.0f, 0.0f));
+					GizmoModelMatrix = glm::scale(GizmoModelMatrix, glm::vec3(ConstantScale));
+					glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &GizmoModelMatrix[0][0]);
+
+  					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, static_cast<GLsizei>(EntityComponent->m_tType.m_OpenGLResource.m_Indices.size()), GL_UNSIGNED_INT, nullptr);
+				}
 				else
 				{
 					glEnable(GL_BLEND);
 					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
 					glDisable(GL_BLEND);
 				}
 				auto breakpoint = 1;

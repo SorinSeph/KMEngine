@@ -1,1 +1,14 @@
-﻿  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+﻿  KMEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreEngine.h(54,126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreEngine.h(54,100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'KMEngine.cpp')
+  
+  Renderer.cpp
+C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Renderer\Renderer.cpp(96,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
