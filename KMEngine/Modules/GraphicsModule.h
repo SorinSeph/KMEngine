@@ -17,8 +17,6 @@ public:
 		m_EntityBuilder.SetGraphicsModule(this);
 	};
 
-
-
 	void SetRenderer()
 	{
 		m_Renderer.GetDX11Device()->SetRenderer(&m_Renderer);
@@ -35,9 +33,9 @@ public:
 		m_Renderer.GetDX11Device()->SpawnGizmo(SelectedEntity);
 	}
 
-	void GenerateTestPlane()
+	void SpawnGizmoOpenGL(const CGameEntity3D& SelectedEntity)
 	{
-
+		m_EntityBuilder.CreateGizmoOpenGL(glm::vec3{ SelectedEntity.GetFloatLocationX(), SelectedEntity.GetFloatLocationY(), SelectedEntity.GetFloatLocationZ() });
 	}
 
 	CRenderer m_Renderer;

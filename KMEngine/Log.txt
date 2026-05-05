@@ -44,466 +44,307 @@ RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
 g_RotX = 10
 g_RotY =-0.15
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10
+g_RotX = 10.3
 g_RotY =-0.3
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.85
-g_RotY =-0.45
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.85
+g_RotX = 10.45
 g_RotY =-0.6
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.85
+g_RotX = 10.75
 g_RotY =-0.75
 
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
-g_RotY =-0.75
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
+g_RotX = 10.9
 g_RotY =-0.9
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
-g_RotY =-1.05
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
+g_RotX = 11.2
 g_RotY =-1.2
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
+g_RotX = 11.2
+g_RotY =-1.35
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 11.35
 g_RotY =-1.35
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
+g_RotX = 11.5
+g_RotY =-1.35
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 11.5
 g_RotY =-1.5
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.7
+g_RotX = 11.65
 g_RotY =-1.65
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
-g_RotY =-1.65
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
-g_RotY =-1.8
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
+g_RotX = 11.95
 g_RotY =-1.95
 
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
+g_RotX = 12.1
 g_RotY =-2.1
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
-g_RotY =-2.25
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.55
+g_RotX = 12.4
 g_RotY =-2.4
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.4
-g_RotY =-2.55
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.4
-g_RotY =-2.7
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.4
+g_RotX = 12.7
 g_RotY =-2.85
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.4
-g_RotY =-3
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.4
+g_RotX = 13
 g_RotY =-3.15
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
-g_RotY =-3.15
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
+g_RotX = 13.3
 g_RotY =-3.3
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
-g_RotY =-3.45
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
+g_RotX = 13.6
 g_RotY =-3.6
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
-g_RotY =-3.75
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
+g_RotX = 13.9
 g_RotY =-3.9
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.25
-g_RotY =-4.05
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
+g_RotX = 14.2
 g_RotY =-4.2
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
+g_RotX = 14.5
 g_RotY =-4.35
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
-g_RotY =-4.5
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
+g_RotX = 14.8
 g_RotY =-4.65
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
+g_RotX = 15.1
 g_RotY =-4.8
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 9.1
+g_RotX = 15.4
 g_RotY =-5.1
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
+g_RotX = 15.55
 g_RotY =-5.25
 
 RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 15.85
+g_RotY =-5.25
+
 RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
+g_RotX = 16.15
+g_RotY =-5.4
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 16.3
 g_RotY =-5.4
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
+g_RotX = 16.45
 g_RotY =-5.55
 
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
-g_RotY =-5.7
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
-g_RotY =-5.85
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.95
+g_RotX = 16.6
 g_RotY =-6
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.8
-g_RotY =-6.15
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.8
-g_RotY =-6.3
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.8
+g_RotX = 16.75
 g_RotY =-6.45
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.8
-g_RotY =-6.6
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.8
-g_RotY =-6.75
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.65
-g_RotY =-6.75
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.65
+g_RotX = 17.05
 g_RotY =-6.9
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.65
-g_RotY =-7.05
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.65
+g_RotX = 17.2
 g_RotY =-7.2
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.65
-g_RotY =-7.35
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
-g_RotY =-7.35
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
-g_RotY =-7.5
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
-g_RotY =-7.65
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
+g_RotX = 17.5
 g_RotY =-7.8
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
-g_RotY =-7.95
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.5
-g_RotY =-8.1
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.35
-g_RotY =-8.1
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.35
-g_RotY =-8.25
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.35
+g_RotX = 17.65
 g_RotY =-8.4
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.35
-g_RotY =-8.55
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.35
-g_RotY =-8.7
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
-g_RotY =-8.7
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
-g_RotY =-8.85
-
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
+g_RotX = 17.8
 g_RotY =-9
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
-g_RotY =-9.15
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
-g_RotY =-9.3
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.2
-g_RotY =-9.45
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.05
+g_RotX = 18.1
 g_RotY =-9.6
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.05
-g_RotY =-9.75
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.05
+g_RotX = 18.25
 g_RotY =-9.9
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 8.05
-g_RotY =-10.05
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.9
+g_RotX = 18.4
 g_RotY =-10.2
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.9
-g_RotY =-10.35
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.9
+g_RotX = 18.4
 g_RotY =-10.5
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.9
-g_RotY =-10.65
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
-g_RotY =-10.65
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
+g_RotX = 18.55
 g_RotY =-10.8
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
-g_RotY =-10.95
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
+g_RotX = 18.7
 g_RotY =-11.1
 
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 18.85
+g_RotY =-11.4
+
 RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
-g_RotY =-11.25
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.75
-g_RotY =-11.4
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
-g_RotY =-11.4
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
+g_RotX = 19
 g_RotY =-11.55
 
-RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
+g_RotX = 19
 g_RotY =-11.7
 
+RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
+g_RotX = 19.15
 g_RotY =-11.85
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
+g_RotX = 19.15
 g_RotY =-12
 
 RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.6
-g_RotY =-12.15
-
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
+g_RotX = 19.3
 g_RotY =-12.15
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
+g_RotX = 19.45
 g_RotY =-12.3
 
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
-g_RotY =-12.45
-
-RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
-g_RotY =-12.6
-
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
-g_RotY =-12.75
-
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.45
+g_RotX = 19.6
 g_RotY =-12.6
 
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.3
-g_RotY =-12.6
-
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.3
-g_RotY =-12.75
-
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.3
+g_RotX = 19.75
 g_RotY =-12.9
 
 RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 19.9
+g_RotY =-13.05
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.05
+g_RotY =-13.2
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.05
+g_RotY =-13.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.2
+g_RotY =-13.8
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.35
+g_RotY =-13.95
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.5
+g_RotY =-14.25
+
+RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.65
+g_RotY =-14.4
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.65
+g_RotY =-14.55
+
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.65
+g_RotY =-14.7
+
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.8
+g_RotY =-14.7
+
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.8
+g_RotY =-14.85
+
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 7.3
-g_RotY =-12.9
+g_RotX = 20.8
+g_RotY =-15
 
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
@@ -511,180 +352,10 @@ RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
+ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
+g_RotX = 20.8
+g_RotY =-15
+
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component

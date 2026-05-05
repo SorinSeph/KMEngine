@@ -247,25 +247,6 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
     // 3) Raycast destination along forward by 50 units from the origin
     glm::vec3 rayDest = rayOrigin + rayDirection * 50.0f;
 
-
-
- //   // convert to clip space
- //   glm::vec4 ClipCoords{ MouseX, MouseY, -1, 1 };
-
- //   // convert to eye space
- //   
- //   glm::mat4 InvertedProjectionMatrix{ glm::inverse(COpenGLDevice::g_ProjectionMatrix) };
-	//glm::vec4 EyeCoordsTemp = InvertedProjectionMatrix * ClipCoords;
- //   glm::vec4 EyeCoords{ EyeCoordsTemp.x, EyeCoordsTemp.y, -1, 1 };
-
-	//// convert to world space
-	//glm::mat4 InvertedViewMatrix{ COpenGLDevice::g_ViewMatrix };
-	//glm::vec4 RaycastWorld = InvertedProjectionMatrix * EyeCoords;
-	//glm::vec3 RayDirection{ RaycastWorld.x, RaycastWorld.y, RaycastWorld.z };
- //   RayDirection = glm::normalize(RayDirection);
-	//glm::vec3 RayDestination = RayDirection * 100.f;
- //   glm::vec3 RayOrigin{ 0.f, 0.f, 0.f };
-
     CUIModule* pUIModule = static_cast<CUIModule*>(m_pUIModule->m_pMediator->m_ModuleArray[0]);
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
     CPhysicsModule* pPhysicsModule = static_cast<CPhysicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[2]);
@@ -304,6 +285,8 @@ void CUIMessageQueue::RaycastOpenGL(int MouseX, int MouseY)
                 if (pUIModule)
                 {
                     pUIModule->UpdateSelectedEntityString(EntityComponent->m_tType.m_GameEntityTag);
+                    glm::vec3 LocationVector{ EntityComponent->m_tType.m_LocationX, EntityComponent->m_tType.m_LocationY, EntityComponent->m_tType.m_LocationZ };
+                    pGraphicsModule->SpawnGizmoOpenGL(EntityComponent->m_tType);
                 }
 		        //MessageBox(nullptr, L"Raycast hit!", L"ViewportMessage", MB_OK);
                 break;

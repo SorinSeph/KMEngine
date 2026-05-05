@@ -22,7 +22,7 @@ public:
 
 	void CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices);
 
-	void CreateGizmo();
+	void CreateGizmoOpenGL(glm::vec3 Location);
 	
 	void CreateLight();
 

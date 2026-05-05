@@ -63,7 +63,7 @@ public:
 
 		m_GraphicsModule.m_EntityBuilder.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
         m_GraphicsModule.m_EntityBuilder.CreateLight();
-        m_GraphicsModule.m_EntityBuilder.CreateGizmo();
+        //m_GraphicsModule.m_EntityBuilder.CreateGizmoOpenGL(glm::vec3{ 0, 0, 0 });
 
         return S_OK;
     }

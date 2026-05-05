@@ -352,9 +352,7 @@ void CEntityBuilder::SetOpenGLDevice(COpenGLDevice* pOpenGLDevice)
 	m_pOpenGLDevice = pOpenGLDevice;
 }
 
-// ATM test by creating a simple square
-// ATM test by creating a simple square
-void CEntityBuilder::CreateGizmo()
+void CEntityBuilder::CreateGizmoOpenGL(glm::vec3 Location)
 {
 	CPrimitiveGeometryFactory PrimitiveGeometryFactory;
 	std::vector<glm::vec3> ArrowVertices = PrimitiveGeometryFactory.GetArrowVertices(); // 50 elements
@@ -394,9 +392,9 @@ void CEntityBuilder::CreateGizmo()
 	float HalfWidth = 0.5f;
 	float HalfHeight = 0.5f;
 	float HalfLength = 0.2f;
-	glm::vec3 LocalOriginX{ -1.f, 0.f, -4.5f };
-	glm::vec3 LocalOriginY{ -2.f, 0.f, -4.5f };
-	glm::vec3 LocalOriginZ{ -1.5f, 1.f, -4.5f };
+	glm::vec3 LocalOriginX{ Location.x + 0.005f, Location.y, Location.z };
+	glm::vec3 LocalOriginY{ Location.x, Location.y + 0.005f, Location.z };
+	glm::vec3 LocalOriginZ{ Location.x, Location.y, Location.z - 0.005f };
 
 	// Build interleaved vertex data: position (vec3) + color (vec3)
 	std::vector<float> Vertices;
@@ -419,14 +417,14 @@ void CEntityBuilder::CreateGizmo()
 	GizmoComponentX.m_CollisionComponent.m_Extents = glm::vec3{ HalfWidth, HalfHeight, HalfLength };
 
 	GizmoComponentX.SetLocationF(LocalOriginX.x, LocalOriginX.y, LocalOriginX.z);
-	GizmoComponentX.SetScale(0.005f, 0.005f, 0.005f);
 	GizmoComponentY.SetLocationF(LocalOriginY.x, LocalOriginY.y, LocalOriginY.z);
 	GizmoComponentZ.SetLocationF(LocalOriginZ.x, LocalOriginZ.y, LocalOriginZ.z);
+	GizmoComponentX.SetScale(0.005f, 0.005f, 0.005f);
 
-	glm::quat RotationZ{ 1.0f, 0.0f, 0.0f, 0.0f };
-	RotationZ = glm::rotate(RotationZ, XMConvertToRadians(90), glm::vec3(0, 1, 0));
-	GizmoComponentZ.SetRotationQuat(RotationZ);
-	GizmoComponentZ.SetRotation(GizmoComponentZ.GetRotationX(), GizmoComponentZ.GetRotationY(), 90);
+	//GizmoComponentX.SetRotation(GizmoComponentX.GetRotationX(), GizmoComponentX.GetRotationY(), 90);
+	GizmoComponentX.SetRotation(0, 0, 90);
+	GizmoComponentY.SetRotation(0, 0, 180);
+	GizmoComponentZ.SetRotation(0, -90, 0);
 
 	glGenVertexArrays(1, &VAO_X);
 	glGenBuffers(1, &VBO_X);

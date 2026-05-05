@@ -160,7 +160,9 @@ public:
 
 					glm::mat4 GizmoModelMatrix{ 1.f };
 					GizmoModelMatrix = glm::translate(GizmoModelMatrix, GizmoPos);
+					GizmoModelMatrix = glm::rotate(GizmoModelMatrix, glm::radians(EntityComponent->m_tType.GetRotationX()), glm::vec3(1.0f, 0.0f, 0.0f));
 					GizmoModelMatrix = glm::rotate(GizmoModelMatrix, glm::radians(EntityComponent->m_tType.GetRotationZ()), glm::vec3(0.0f, 1.0f, 0.0f));
+					GizmoModelMatrix = glm::rotate(GizmoModelMatrix, glm::radians(EntityComponent->m_tType.GetRotationY()), glm::vec3(1.0f, 0.0f, 0.0f));
 					GizmoModelMatrix = glm::scale(GizmoModelMatrix, glm::vec3(ConstantScale));
 					glUniformMatrix4fv(glGetUniformLocation(EntityComponent->m_tType.m_OpenGLResource.m_ShaderProgram, std::string{ "model" }.c_str()), 1, GL_FALSE, &GizmoModelMatrix[0][0]);
 

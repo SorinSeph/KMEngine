@@ -968,6 +968,8 @@ CGameEntity3D CPrimitiveGeometryFactory::CreateLinetrace(float X_Origin, float Y
     return LineEntity;
 }
 
+
+// @Temporary: this is currently used to create the arrow for the gizmo, to be moved into the builder's create function
 std::vector<glm::vec3> CPrimitiveGeometryFactory::GetArrowVertices()
 {
     std::vector<glm::vec3> VerticesList;
@@ -976,8 +978,8 @@ std::vector<glm::vec3> CPrimitiveGeometryFactory::GetArrowVertices()
     VerticesList.push_back(glm::vec3{ 0.0f, 0.0f, 0.0f });
 
     const float Increment = 22.5f;
-    const float BodyLength = 3.0f;
-    const float TipLength = 2.0f;
+    const float BodyLength = 10.0f;
+    const float TipLength = 5.0f;
     const double ErrorTolerance = 1e-6;
 
     // Vertices 1–16: circle base of cylinder
@@ -1026,8 +1028,8 @@ std::vector<glm::vec3> CPrimitiveGeometryFactory::GetArrowVertices()
     for (int i = 17; i <= 32; i++)
     {
         glm::vec3 ConeBaseVertex = VerticesList[i];
-        ConeBaseVertex.x *= 1.5f;
-        ConeBaseVertex.y *= 1.5f;
+        ConeBaseVertex.x *= 2.5f;
+        ConeBaseVertex.y *= 2.5f;
         VerticesList.push_back(ConeBaseVertex);
     }
 

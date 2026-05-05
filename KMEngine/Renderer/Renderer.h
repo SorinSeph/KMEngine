@@ -63,6 +63,8 @@ public:
 
     void AddGizmo();
 
+    void AddGizmoOpenGL();
+
     void Render2(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);
 
     void Render(float RotX, float RotY, float EyeX, float EyeY, float EyeZ);

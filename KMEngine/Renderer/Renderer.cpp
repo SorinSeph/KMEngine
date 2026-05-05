@@ -239,6 +239,11 @@ void CRenderer::AddGizmo()
     m_DX11Device.AddGizmo();
 }
 
+void CRenderer::AddGizmoOpenGL()
+{
+
+}
+
 void CRenderer::CleanupRenderer()
 {
     m_DX11Device.CleanupDX11Device();

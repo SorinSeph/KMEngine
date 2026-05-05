@@ -1,6 +1,8 @@
 #include "UIModule.h"
 #include "../Scene.h"
 #include "../resource.h"
+#include <CommCtrl.h>
+#pragma comment(lib, "comctl32.lib")
 
 HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
 {
@@ -99,6 +101,28 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         NULL
     );
 
+    HWND hTabControl = CreateWindowEx(
+        0,
+        WC_TABCONTROL,
+        NULL,
+        WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS,
+        0, 0, 0, 0,  // Will be resized in WM_SIZE
+        LeftToolbarHwnd,
+        (HMENU)100,  // Tab control ID
+        (HINSTANCE)GetWindowLongPtr(LeftToolbarHwnd, GWLP_HINSTANCE),
+        NULL
+    );
+
+    // Add tabs
+    TCITEM tie = {};
+    tie.mask = TCIF_TEXT;
+
+    tie.pszText = (LPWSTR)L"Tab 1";
+    TabCtrl_InsertItem(hTabControl, 0, &tie);
+
+    tie.pszText = (LPWSTR)L"Tab 2";
+    TabCtrl_InsertItem(hTabControl, 1, &tie);
+
     // @Temporary use this button to import the GLTF file
     HWND ImportButtonHWND = CreateWindow(
         L"BUTTON",  
@@ -137,6 +161,11 @@ HRESULT CUIModule::Initialize(HINSTANCE hInstance, int nCmdShow)
         MessageBox(NULL, L"Button creation failed!", L"Error", MB_ICONERROR);
         return 0;
     }
+
+    // Show buttons for Tab 2 by default (index 1)
+    TabCtrl_SetCurSel(hTabControl, 1);
+    ShowWindow(ImportButtonHWND, SW_SHOW);
+    ShowWindow(PlayAnimationButtonHWND, SW_SHOW);
 
     CViewportWindow::SetViewportParentHWND(hwnd);
     m_ViewportWindow.CreateViewport();
@@ -346,6 +375,46 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         case WM_CREATE:
         {
             SetWindowLong(hwnd, 0, 0);
+            return 0;
+        }
+
+        case WM_SIZE:
+        {
+            // Resize tab control to fill the toolbar window
+            HWND hTabControl = GetDlgItem(hwnd, 100);
+            if (hTabControl)
+            {
+                RECT rcClient;
+                GetClientRect(hwnd, &rcClient);
+                SetWindowPos(hTabControl, NULL, 0, 0, rcClient.right, rcClient.bottom, SWP_NOZORDER);
+            }
+            return 0;
+        }
+
+        case WM_NOTIFY:
+        {
+            LPNMHDR pnmhdr = (LPNMHDR)lParam;
+            if (pnmhdr->idFrom == 100 && pnmhdr->code == TCN_SELCHANGE)
+            {
+                HWND hTabControl = GetDlgItem(hwnd, 100);
+                int iTab = TabCtrl_GetCurSel(hTabControl);
+
+                // Get button handles
+                HWND hButton1 = GetDlgItem(hwnd, 1);
+                HWND hButton2 = GetDlgItem(hwnd, 2);
+
+                // Show/hide buttons based on selected tab
+                if (iTab == 0)  // Tab 1 - empty
+                {
+                    ShowWindow(hButton1, SW_HIDE);
+                    ShowWindow(hButton2, SW_HIDE);
+                }
+                else if (iTab == 1)  // Tab 2 - show buttons
+                {
+                    ShowWindow(hButton1, SW_SHOW);
+                    ShowWindow(hButton2, SW_SHOW);
+                }
+            }
             return 0;
         }
 
