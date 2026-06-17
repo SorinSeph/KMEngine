@@ -1,52 +1,18 @@
-﻿  UIMessageQueue.cpp
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(13,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(14,30): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(46,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(47,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(349,34): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'UIMessageQueue.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98):
+﻿  GLTFImporter.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(179,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(216,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(219,49): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(442,56): warning C4267: '=': conversion from 'size_t' to 'uint16_t', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(657,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1018,41): warning C4244: 'initializing': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(167,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'GLTFImporter.cpp')
+      C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(167,19):
       the template instantiation context (the oldest one first) is
-          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\UIMessageQueue.cpp(179,30):
-          see reference to function template instantiation 'void CTimerManager::SetTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>(std::string,float,float,TLambda,int,int)' being compiled
-          with
-          [
-              TLambda=CUIMessageQueue::RayPicking::<lambda_1>
-          ]
-          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(267,60):
-          see reference to class template instantiation 'CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>' being compiled
-          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(188,7):
-          while compiling class template member function 'void CTimerVariadicArgsLambda<CUIMessageQueue::RayPicking::<lambda_1>,int,int>::Execute(void)'
-          C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Core\CoreClock.h(190,8):
-          see reference to function template instantiation 'void std::apply<TLambda&,std::tuple<int,int>&>(_Callable,_Tuple) noexcept(false)' being compiled
-          with
-          [
-              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
-              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
-              _Tuple=std::tuple<int,int> &
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1067,28):
-          see reference to function template instantiation 'void std::_Apply_impl<TLambda&,std::tuple<int,int>&,0,1>(_Callable,_Tuple,std::integer_sequence<size_t,0,1>) noexcept(false)' being compiled
-          with
-          [
-              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
-              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
-              _Tuple=std::tuple<int,int> &
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\tuple(1058,17):
-          see reference to function template instantiation 'void std::invoke<TLambda&,int&,int&>(_Callable,_Ty1,int &) noexcept(false)' being compiled
-          with
-          [
-              TLambda=CUIMessageQueue::RayPicking::<lambda_1>,
-              _Callable=CUIMessageQueue::RayPicking::<lambda_1> &,
-              _Ty1=int &
-          ]
+          C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(38,5):
+          see reference to function template instantiation 'void CGLTFImporter::CreateAnimBoneHierarchy<CGLTFNode>(CTemplatedTree<CGLTFNode> &)' being compiled
   
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'UIMessageQueue.cpp')
-  
-  KMEngine.vcxproj -> C:\Users\Elena\Documents\Misc\KMEngine\x64\Debug\KMEngine.exe
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1240,1): warning C4715: 'CGLTFImporter::GetBufferViewByType': not all control paths return a value
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

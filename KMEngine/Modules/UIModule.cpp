@@ -421,8 +421,9 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         case WM_COMMAND:
         {
             CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
-
-            std::string FilePathString{ "Resources/Assets/3D_Objects/GLTF/rectangle_textured_skeletal_anim2.gltf" };
+            std::string FilePathString{ "E:/Work/2/Human_Basemesh_Simplified/Human_Basemesh_Simplified_Anim_Wave2.gltf" };
+            //std::string FilePathString{ "E:/Work/2/Rectangle_3Bones_Anim1/Rectangle_3Bones_anim.gltf" };
+            //std::string FilePathString{ "Resources/Assets/3D_Objects/GLTF/rectangle_textured_skeletal_anim2.gltf" };
             std::string FileContent{};
 
             // @Temporary code to import and play a GLTF animation

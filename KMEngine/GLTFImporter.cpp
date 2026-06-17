@@ -1,6 +1,4 @@
 #include "GLTFImporter.h"
-
-#include "GLTFImporter.h"
 #include "Tree.h"
 #include <iostream>
 
@@ -32,9 +30,12 @@ CGLTFAnimation CGLTFImporter::ImportAnimation(std::string& FilePath, const std::
 
     ReadAnimationBIN(FilePath);
 
+    GetInverseBindMatrix(FileContent, FilePath);
+
     m_Animation.m_AnimKeyframes = GetAnimationRuntime();
 
-    CreateBoneHierarchy();
+    //CreateBoneHierarchy();
+    CreateAnimBoneHierarchy<CGLTFNode>(m_Animation.m_AnimHierarchyTree);
 
     return m_Animation;
 }
@@ -114,7 +115,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
     {
         switch (BufferViewIt->m_BufferViewType)
         {
-        case EAttributeType::Position:
+            case EAttributeType::Position:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 4 * 3 (count * 4 bytes from 32 bit float * VEC3) 
@@ -123,7 +124,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
                 break;
             }
 
-        case EAttributeType::Normal:
+            case EAttributeType::Normal:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 4 * 3 (count * 4 bytes from 32 bit float * VEC3) 
@@ -132,7 +133,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
                 break;
             }
 
-        case EAttributeType::Indices:
+            case EAttributeType::Indices:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 2 (count * 2 bytes from 16 bit unsigned short)
@@ -141,7 +142,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
                 break;
             }
 
-        case EAttributeType::TexCoords:
+            case EAttributeType::TexCoords:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 4 * 2 (count * 4 bytes from 32 bit float * VEC2)
@@ -150,7 +151,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
                 break;
             }
 
-        case EAttributeType::Joints:
+            case EAttributeType::Joints:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 4 (count * VEC4)
@@ -159,7 +160,7 @@ void CGLTFImporter::ImportAccesorsData(const std::string& FileContent)
                 break;
             }
 
-        case EAttributeType::Weights:
+            case EAttributeType::Weights:
             {
                 BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
                 // Bytelength = count * 4 * 2 (count * 4 bytes from 32 bit float * VEC4)
@@ -297,7 +298,7 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
     {
         switch (BufferViewIt->m_BufferViewType)
         {
-        case EAttributeType::Position:
+            case EAttributeType::Position:
             {
                 CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count * 3);
@@ -309,12 +310,10 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                     BufferView->m_Data.push_back(Value);
                 }
 
-                int breakpoint = 1;
-
                 break;
             }
 
-        case EAttributeType::Indices:
+            case EAttributeType::Indices:
             {
                 CBufferView<uint32_t>* BufferView = static_cast<CBufferView<uint32_t>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count);
@@ -326,12 +325,10 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                     BufferView->m_Data.push_back(static_cast<uint32_t>(Value));
                 }
 
-                int breakpoint = 1;
-
                 break;
             }
 
-        case EAttributeType::TexCoords:
+            case EAttributeType::TexCoords:
             {
                 CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count * 2);
@@ -343,12 +340,10 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                     BufferView->m_Data.push_back(Value);
                 }
 
-                int breakpoint = 1;
-
                 break;
             }
 
-        case EAttributeType::Joints:
+            case EAttributeType::Joints:
             {
                 CBufferView<uint8_t>* BufferView = static_cast<CBufferView<uint8_t>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count * 4);
@@ -363,7 +358,7 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                 break;
             }
 
-        case EAttributeType::Weights:
+            case EAttributeType::Weights:
             {
                 CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count * 4);
@@ -378,7 +373,7 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                 break;
             }
 
-        case EAttributeType::SamplerKeyframesInput:
+            case EAttributeType::SamplerKeyframesInput:
             {
                 CBufferView<float>* BufferView = static_cast<CBufferView<float>*>(BufferViewIt);
                 BufferView->m_Data.reserve(BufferView->m_Count);
@@ -389,6 +384,7 @@ void CGLTFImporter::ReadBIN(std::string FilePath)
                     std::memcpy(&Value, &Buffer[i], sizeof(float));
                     BufferView->m_Data.push_back(Value);
                 }
+
                 break;
             }
         }
@@ -401,7 +397,7 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
     CLogger& Logger = CLogger::GetLogger();
     int FileContentIt = 0;
     Logger.Log("GLTFImporter.cpp, ImportBoneData(): \n");
-    Logger.Log(FileContent);  
+    Logger.Log(FileContent);
 
     uint64_t ByteOffset{ 0 };
     std::string SearchString = "\n\t\"nodes\":[";
@@ -430,9 +426,9 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
 
             Node.m_ChildrenIndices.clear();
             Node.m_Name = "";
-            Node.m_PoseTranslation = glm::vec3(1.0f);
-            Node.m_PoseRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-            Node.m_PoseScale = glm::vec3(1.0f);
+            //Node.m_PoseTranslation = glm::vec3(1.0f);
+            //Node.m_PoseRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+            //Node.m_PoseScale = glm::vec3(1.0f);
 
             m_Animation.m_Nodes.push_back(Node);
 
@@ -596,6 +592,48 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
 
     m_Animation.m_Nodes.erase(m_Animation.m_Nodes.begin() + MeshNodeIndex);
     m_Animation.m_Nodes.erase(m_Animation.m_Nodes.end() - 1);
+
+
+    std::string SearchSkinString = "\"inverseBindMatrices\":";
+    uint64_t SkinDataPosition = FileContent.find(SearchSkinString);
+    SkinDataPosition += SearchSkinString.size();
+    std::string SkinBufferViewString{ };
+    while (std::isdigit(FileContent.at(SkinDataPosition)))
+    {
+        SkinBufferViewString += FileContent.at(SkinDataPosition);
+        SkinDataPosition++;
+    }
+
+    std::string InverseBindMatrixNodeString{};
+    std::vector<int32_t> InverseBindMatrixNode;
+
+    for (; SkinDataPosition < FileContent.size(); SkinDataPosition++)
+    {
+        uint32_t InverseMatrixIndexCounter{ 0 };
+        if (FileContent.at(SkinDataPosition) == ']'
+            && FileContent.at(SkinDataPosition + 1) == ',')
+        {
+            break;
+        }
+        else if (std::isdigit(FileContent[SkinDataPosition]))
+        {
+            //InverseBindMatrixNodeString.at(InverseMatrixIndexCounter) += std::atoi(FileContent.at(SkinDataPosition));
+            while (std::isdigit(FileContent[SkinDataPosition]))
+            {
+                InverseBindMatrixNodeString +=FileContent[SkinDataPosition];
+                SkinDataPosition++;
+            }
+
+            uint32_t Node = uint32_t(std::atoi(InverseBindMatrixNodeString.c_str()));
+            InverseBindMatrixNodeString.clear();
+            InverseBindMatrixNode.push_back(Node);
+            InverseMatrixIndexCounter++;
+        }
+        else
+        {
+            continue;
+        }
+    }
 }
 
 void CGLTFImporter::CreateBoneHierarchy()
@@ -640,9 +678,9 @@ void CGLTFImporter::CreateBoneHierarchy()
         }
     }
 
-    std::vector<SNode<CGLTFNode>*> NodeList;
-    m_HierarchyTree.PreOrderTraversal(m_HierarchyTree.m_RootNode, NodeList);
-    auto breakpoint = 1;
+    //std::vector<SNode<CGLTFNode>*> NodeList;
+    //m_HierarchyTree.PreOrderTraversal(m_HierarchyTree.m_RootNode, NodeList);
+    //auto breakpoint = 1;
 }
 
 CGLTFAnimation CGLTFImporter::ImportSamplers(const std::string& FileContent)
@@ -851,7 +889,7 @@ std::vector<CBufferViewBase*> CGLTFImporter::ImportSamplerBufferViews(const std:
     std::string BufferViewString{};
     std::string BufferViewData{};
 
-    // Create every input buffer views and retrieve the count, byte length and byte offset
+    // Create every input buffer view and retrieve the count, byte length and byte offset
     for (int SamplerIt = 0; SamplerIt < Animation.m_Samplers.size(); ++SamplerIt)
     {
         CBufferView<float>* InputBuffer = new CBufferView<float>();
@@ -904,20 +942,7 @@ void CGLTFImporter::ReadAnimationBIN(std::string FilePath)
     std::vector<uint8_t> FileBuffer((std::istreambuf_iterator<char>(FileStream)), std::istreambuf_iterator<char>());
     uint64_t SamplerItOffset = m_InputOutputBufferViews.size() / 2;
 
-    for (uint64_t SamplerIt = 0; SamplerIt < SamplerItOffset; ++SamplerIt)
-    {
-        uint64_t Offset = m_InputOutputBufferViews.at(SamplerIt)->m_ByteOffset;
-        uint64_t Length = m_InputOutputBufferViews.at(SamplerIt)->m_ByteLength + Offset;
-
-        for (uint64_t i = Offset; i + 3 < Length; i += 4)
-        {
-            float Value;
-            std::memcpy(&Value, &FileBuffer[i], sizeof(float));
-            m_Animation.m_Samplers.at(SamplerIt).m_Keyframes.push_back(Value);
-        }
-    }
-
-    // Read the data for the sampler's output buffer view
+    // Read the transform data for the sampler's output buffer view first, we have the transform values ready to insert in the keyframe map
 
     for (uint64_t SamplerIt = SamplerItOffset; SamplerIt < m_InputOutputBufferViews.size(); ++SamplerIt)
     {
@@ -950,6 +975,9 @@ void CGLTFImporter::ReadAnimationBIN(std::string FilePath)
                 std::memcpy(&Z, &FileBuffer[i + 8], sizeof(float));
                 std::memcpy(&W, &FileBuffer[i + 12], sizeof(float));
                 m_Animation.m_Samplers.at(SamplerIt - SamplerItOffset).m_Rotation.push_back(glm::quat(W, X, Y, Z));
+
+                uint16_t NodeIndex = m_Animation.m_Samplers.at(SamplerIt - SamplerItOffset).m_NodeIndex;
+                //m_Animation.m_Nodes.at(NodeIndex).
             }
         }
         else if (m_Animation.m_Samplers.at(SamplerIt - SamplerItOffset).m_TransformType == EChannelTransformType::Scale)
@@ -968,11 +996,215 @@ void CGLTFImporter::ReadAnimationBIN(std::string FilePath)
         }
     }
 
-    auto breakpoint = 1;
+    // Add the actual keyframes from the input buffer
+
+    for (uint64_t SamplerIt = 0; SamplerIt < SamplerItOffset; ++SamplerIt)
+    {
+        uint64_t Offset = m_InputOutputBufferViews.at(SamplerIt)->m_ByteOffset;
+        uint64_t Length = m_InputOutputBufferViews.at(SamplerIt)->m_ByteLength + Offset;
+
+        for (uint64_t i = Offset; i + 3 < Length; i += 4)
+        {
+            float Value;
+            std::memcpy(&Value, &FileBuffer[i], sizeof(float));
+            m_Animation.m_Samplers.at(SamplerIt).m_Keyframes.push_back(Value);
+
+            // Get the keyframe position in the buffer in order to add it to the node's keyframe map
+
+            CKeyframe Keyframe;
+
+            uint16_t NodeIndex = m_Animation.m_Samplers.at(SamplerIt).m_NodeIndex;
+            uint16_t TransformTypeFlag = static_cast<uint16_t>(m_Animation.m_Samplers.at(SamplerIt).m_TransformType);
+            uint16_t SamplerTransformIt = (i - Offset) / 4;
+
+            if (m_Animation.m_Samplers.at(SamplerIt).m_TransformType == EChannelTransformType::Translation)
+            {
+                Keyframe.m_TransformTypeFlags = (uint16_t)EChannelTransformType::Translation;
+                Keyframe.m_Translation = m_Animation.m_Samplers.at(SamplerIt).m_Translation.at(SamplerTransformIt);
+                m_Animation.m_Nodes.at(NodeIndex).m_KeyframeMap.insert({ Value, Keyframe });
+            }
+            else if (m_Animation.m_Samplers.at(SamplerIt).m_TransformType == EChannelTransformType::Rotation)
+            {
+                Keyframe.m_TransformTypeFlags = (uint16_t)EChannelTransformType::Rotation;
+                Keyframe.m_Rotation = m_Animation.m_Samplers.at(SamplerIt).m_Rotation.at(SamplerTransformIt);
+                m_Animation.m_Nodes.at(NodeIndex).m_KeyframeMap.insert({ Value, Keyframe });
+            }
+            else if (m_Animation.m_Samplers.at(SamplerIt).m_TransformType == EChannelTransformType::Scale)
+            {
+                Keyframe.m_TransformTypeFlags = (uint16_t)EChannelTransformType::Scale;
+                Keyframe.m_Scale = m_Animation.m_Samplers.at(SamplerIt).m_Scale.at(SamplerTransformIt);
+                m_Animation.m_Nodes.at(NodeIndex).m_KeyframeMap.insert({ Value, Keyframe });
+            }
+        }
+    }
+}
+
+void CGLTFImporter::GetInverseBindMatrix(const std::string& FileContent, std::string BinFilePath)
+{
+    // Get the buffer view index of the inverse bind matrices buffer
+
+    for (auto AttributeTypeIt : m_AttributeType)
+    {
+        if (AttributeTypeIt == "\"inverseBindMatrices\":")
+        {
+            std::string Index = GetBufferViewStringIndex(FileContent, AttributeTypeIt);
+            if (!Index.empty())
+            {
+                CBufferView<glm::mat4>* pBufferView = new CBufferView<glm::mat4>();
+                pBufferView->m_BufferIndex = Index;
+                pBufferView->m_BufferViewType = EAttributeType::InverseBindMatrix;
+                m_BufferViews.push_back(pBufferView);
+            }
+        }
+    }
+
+    // @Temporary: to be refactored
+    // Get the count, byte offset and byte length of the inverse matrix buffer
+
+    std::string BufferViewsData;
+    std::string BufferViewSection = "\"accessors\":[";
+    uint64_t BufferViewSectionIndex = FileContent.find(BufferViewSection);
+    if (BufferViewSectionIndex != std::string::npos)
+    {
+        BufferViewSectionIndex += BufferViewSection.length();
+        BufferViewsData.append(FileContent.substr(BufferViewSectionIndex + 1));
+    }
+
+    for (auto& BufferViewIt : m_BufferViews)
+    {
+        if (BufferViewIt->m_BufferViewType == EAttributeType::InverseBindMatrix)
+        {
+            BufferViewIt->m_Count = GetBufferViewByteCount(BufferViewIt->m_BufferIndex, BufferViewsData);
+            // Bytelength = count * 4 * 16 (count * 4 bytes from 32 bit float * 16 numbers in 4x4 matrix)
+            BufferViewIt->m_ByteLength = BufferViewIt->m_Count * 4 * 16;
+            BufferViewIt->m_ByteOffset = GetByteOffset(BufferViewIt->m_BufferIndex, BufferViewsData);
+            break;
+        }
+    }
+
+    // Retrieving the corresponding joint indices
+
+    std::string InverseBindMatricesString = "\"joints\":[";
+    uint64_t MatricesSectionIterator = FileContent.find(InverseBindMatricesString);
+
+    std::string InverseBindMatrixNodeString{};
+    std::vector<int32_t> InverseBindMatrixNode;
+
+    for (; MatricesSectionIterator < FileContent.size(); MatricesSectionIterator++)
+    {
+        uint32_t InverseMatrixIndexCounter{ 0 };
+        if (FileContent.at(MatricesSectionIterator) == ']'
+            && FileContent.at(MatricesSectionIterator + 1) == ',')
+        {
+            break;
+        }
+        else if (std::isdigit(FileContent[MatricesSectionIterator]))
+        {
+            //InverseBindMatrixNodeString.at(InverseMatrixIndexCounter) += std::atoi(FileContent.at(SkinDataPosition));
+            while (std::isdigit(FileContent[MatricesSectionIterator]))
+            {
+                InverseBindMatrixNodeString += FileContent[MatricesSectionIterator];
+                MatricesSectionIterator++;
+            }
+
+            uint32_t Node = uint32_t(std::atoi(InverseBindMatrixNodeString.c_str()));
+            InverseBindMatrixNodeString.clear();
+            InverseBindMatrixNode.push_back(Node);
+            InverseMatrixIndexCounter++;
+        }
+        else
+        {
+            continue;
+        }
+    }
+
+
+
+    //std::vector<uint16_t> InverseMatrixJointsIndex{};
+    //std::string InverseBindMatricesString = "\"joints\":[";
+    //uint64_t MatricesSectionIndex = FileContent.find(InverseBindMatricesString);
+
+    //if (MatricesSectionIndex != std::string::npos)
+    //{
+    //    std::string JointsIndexString{};
+    //    BufferViewSectionIndex += InverseBindMatricesString.length();
+    //    for (int i = BufferViewSectionIndex; i < FileContent.size(); i++)
+    //    {
+    //        if (std::isdigit(FileContent[i]))
+    //        {
+    //            JointsIndexString.push_back(FileContent[i]);
+    //        }
+    //        else if (FileContent[i] == ',')
+    //        {
+    //            uint16_t Index = static_cast<uint16_t>(std::atoi(JointsIndexString.c_str()));
+    //            JointsIndexString.clear();
+    //            InverseMatrixJointsIndex.push_back(Index);
+    //        }
+    //        else if (FileContent[i] == ']'
+    //            && FileContent[i + 1] == ',')
+    //        {
+    //            break;
+    //        }
+    //    }
+    //}
+
+    BinFilePath.erase(BinFilePath.end() - 4, BinFilePath.end());
+    BinFilePath.append("bin");
+    std::ifstream File(BinFilePath, std::ios::in | std::ios::binary);
+    std::vector<uint8_t> Buffer((std::istreambuf_iterator<char>(File)), std::istreambuf_iterator<char>());
+
+    CBufferView<glm::mat4>* BufferView{ nullptr };
+    std::vector<float> ValueVector;
+    std::vector<glm::mat4> InverseMatricesVector;
+
+    for (auto& BufferViewIt : m_BufferViews)
+    {
+        if (BufferViewIt->m_BufferViewType == EAttributeType::InverseBindMatrix)
+        {
+            BufferView = static_cast<CBufferView<glm::mat4>*>(BufferViewIt);
+            for (uint64_t i = BufferView->m_ByteOffset; i + (sizeof(float) - 1) < BufferView->m_ByteOffset + BufferView->m_ByteLength; i += sizeof(float) * 16)
+            {
+                float Value;
+                uint16_t ValueIt{ 0 };
+
+                for (ValueIt = 0; ValueIt < 63; ValueIt += 4)
+                {
+                    std::memcpy(&Value, &Buffer[i + ValueIt], sizeof(float));
+                    ValueVector.push_back(Value);
+                }
+
+                InverseMatricesVector.push_back(glm::mat4{ ValueVector.at(0), ValueVector.at(1), ValueVector.at(2), ValueVector.at(3),
+                                                    ValueVector.at(4), ValueVector.at(5), ValueVector.at(6), ValueVector.at(7),
+                                                    ValueVector.at(8), ValueVector.at(9), ValueVector.at(10), ValueVector.at(11),
+                                                    ValueVector.at(12), ValueVector.at(13), ValueVector.at(14), ValueVector.at(15) });
+                ValueVector.clear();
+            }
+        }
+    }
+
+    CLogger& Logger = CLogger::GetLogger();
+    Logger.Log("GLTFImporter.cpp, GetInverseBindMatrix:");
+
+    int LogCounter{ 0 };
+
+    m_Animation.m_InverseBindMatrices.reserve(62);
+
+    for (int i = 0; i < InverseMatricesVector.size(); i++)
+    {
+        //m_Animation.m_InverseBindMatrices.push_back(InverseMatricesVector.at(InverseBindMatrixNode.at(i)));
+        //m_Animation.m_InverseBindMatrices.push_back(InverseMatricesVector.at(i));
+        for (int MatrixNodeIt = 0; MatrixNodeIt < InverseBindMatrixNode.size(); MatrixNodeIt++)
+        {
+            if (InverseBindMatrixNode.at(MatrixNodeIt) == i)
+            {
+                m_Animation.m_InverseBindMatrixMap.insert({ i, InverseMatricesVector.at(MatrixNodeIt) });
+            }
+        }
+    }
 }
 
 std::vector<float> CGLTFImporter::GetAnimationRuntime()
-{
+{   
     uint64_t Size{ 0 };
     uint64_t LongestRuntimeIndex{ 0 };
 

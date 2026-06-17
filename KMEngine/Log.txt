@@ -1,10 +1,10 @@
 CDX11Device constructor
 CDX11Device constructor
-CRenderer constructed at C:\Users\Elena\Documents\Misc\KMEngine\KMEngine\Modules\GraphicsModule.h:16
+CRenderer constructed at C:\Users\sefce\source\KMEngine\KMEngine\Modules\GraphicsModule.h:16
 CDX11Device constructor
 KMEngine.cpp, engine started
 
-World.cpp, Init(): Location: "C:\\Users\\Elena\\Documents\\Misc\\KMEngine\\KMEngine"
+World.cpp, Init(): Location: "C:\\Users\\sefce\\source\\KMEngine\\KMEngine"
 Terrain generator destroyed
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
@@ -46,137 +46,21 @@ RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10
-g_RotY =-0.15
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10.3
-g_RotY =-0.3
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10.45
-g_RotY =-0.6
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10.75
-g_RotY =-0.75
-
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 10.9
-g_RotY =-0.9
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.2
-g_RotY =-1.2
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.2
-g_RotY =-1.35
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.35
-g_RotY =-1.35
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.5
-g_RotY =-1.35
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.5
-g_RotY =-1.5
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.65
-g_RotY =-1.65
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 11.95
-g_RotY =-1.95
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 12.1
-g_RotY =-2.1
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 12.4
-g_RotY =-2.4
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 12.7
-g_RotY =-2.85
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 13
-g_RotY =-3.15
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 13.3
-g_RotY =-3.3
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 13.6
-g_RotY =-3.6
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 13.9
-g_RotY =-3.9
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 14.2
-g_RotY =-4.2
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 14.5
-g_RotY =-4.35
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 14.8
-g_RotY =-4.65
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 15.1
-g_RotY =-4.8
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 15.4
-g_RotY =-5.1
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 15.55
-g_RotY =-5.25
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 15.85
-g_RotY =-5.25
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 16.15
-g_RotY =-5.4
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 16.3
-g_RotY =-5.4
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 16.45
-g_RotY =-5.55
-
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
@@ -188,189 +72,3127 @@ RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 16.6
-g_RotY =-6
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 16.75
-g_RotY =-6.45
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 17.05
-g_RotY =-6.9
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 17.2
-g_RotY =-7.2
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 17.5
-g_RotY =-7.8
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 17.65
-g_RotY =-8.4
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 17.8
-g_RotY =-9
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.1
-g_RotY =-9.6
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.25
-g_RotY =-9.9
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.4
-g_RotY =-10.2
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.4
-g_RotY =-10.5
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.55
-g_RotY =-10.8
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.7
-g_RotY =-11.1
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 18.85
-g_RotY =-11.4
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19
-g_RotY =-11.55
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19
-g_RotY =-11.7
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.15
-g_RotY =-11.85
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.15
-g_RotY =-12
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.3
-g_RotY =-12.15
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.45
-g_RotY =-12.3
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.6
-g_RotY =-12.6
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.75
-g_RotY =-12.9
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 19.9
-g_RotY =-13.05
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.05
-g_RotY =-13.2
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.05
-g_RotY =-13.5
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.2
-g_RotY =-13.8
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.35
-g_RotY =-13.95
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.5
-g_RotY =-14.25
-
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.65
-g_RotY =-14.4
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.65
-g_RotY =-14.55
-
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.65
-g_RotY =-14.7
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
 RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.8
-g_RotY =-14.7
-
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.8
-g_RotY =-14.85
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.8
-g_RotY =-15
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-ViewportWindow.cpp, ViewportWindow::ViewportWndProc, case INPUT:
-g_RotX = 20.8
-g_RotY =-15
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
 
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
 RendererOpenGL.h, Render(): rendering terrain component
-RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
 RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+GLTFImporter.cpp, ImportBoneData(): 
+
+{
+	"asset":{
+		"generator":"Khronos glTF Blender I/O v5.0.21",
+		"version":"2.0"
+	},
+	"scene":0,
+	"scenes":[
+		{
+			"name":"Scene",
+			"nodes":[
+				26
+			]
+		}
+	],
+	"nodes":[
+		{
+			"name":"head",
+			"rotation":[
+				-0.022972071543335915,
+				-7.547800606744204e-08,
+				-1.7343200209296583e-09,
+				0.9997361302375793
+			],
+			"translation":[
+				-2.307079416397073e-09,
+				0.5754921436309814,
+				0.015279032289981842
+			]
+		},
+		{
+			"name":"fingers1_L",
+			"rotation":[
+				-0.06793010979890823,
+				-0.0049830772913992405,
+				0.004355873446911573,
+				0.9976681470870972
+			],
+			"scale":[
+				1.0000001192092896,
+				1,
+				1.0000001192092896
+			],
+			"translation":[
+				-8.847564458847046e-09,
+				0.022411759942770004,
+				-4.307366907596588e-09
+			]
+		},
+		{
+			"children":[
+				1
+			],
+			"name":"fingers2_L",
+			"rotation":[
+				-0.11640311032533646,
+				-0.7244079113006592,
+				-0.052200887352228165,
+				0.6774648427963257
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				3.259629011154175e-09,
+				0.0380488783121109,
+				-9.313225746154785e-10
+			]
+		},
+		{
+			"children":[
+				2
+			],
+			"name":"fingers3_L",
+			"rotation":[
+				-0.008008471690118313,
+				-0.028711816295981407,
+				-0.19010761380195618,
+				0.9813106656074524
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				-5.4016709327697754e-08,
+				0.2945711612701416,
+				1.1175870895385742e-08
+			]
+		},
+		{
+			"name":"thumb1_L",
+			"rotation":[
+				-6.689661802283808e-08,
+				0.9978649616241455,
+				-0.06531078368425369,
+				2.811296781146666e-06
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				-5.232296018675697e-08,
+				0.03698236867785454,
+				-5.4258624260228316e-08
+			]
+		},
+		{
+			"children":[
+				4
+			],
+			"name":"thumb2_L",
+			"rotation":[
+				-0.05515509843826294,
+				0.19422957301139832,
+				-0.1238238513469696,
+				0.971545398235321
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				1.0058283805847168e-07,
+				0.020694997161626816,
+				2.7939677238464355e-09
+			]
+		},
+		{
+			"children":[
+				5
+			],
+			"name":"thumb3_L",
+			"rotation":[
+				0.23767389357089996,
+				0.42726337909698486,
+				-0.2811933755874634,
+				0.8257647752761841
+			],
+			"scale":[
+				1,
+				1,
+				1.0000001192092896
+			],
+			"translation":[
+				0.045184820890426636,
+				0.21164818108081818,
+				0.0548139251768589
+			]
+		},
+		{
+			"children":[
+				3,
+				6
+			],
+			"name":"forearm_L",
+			"rotation":[
+				0.0785280242562294,
+				0.05098253861069679,
+				-0.06639737635850906,
+				0.9933909177780151
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				-2.421438694000244e-08,
+				0.2578586935997009,
+				9.313225746154785e-10
+			]
+		},
+		{
+			"children":[
+				7
+			],
+			"name":"upper_arm_L",
+			"rotation":[
+				-0.036111220717430115,
+				-0.05157214403152466,
+				-0.9302964806556702,
+				0.3613651990890503
+			],
+			"scale":[
+				0.9999999403953552,
+				0.9999999403953552,
+				0.9999999403953552
+			],
+			"translation":[
+				0.17455127835273743,
+				0.3977654278278351,
+				-0.02253679558634758
+			]
+		},
+		{
+			"name":"fingers1_R",
+			"rotation":[
+				0.06784005463123322,
+				-0.0043775467202067375,
+				0.0056121572852134705,
+				0.9976708292961121
+			],
+			"scale":[
+				1,
+				1,
+				0.9999999403953552
+			],
+			"translation":[
+				6.05359673500061e-09,
+				0.02241143211722374,
+				4.3190084397792816e-08
+			]
+		},
+		{
+			"children":[
+				9
+			],
+			"name":"fingers2_R",
+			"rotation":[
+				0.039017271250486374,
+				-0.7350879907608032,
+				0.12145950645208359,
+				0.6658610701560974
+			],
+			"scale":[
+				0.9999999403953552,
+				1,
+				0.9999998807907104
+			],
+			"translation":[
+				4.842877388000488e-08,
+				0.03804922103881836,
+				1.862645149230957e-08
+			]
+		},
+		{
+			"children":[
+				10
+			],
+			"name":"fingers3_R",
+			"rotation":[
+				-0.026140492409467697,
+				0.12266618758440018,
+				0.18381492793560028,
+				0.9749265313148499
+			],
+			"scale":[
+				0.9999998807907104,
+				1.0000001192092896,
+				1
+			],
+			"translation":[
+				-1.1734664440155029e-07,
+				0.2945711016654968,
+				-3.725290298461914e-09
+			]
+		},
+		{
+			"name":"thumb1_R",
+			"rotation":[
+				1.4401216219539492e-07,
+				0.9978650212287903,
+				0.06531023234128952,
+				2.0975680854462553e-06
+			],
+			"translation":[
+				2.19667128931178e-09,
+				0.03698207437992096,
+				1.364844415263633e-08
+			]
+		},
+		{
+			"children":[
+				12
+			],
+			"name":"thumb2_R",
+			"rotation":[
+				-0.001344837248325348,
+				0.22746755182743073,
+				-0.13554605841636658,
+				0.9643049240112305
+			],
+			"scale":[
+				1.0000001192092896,
+				1,
+				0.9999999403953552
+			],
+			"translation":[
+				-2.9802322387695312e-08,
+				0.02069522626698017,
+				3.725290298461914e-09
+			]
+		},
+		{
+			"children":[
+				13
+			],
+			"name":"thumb3_R",
+			"rotation":[
+				-0.1568593531847,
+				0.5732334852218628,
+				0.33309683203697205,
+				0.7320143580436707
+			],
+			"scale":[
+				1.0000001192092896,
+				1,
+				1.000000238418579
+			],
+			"translation":[
+				-0.04518502578139305,
+				0.21164825558662415,
+				0.054813869297504425
+			]
+		},
+		{
+			"children":[
+				11,
+				14
+			],
+			"name":"forearm_R",
+			"rotation":[
+				0.07852807641029358,
+				-0.0509825125336647,
+				0.06639739871025085,
+				0.9933909177780151
+			],
+			"scale":[
+				1,
+				1.0000001192092896,
+				1.0000001192092896
+			],
+			"translation":[
+				-6.146728992462158e-08,
+				0.2578586935997009,
+				-1.7695128917694092e-08
+			]
+		},
+		{
+			"children":[
+				15
+			],
+			"name":"upper_arm_R",
+			"rotation":[
+				-0.036111362278461456,
+				0.051572080701589584,
+				0.9302964210510254,
+				0.36136525869369507
+			],
+			"scale":[
+				0.9999999403953552,
+				1,
+				0.9999999403953552
+			],
+			"translation":[
+				-0.17455127835273743,
+				0.3977656662464142,
+				-0.022536855190992355
+			]
+		},
+		{
+			"children":[
+				0,
+				8,
+				16
+			],
+			"name":"spine",
+			"rotation":[
+				5.214461040736751e-08,
+				-0.7231637239456177,
+				-0.6906766891479492,
+				5.459735064050619e-08
+			],
+			"translation":[
+				8.120999532568174e-15,
+				-0.14497661590576172,
+				1.0221624374389648
+			]
+		},
+		{
+			"name":"foot_L",
+			"rotation":[
+				-0.7409884929656982,
+				-0.015862422063946724,
+				0.014367937110364437,
+				0.6711766123771667
+			],
+			"scale":[
+				0.9999998211860657,
+				0.9999999403953552,
+				0.9999998807907104
+			],
+			"translation":[
+				1.6537378542125225e-06,
+				0.46731120347976685,
+				-0.006038496270775795
+			]
+		},
+		{
+			"children":[
+				18
+			],
+			"name":"shin_L",
+			"rotation":[
+				0.08736716955900192,
+				0.005513905081897974,
+				0.020140904933214188,
+				0.9959573149681091
+			],
+			"scale":[
+				1.0000001192092896,
+				0.9999998807907104,
+				0.9999999403953552
+			],
+			"translation":[
+				8.381903171539307e-09,
+				0.48105132579803467,
+				-8.887992564154956e-09
+			]
+		},
+		{
+			"children":[
+				19
+			],
+			"name":"thigh_L",
+			"rotation":[
+				0.030527792870998383,
+				-0.7329993844032288,
+				0.6789553165435791,
+				0.028276897966861725
+			],
+			"scale":[
+				0.9999999403953552,
+				1.0000003576278687,
+				0.9999999403953552
+			],
+			"translation":[
+				-0.08758845180273056,
+				-0.13643872737884521,
+				0.9624016880989075
+			]
+		},
+		{
+			"name":"foot_R",
+			"rotation":[
+				-0.7409886121749878,
+				0.015862170606851578,
+				-0.014367825351655483,
+				0.671176552772522
+			],
+			"scale":[
+				0.9999998211860657,
+				1,
+				0.9999999403953552
+			],
+			"translation":[
+				-1.6702106222510338e-06,
+				0.46731120347976685,
+				-0.006038518622517586
+			]
+		},
+		{
+			"children":[
+				21
+			],
+			"name":"shin_R",
+			"rotation":[
+				0.08736717700958252,
+				-0.005513789132237434,
+				-0.02014090120792389,
+				0.9959573149681091
+			],
+			"scale":[
+				1.0000001192092896,
+				1,
+				0.9999999403953552
+			],
+			"translation":[
+				-1.1641532182693481e-09,
+				0.48105132579803467,
+				-8.887992564154956e-09
+			]
+		},
+		{
+			"children":[
+				22
+			],
+			"name":"thigh_R",
+			"rotation":[
+				0.030527792870998383,
+				0.7329993844032288,
+				-0.6789553165435791,
+				0.028276897966861725
+			],
+			"scale":[
+				0.9999999403953552,
+				1.0000003576278687,
+				0.9999999403953552
+			],
+			"translation":[
+				0.08758845180273056,
+				-0.1364387571811676,
+				0.9624017477035522
+			]
+		},
+		{
+			"children":[
+				17,
+				20,
+				23
+			],
+			"name":"root",
+			"rotation":[
+				0,
+				0.7071067690849304,
+				0.7071067690849304,
+				0
+			]
+		},
+		{
+			"mesh":0,
+			"name":"BaseMesh",
+			"skin":0
+		},
+		{
+			"children":[
+				25,
+				24
+			],
+			"name":"Armature_BaseMesh"
+		}
+	],
+	"animations":[
+		{
+			"channels":[
+				{
+					"sampler":0,
+					"target":{
+						"node":24,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":1,
+					"target":{
+						"node":24,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":2,
+					"target":{
+						"node":24,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":3,
+					"target":{
+						"node":17,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":4,
+					"target":{
+						"node":17,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":5,
+					"target":{
+						"node":17,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":6,
+					"target":{
+						"node":0,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":7,
+					"target":{
+						"node":0,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":8,
+					"target":{
+						"node":0,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":9,
+					"target":{
+						"node":8,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":10,
+					"target":{
+						"node":8,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":11,
+					"target":{
+						"node":8,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":12,
+					"target":{
+						"node":7,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":13,
+					"target":{
+						"node":7,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":14,
+					"target":{
+						"node":7,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":15,
+					"target":{
+						"node":3,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":16,
+					"target":{
+						"node":3,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":17,
+					"target":{
+						"node":3,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":18,
+					"target":{
+						"node":2,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":19,
+					"target":{
+						"node":2,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":20,
+					"target":{
+						"node":2,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":21,
+					"target":{
+						"node":1,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":22,
+					"target":{
+						"node":1,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":23,
+					"target":{
+						"node":1,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":24,
+					"target":{
+						"node":6,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":25,
+					"target":{
+						"node":6,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":26,
+					"target":{
+						"node":6,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":27,
+					"target":{
+						"node":5,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":28,
+					"target":{
+						"node":5,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":29,
+					"target":{
+						"node":5,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":30,
+					"target":{
+						"node":4,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":31,
+					"target":{
+						"node":4,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":32,
+					"target":{
+						"node":4,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":33,
+					"target":{
+						"node":16,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":34,
+					"target":{
+						"node":16,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":35,
+					"target":{
+						"node":16,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":36,
+					"target":{
+						"node":15,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":37,
+					"target":{
+						"node":15,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":38,
+					"target":{
+						"node":15,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":39,
+					"target":{
+						"node":11,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":40,
+					"target":{
+						"node":11,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":41,
+					"target":{
+						"node":11,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":42,
+					"target":{
+						"node":10,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":43,
+					"target":{
+						"node":10,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":44,
+					"target":{
+						"node":10,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":45,
+					"target":{
+						"node":9,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":46,
+					"target":{
+						"node":9,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":47,
+					"target":{
+						"node":9,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":48,
+					"target":{
+						"node":14,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":49,
+					"target":{
+						"node":14,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":50,
+					"target":{
+						"node":14,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":51,
+					"target":{
+						"node":13,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":52,
+					"target":{
+						"node":13,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":53,
+					"target":{
+						"node":13,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":54,
+					"target":{
+						"node":12,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":55,
+					"target":{
+						"node":12,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":56,
+					"target":{
+						"node":12,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":57,
+					"target":{
+						"node":20,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":58,
+					"target":{
+						"node":20,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":59,
+					"target":{
+						"node":20,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":60,
+					"target":{
+						"node":19,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":61,
+					"target":{
+						"node":19,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":62,
+					"target":{
+						"node":19,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":63,
+					"target":{
+						"node":18,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":64,
+					"target":{
+						"node":18,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":65,
+					"target":{
+						"node":18,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":66,
+					"target":{
+						"node":23,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":67,
+					"target":{
+						"node":23,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":68,
+					"target":{
+						"node":23,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":69,
+					"target":{
+						"node":22,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":70,
+					"target":{
+						"node":22,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":71,
+					"target":{
+						"node":22,
+						"path":"scale"
+					}
+				},
+				{
+					"sampler":72,
+					"target":{
+						"node":21,
+						"path":"translation"
+					}
+				},
+				{
+					"sampler":73,
+					"target":{
+						"node":21,
+						"path":"rotation"
+					}
+				},
+				{
+					"sampler":74,
+					"target":{
+						"node":21,
+						"path":"scale"
+					}
+				}
+			],
+			"name":"Armature_BaseMeshAction",
+			"samplers":[
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":10
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":11
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":12
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":13
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":15
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":12
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":16
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":17
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":12
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":18
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":19
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":20
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":21
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":22
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":23
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":24
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":25
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":26
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":27
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":28
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":29
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":30
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":31
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":32
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":33
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":34
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":12
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":35
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":36
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":37
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":38
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":39
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":40
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":41
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":42
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":43
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":44
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":45
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":46
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":47
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":48
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":26
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":49
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":50
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":12
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":51
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":52
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":53
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":54
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":55
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":56
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":57
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":58
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":59
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":60
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":61
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":62
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":63
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":64
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":65
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":66
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":67
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":68
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":69
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":70
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":71
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":72
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":73
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":65
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":74
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":75
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":76
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":77
+				},
+				{
+					"input":14,
+					"interpolation":"LINEAR",
+					"output":78
+				},
+				{
+					"input":9,
+					"interpolation":"STEP",
+					"output":79
+				}
+			]
+		}
+	],
+	"materials":[
+		{
+			"doubleSided":true,
+			"name":"Fbx Default Material 0",
+			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.7200000286102295,
+					0.7200000286102295,
+					0.7200000286102295,
+					1
+				],
+				"metallicFactor":0,
+				"roughnessFactor":0.5527864098548889
+			}
+		}
+	],
+	"meshes":[
+		{
+			"name":"BaseHuman_v2",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":0,
+						"NORMAL":1,
+						"TEXCOORD_0":2,
+						"COLOR_0":3,
+						"COLOR_1":4,
+						"JOINTS_0":5,
+						"WEIGHTS_0":6
+					},
+					"indices":7,
+					"material":0
+				}
+			]
+		}
+	],
+	"skins":[
+		{
+			"inverseBindMatrices":8,
+			"joints":[
+				24,
+				17,
+				0,
+				8,
+				7,
+				3,
+				2,
+				1,
+				6,
+				5,
+				4,
+				16,
+				15,
+				11,
+				10,
+				9,
+				14,
+				13,
+				12,
+				20,
+				19,
+				18,
+				23,
+				22,
+				21
+			],
+			"name":"Armature_BaseMesh"
+		}
+	],
+	"accessors":[
+		{
+			"bufferView":0,
+			"componentType":5126,
+			"count":2831,
+			"max":[
+				0.5409432053565979,
+				1.8001378774642944,
+				0.09217044711112976
+			],
+			"min":[
+				-0.5409432053565979,
+				-0.0003954768180847168,
+				-0.2437128722667694
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":1,
+			"componentType":5126,
+			"count":2831,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":2831,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":3,
+			"componentType":5121,
+			"count":2831,
+			"normalized":true,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":4,
+			"componentType":5123,
+			"count":2831,
+			"normalized":true,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":5,
+			"componentType":5121,
+			"count":2831,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":6,
+			"componentType":5126,
+			"count":2831,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":7,
+			"componentType":5123,
+			"count":5904,
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":8,
+			"componentType":5126,
+			"count":25,
+			"type":"MAT4"
+		},
+		{
+			"bufferView":9,
+			"componentType":5126,
+			"count":2,
+			"max":[
+				4.166666666666667
+			],
+			"min":[
+				0.03333333333333333
+			],
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":10,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":11,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":12,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":13,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":14,
+			"componentType":5126,
+			"count":125,
+			"max":[
+				4.166666666666667
+			],
+			"min":[
+				0.03333333333333333
+			],
+			"type":"SCALAR"
+		},
+		{
+			"bufferView":15,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":16,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":17,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":18,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":19,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":20,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":21,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":22,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":23,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":24,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":25,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":26,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":27,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":28,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":29,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":30,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":31,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":32,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":33,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":34,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":35,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":36,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":37,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":38,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":39,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":40,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":41,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":42,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":43,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":44,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":45,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":46,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":47,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":48,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":49,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":50,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":51,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":52,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":53,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":54,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":55,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":56,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":57,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":58,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":59,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":60,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":61,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":62,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":63,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":64,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":65,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":66,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":67,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":68,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":69,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":70,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":71,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":72,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":73,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":74,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":75,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":76,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":77,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":78,
+			"componentType":5126,
+			"count":125,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":79,
+			"componentType":5126,
+			"count":2,
+			"type":"VEC3"
+		}
+	],
+	"bufferViews":[
+		{
+			"buffer":0,
+			"byteLength":33972,
+			"byteOffset":0,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":33972,
+			"byteOffset":33972,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":22648,
+			"byteOffset":67944,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":11324,
+			"byteOffset":90592,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":22648,
+			"byteOffset":101916,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":11324,
+			"byteOffset":124564,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":45296,
+			"byteOffset":135888,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":11808,
+			"byteOffset":181184,
+			"target":34963
+		},
+		{
+			"buffer":0,
+			"byteLength":1600,
+			"byteOffset":192992
+		},
+		{
+			"buffer":0,
+			"byteLength":8,
+			"byteOffset":194592
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":194600
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":194624
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":194656
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":194680
+		},
+		{
+			"buffer":0,
+			"byteLength":500,
+			"byteOffset":194704
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":195204
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":197204
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":197228
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":199228
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":199252
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":201252
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":201276
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":201300
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203300
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203324
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203348
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203380
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203404
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203428
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203460
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203484
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203508
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203540
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203564
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203588
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203620
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203644
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203676
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203700
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":203724
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203756
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":203780
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":203804
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":205804
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":205828
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":205852
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":207852
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":207876
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":207900
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":209900
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":209924
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":209956
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":209980
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":210012
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":210036
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":210060
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212060
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212084
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":212108
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212140
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212164
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":212188
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212220
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":212244
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":212268
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":214268
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":214292
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":214316
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":216316
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":216340
+		},
+		{
+			"buffer":0,
+			"byteLength":32,
+			"byteOffset":216364
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":216396
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":216420
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":216444
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":218444
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":218468
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":220468
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":220492
+		},
+		{
+			"buffer":0,
+			"byteLength":2000,
+			"byteOffset":220516
+		},
+		{
+			"buffer":0,
+			"byteLength":24,
+			"byteOffset":222516
+		}
+	],
+	"buffers":[
+		{
+			"byteLength":222540,
+			"uri":"Human_Basemesh_Simplified_Anim_Wave2.bin"
+		}
+	]
+}
+
+GLTFImporter.cpp, GetInverseBindMatrix:
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+UIMessageQueue.cpp, PlayGLTFAnimation
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+
+RendererOpenGL.h, Render(): rendering terrain component
+RendererOpenGL.h, void Render(): Entity Component tag is "KnightComponent"
+RendererOpenGL.h, void Render(): Entity Location X: 0 Y: 0 Z: -5.5
+

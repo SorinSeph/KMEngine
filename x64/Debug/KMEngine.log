@@ -1,0 +1,18 @@
+﻿  GLTFImporter.cpp
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(177,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(214,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(217,49): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(445,56): warning C4267: '=': conversion from 'size_t' to 'uint16_t', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(656,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1017,41): warning C4244: 'initializing': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(164,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'GLTFImporter.cpp')
+      C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(164,19):
+      the template instantiation context (the oldest one first) is
+          C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(36,5):
+          see reference to function template instantiation 'void CGLTFImporter::CreateAnimBoneHierarchy<CGLTFNode>(CTemplatedTree<CGLTFNode> &)' being compiled
+  
+C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1075,1): warning C4715: 'CGLTFImporter::GetBufferViewByType': not all control paths return a value
+  KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

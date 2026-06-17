@@ -318,13 +318,18 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	}
 	stbi_image_free(data);
 
-	// Activate the shader program BEFORE setting any uniforms
 	glUseProgram(ShaderProgram);
 
 	glm::mat4 IdentityMatrix{ 1.f };
 
-	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[0]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[1]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
+	/*glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[0]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[1]"), 1, GL_FALSE, &IdentityMatrix[0][0]);*/
+
+	for (int i = 0; i < 63; i++)
+	{
+		std::string BoneName{ "bones[" + std::to_string(i) + "]"};
+		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneName.c_str()), 1, GL_FALSE, &IdentityMatrix[0][0]);
+	}
 
 	glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
 

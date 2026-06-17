@@ -1,0 +1,269 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CCoreClock::m_PrevTime' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/Core/CoreClock.h"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CCoreClock::{ctor}",
+                  "decoratedName": "??0CCoreClock@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CCoreClock::m_PrevTime"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CUIMessageQueue::m_MouseY' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/UIMessageQueue.h"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CUIMessageQueue::{ctor}",
+                  "decoratedName": "??0CUIMessageQueue@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CUIMessageQueue::m_MouseY"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CUIMessageQueue::m_MouseX' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/UIMessageQueue.h"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CUIMessageQueue::{ctor}",
+                  "decoratedName": "??0CUIMessageQueue@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CUIMessageQueue::m_MouseX"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CUIMessageQueue::m_TestInt' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/UIMessageQueue.h"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CUIMessageQueue::{ctor}",
+                  "decoratedName": "??0CUIMessageQueue@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CUIMessageQueue::m_TestInt"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::m_YKeyPressed' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::m_YKeyPressed"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'CViewportWindow::bSpeedScale' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/ViewportWindow.h"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CViewportWindow::{ctor}",
+                  "decoratedName": "??0CViewportWindow@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "CViewportWindow::bSpeedScale"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35223.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/viewportwindow.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "f70d87fd5caf8991e90e9408ea0bbf3468aa3dacf64c583ab189ceab969d995f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/Core/CoreClock.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c3d838558cd578e78e35179f06e1dc1bae4b290fd83064ea99e287caf5284114"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/UIMessageQueue.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "20fcfa181682fe7efe8a2f366ad81869d87bc48e9b47e8ae6a35750548c07304"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Elena/Documents/Misc/KMEngine/KMEngine/ViewportWindow.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "a9772c0a8db0b73f004b6e58945453a193d7ef63f0c17254da2cb5a3f962dfd2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/elena/documents/misc/kmengine/kmengine/logger.h"
+          },
+          "hashes": {
+            "sha-256": "71872e4e825c7d4da36042c4e1b4e8ed4e35c76b59c1d5caf745cc9bec0b5191"
+          }
+        }
+      ]
+    }
+  ]
+}
