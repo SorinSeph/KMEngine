@@ -208,10 +208,17 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 
 		for (int i = 0; i < JointsBufferSize / 4; ++i)
 		{
-			Vertices.at(i).m_Joint = glm::vec4(JointsBuffer->m_Data.at(i * 4),
-				JointsBuffer->m_Data.at(i * 4 + 1),
-				JointsBuffer->m_Data.at(i * 4 + 2),
-				JointsBuffer->m_Data.at(i * 4 + 3));
+			uint8_t x = JointsBuffer->m_Data.at(i * 4);
+			uint8_t y = JointsBuffer->m_Data.at(i * 4 + 1);
+			uint8_t z = JointsBuffer->m_Data.at(i * 4 + 2);
+			uint8_t w = JointsBuffer->m_Data.at(i * 4 + 3);
+
+			Vertices.at(i).m_Joint = glm::vec4{x, y, z, w};
+
+			//Vertices.at(i).m_Joint = glm::vec4((float)m_GLTFImporter.m_JointArrayMap.find(x)->second,
+			//	(float)m_GLTFImporter.m_JointArrayMap.find(y)->second,
+			//	(float)m_GLTFImporter.m_JointArrayMap.find(z)->second,
+			//	(float)m_GLTFImporter.m_JointArrayMap.find(w)->second);
 		}
 
 		for (int i = 0; i < WeightsBufferSize / 4; ++i)
@@ -232,18 +239,11 @@ void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileCo
 		{
 			Indices = IndicesBuffer->m_Data;
 		}
+
+		//__debugbreak();
 	}
 
 	CreateModel(Vertices, Indices);
-
-	auto Breakpoint = 1;
-}
-
-void CEntityBuilder::ImportGLTFAnimation()
-{
-	CGLTFAnimation Animation = m_GLTFImporter.ImportAnimation(m_FilePath, m_FileContent);
-
-	auto breakpoint = 1;
 }
 
 CGLTFAnimation CEntityBuilder::GetGLTFAnimation()
@@ -253,9 +253,17 @@ CGLTFAnimation CEntityBuilder::GetGLTFAnimation()
 	return Animation;
 }
 
+CGLTFAnimation* CEntityBuilder::GetGLTFpAnimation()
+{
+	CGLTFAnimation* pAnimation = m_GLTFImporter.GetAnimation();
+
+	return pAnimation;
+}
+
 void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices)
 {
 	CScene& Scene = CScene::GetScene();
+	CLogger& Logger = CLogger::GetLogger();
 	CGameEntity3D Entity{};
 	Entity.m_GameEntityTag = "Knight";
 	CGameEntity3DComponent EntityComponent;
@@ -288,7 +296,9 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Position));
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribIPointer(1, 4, GL_INT, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Joint));
+	//glVertexAttribIPointer(1, 4, GL_INT, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Joint));
+	//glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Joint));
 	glEnableVertexAttribArray(1);
 
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(SSkeletalVertex), (void*)offsetof(SSkeletalVertex, m_Weight));
@@ -305,25 +315,24 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	std::string TexturePath{ "C:\\Users\\sefce\\source\\KMEngine\\KMEngine\\grey_grid.jpg" };
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load("grey_grid.jpg", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load(TexturePath.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+		Logger.Log("Sucessfully loaded texture located at ", std::filesystem::absolute(TexturePath));
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		Logger.Log("Failed to load texture in CreateModel function");
 	}
 	stbi_image_free(data);
 
 	glUseProgram(ShaderProgram);
 
 	glm::mat4 IdentityMatrix{ 1.f };
-
-	/*glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[0]"), 1, GL_FALSE, &IdentityMatrix[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bones[1]"), 1, GL_FALSE, &IdentityMatrix[0][0]);*/
 
 	for (int i = 0; i < 63; i++)
 	{
@@ -332,6 +341,8 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	}
 
 	glUniform1i(glGetUniformLocation(ShaderProgram, "material.diffuse"), 0);
+
+
 
 	if (m_pOpenGLDevice)
 	{

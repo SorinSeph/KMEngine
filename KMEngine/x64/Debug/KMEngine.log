@@ -1,18 +1,48 @@
-﻿  GLTFImporter.cpp
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(179,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(216,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(219,49): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(442,56): warning C4267: '=': conversion from 'size_t' to 'uint16_t', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(657,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1018,41): warning C4244: 'initializing': conversion from 'uint64_t' to 'uint16_t', possible loss of data
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(167,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'GLTFImporter.cpp')
-      C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.h(167,19):
+﻿  UIModule.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(90,23): warning C4312: 'type cast': conversion from 'LONG' to 'HINSTANCE' of greater size
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(195,39): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(196,34): warning C4244: '=': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(336,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(337,46): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(236,30): warning C4101: 'y': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(242,26): warning C4101: 'hSubMenu': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(481,17): warning C4101: 'hdc': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(482,17): warning C4101: 'ps': unreferenced local variable
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(483,17): warning C4101: 'rect': unreferenced local variable
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(4813,18): warning C4244: '=': conversion from 'wchar_t' to 'char', possible loss of data
+  (compiling source file 'Modules/UIModule.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(4813,18):
       the template instantiation context (the oldest one first) is
-          C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(38,5):
-          see reference to function template instantiation 'void CGLTFImporter::CreateAnimBoneHierarchy<CGLTFNode>(CTemplatedTree<CGLTFNode> &)' being compiled
+          C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(280,46):
+          see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+              C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp(280,46):
+              see the first reference to 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string' in 'WindowProc'
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xstring(812,17):
+          see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)' being compiled
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xstring(968,18):
+          see reference to function template instantiation '_OutIt *std::_Copy_n_unchecked4<wchar_t*,_Size,char*>(_InIt,_SizeTy,_OutIt)' being compiled
+          with
+          [
+              _OutIt=char *,
+              _Size=unsigned __int64,
+              _InIt=wchar_t *,
+              _SizeTy=unsigned __int64
+          ]
   
-C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp(1240,1): warning C4715: 'CGLTFImporter::GetBufferViewByType': not all control paths return a value
   KMEngine.vcxproj -> C:\Users\sefce\source\KMEngine\x64\Debug\KMEngine.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

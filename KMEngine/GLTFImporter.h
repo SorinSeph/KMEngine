@@ -125,7 +125,9 @@ public:
 	std::vector<CGLTFNode> m_Nodes{};
 	std::vector<glm::mat4> m_InverseBindMatrices;
 	std::unordered_map<uint32_t, glm::mat4> m_InverseBindMatrixMap;
+	std::unordered_map<uint32_t, uint32_t> m_JointsArrayMap;
 	CTemplatedTree<CGLTFNode> m_AnimHierarchyTree{};
+	int m_TestInt{ 0 };
 };
 
 class CGLTFImporter
@@ -205,6 +207,10 @@ public:
 
 	void ReadAnimationBIN(std::string FilePath);
 
+	void GetJointsArray(const std::string& FileContent);
+
+	CGLTFAnimation* GetAnimation();
+
 	std::vector<float> GetAnimationRuntime();
 
 	std::vector<CBufferViewBase*> m_BufferViews;
@@ -230,4 +236,8 @@ public:
 	std::vector<CBufferViewBase*> m_InputOutputBufferViews{};
 
 	CTemplatedTree<CGLTFNode> m_HierarchyTree{};
+
+	std::vector<uint16_t> m_JointArray;
+
+	std::unordered_map<uint16_t, uint16_t> m_JointArrayMap;
 };

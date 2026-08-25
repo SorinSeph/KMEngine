@@ -78,5 +78,24 @@ public:
         return nullptr;
     }
 
+    SNode<T>* FindParent(SNode<T>& StartNode, std::string NodeName)
+    {
+        for (SNode<T>& Child : StartNode.m_Children)
+        {
+            if (Child.m_NodeName == NodeName)
+            {
+                return &StartNode;
+            }
+
+            SNode<T>* FoundNode = FindParent(Child, NodeName);
+            if (FoundNode != nullptr)
+            {
+                return FoundNode;
+            }
+        }
+
+        return nullptr;
+    }
+
     SNode<T> m_RootNode{};
 };

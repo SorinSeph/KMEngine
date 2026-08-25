@@ -15,6 +15,8 @@ std::vector<CBufferViewBase*> CGLTFImporter::Import(std::string& FilePath, const
     // Read buffer data from BIN file
     ReadBIN(FilePath);
 
+    GetJointsArray(FileContent);
+
     return m_BufferViews;
 }
 
@@ -38,6 +40,11 @@ CGLTFAnimation CGLTFImporter::ImportAnimation(std::string& FilePath, const std::
     CreateAnimBoneHierarchy<CGLTFNode>(m_Animation.m_AnimHierarchyTree);
 
     return m_Animation;
+}
+
+CGLTFAnimation* CGLTFImporter::GetAnimation()
+{
+    return &m_Animation;
 }
 
 void CGLTFImporter::ImportAttributes(const std::string& FileContent)
@@ -226,6 +233,37 @@ std::string CGLTFImporter::GetBufferViewStringIndex(const std::string& FileConte
     }
 
     return AttributeBufferIndex;
+}
+
+void CGLTFImporter::GetJointsArray(const std::string& FileContent)
+{
+    std::string SearchJointArrayString = "\"joints\":";
+    uint64_t JointArrayPosition = FileContent.find(SearchJointArrayString);
+    std::string JointArrayString;
+
+    for (; JointArrayPosition < FileContent.size(); JointArrayPosition++)
+    {
+        if (FileContent.at(JointArrayPosition) == ']'
+            && FileContent.at(JointArrayPosition + 1) == ',')
+        {
+            break;
+        }
+        else if (std::isdigit(FileContent[JointArrayPosition]))
+        {
+            JointArrayString += FileContent[JointArrayPosition];
+        }
+        else if (!std::isdigit(FileContent[JointArrayPosition]) && JointArrayString.size() > 0)
+        {
+            uint16_t Joint = uint16_t(std::atoi(JointArrayString.c_str()));
+            m_JointArray.push_back(Joint);
+            JointArrayString.clear();
+        }
+    }
+
+    for (int i = 0; i < m_JointArray.size(); i++)
+    {
+        m_JointArrayMap.insert({i, m_JointArray.at(i) });
+    }
 }
 
 uint64_t CGLTFImporter::GetByteOffset(const std::string& BufferIndexString, const std::string& BufferViewsData)
@@ -580,7 +618,7 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
 
                     if (RotationValuesVector.size() == 4)
                     {
-                        glm::quat RotationQuat{ RotationValuesVector.at(0), RotationValuesVector.at(1), RotationValuesVector.at(2), RotationValuesVector.at(3) };
+                        glm::quat RotationQuat{ RotationValuesVector.at(3), RotationValuesVector.at(0), RotationValuesVector.at(1), RotationValuesVector.at(2) };
                         m_Animation.m_Nodes.at(OpenBracketCount).m_PoseRotation = RotationQuat;
                         m_Animation.m_Nodes.at(OpenBracketCount).m_TransformTypeFlags = m_Animation.m_Nodes.at(OpenBracketCount).m_TransformTypeFlags & static_cast<uint16_t>(EChannelTransformType::Rotation);
                     }
@@ -592,7 +630,6 @@ void CGLTFImporter::ImportBoneData(const std::string& FileContent)
 
     m_Animation.m_Nodes.erase(m_Animation.m_Nodes.begin() + MeshNodeIndex);
     m_Animation.m_Nodes.erase(m_Animation.m_Nodes.end() - 1);
-
 
     std::string SearchSkinString = "\"inverseBindMatrices\":";
     uint64_t SkinDataPosition = FileContent.find(SearchSkinString);
@@ -1190,16 +1227,9 @@ void CGLTFImporter::GetInverseBindMatrix(const std::string& FileContent, std::st
     m_Animation.m_InverseBindMatrices.reserve(62);
 
     for (int i = 0; i < InverseMatricesVector.size(); i++)
-    {
-        //m_Animation.m_InverseBindMatrices.push_back(InverseMatricesVector.at(InverseBindMatrixNode.at(i)));
-        //m_Animation.m_InverseBindMatrices.push_back(InverseMatricesVector.at(i));
-        for (int MatrixNodeIt = 0; MatrixNodeIt < InverseBindMatrixNode.size(); MatrixNodeIt++)
-        {
-            if (InverseBindMatrixNode.at(MatrixNodeIt) == i)
-            {
-                m_Animation.m_InverseBindMatrixMap.insert({ i, InverseMatricesVector.at(MatrixNodeIt) });
-            }
-        }
+    {   
+        m_Animation.m_InverseBindMatrixMap.insert({ InverseBindMatrixNode.at(i), InverseMatricesVector.at(i) });
+        m_Animation.m_JointsArrayMap.insert({ InverseBindMatrixNode.at(i), i });
     }
 }
 

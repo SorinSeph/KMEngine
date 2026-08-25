@@ -6,3 +6,5 @@ Right now we use absolute filepaths
 * Timer bRunOnce wrong?
 
 * Raypicking crashes
+
+! Animations are distorted because the final nodes (joints) are not the ones corresponding with their proper joints / weights. Also, see the way the skeletal vertices structure loads the joints and weights.

@@ -20,6 +20,8 @@ public:
 	// @Temporary for testing a single animation imported on button press
 	CGLTFAnimation GetGLTFAnimation();
 
+	CGLTFAnimation* GetGLTFpAnimation();
+
 	void CreateModel(const std::vector<SSkeletalVertex>& Vertices, const std::vector<uint32_t>& Indices);
 
 	void CreateGizmoOpenGL(glm::vec3 Location);

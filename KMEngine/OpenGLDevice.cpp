@@ -1,4 +1,5 @@
 #include "OpenGLDevice.h"
+#include <GL/wglext.h>
 
 void COpenGLDevice::SetViewportHandle(HWND hwnd)
 {
@@ -78,13 +79,9 @@ void COpenGLDevice::InitOpenGLDevice()
         PFD_TYPE_RGBA,
         32,
         0, 0, 0, 0, 0, 0,
-        0,
-        0,
-        0,
+        0, 0, 0,
         0, 0, 0, 0,
-        24,
-        8,
-        0,
+        24, 8, 0,
         PFD_MAIN_PLANE,
         0,
         0, 0, 0
@@ -93,7 +90,34 @@ void COpenGLDevice::InitOpenGLDevice()
     int PixelFormat = ChoosePixelFormat(m_HDC, &PixelFormatDesc);
     SetPixelFormat(m_HDC, PixelFormat, &PixelFormatDesc);
 
-    m_HGLRC = wglCreateContext(m_HDC);
+    // Step 1: create a temporary legacy context to load wglCreateContextAttribsARB
+    HGLRC TempContext = wglCreateContext(m_HDC);
+    wglMakeCurrent(m_HDC, TempContext);
+
+    // Step 2: load the extension
+    PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB =
+        (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+
+    if (!wglCreateContextAttribsARB)
+    {
+        MessageBoxA(0, "wglCreateContextAttribsARB not supported", "Error", 0);
+        exit(-1);
+    }
+
+    // Step 3: create OpenGL 3.3 core profile context
+    const int ContextAttribs[] =
+    {
+        WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+        WGL_CONTEXT_MINOR_VERSION_ARB, 3,
+        WGL_CONTEXT_PROFILE_MASK_ARB,  WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
+        0
+    };
+
+    m_HGLRC = wglCreateContextAttribsARB(m_HDC, nullptr, ContextAttribs);
+
+    // Step 4: discard temp context, activate core context
+    wglMakeCurrent(nullptr, nullptr);
+    wglDeleteContext(TempContext);
     wglMakeCurrent(m_HDC, m_HGLRC);
 
     // Initialize glad after context is current!

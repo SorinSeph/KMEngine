@@ -1,9 +1,10 @@
-#include <any>
+﻿#include <any>
 #include "UIMessageQueue.h"
 #include "Modules/UIModule.h"
 #include "Modules/GraphicsModule.h"
 #include "Modules/PhysicsModule.h"
 #include "Core/CoreClock.h"
+#include <algorithm>
 
 //for (int ChildIt = Anim.m_Nodes.size() - 1; ChildIt >= 0; --ChildIt)
 
@@ -319,6 +320,7 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
     CGraphicsModule* pGraphicsModule = static_cast<CGraphicsModule*>(m_pUIModule->m_pMediator->m_ModuleArray[1]);
     CTimerManager& TimerManager = CTimerManager::GetTimerManager();
     CGLTFAnimation Anim = pGraphicsModule->m_EntityBuilder.GetGLTFAnimation();
+    CGLTFAnimation* pAnim = pGraphicsModule->m_EntityBuilder.GetGLTFpAnimation();
 
     CScene& Scene = CScene::GetScene();
     std::vector<CGameEntity3D>& SceneEntityList = Scene.GetSceneList();
@@ -384,7 +386,7 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
     //    };
 
     //    float CurrentTime = TimerManager.m_pCoreClock->GetFDeltaTime();
-    //    float AnimTime = CurrentTime + Anim.m_AnimKeyframes.at(KeyframeIt);
+    //    float AnimTime = CurrentTime + pAnim->m_AnimKeyframes.at(KeyframeIt);
     //    TimerManager.SetTimerVariadicArgsLambda("AnimationTimer", AnimTime, 0.0f, AnimLambda);
     //}
 
@@ -395,28 +397,11 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
     // Testing 2
     //--------------------------------------------------------------------------------------
 
-    glm::mat4 Anim2InverseBindMatriceBoneRoot{
-        1, -0, 0, -0,
-        -0, 1, -0, 0,
-        0, -0, 1, -0,
-        -0, 0, -0, 1
-    };
-
-    glm::mat4 Anim2InverseBindMatriceBoneTop{
-        1, -0, 0, -0,
-        -0, 1, -0, 0,
-        0, -0, 1, -0,
-        -0, -3, -0, 1
-    };
-
     std::vector<glm::mat4> NodeLocalTransform;
     std::vector<glm::mat4> NodeGlobalTransform;
     std::vector<glm::mat4> InverseBindMatrices;
 
-    InverseBindMatrices.push_back(Anim2InverseBindMatriceBoneRoot);
-    InverseBindMatrices.push_back(Anim2InverseBindMatriceBoneTop);
-
-    for (auto& NodeIt : Anim.m_Nodes)
+    for (auto& NodeIt : pAnim->m_Nodes)
     {
         glm::mat4 TranslationMatrix = glm::translate(glm::mat4(1.0f), NodeIt.m_PoseTranslation);
         glm::mat4 RotationMatrix = glm::mat4_cast(NodeIt.m_PoseRotation);
@@ -425,28 +410,37 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
         NodeLocalTransform.push_back(GlobalTransform);
     }
 
-    for (uint16_t KeyframeIt = 0; KeyframeIt < Anim.m_AnimKeyframes.size(); KeyframeIt++)
+
+    CGLTFImporter* pImporter = &pGraphicsModule->m_EntityBuilder.m_GLTFImporter;
+
+    //@Temporary: testing whether tree data structure works
+    auto Test = pAnim->m_AnimHierarchyTree.FindNodeByName(pAnim->m_AnimHierarchyTree.m_RootNode, "bone_right");
+
+    for (uint16_t KeyframeIt = 0; KeyframeIt < pAnim->m_AnimKeyframes.size(); KeyframeIt++)
     {
         Logger.Log("UIMessageQueue.cpp, PlayGLTFAnimation");
 
         auto AnimLambda = [=]() mutable {
             CLogger& Logger = CLogger::GetLogger();
 
-            float KeyframeTime = Anim.m_AnimKeyframes.at(KeyframeIt);
+            std::vector<glm::mat4> FinalTransformVector{};
 
+            float KeyframeTime = pAnim->m_AnimKeyframes.at(KeyframeIt);
+
+            std::unordered_map<std::string, glm::mat4> LocalTransformMap;
             const uint16_t TranslationFlag = (uint16_t)EChannelTransformType::Translation;
             const uint16_t RotationFlag = (uint16_t)EChannelTransformType::Rotation;
             const uint16_t ScaleFlag = (uint16_t)EChannelTransformType::Scale;
 
-            for (int32_t NodeIt = static_cast<int32_t>(Anim.m_Nodes.size()) - 1; NodeIt >= 0; NodeIt--)
+            for (int32_t NodeIt = static_cast<int32_t>(pAnim->m_Nodes.size()) - 1; NodeIt >= 0; NodeIt--)
             {
-                glm::vec3 Translation{ Anim.m_Nodes.at(NodeIt).m_PoseTranslation };
-                glm::quat Rotation = Anim.m_Nodes.at(NodeIt).m_PoseRotation;
-                glm::vec3 Scale = Anim.m_Nodes.at(NodeIt).m_PoseScale;
+                glm::vec3 Translation{ pAnim->m_Nodes.at(NodeIt).m_PoseTranslation };
+                glm::quat Rotation = pAnim->m_Nodes.at(NodeIt).m_PoseRotation;
+                glm::vec3 Scale = pAnim->m_Nodes.at(NodeIt).m_PoseScale;
 
-                if (Anim.m_Nodes.at(NodeIt).m_KeyframeMap.contains(KeyframeTime))
+                if (pAnim->m_Nodes.at(NodeIt).m_KeyframeMap.contains(KeyframeTime))
                 {
-                    const CKeyframe& Keyframe = Anim.m_Nodes.at(NodeIt).m_KeyframeMap.at(KeyframeTime);
+                    const CKeyframe& Keyframe = pAnim->m_Nodes.at(NodeIt).m_KeyframeMap.at(KeyframeTime);
                     const uint16_t KeyframeFlag = Keyframe.m_TransformTypeFlags;
 
                     if ((KeyframeFlag & TranslationFlag) == TranslationFlag)
@@ -464,39 +458,95 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
                 }
 
                 glm::mat4 LocalTranslation{ 1.0f};
-                //PoseTranslation = glm::translate(PoseTranslation, Anim.m_Nodes.at(NodeIt).m_PoseTranslation);
+                //PoseTranslation = glm::translate(PoseTranslation, pAnim->m_Nodes.at(NodeIt).m_PoseTranslation);
                 LocalTranslation = glm::translate(LocalTranslation, Translation);
                 glm::mat4 LocalRotation{ glm::mat4(Rotation) };
-                NodeLocalTransform.at(NodeIt) = LocalTranslation * LocalRotation * glm::scale(glm::mat4(1.0f), Scale);
+                auto LocalTransform = LocalTranslation * LocalRotation;
+                NodeLocalTransform.at(NodeIt) = LocalTranslation * LocalRotation;
+                LocalTransformMap[pAnim->m_Nodes.at(NodeIt).m_Name] = LocalTransform;
+
+                //if (KeyframeIt == 100 && NodeIt == 17)
+                //{
+                //    __debugbreak();
+                //}
+                    
             }
 
-            std::vector<glm::mat4> NodeGlobalTransform(Anim.m_Nodes.size());
-            NodeGlobalTransform.at(Anim.m_Nodes.size() - 1) = NodeLocalTransform.at(Anim.m_Nodes.size() - 1);
-            for (int32_t NodeIt = static_cast<int32_t>(Anim.m_Nodes.size()) - 2; NodeIt >= 0; NodeIt--)
+            std::vector<glm::mat4> NodeGlobalTransform(pAnim->m_Nodes.size());
+            NodeGlobalTransform.at(pAnim->m_Nodes.size() - 1) = NodeLocalTransform.at(pAnim->m_Nodes.size() - 1);
+
+            std::unordered_map<std::string, glm::mat4> GlobalTransformMap;
+            std::string RootName = pAnim->m_Nodes.at(pAnim->m_Nodes.size() - 1).m_Name;
+
+            //GlobalTransformMap[RootName] = glm::translate(glm::mat4{ 1.f }, pAnim->m_Nodes.at(pAnim->m_Nodes.size() - 1).m_PoseTranslation);
+            GlobalTransformMap[RootName] = LocalTransformMap[RootName];
+
+            for (int32_t NodeIt = static_cast<int32_t>(pAnim->m_Nodes.size()) - 2; NodeIt >= 0; NodeIt--)
             {
-                auto ParentGlobalTransform = NodeGlobalTransform.at(NodeIt + 1);
-                auto CurrentLocalTransform = NodeLocalTransform.at(NodeIt);
+                // Get the parent global transform
+                glm::mat4 ParentGlobalTransform{};
+
+                SNode<CGLTFNode>* ParentNode = pAnim->m_AnimHierarchyTree.FindParent(pAnim->m_AnimHierarchyTree.m_RootNode, std::string{ pAnim->m_Nodes.at(NodeIt).m_Name });
+                ParentGlobalTransform = GlobalTransformMap[ParentNode->m_NodeName];
+
+                glm::mat4 CurrentLocalTransform = NodeLocalTransform.at(NodeIt);
+                glm::mat4 GlobalTransform = ParentGlobalTransform * CurrentLocalTransform;
                 NodeGlobalTransform.at(NodeIt) = ParentGlobalTransform * CurrentLocalTransform;
-                if (KeyframeIt == 100 && NodeIt == 24)
-                    __debugbreak();
-            }
-            for (int32_t ShaderNodeIt = 0; ShaderNodeIt < static_cast<int32_t>(NodeGlobalTransform.size()); ShaderNodeIt++)
-            {
-                int32_t NodeIndex = static_cast<int32_t>(NodeGlobalTransform.size()) - 1 - ShaderNodeIt;
-                auto FinalGlobalTransform = NodeGlobalTransform.at(ShaderNodeIt);
-                auto FinalInverseMatrix = Anim.m_InverseBindMatrixMap.at(ShaderNodeIt);
-                glm::mat4 BoneMatrix = FinalGlobalTransform * FinalInverseMatrix;
-
-                std::string BoneString{ "bones[" + std::to_string(NodeIndex) + "]" };
-                glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
-
-                if (KeyframeIt == 100 && ShaderNodeIt == 24)
-                    __debugbreak();
-
-                //if (KeyframeIt == 29 && ShaderNodeIt == 0)
+                GlobalTransformMap[pAnim->m_Nodes.at(NodeIt).m_Name] = GlobalTransform;
+                //if (KeyframeIt == 100 && NodeIt == 17)
                 //    __debugbreak();
             }
 
+            for (int32_t NodeIt = static_cast<int32_t>(NodeGlobalTransform.size() - 1); NodeIt >= 0; NodeIt--)
+            {
+                auto FinalGlobalTransform = GlobalTransformMap.at(pAnim->m_Nodes.at(NodeIt).m_Name);
+                auto FinalInverseMatrix = pAnim->m_InverseBindMatrixMap.at(NodeIt);
+                glm::mat4 BoneMatrix = FinalGlobalTransform * FinalInverseMatrix;
+
+                //std::string BoneString{ "bones[" + std::to_string(pImporter->m_JointArrayMap.find(NodeIt)->second) + "]" };
+                std::string BoneString{ "bones[" + std::to_string(pAnim->m_JointsArrayMap.at(NodeIt)) + "]" };
+                //std::string BoneString{ "bones[" + std::to_string(NodeIt) + "]" };
+                glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
+
+                //if (KeyframeIt == 100 && NodeIt == 17)
+                //    __debugbreak();
+            }
+
+
+            //for (int32_t ShaderNodeIt = 0; ShaderNodeIt < static_cast<int32_t>(NodeGlobalTransform.size()); ShaderNodeIt++)
+            //{
+            //    int32_t NodeIndex = static_cast<int32_t>(NodeGlobalTransform.size()) - 1 - ShaderNodeIt;
+            //    auto FinalGlobalTransform = NodeGlobalTransform.at(NodeIndex);
+            //    auto FinalInverseMatrix = pAnim->m_InverseBindMatrixMap.at(NodeIndex);
+            //    glm::mat4 BoneMatrix = FinalGlobalTransform * FinalInverseMatrix;
+            //    FinalTransformVector.push_back(BoneMatrix);
+            //    if (ShaderNodeIt == 2)
+            //    {
+            //        std::string BoneString{ "bones[1]" };
+            //        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
+            //    }
+            //    else if (ShaderNodeIt == 3)
+            //    {
+            //        std::string BoneString{ "bones[0]" };
+            //        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
+            //    }
+            //    else
+            //    {
+            //        std::string BoneString{ "bones[" + std::to_string(pImporter->m_JointArrayMap.find(ShaderNodeIt)->second) + "]" };
+            //        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
+            //    }
+
+            //    //int32_t NodeIndex = static_cast<int32_t>(NodeGlobalTransform.size()) - 1 - ShaderNodeIt;
+            //    //auto FinalGlobalTransform = NodeGlobalTransform.at(NodeIndex);
+            //    //auto FinalInverseMatrix = pAnim->m_InverseBindMatrixMap.at(NodeIndex);
+            //    //glm::mat4 BoneMatrix = FinalGlobalTransform * FinalInverseMatrix;
+            //    //FinalTransformVector.push_back(BoneMatrix);
+            //    //std::string BoneString{ "bones[" + std::to_string(pImporter->m_JointArrayMap.find(ShaderNodeIt)->second) + "]" };
+            //    //glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, BoneString.c_str()), 1, GL_FALSE, &BoneMatrix[0][0]);
+            //    
+            //    if (KeyframeIt == 180 && ShaderNodeIt == 3)
+            //        __debugbreak();
+            //}
 
         }; // End of lambda
 
@@ -506,7 +556,7 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
         }
 
         float CurrentTime = TimerManager.m_pCoreClock->GetFDeltaTime();
-        float AnimTime = CurrentTime + Anim.m_AnimKeyframes.at(KeyframeIt);
+        float AnimTime = CurrentTime + pAnim->m_AnimKeyframes.at(KeyframeIt);
         TimerManager.SetTimerVariadicArgsLambda("AnimationTimer", AnimTime, 0.0f, AnimLambda);
     }
 }
