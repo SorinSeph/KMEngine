@@ -7,6 +7,7 @@ C:\Users\sefce\source\KMEngine\KMEngine\GameEntity3D.cpp;C:\Users\sefce\source\K
 C:\Users\sefce\source\KMEngine\KMEngine\GLTFImporter.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\GLTFImporter.obj
 C:\Users\sefce\source\KMEngine\KMEngine\KMEngine.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\KMEngine.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Logger.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\Logger.obj
+C:\Users\sefce\source\KMEngine\KMEngine\Modules\MemoryModule.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\MemoryModule.obj
 C:\Users\sefce\source\KMEngine\KMEngine\Modules\UIModule.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\UIModule.obj
 C:\Users\sefce\source\KMEngine\KMEngine\OpenGLDevice.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\OpenGLDevice.obj
 C:\Users\sefce\source\KMEngine\KMEngine\OpenGLResource.cpp;C:\Users\sefce\source\KMEngine\KMEngine\x64\Debug\OpenGLResource.obj

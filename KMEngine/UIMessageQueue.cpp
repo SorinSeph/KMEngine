@@ -330,7 +330,7 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
 
     for (auto& SceneEntityIt : SceneEntityList)
     {
-        if (SceneEntityIt.m_GameEntityTag == "Knight")
+        if (SceneEntityIt.m_GameEntityTag == "Player")
         {
             pGameEntity = &SceneEntityIt;
         }
@@ -550,10 +550,10 @@ void CUIMessageQueue::PlayGLTFAnimation(std::string& FilePath, const std::string
 
         }; // End of lambda
 
-        if (KeyframeIt == 0)
-        {
-            AnimLambda();
-        }
+        //if (KeyframeIt == 0)
+        //{
+        //    AnimLambda();
+        //}
 
         float CurrentTime = TimerManager.m_pCoreClock->GetFDeltaTime();
         float AnimTime = CurrentTime + pAnim->m_AnimKeyframes.at(KeyframeIt);

@@ -421,8 +421,8 @@ LRESULT CALLBACK LeftToolbarHwndProc(HWND hwnd, UINT message, WPARAM wParam, LPA
         case WM_COMMAND:
         {
             CUIMessageQueue& UIMessageQueue = CUIMessageQueue::GetUIMessageQueue();
-            std::string FilePathString{ "E:/Work/2/Cartoon_Knight/Anim_Cartoon_Knight_Wave2.gltf" };
-            //std::string FilePathString{ "E:/Work/2/Human_Basemesh_Simplified/Human_Basemesh_Simplified_Anim_Wave2.gltf" };
+            //std::string FilePathString{ "E:/Work/2/Cartoon_Knight/Anim_Cartoon_Knight_Wave2.gltf" };
+            std::string FilePathString{ "E:/Work/2/Human_Basemesh_Simplified/Human_Basemesh_Simplified_Anim_Wave2.gltf" };
             //std::string FilePathString{ "E:/Work/2/SkeletalMeshTest/SkeletalMeshTest_Anim1.gltf" };
             //std::string FilePathString{ "E:/Work/2/SkeletalMeshTest/reduced/SkeletalMeshTest_Reduced_Anim1.gltf" };
             std::string FileContent{};

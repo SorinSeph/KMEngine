@@ -141,12 +141,11 @@ public:
 
 				//	glEnable(GL_DEPTH_TEST);
 				//}
-				else if (EntityComponent->m_tType.m_GameEntityTag == "KnightComponent")
+				else if (EntityComponent->m_tType.m_GameEntityTag == "PlayerComponent")
 				{
-					Logger.Log("RendererOpenGL.h, void Render(): Entity Component tag is \"KnightComponent\"");
+					Logger.Log("RendererOpenGL.h, void Render(): Entity Component tag is \"PlayerComponent\"");
 					Logger.Log("RendererOpenGL.h, void Render(): Entity Location X: ", EntityComponent->m_tType.GetLocationX(), " Y: ", EntityComponent->m_tType.GetLocationY(), " Z: ", EntityComponent->m_tType.GetLocationZ(), "\n");
 					glDrawElements(EntityComponent->m_tType.m_OpenGLResource.m_DrawMode, 111408, GL_UNSIGNED_INT, nullptr);
-					auto breakpoint = 1;
 				}
 				else if (EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentX" || EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentY" || EntityComponent->m_tType.m_GameEntityTag == "GizmoComponentZ")
 				{

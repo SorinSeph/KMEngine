@@ -1,10 +1,19 @@
+//--------------------------------------------------------------------------------------
+// Architechture
+//--------------------------------------------------------------------------------------
+
+Must create an asset manager class. 
+
+//--------------------------------------------------------------------------------------
+// Misc
+//--------------------------------------------------------------------------------------
+
 * The WINAPI file explorer in the menu bar does not properly add and render the imported OpenGL entity (improper context switching?). 
-Right now we use absolute filepaths
+The same happens when trying to add a game object with mesh, at startup (in CWorld::Init()). The mesh is simply not being rendered.
+The temporary solution is to add a delay. Must check why this problem happens without the delay.
 
 * Remove the button(s) such as ImportButtonHWND and its/their functionality from case WM_COMMAND in LeftToolbarHwndProc, UIModule.cpp
 
 * Timer bRunOnce wrong?
 
 * Raypicking crashes
-
-! Animations are distorted because the final nodes (joints) are not the ones corresponding with their proper joints / weights. Also, see the way the skeletal vertices structure loads the joints and weights.

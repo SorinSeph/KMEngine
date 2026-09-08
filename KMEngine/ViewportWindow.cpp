@@ -1,4 +1,5 @@
 #include "Core/CoreClock.h"
+#include "World.h"
 #include "ViewportWindow.h"
 
 void CViewportWindow::SetViewportParentHWND(HWND hwnd)
@@ -14,7 +15,7 @@ void CViewportWindow::SetViewportSize(float Width, float Height)
 
 float CViewportWindow::ConvertToRadians(float Degrees)
 {
-    return Degrees * (XM_PI / 180.0f);
+    return Degrees * (PI / 180.0f);
 }
 
 void CViewportWindow::CreateViewport()
@@ -354,6 +355,18 @@ void CViewportWindow::DetectKeyboardInput()
     else
     {
         m_YKeyPressed = 0;
+    }
+
+    if (m_bWorldSet)
+    {
+		auto LocX = m_pWorld->m_pPlayer->m_SceneGraph.m_pRootNode->m_tType.GetLocationX();
+		auto LocY = m_pWorld->m_pPlayer->m_SceneGraph.m_pRootNode->m_tType.GetLocationY();
+		auto LocZ = m_pWorld->m_pPlayer->m_SceneGraph.m_pRootNode->m_tType.GetLocationZ();
+
+        if (keyboardState[DIK_UPARROW] & 0x80)
+        {
+            m_pWorld->m_pPlayer->m_SceneGraph.m_pRootNode->m_tType.SetLocationF(LocX, LocY, LocZ + 0.1f);
+        }
     }
 }
 

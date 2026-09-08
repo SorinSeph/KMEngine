@@ -139,6 +139,7 @@
     <ClCompile Include="GLTFImporter.cpp" />
     <ClCompile Include="KMEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Modules\MemoryModule.cpp" />
     <ClCompile Include="Modules\UIModule.cpp" />
     <ClCompile Include="OpenGLDevice.cpp" />
     <ClCompile Include="OpenGLResource.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Modules\BaseModule.h" />
     <ClInclude Include="Modules\GraphicsModule.h" />
+    <ClInclude Include="Modules\MemoryModule.h" />
     <ClInclude Include="Modules\ModuleInitializer.h" />
     <ClInclude Include="Modules\PhysicsModule.h" />
     <ClInclude Include="Modules\UIModule.h" />

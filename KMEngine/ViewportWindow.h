@@ -6,8 +6,9 @@
 #include <cmath>
 #include "Logger.h"
 #include "UIMessageQueue.h"
+#include "World.h"
 
-const float XM_PI = 3.141592654f;
+const float PI = 3.141592654f;
 
 static float g_RotX{ 10.f };
 static float g_RotY{ 0.f };
@@ -71,6 +72,9 @@ public:
 	static float m_ViewportHeight;
 
 	int m_YKeyPressed;
+
+	bool m_bWorldSet{ false };
+	CWorld* m_pWorld{ nullptr };
 
 private:
 

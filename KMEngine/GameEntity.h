@@ -2,10 +2,11 @@
 
 #include <directxmath.h>
 #include <string>
+#include "Core/CoreObject.h"
 
 using namespace DirectX;
 
-class CGameEntity
+class CGameEntity : public CCoreObject
 {
 public:
 	CGameEntity()

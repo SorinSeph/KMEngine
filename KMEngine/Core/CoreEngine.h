@@ -15,6 +15,7 @@
 #include "Modules/UIModule.h"
 #include "Modules/GraphicsModule.h"
 #include "Modules/PhysicsModule.h"
+#include "Modules/MemoryModule.h"
 #include "TerrainGenerator.h"
 
 bool bClipCursor = false;
@@ -58,8 +59,19 @@ public:
         m_PhysicsModule.SetMediator(Mediator);
         Mediator.m_ModuleArray[2] = &m_PhysicsModule;
 
+        m_MemoryModule.SetMediator(Mediator);
+        Mediator.m_ModuleArray[3] = &m_MemoryModule;
+
 		m_World.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
+        m_World.SetGraphicsModule(&m_GraphicsModule);
         m_World.Init();
+        m_UIModule.m_ViewportWindow.m_pWorld = &m_World;
+
+        auto SetWorldPlayerLambda = [=]() mutable {
+            m_UIModule.m_ViewportWindow.m_bWorldSet = true;
+        };
+        CTimerManager& TimerManager = CTimerManager::GetTimerManager();
+        TimerManager.SetTimerVariadicArgsLambda("AnimationTimer", 1.5f, 2.5f, SetWorldPlayerLambda);
 
 		m_GraphicsModule.m_EntityBuilder.SetOpenGLDevice(&m_GraphicsModule.m_Renderer.m_pRendererOpenGL->m_OpenGLDevice);
         m_GraphicsModule.m_EntityBuilder.CreateLight();
@@ -135,6 +147,7 @@ private:
     CUIModule m_UIModule;
     CGraphicsModule m_GraphicsModule;
     CPhysicsModule m_PhysicsModule;
+    CMemoryModule m_MemoryModule;
     CMediator Mediator;
 };
 

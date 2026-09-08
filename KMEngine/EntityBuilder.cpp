@@ -162,7 +162,6 @@ void CEntityBuilder::InterpMoveTestEntity()
 
 void CEntityBuilder::ImportGLTF(std::string& FilePath, const std::string& FileContent)
 {
-
 	m_FileContent = FileContent;
 	m_FilePath = FilePath;
 	//AddTestEntity();
@@ -265,9 +264,9 @@ void CEntityBuilder::CreateModel(const std::vector<SSkeletalVertex>& Vertices, c
 	CScene& Scene = CScene::GetScene();
 	CLogger& Logger = CLogger::GetLogger();
 	CGameEntity3D Entity{};
-	Entity.m_GameEntityTag = "Knight";
+	Entity.m_GameEntityTag = "Player";
 	CGameEntity3DComponent EntityComponent;
-	EntityComponent.m_GameEntityTag = "KnightComponent";
+	EntityComponent.m_GameEntityTag = "PlayerComponent";
 
 	uint32_t& ShaderProgram{ EntityComponent.m_OpenGLResource.m_ShaderProgram };
 	uint32_t& VAO{ EntityComponent.m_OpenGLResource.m_VAO };
